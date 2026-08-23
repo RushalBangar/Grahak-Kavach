@@ -108,7 +108,7 @@ const App = {
     if (pill) {
       if (isOnline) {
         pill.className = 'backend-pill';
-        pill.innerHTML = '<span class="status-dot"></span> Backend Live (Port 8000)';
+        pill.innerHTML = '<span class="status-dot"></span> Backend Live (Render Cloud)';
       } else {
         pill.className = 'backend-pill offline';
         pill.innerHTML = '<span class="status-dot"></span> Offline Demo Mode';

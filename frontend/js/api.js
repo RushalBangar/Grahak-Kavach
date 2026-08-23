@@ -7,10 +7,11 @@ const API = {
   // Check backend server health
   async checkHealth() {
     try {
-      const res = await fetch(`${CONFIG.API_BASE_URL}/docs`, { method: 'HEAD', mode: 'no-cors' });
+      const res = await fetch(`${CONFIG.API_BASE_URL}/docs`, { mode: 'no-cors' });
       CONFIG.DEMO_MODE_ACTIVE = false;
       return true;
     } catch (err) {
+      console.warn('Health check failed, activating offline demo mode:', err);
       CONFIG.DEMO_MODE_ACTIVE = true;
       return false;
     }

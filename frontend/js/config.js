@@ -4,7 +4,7 @@
  */
 
 const CONFIG = {
-  API_BASE_URL: 'http://localhost:8000',
+  API_BASE_URL: 'https://grahak-kavach-26.onrender.com',
   APP_NAME: 'Grahak Kavach',
   APP_VERSION: '1.0.0',
   DEMO_MODE_ACTIVE: false, // Automatically toggled if backend is unreachable

@@ -55,14 +55,17 @@ python -m http.server 3000 --directory frontend
 ```
 Visit: `http://localhost:3000`
 
-### Option 2: Full-Stack (with Backend)
-1. Start the FastAPI backend:
-   ```bash
-   cd backend
-   uvicorn main:app --reload --port 8000
-   ```
-2. Start the frontend:
-   ```bash
-   python -m http.server 3000 --directory frontend
-   ```
-The frontend will detect port 8000 and display **"Backend Live (Port 8000)"** in the top navigation.
+### Option 2: Live Cloud Backend
+The frontend is already configured to connect directly to the live Render deployment:
+- **Cloud Backend API**: `https://grahak-kavach-26.onrender.com`
+- **Swagger Documentation**: `https://grahak-kavach-26.onrender.com/docs`
+
+When you open the frontend, it automatically detects the Render backend and displays **"Backend Live (Render Cloud)"** in the header.
+
+### Option 3: Local Backend
+If running the FastAPI backend locally:
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+```
+Update `CONFIG.API_BASE_URL` in `frontend/js/config.js` to `http://localhost:8000` if you want local development.
