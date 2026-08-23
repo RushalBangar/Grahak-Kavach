@@ -2,7 +2,7 @@ fastapi
 uvicorn
 sqlalchemy
 pytesseract
-pyjwt
+python-jose[cryptography]
 passlib
 bcrypt
 python-multipart
