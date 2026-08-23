@@ -355,8 +355,14 @@
 
     </script>
 <style>
-    .app-view { display: none; height: 100%; overflow-y: auto; }
+    .app-view { display: none; }
     .active-view { display: block; }
+    
+    /* Mobile Bottom Nav Active States */
+    .mobile-nav-btn { transition: color 0.2s; }
+    .mobile-nav-btn.active { color: #000080; font-weight: 700; }
+    .mobile-nav-btn.active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+    .mobile-nav-btn.active .icon-container { background: #d6e3ff; }
 
     /* ── NAVBAR REDESIGN ── */
     #main-nav {
@@ -916,8 +922,8 @@
 <!-- Main Content Area -->
 <div class="flex-1 flex flex-col h-full overflow-hidden">
 <!-- TopAppBar (Mobile & Desktop Header Area) -->
-<header class="bg-primary dark:bg-primary-container flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 flat no shadows docked full-width top-0 z-10 shrink-0 md:hidden">
-<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary dark:text-on-primary-container">Grahak Kavach</h1>
+<header class="bg-primary dark:bg-primary-container flex justify-between items-center w-full px-4 h-16 shrink-0 md:hidden shadow-md relative z-20">
+<h1 class="font-headline-lg text-[22px] font-bold text-on-primary dark:text-on-primary-container">Grahak Kavach</h1>
 <div class="flex gap-4 items-center">
 <button aria-label="Search" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
 <span class="material-symbols-outlined">search</span>
@@ -931,8 +937,8 @@
 </div>
 </header>
 <!-- Main Scrollable Canvas -->
-<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop bg-surface"><section class="app-view active-view" id="view_dashboard" style="display: block;">
-<div class="max-w-container-max mx-auto space-y-16 pb-24 md:pb-8">
+<main class="flex-1 overflow-y-auto p-4 md:p-10 bg-surface pb-24 md:pb-10"><section class="app-view active-view" id="view_dashboard" style="display: block;">
+<div class="max-w-container-max mx-auto space-y-12">
 <!-- Page Title -->
 <div class="space-y-2">
 <h2 class="font-display-lg text-display-lg text-primary">Namaste, Citizen 🙏</h2>
@@ -1486,22 +1492,30 @@ Search Shop by Name or GSTIN
 </section></main>
 </div>
 <!-- BottomNavBar (Mobile) -->
-<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface dark:bg-on-surface border-t border-outline-variant shadow-lg docked full-width bottom-0 rounded-t-xl">
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full p-2 px-6 scale-95 duration-100 font-label-caps text-label-caps" href="#">
-<span class="material-symbols-outlined text-2xl">photo_camera</span>
-<span class="mt-1 text-[10px]">Scan</span>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-2 py-2 md:hidden bg-surface dark:bg-on-surface border-t border-outline-variant shadow-[0_-4px_16px_rgba(0,0,128,0.06)] rounded-t-2xl pb-safe">
+<a class="nav-tab-btn mobile-nav-btn active flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="scanner" href="#">
+<div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
+<span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+</div>
+<span class="text-[10px] font-label-caps tracking-wide">Scanner</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
-<span class="material-symbols-outlined text-2xl">report_problem</span>
-<span class="mt-1 text-[10px]">Complaints</span>
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="complaints" href="#">
+<div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
+<span class="material-symbols-outlined text-2xl">gavel</span>
+</div>
+<span class="text-[10px] font-label-caps tracking-wide">Report</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
-<span class="material-symbols-outlined text-2xl">history_edu</span>
-<span class="mt-1 text-[10px]">Ledger</span>
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="dashboard" href="#">
+<div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
+<span class="material-symbols-outlined text-2xl">manage_search</span>
+</div>
+<span class="text-[10px] font-label-caps tracking-wide">Ledger</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
-<span class="material-symbols-outlined text-2xl">shield_person</span>
-<span class="mt-1 text-[10px]">Officer</span>
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="officer" href="#">
+<div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
+<span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
+</div>
+<span class="text-[10px] font-label-caps tracking-wide">Officer</span>
 </a>
 </nav>
 <script src="js/config.js"></script><script src="js/api.js"></script><script src="js/app.js"></script><script src="js/scanner.js"></script><script src="js/complaints.js"></script><script src="js/shops.js"></script><script src="js/officer.js"></script>
