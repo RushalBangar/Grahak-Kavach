@@ -2,7 +2,7 @@ from fastapi import APIRouter, File, UploadFile
 import pytesseract
 from PIL import Image
 import io
-from .. import schemas
+import schemas
 
 router = APIRouter(
     prefix="/api/scan",
