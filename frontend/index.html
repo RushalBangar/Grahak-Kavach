@@ -1,836 +1,1639 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grahak Kavach (ग्राहक कवच) — AI Commodity Compliance & Food Safety Platform</title>
-  <meta name="description" content="AI-powered unified platform for Packaged Commodity Compliance (Legal Metrology 2011) and Food Safety (FSSAI 2020). Scan labels, detect violations, and file evidence-backed complaints under DPDP Act 2023.">
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Citizen Command Center | Grahak Kavach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        tailwind.config = {
 
-  <!-- Core & Module Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/scanner.css">
-  <link rel="stylesheet" href="css/complaints.css">
-  <link rel="stylesheet" href="css/officer.css">
-</head>
-<body>
+          darkMode: "class",
 
-  <!-- Top Navigation Header -->
-  <header class="app-header">
-    <div class="container nav-wrapper">
-      <a href="#" class="brand-logo" onclick="App.switchView('scanner'); return false;">
-        <div class="logo-shield-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <div class="brand-meta">
-          <div class="brand-title">
-            Grahak Kavach <span class="sih-badge">SIH26197</span>
-          </div>
-          <span class="brand-subtitle">Unified Compliance & Food Safety</span>
-        </div>
-      </a>
+          theme: {
 
-      <!-- Navigation Tabs -->
-      <ul class="nav-tabs">
-        <li>
-          <button class="nav-tab-btn active" data-view="scanner">
-            <i class="fas fa-barcode"></i> <span>AI Scanner</span>
-          </button>
-        </li>
-        <li>
-          <button class="nav-tab-btn" data-view="complaints">
-            <i class="fas fa-file-shield"></i> <span>File Complaint</span>
-          </button>
-        </li>
-        <li>
-          <button class="nav-tab-btn" data-view="track">
-            <i class="fas fa-search-location"></i> <span>Track Status</span>
-          </button>
-        </li>
-        <li>
-          <button class="nav-tab-btn" data-view="shops">
-            <i class="fas fa-store"></i> <span>Shop Ledger</span>
-          </button>
-        </li>
-        <li>
-          <button class="nav-tab-btn" data-view="officer">
-            <i class="fas fa-user-shield"></i> <span>Officer Portal</span>
-          </button>
-        </li>
-        <li>
-          <button class="nav-tab-btn" data-view="gov">
-            <i class="fas fa-landmark"></i> <span>Gov Wings</span>
-          </button>
-        </li>
-      </ul>
+            extend: {
 
-      <!-- Action Utilities -->
-      <div class="nav-actions">
-        <div id="backendStatusPill" class="backend-pill">
-          <span class="status-dot"></span> Checking API...
-        </div>
-        <button id="themeToggleBtn" class="theme-btn" title="Toggle Dark/Light Mode">
-          <i class="fas fa-sun"></i>
-        </button>
-      </div>
+              "colors": {
+
+                      "tertiary-fixed": "#ffddba",
+
+                      "on-surface": "#181c1e",
+
+                      "error": "#ba1a1a",
+
+                      "surface": "#faf9fd",
+
+                      "primary-fixed": "#d6e3ff",
+
+                      "on-tertiary": "#ffffff",
+
+                      "on-tertiary-container": "#c6955e",
+
+                      "on-primary": "#ffffff",
+
+                      "surface-container": "#ebeef0",
+
+                      "on-error": "#ffffff",
+
+                      "ai-accent": "#5C6AC4",
+
+                      "on-secondary-container": "#596376",
+
+                      "secondary-fixed": "#d9e3f9",
+
+                      "surface-dim": "#d7dadc",
+
+                      "surface-bright": "#faf9fd",
+
+                      "tertiary-container": "#4f2e00",
+
+                      "surface-container-high": "#e5e9eb",
+
+                      "secondary-fixed-dim": "#bdc7dc",
+
+                      "on-secondary-fixed": "#121c2c",
+
+                      "surface-variant": "#e0e3e5",
+
+                      "primary-fixed-dim": "#adc7f7",
+
+                      "on-tertiary-fixed-variant": "#633f0f",
+
+                      "inverse-on-surface": "#eef1f3",
+
+                      "on-error-container": "#93000a",
+
+                      "status-alert": "#DC2626",
+
+                      "inverse-primary": "#adc7f7",
+
+                      "error-container": "#ffdad6",
+
+                      "tertiary-fixed-dim": "#f2bc82",
+
+                      "on-background": "#181c1e",
+
+                      "secondary-container": "#d6e0f6",
+
+                      "outline-variant": "#c4c6cf",
+
+                      "status-warning": "#D97706",
+
+                      "surface-tint": "#455f88",
+
+                      "surface-container-lowest": "#ffffff",
+
+                      "status-compliant": "#059669",
+
+                      "surface-container-highest": "#e0e3e5",
+
+                      "on-surface-variant": "#43474e",
+
+                      "on-secondary-fixed-variant": "#3d4759",
+
+                      "on-primary-container": "#86a0cd",
+
+                      "primary": "#000080",
+
+                      "background": "#faf9fd",
+
+                      "primary-container": "#0000b3",
+
+                      "on-primary-fixed": "#001b3c",
+
+                      "outline": "#74777f",
+
+                      "secondary": "#555f71",
+
+                      "on-tertiary-fixed": "#2b1700",
+
+                      "on-secondary": "#ffffff",
+
+                      "slate-dark": "#0F172A",
+
+                      "on-primary-fixed-variant": "#2d476f",
+
+                      "tertiary": "#321b00",
+
+                      "surface-container-low": "#f1f4f6",
+
+                      "inverse-surface": "#2d3133"
+
+              },
+
+              "borderRadius": {
+
+                      "DEFAULT": "0.5rem",
+
+                      "lg": "0.75rem",
+
+                      "xl": "1rem",
+
+                      "2xl": "1.25rem",
+
+                      "full": "9999px"
+
+              },
+
+              "spacing": {
+
+                      "container-max": "1280px",
+
+                      "margin-mobile": "16px",
+
+                      "margin-desktop": "40px",
+
+                      "gutter": "24px",
+
+                      "base": "8px"
+
+              },
+
+              "fontFamily": {
+
+                      "label-caps": [
+
+                              "JetBrains Mono"
+
+                      ],
+
+                      "body-sm": [
+
+                              "Inter"
+
+                      ],
+
+                      "headline-lg-mobile": [
+
+                              "Plus Jakarta Sans"
+
+                      ],
+
+                      "body-md": [
+
+                              "Inter"
+
+                      ],
+
+                      "body-lg": [
+
+                              "Inter"
+
+                      ],
+
+                      "headline-md": [
+
+                              "Plus Jakarta Sans"
+
+                      ],
+
+                      "display-lg": [
+
+                              "Plus Jakarta Sans"
+
+                      ],
+
+                      "button": [
+
+                              "Inter"
+
+                      ],
+
+                      "headline-lg": [
+
+                              "Plus Jakarta Sans"
+
+                      ]
+
+              },
+
+              "fontSize": {
+
+                      "label-caps": [
+
+                              "12px",
+
+                              {
+
+                                      "lineHeight": "16px",
+
+                                      "letterSpacing": "0.05em",
+
+                                      "fontWeight": "500"
+
+                              }
+
+                      ],
+
+                      "body-sm": [
+
+                              "14px",
+
+                              {
+
+                                      "lineHeight": "20px",
+
+                                      "fontWeight": "400"
+
+                              }
+
+                      ],
+
+                      "headline-lg-mobile": [
+
+                              "24px",
+
+                              {
+
+                                      "lineHeight": "32px",
+
+                                      "fontWeight": "600"
+
+                              }
+
+                      ],
+
+                      "body-md": [
+
+                              "16px",
+
+                              {
+
+                                      "lineHeight": "24px",
+
+                                      "fontWeight": "400"
+
+                              }
+
+                      ],
+
+                      "body-lg": [
+
+                              "18px",
+
+                              {
+
+                                      "lineHeight": "28px",
+
+                                      "fontWeight": "400"
+
+                              }
+
+                      ],
+
+                      "headline-md": [
+
+                              "24px",
+
+                              {
+
+                                      "lineHeight": "32px",
+
+                                      "fontWeight": "600"
+
+                              }
+
+                      ],
+
+                      "display-lg": [
+
+                              "48px",
+
+                              {
+
+                                      "lineHeight": "56px",
+
+                                      "letterSpacing": "-0.02em",
+
+                                      "fontWeight": "700"
+
+                              }
+
+                      ],
+
+                      "button": [
+
+                              "14px",
+
+                              {
+
+                                      "lineHeight": "20px",
+
+                                      "fontWeight": "600"
+
+                              }
+
+                      ],
+
+                      "headline-lg": [
+
+                              "32px",
+
+                              {
+
+                                      "lineHeight": "40px",
+
+                                      "fontWeight": "600"
+
+                              }
+
+                      ]
+
+              }
+
+      },
+
+          },
+
+        }
+
+    </script>
+<style>
+    .app-view { display: none; height: 100%; overflow-y: auto; }
+    .active-view { display: block; }
+
+    /* ── NAVBAR REDESIGN ── */
+    #main-nav {
+        background: #ffffff;
+        border-right: 1px solid #e8eaf0;
+        display: flex;
+        flex-direction: column;
+        width: 256px;
+        height: 100vh;
+        flex-shrink: 0;
+        z-index: 20;
+        font-family: 'Inter', sans-serif;
+        box-shadow: 4px 0 24px rgba(0,0,128,0.04);
+    }
+    /* Brand area */
+    #main-nav .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 20px 16px;
+        border-bottom: 1px solid #f0f0f6;
+    }
+    #main-nav .nav-brand-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #000080, #3949ab);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0,0,128,0.25);
+    }
+    #main-nav .nav-brand-logo .material-symbols-outlined {
+        color: white;
+        font-size: 20px;
+        font-variation-settings: 'FILL' 1;
+    }
+    #main-nav .nav-brand-name {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 1.2;
+        color: #000080;
+        letter-spacing: -0.01em;
+    }
+    #main-nav .nav-brand-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: #74777f;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-top: 1px;
+    }
+    /* Nav section label */
+    #main-nav .nav-section-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #aeb3c0;
+        padding: 16px 20px 6px;
+    }
+    /* Nav items */
+    #main-nav .nav-items {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 12px;
+        overflow-y: auto;
+    }
+    #main-nav .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #44474f;
+        text-decoration: none;
+        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+        position: relative;
+        cursor: pointer;
+    }
+    #main-nav .nav-item:hover {
+        background: #f0f1ff;
+        color: #000080;
+        transform: translateX(2px);
+    }
+    #main-nav .nav-item.active {
+        background: linear-gradient(135deg, rgba(0,0,128,0.1), rgba(57,73,171,0.06));
+        color: #000080;
+        font-weight: 600;
+    }
+    #main-nav .nav-item.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 20%;
+        bottom: 20%;
+        width: 3px;
+        border-radius: 0 3px 3px 0;
+        background: #000080;
+    }
+    #main-nav .nav-item .nav-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background: transparent;
+        transition: background 0.15s ease;
+    }
+    #main-nav .nav-item .nav-icon .material-symbols-outlined {
+        font-size: 20px;
+        color: currentColor;
+    }
+    #main-nav .nav-item.active .nav-icon {
+        background: rgba(0,0,128,0.1);
+    }
+    #main-nav .nav-item:hover .nav-icon {
+        background: rgba(0,0,128,0.07);
+    }
+    /* Emergency / Bottom section */
+    #main-nav .nav-bottom {
+        padding: 12px;
+        border-top: 1px solid #f0f0f6;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    #main-nav .nav-emergency {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #fff5f5;
+        color: #c0392b;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid #fcd0cc;
+        cursor: pointer;
+        transition: background 0.15s, transform 0.15s;
+        margin-bottom: 4px;
+    }
+    #main-nav .nav-emergency:hover {
+        background: #ffe8e6;
+        transform: translateX(2px);
+    }
+    #main-nav .nav-secondary {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 9px 12px;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        color: #74777f;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+    }
+    #main-nav .nav-secondary:hover {
+        background: #f5f5f5;
+        color: #44474f;
+    }
+    #main-nav .nav-secondary .material-symbols-outlined {
+        font-size: 18px;
+    }
+
+    /* ── COLLAPSE / EXPAND ── */
+    #main-nav {
+        position: relative;
+        transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: visible; /* allow tooltips to escape */
+    }
+
+    /* ---- collapsed rail ---- */
+    #main-nav.collapsed { width: 64px; }
+
+    /* hide labels smoothly */
+    .nav-item-label,
+    .nav-emergency-label,
+    .nav-secondary-label,
+    .nav-brand-text {
+        transition: opacity 0.18s ease, max-width 0.25s ease;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 200px;
+        opacity: 1;
+    }
+    #main-nav.collapsed .nav-item-label,
+    #main-nav.collapsed .nav-emergency-label,
+    #main-nav.collapsed .nav-secondary-label,
+    #main-nav.collapsed .nav-brand-text {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    /* hide section label entirely when collapsed */
+    #main-nav.collapsed .nav-section-label {
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: height 0.2s, opacity 0.15s;
+    }
+
+    /* brand area: just logo centered when collapsed */
+    #main-nav .nav-brand {
+        overflow: hidden;
+    }
+    #main-nav.collapsed .nav-brand {
+        padding: 18px 0 14px;
+        justify-content: center;
+    }
+
+    /* nav items centering when collapsed */
+    #main-nav.collapsed .nav-items {
+        padding: 8px 6px;
+        align-items: center;
+    }
+    #main-nav.collapsed .nav-item {
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        justify-content: center;
+        gap: 0;
+        border-radius: 12px;
+    }
+    #main-nav.collapsed .nav-item .nav-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+    }
+
+    /* bottom section when collapsed */
+    #main-nav.collapsed .nav-bottom {
+        padding: 8px 6px;
+        align-items: center;
+    }
+    #main-nav.collapsed .nav-emergency {
+        padding: 0;
+        width: 48px;
+        height: 44px;
+        justify-content: center;
+        border-radius: 12px;
+    }
+    #main-nav.collapsed .nav-secondary {
+        padding: 0;
+        width: 48px;
+        height: 40px;
+        justify-content: center;
+        gap: 0;
+        border-radius: 10px;
+    }
+
+    /* ── FLOATING TOGGLE BUTTON on right edge ── */
+    #navToggleBtn {
+        position: absolute;
+        top: 50%;
+        right: -14px;
+        transform: translateY(-50%);
+        z-index: 100;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid #e0e3ef;
+        background: #ffffff;
+        color: #000080;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,128,0.15);
+        transition: background 0.15s, box-shadow 0.15s;
+    }
+    #navToggleBtn:hover {
+        background: #f0f1ff;
+        box-shadow: 0 4px 14px rgba(0,0,128,0.22);
+    }
+    #navToggleBtn .material-symbols-outlined { font-size: 18px; }
+    #main-nav.collapsed #navToggleBtn .toggle-icon { transform: rotate(180deg); display: inline-block; transition: transform 0.28s ease; }
+    #main-nav:not(.collapsed) #navToggleBtn .toggle-icon { transform: rotate(0deg); display: inline-block; transition: transform 0.28s ease; }
+
+    /* ── TOOLTIPS (only when collapsed) ── */
+    #main-nav.collapsed .nav-item[data-tooltip]:hover::after,
+    #main-nav.collapsed .nav-secondary[data-tooltip]:hover::after,
+    #main-nav.collapsed .nav-emergency[data-tooltip]:hover::after {
+        content: attr(data-tooltip);
+        position: fixed;
+        left: 72px;
+        background: #1a1b2e;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 7px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+    
+    /* --- Nagarik Setu Inspired Enhancements --- */
+
+    /* Smooth global transitions */
+    * { box-sizing: border-box; }
+
+    /* Bento card hover lift effect */
+    .bento-card {
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+    .bento-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 128, 0.12);
+    }
+
+    /* Animated AI Glow on scan dropzone */
+    @keyframes kavach-glow {
+        0%, 100% { box-shadow: 0 0 12px 2px rgba(92, 106, 196, 0.3), inset 0 0 20px rgba(92, 106, 196, 0.05); }
+        50% { box-shadow: 0 0 28px 6px rgba(92, 106, 196, 0.5), inset 0 0 30px rgba(92, 106, 196, 0.1); }
+    }
+    #scanDropzone {
+        animation: kavach-glow 3s ease-in-out infinite;
+        border-radius: 1rem !important;
+        border: 2px solid rgba(92, 106, 196, 0.4) !important;
+    }
+
+    /* Floating Kavach AI Chat FAB */
+    #kavachFAB {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9999;
+        background: linear-gradient(135deg, #000080, #5C6AC4);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(0, 0, 128, 0.35);
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+        border: none;
+    }
+    #kavachFAB:hover {
+        transform: scale(1.12) translateY(-2px);
+        box-shadow: 0 14px 36px rgba(0, 0, 128, 0.45);
+    }
+    #kavachFAB .fab-ring {
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 2px solid rgba(92, 106, 196, 0.4);
+        animation: fab-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes fab-pulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.1; transform: scale(1.2); }
+    }
+
+    /* Kavach AI Chat Panel */
+    #kavachChatPanel {
+        position: fixed;
+        bottom: 104px;
+        right: 28px;
+        z-index: 9998;
+        width: 360px;
+        max-height: 520px;
+        display: flex;
+        flex-direction: column;
+        background: #faf9fd;
+        border: 1px solid rgba(0,0,128,0.15);
+        border-radius: 1.25rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 128, 0.18);
+        overflow: hidden;
+        transform: scale(0.85) translateY(16px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+    }
+    #kavachChatPanel.open {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+    #kavachChatPanel .chat-header {
+        background: linear-gradient(135deg, #000080, #5C6AC4);
+        color: white;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    #chatMessages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .chat-msg-bot {
+        background: #e8eaf6;
+        color: #1a1b1e;
+        padding: 10px 14px;
+        border-radius: 0 12px 12px 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        max-width: 88%;
+        align-self: flex-start;
+    }
+    .chat-msg-user {
+        background: #000080;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 12px 0 12px 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        max-width: 88%;
+        align-self: flex-end;
+    }
+    .chat-input-row {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid #e0e3e5;
+        background: white;
+    }
+    .chat-input-row input {
+        flex: 1;
+        border: 1px solid #c4c6cf;
+        border-radius: 24px;
+        padding: 8px 16px;
+        font-size: 13px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+    .chat-input-row input:focus { border-color: #000080; }
+    .chat-input-row button {
+        background: #000080;
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+    .chat-input-row button:hover { background: #0000b3; }
+
+    /* Nav sidebar enhancements */
+    nav .nav-tab-btn {
+        transition: all 0.18s ease;
+    }
+    nav .nav-tab-btn:hover {
+        transform: translateX(4px);
+    }
+
+    /* Section header left border accent (Nagarik Setu style) */
+    .section-header-accent {
+        border-left: 4px solid #000080;
+        padding-left: 12px;
+    }
+</style></head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden font-body-md">
+<!-- SideNavBar (Desktop) -->
+<nav id="main-nav" class="hidden md:flex">
+  <!-- Floating toggle button on right edge -->
+  <button id="navToggleBtn" aria-label="Toggle sidebar">
+    <span class="material-symbols-outlined toggle-icon">chevron_left</span>
+  </button>
+
+  <!-- Brand -->
+  <div class="nav-brand">
+    <div class="nav-brand-logo">
+      <span class="material-symbols-outlined">shield</span>
     </div>
-  </header>
-
-  <!-- Main Application Container -->
-  <main class="container" style="padding-top: 1.5rem;">
-
-    <!-- Hero Header Banner -->
-    <section class="hero-banner">
-      <div class="hero-pill-tag">
-        <i class="fas fa-sparkles"></i> AI-Powered Dual Regulatory Scanner
-      </div>
-      <h1 class="hero-title">
-        Scan Once. Verify <span class="text-gradient">Legal Compliance</span> & <span class="text-gradient">Food Safety</span>.
-      </h1>
-      <p class="hero-description">
-        Instant AI label inspection under <strong>Legal Metrology Rules, 2011</strong> & <strong>FSSAI 2020 Regulations</strong>. File DPDP 2023 evidence-backed complaints routed straight to enforcement authorities.
-      </p>
-
-      <div class="dual-laws-pills">
-        <div class="law-tag">
-          <i class="fas fa-balance-scale" style="color: var(--accent-blue);"></i>
-          <span><strong>Legal Metrology 2011</strong> (MRP, Net Qty, Mfg Date)</span>
-        </div>
-        <div class="law-tag">
-          <i class="fas fa-shield-virus" style="color: var(--accent-emerald);"></i>
-          <span><strong>FSSAI Labelling 2020</strong> (Nutri-Score, Additives, Expiry)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 1: AI LABEL SCANNER (CONSUMER LEAD FEATURE)
-         ========================================================================= -->
-    <section id="view_scanner" class="app-view active-view">
-      <div class="scanner-grid">
-        
-        <!-- Left: Upload & Camera Dropzone -->
-        <div class="glass-card scan-dropzone-card">
-          <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
-            <i class="fas fa-camera-retro text-gradient"></i> Product Label Capture
-          </h2>
-          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">
-            Upload or capture any packaged food, beverage, or consumer commodity label.
-          </p>
-
-          <input type="file" id="labelFileInput" accept="image/*" style="display: none;">
-
-          <div id="scanDropzone" class="dropzone-box">
-            <div class="dropzone-icon">
-              <i class="fas fa-cloud-arrow-up"></i>
-            </div>
-            <div class="dropzone-text">
-              <h3>Drag & Drop Product Label Image</h3>
-              <p>Supports PNG, JPG, WEBP formats</p>
-            </div>
-          </div>
-
-          <!-- Scanner Action Buttons -->
-          <div class="scanner-actions-bar">
-            <button id="uploadFileBtn" class="btn btn-secondary">
-              <i class="fas fa-folder-open"></i> Browse File
-            </button>
-            <button id="openCameraBtn" class="btn btn-primary">
-              <i class="fas fa-camera"></i> Live Camera
-            </button>
-          </div>
-
-          <!-- Image Preview & Laser Scan Effect -->
-          <div id="previewContainer" class="preview-container">
-            <div id="scanLine" class="scan-line"></div>
-            <img id="previewImage" alt="Scanned Label Preview">
-            <div class="preview-overlay">
-              <span style="font-size: 0.75rem; color: #fff; font-family: var(--font-mono);"><i class="fas fa-eye"></i> Visual OCR Active</span>
-              <button class="btn btn-sm btn-secondary" onclick="document.getElementById('labelFileInput').click()">Change</button>
-            </div>
-          </div>
-
-          <!-- SIH Judge Demo Preset Buttons -->
-          <div class="preset-samples-wrapper">
-            <div class="preset-title">
-              <span><i class="fas fa-flask"></i> Instant Test Presets (Judges Pitch)</span>
-              <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: normal;">Click to test</span>
-            </div>
-            <div id="presetList" class="preset-grid"></div>
-          </div>
-        </div>
-
-        <!-- Right: Dual AI Verification Results -->
-        <div class="glass-card results-card">
-          <div class="section-header">
-            <h2 style="font-size: 1.35rem; display: flex; align-items: center; gap: 0.6rem;">
-              <i class="fas fa-clipboard-check text-gradient"></i> AI Dual Analysis Dossier
-            </h2>
-          </div>
-
-          <!-- Placeholder when no image is scanned -->
-          <div id="resultsPlaceholder" class="results-placeholder">
-            <i class="fas fa-barcode-read"></i>
-            <h3>No Label Scanned Yet</h3>
-            <p>Upload a product image or pick a test preset from the left to view instant Legal Metrology & Food Safety compliance results.</p>
-          </div>
-
-          <!-- Results Content -->
-          <div id="resultsContent" class="results-content">
-            
-            <!-- 1. Legal Metrology Module Result -->
-            <div class="result-section">
-              <div class="section-header">
-                <div class="section-title">
-                  <i class="fas fa-scale-balanced" style="color: var(--accent-blue);"></i>
-                  <strong>Legal Metrology (2011 Rules)</strong>
-                </div>
-                <span class="authority-pill dca">Dept. Consumer Affairs</span>
-              </div>
-              <div id="lmComplianceBadge" class="compliance-badge pass">
-                <i class="fas fa-check-circle"></i> Fully Compliant
-              </div>
-              <p id="lmDetailsText" style="font-size: 0.85rem; margin-bottom: 0.5rem;"></p>
-              
-              <!-- Mandatory Checklist -->
-              <div id="lmChecklist" class="lm-checklist"></div>
-            </div>
-
-            <!-- 2. Food Safety & Health Score Result -->
-            <div class="result-section">
-              <div class="section-header">
-                <div class="section-title">
-                  <i class="fas fa-heart-pulse" style="color: var(--accent-emerald);"></i>
-                  <strong>Food Safety & Additives Radar</strong>
-                </div>
-                <span class="authority-pill fssai">FSSAI Authority</span>
-              </div>
-
-              <!-- Nutri-Score Gauge -->
-              <div class="nutri-score-wrapper">
-                <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary);">Health Score:</div>
-                <div class="nutri-score-scale">
-                  <div id="scoreBox_A" class="score-box score-a">A</div>
-                  <div id="scoreBox_B" class="score-box score-b">B</div>
-                  <div id="scoreBox_C" class="score-box score-c">C</div>
-                  <div id="scoreBox_D" class="score-box score-d">D</div>
-                  <div id="scoreBox_E" class="score-box score-e">E</div>
-                </div>
-              </div>
-
-              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-top: 0.5rem;">Detected Additives & Chemicals:</div>
-              <div id="harmfulIngredientsList" class="harmful-ingredients-list"></div>
-              <p id="fsDetailsText" style="font-size: 0.85rem; margin-top: 0.75rem;"></p>
-            </div>
-
-            <!-- 3. Extracted Raw OCR Accordion -->
-            <details style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; background: rgba(0,0,0,0.2);">
-              <summary style="cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">
-                <i class="fas fa-file-code"></i> View Extracted Raw OCR Text
-              </summary>
-              <div id="extractedOcrText" class="ocr-text-box"></div>
-            </details>
-
-            <!-- Action Button: Bridge to Complaint Wizard -->
-            <button id="fileComplaintFromScanBtn" class="btn btn-outline-danger" style="width: 100%;">
-              <i class="fas fa-bullhorn"></i> File Official Evidence Complaint with this Scan
-            </button>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 2: FILE EVIDENCE COMPLAINT (DPDP ACT 2023 COMPLIANT)
-         ========================================================================= -->
-    <section id="view_complaints" class="app-view">
-      <div class="complaint-wizard-grid">
-        
-        <!-- Left: Complaint Form -->
-        <div class="glass-card">
-          <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
-            <i class="fas fa-file-signature text-gradient"></i> Evidence-Backed Complaint Portal
-          </h2>
-          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">
-            Submit verified consumer grievances with cryptographic proof to prevent false reporting.
-          </p>
-
-          <!-- DPDP 2023 Legal Compliance Banner -->
-          <div class="dpdp-compliance-banner">
-            <span class="dpdp-badge"><i class="fas fa-shield-check"></i> DPDP ACT 2023</span>
-            <p>
-              Under the <em>Digital Personal Data Protection Act, 2023</em> & <em>Aadhaar Act</em>, no raw identity numbers are stored. Digital signatures are validated offline to maintain 100% citizen privacy.
-            </p>
-          </div>
-
-          <form id="complaintForm">
-            <!-- Shop Selector -->
-            <div class="form-group">
-              <label class="form-label" for="complaintShopSelect">Retail Store / Vendor Location</label>
-              <select id="complaintShopSelect" class="form-select" required>
-                <option value="">Loading verified shops...</option>
-              </select>
-              <div style="margin-top: 0.35rem; font-size: 0.78rem;">
-                <a href="#" onclick="Shops.openAddShopModal(); return false;"><i class="fas fa-plus-circle"></i> Not listed? Add a new shop</a>
-              </div>
-            </div>
-
-            <!-- Product Details -->
-            <div class="form-group">
-              <label class="form-label" for="complaintProductDetails">Product Details & Violation Description</label>
-              <textarea id="complaintProductDetails" class="form-textarea" placeholder="e.g. Volt Energy Drink 250ml missing MRP and containing restricted Tartrazine dye..." required></textarea>
-            </div>
-
-            <!-- Violation Type Selector -->
-            <div class="form-group">
-              <label class="form-label">Nature of Violation</label>
-              <div class="violation-types-grid">
-                <label class="violation-card-radio">
-                  <input type="radio" name="violation_type" value="Legal Metrology" id="violation_lm">
-                  <div class="violation-card-content">
-                    <i class="fas fa-scale-balanced"></i>
-                    <strong>Legal Metrology</strong>
-                    <span>MRP / Weight / Mfg</span>
-                  </div>
-                </label>
-
-                <label class="violation-card-radio">
-                  <input type="radio" name="violation_type" value="Food Safety" id="violation_fs">
-                  <div class="violation-card-content">
-                    <i class="fas fa-shield-virus"></i>
-                    <strong>Food Safety</strong>
-                    <span>Expiry / Harmful Additive</span>
-                  </div>
-                </label>
-
-                <label class="violation-card-radio">
-                  <input type="radio" name="violation_type" value="Both" id="violation_both" checked>
-                  <div class="violation-card-content">
-                    <i class="fas fa-code-branch"></i>
-                    <strong>Both Violations</strong>
-                    <span>Dual Split Routing</span>
-                  </div>
-                </label>
-              </div>
-            </div>
-
-            <!-- Identity Verification Tier Selector -->
-            <div class="form-group">
-              <label class="form-label">Citizen Identity Verification (Anti-Spam Verification)</label>
-              <div class="verification-tiers-grid">
-                <div class="verify-tier-card selected" data-method="Aadhaar QR (Zero Storage)">
-                  <i class="fas fa-qrcode" style="font-size: 1.25rem; color: var(--accent-emerald);"></i>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 0.4rem;">
-                      <strong style="font-size: 0.85rem;">Aadhaar QR Scan</strong>
-                      <span class="trust-badge trust-high">High Trust</span>
-                    </div>
-                    <p style="font-size: 0.72rem; color: var(--text-muted);">Offline signature verified</p>
-                  </div>
-                </div>
-
-                <div class="verify-tier-card" data-method="DigiLocker Auth">
-                  <i class="fas fa-lock" style="font-size: 1.25rem; color: var(--accent-blue);"></i>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 0.4rem;">
-                      <strong style="font-size: 0.85rem;">DigiLocker Login</strong>
-                      <span class="trust-badge trust-high">High Trust</span>
-                    </div>
-                    <p style="font-size: 0.72rem; color: var(--text-muted);">OAuth consent gateway</p>
-                  </div>
-                </div>
-
-                <div class="verify-tier-card" data-method="PAN Card OCR">
-                  <i class="fas fa-id-card" style="font-size: 1.25rem; color: var(--accent-amber);"></i>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 0.4rem;">
-                      <strong style="font-size: 0.85rem;">PAN / Voter ID</strong>
-                      <span class="trust-badge trust-med">Medium Trust</span>
-                    </div>
-                    <p style="font-size: 0.72rem; color: var(--text-muted);">Masked OCR extraction</p>
-                  </div>
-                </div>
-
-                <div class="verify-tier-card" data-method="Phone OTP">
-                  <i class="fas fa-mobile-screen" style="font-size: 1.25rem; color: var(--accent-cyan);"></i>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 0.4rem;">
-                      <strong style="font-size: 0.85rem;">Mobile OTP</strong>
-                      <span class="trust-badge trust-low">Fallback</span>
-                    </div>
-                    <p style="font-size: 0.72rem; color: var(--text-muted);">SMS verification code</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Hidden evidence input -->
-            <input type="hidden" id="complaintEvidenceInput" value="evidence_product_sample.jpg">
-
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-              <i class="fas fa-paper-plane"></i> File Authenticated Complaint
-            </button>
-          </form>
-        </div>
-
-        <!-- Right: Smart Auto-Routing Live Visualizer -->
-        <div>
-          <div class="glass-card">
-            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-              <i class="fas fa-sitemap text-gradient"></i> Smart Multi-Dept Routing Engine
-            </h3>
-            <p style="font-size: 0.82rem;">
-              Grahak Kavach automatically evaluates legal jurisdictions and routes grievance dockets to the correct enforcement authority.
-            </p>
-
-            <div class="routing-preview-box">
-              <div class="routing-header">
-                <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted);">TARGET RECIPIENT:</span>
-                <span id="autoRoutedBadge" class="routed-department-badge both">
-                  <i class="fas fa-code-branch"></i> Dual Routing: DCA + FSSAI
-                </span>
-              </div>
-              <p id="routingDescText" style="font-size: 0.82rem; color: var(--text-secondary);"></p>
-            </div>
-
-            <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-              <h4 style="font-size: 0.9rem; margin-bottom: 0.4rem;"><i class="fas fa-gavel" style="color: var(--accent-cyan);"></i> Why Verified Complaints Matter:</h4>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">
-                Unlike unverified social media complaints, our DPDP-authenticated dossiers generate legally actionable enforcement records that trigger physical officer inspections.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 3: PUBLIC COMPLAINT STATUS TRACKING
-         ========================================================================= -->
-    <section id="view_track" class="app-view">
-      <div class="glass-card" style="max-width: 720px; margin: 0 auto;">
-        <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
-          <i class="fas fa-satellite-dish text-gradient"></i> Real-Time Grievance Tracker
-        </h2>
-        <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">
-          Enter your 8-character Docket Tracking ID to inspect the current investigation status and enforcement timeline.
-        </p>
-
-        <div class="tracking-search-bar">
-          <input type="text" id="trackingIdInput" class="form-input" placeholder="Enter Tracking ID (e.g. GK-8F2B1A)">
-          <button id="trackComplaintBtn" class="btn btn-primary">
-            <i class="fas fa-search"></i> Track
-          </button>
-        </div>
-
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-muted);">
-          <span>Try sample tracking IDs:</span>
-          <a href="#" onclick="document.getElementById('trackingIdInput').value='GK-8F2B1A'; Complaints.searchTrackingStatus('GK-8F2B1A'); return false;">GK-8F2B1A</a>,
-          <a href="#" onclick="document.getElementById('trackingIdInput').value='GK-A491C2'; Complaints.searchTrackingStatus('GK-A491C2'); return false;">GK-A491C2</a>
-        </div>
-
-        <!-- Tracking Timeline Result Container -->
-        <div id="trackingTimelineResults" style="display: none;"></div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 4: SHOP COMPLIANCE HISTORY EXPLORER
-         ========================================================================= -->
-    <section id="view_shops" class="app-view">
-      <div class="glass-card" style="margin-bottom: 1.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.6rem;">
-              <i class="fas fa-store-slash text-gradient"></i> Citizen Shop Compliance Ledger
-            </h2>
-            <p style="font-size: 0.85rem;">
-              Search local retail grocery stores & supermarkets to view official past inspection results and resolved violations.
-            </p>
-          </div>
-          <button id="addNewShopBtn" class="btn btn-secondary btn-sm">
-            <i class="fas fa-plus"></i> Register Shop
-          </button>
-        </div>
-      </div>
-
-      <div class="shop-history-container">
-        <!-- Left: Search & Shop List -->
-        <div class="glass-card">
-          <div class="form-group">
-            <input type="text" id="shopSearchInput" class="form-input" placeholder="Search by shop name or street...">
-          </div>
-          <div id="shopSearchResultsList" class="shop-list-group"></div>
-        </div>
-
-        <!-- Right: Shop Details & Trust Score -->
-        <div id="shopHistoryDetailsView" class="glass-card">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>
-              <h3 id="shopDetailName" style="font-size: 1.35rem; margin-bottom: 0.25rem;">Select a Shop</h3>
-              <p id="shopDetailAddress" style="font-size: 0.85rem; color: var(--text-muted);"></p>
-            </div>
-          </div>
-
-          <!-- Trust Meter -->
-          <div class="shop-trust-meter">
-            <div id="shopTrustScoreCircle" class="trust-circle">--</div>
-            <div>
-              <h4 style="font-size: 1rem; margin-bottom: 0.2rem;">Compliance Trust Index</h4>
-              <p style="font-size: 0.78rem; color: var(--text-muted);">Derived from official Legal Metrology field inspections & resolved grievances.</p>
-            </div>
-          </div>
-
-          <!-- Inspection Records -->
-          <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fas fa-user-shield" style="color: var(--accent-indigo);"></i> Recorded Official Inspections
-          </h4>
-          <div id="shopInspectionsList" style="margin-bottom: 1.5rem;"></div>
-
-          <!-- Resolved Grievances -->
-          <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fas fa-check-double" style="color: var(--accent-emerald);"></i> Resolved Citizen Grievances
-          </h4>
-          <div id="shopResolvedComplaintsList"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 5: OFFICER ENFORCEMENT PORTAL (JWT AUTH)
-         ========================================================================= -->
-    <section id="view_officer" class="app-view">
-      
-      <!-- Login View -->
-      <div id="officerAuthView" class="glass-card officer-auth-container">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-          <div class="logo-shield-icon" style="margin: 0 auto 0.75rem; width: 48px; height: 48px; font-size: 1.5rem;">
-            <i class="fas fa-user-shield"></i>
-          </div>
-          <h2 style="font-size: 1.35rem;">Legal Metrology Officer Login</h2>
-          <p style="font-size: 0.82rem; color: var(--text-muted);">Enforcement & Inspection Portal</p>
-        </div>
-
-        <form id="officerLoginForm">
-          <div class="form-group">
-            <label class="form-label" for="officerUsername">Officer Username</label>
-            <input type="text" id="officerUsername" class="form-input" value="officer" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="officerPassword">Password</label>
-            <input type="password" id="officerPassword" class="form-input" value="password" required>
-          </div>
-          <div style="font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 1.25rem;">
-            <i class="fas fa-info-circle"></i> Demo Credentials: <code>officer</code> / <code>password</code>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
-            <i class="fas fa-sign-in-alt"></i> Access Enforcement Suite
-          </button>
-        </form>
-      </div>
-
-      <!-- Dashboard View (After Login) -->
-      <div id="officerDashboardView" style="display: none;">
-        <div class="officer-dashboard-header">
-          <div>
-            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.25rem;">
-              <h2 style="font-size: 1.5rem;">Inspector Control Center</h2>
-              <span class="officer-badge"><i class="fas fa-badge-check"></i> Zonal Inspector #04</span>
-            </div>
-            <p style="font-size: 0.85rem;">Central Legal Metrology & Packaged Commodity Enforcement</p>
-          </div>
-          <div style="display: flex; gap: 0.75rem;">
-            <button id="openLogInspectionBtn" class="btn btn-primary btn-sm">
-              <i class="fas fa-plus-circle"></i> Log Field Inspection
-            </button>
-            <button id="officerLogoutBtn" class="btn btn-secondary btn-sm">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-          </div>
-        </div>
-
-        <!-- Metrics Cards -->
-        <div class="metrics-grid">
-          <div class="glass-card metric-card">
-            <div class="metric-icon-box blue"><i class="fas fa-clipboard-list"></i></div>
-            <div class="metric-data">
-              <h3 id="metricTotalInsp">0</h3>
-              <p>Total Inspections</p>
-            </div>
-          </div>
-          <div class="glass-card metric-card">
-            <div class="metric-icon-box rose"><i class="fas fa-triangle-exclamation"></i></div>
-            <div class="metric-data">
-              <h3 id="metricViolations">0</h3>
-              <p>Violations Flagged</p>
-            </div>
-          </div>
-          <div class="glass-card metric-card">
-            <div class="metric-icon-box emerald"><i class="fas fa-circle-check"></i></div>
-            <div class="metric-data">
-              <h3 id="metricPass">0</h3>
-              <p>Compliant Stores</p>
-            </div>
-          </div>
-          <div class="glass-card metric-card">
-            <div class="metric-icon-box amber"><i class="fas fa-coins"></i></div>
-            <div class="metric-data">
-              <h3>₹ 35,000</h3>
-              <p>Fines Compounded</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Inspections History Table -->
-        <div class="glass-card">
-          <h3 style="font-size: 1.15rem; margin-bottom: 1rem;"><i class="fas fa-history text-gradient"></i> Official Inspection Logbook</h3>
-          <div class="table-responsive">
-            <table class="custom-table">
-              <thead>
-                <tr>
-                  <th>Retail Shop</th>
-                  <th>Product Audited</th>
-                  <th>Compliance</th>
-                  <th>Findings / Compounding Detail</th>
-                  <th>Date Logged</th>
-                </tr>
-              </thead>
-              <tbody id="officerInspectionsTableBody">
-                <tr><td colspan="5" style="text-align:center;">Loading inspections...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- =========================================================================
-         VIEW 6: GOVERNMENT WINGS SIMULATION (PITCH DEMO MODE)
-         ========================================================================= -->
-    <section id="view_gov" class="app-view">
-      <div class="glass-card" style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.35rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.6rem;">
-          <i class="fas fa-landmark text-gradient"></i> Regulatory Authority Dispatch Portals
-        </h2>
-        <p style="font-size: 0.85rem;">
-          Simulated backend government integration showcases how filed citizen complaints arrive at the respective ministry dashboards.
-        </p>
-      </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-        
-        <!-- DCA Portal View -->
-        <div class="glass-card">
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-            <i class="fas fa-balance-scale" style="font-size: 1.75rem; color: var(--accent-blue);"></i>
-            <div>
-              <h3 style="font-size: 1.1rem;">Dept. of Consumer Affairs (DCA)</h3>
-              <span class="authority-pill dca">Legal Metrology Wing</span>
-            </div>
-          </div>
-          <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-subtle); font-size: 0.82rem;">
-            <div style="color: var(--accent-blue); font-weight: 700; margin-bottom: 0.5rem;">
-              <i class="fas fa-inbox"></i> Incoming Legal Metrology Dockets:
-            </div>
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-subtle);">
-              <strong>Docket #GK-8F2B1A</strong>: Missing MRP on 250ml energy drink canister. Assigned to Area Inspector.
-            </div>
-            <div style="padding: 0.5rem 0;">
-              <strong>Docket #GK-39C104</strong>: Net Weight underweight by 14% on packaged flour. Compounding fine queued.
-            </div>
-          </div>
-        </div>
-
-        <!-- FSSAI Portal View -->
-        <div class="glass-card">
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-            <i class="fas fa-shield-virus" style="font-size: 1.75rem; color: var(--accent-emerald);"></i>
-            <div>
-              <h3 style="font-size: 1.1rem;">FSSAI Food Safety Wing</h3>
-              <span class="authority-pill fssai">Enforcement & Sampling</span>
-            </div>
-          </div>
-          <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-subtle); font-size: 0.82rem;">
-            <div style="color: var(--accent-emerald); font-weight: 700; margin-bottom: 0.5rem;">
-              <i class="fas fa-inbox"></i> Incoming Food Safety Dockets:
-            </div>
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-subtle);">
-              <strong>Docket #GK-8F2B1A</strong>: Unapproved Tartrazine synthetic dye without statutory health warning.
-            </div>
-            <div style="padding: 0.5rem 0;">
-              <strong>Docket #GK-98B21F</strong>: Expired dairy confectionary sold on retail shelf. Sample collection ordered.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- =========================================================================
-       MODALS
-       ========================================================================= -->
-
-  <!-- Camera Live Modal -->
-  <div id="cameraModal" class="modal-backdrop">
-    <div class="modal-content" style="max-width: 500px;">
-      <button class="modal-close" id="closeCameraBtn"><i class="fas fa-times"></i></button>
-      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-camera"></i> Live Camera Label Capture</h3>
-      <video id="cameraVideo" autoplay playsinline></video>
-      <div style="display: flex; gap: 1rem; margin-top: 1.25rem;">
-        <button id="capturePhotoBtn" class="btn btn-primary" style="flex: 1;">
-          <i class="fas fa-circle-dot"></i> Snap & Analyze
-        </button>
-      </div>
+    <div class="nav-brand-text">
+      <div class="nav-brand-name">Grahak Kavach</div>
+      <div class="nav-brand-tag">SIH26197 · GovTech</div>
     </div>
   </div>
 
-  <!-- DPDP Identity Verification Simulation Modal -->
-  <div id="verificationSimModal" class="modal-backdrop">
-    <div class="modal-content">
-      <button class="modal-close" onclick="Complaints.closeVerificationModal()"><i class="fas fa-times"></i></button>
-      <h3 id="verifModalTitle" style="font-size: 1.2rem; margin-bottom: 0.5rem;"></h3>
-      <div id="verifModalBody"></div>
-      <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="Complaints.closeVerificationModal()">
-        <i class="fas fa-check-shield"></i> Confirm Identity Verification
-      </button>
-    </div>
+  <!-- Main Nav Items -->
+  <div class="nav-section-label"><span class="nav-section-label-text">Main Menu</span></div>
+  <div class="nav-items">
+    <a class="nav-item active nav-tab-btn" data-view="scanner" data-tooltip="AI Scanner" href="#">
+      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">qr_code_scanner</span></span>
+      <span class="nav-item-label">AI Scanner</span>
+    </a>
+    <a class="nav-item nav-tab-btn" data-view="complaints" data-tooltip="File Complaint" href="#">
+      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">gavel</span></span>
+      <span class="nav-item-label">File Complaint</span>
+    </a>
+    <a class="nav-item nav-tab-btn" data-view="dashboard" data-tooltip="Shop Ledger" href="#">
+      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">manage_search</span></span>
+      <span class="nav-item-label">Shop Ledger</span>
+    </a>
+    <a class="nav-item nav-tab-btn" data-view="officer" data-tooltip="Officer Portal" href="#">
+      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">admin_panel_settings</span></span>
+      <span class="nav-item-label">Officer Portal</span>
+    </a>
   </div>
 
-  <!-- Complaint Receipt Modal -->
-  <div id="receiptModal" class="modal-backdrop">
-    <div class="modal-content" style="text-align: center;">
-      <button class="modal-close" onclick="document.getElementById('receiptModal').classList.remove('open')"><i class="fas fa-times"></i></button>
-      <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem;">
-        <i class="fas fa-check"></i>
-      </div>
-      <h3 style="font-size: 1.35rem; margin-bottom: 0.35rem;">Complaint Docket Dispatched</h3>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
-        Your grievance has been cryptographically signed and routed to the official enforcement queue.
-      </p>
-
-      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; text-align: left; margin-bottom: 1.5rem;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">DOCKET TRACKING ID:</span>
-          <strong id="receiptTrackingId" style="font-family: var(--font-mono); color: var(--accent-cyan);"></strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">ROUTED AUTHORITY:</span>
-          <strong id="receiptDepartment" style="font-size: 0.85rem;"></strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">CURRENT STATUS:</span>
-          <span id="receiptStatus" style="color: var(--accent-emerald); font-size: 0.85rem; font-weight: 700;"></span>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">TIME OF FILING:</span>
-          <span id="receiptDate" style="font-size: 0.78rem; font-family: var(--font-mono);"></span>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 0.75rem;">
-        <button class="btn btn-primary" style="flex: 1;" onclick="
-          const trk = document.getElementById('receiptTrackingId').innerText;
-          document.getElementById('receiptModal').classList.remove('open');
-          App.switchView('track');
-          document.getElementById('trackingIdInput').value = trk;
-          Complaints.searchTrackingStatus(trk);
-        ">
-          <i class="fas fa-search"></i> Track Live Status
-        </button>
-      </div>
-    </div>
+  <!-- Bottom Actions -->
+  <div class="nav-bottom">
+    <button class="nav-emergency" data-tooltip="Emergency Support">
+      <span class="material-symbols-outlined" style="font-size:18px;">emergency_home</span>
+      <span class="nav-emergency-label">Emergency Support</span>
+    </button>
+    <a class="nav-secondary" href="#" data-tooltip="Settings">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="nav-secondary-label">Settings</span>
+    </a>
+    <a class="nav-secondary" href="#" data-tooltip="Logout">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="nav-secondary-label">Logout</span>
+    </a>
   </div>
+</nav>
 
-  <!-- Log Inspection Modal (Officer) -->
-  <div id="logInspectionModal" class="modal-backdrop">
-    <div class="modal-content">
-      <button class="modal-close" onclick="document.getElementById('logInspectionModal').classList.remove('open')"><i class="fas fa-times"></i></button>
-      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-file-circle-check"></i> Log Legal Metrology Inspection</h3>
-      <form id="logInspectionForm">
-        <div class="form-group">
-          <label class="form-label" for="inspShopSelect">Inspected Retail Store</label>
-          <select id="inspShopSelect" class="form-select" required></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inspProductName">Product Description / Batch Scanned</label>
-          <input type="text" id="inspProductName" class="form-input" placeholder="e.g. Snack Brand 100g Pkg" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inspIsCompliant">Inspection Outcome</label>
-          <select id="inspIsCompliant" class="form-select">
-            <option value="true">Pass — Fully Compliant</option>
-            <option value="false">Violation Detected (Compounding Action)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inspViolationDetails">Detailed Findings & Action Taken</label>
-          <textarea id="inspViolationDetails" class="form-textarea" placeholder="Record mandatory rule violations or compounding fine receipt number..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">
-          <i class="fas fa-save"></i> Save Official Inspection Record
-        </button>
-      </form>
-    </div>
+<script>
+(function() {
+  const nav = document.getElementById('main-nav');
+  const toggleBtn = document.getElementById('navToggleBtn');
+  if (!nav || !toggleBtn) return;
+
+  // Restore saved state
+  const saved = localStorage.getItem('gk_nav_collapsed');
+  if (saved === 'true') nav.classList.add('collapsed');
+
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isCollapsed = nav.classList.toggle('collapsed');
+    localStorage.setItem('gk_nav_collapsed', isCollapsed);
+  });
+})();
+</script>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- TopAppBar (Mobile & Desktop Header Area) -->
+<header class="bg-primary dark:bg-primary-container flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 flat no shadows docked full-width top-0 z-10 shrink-0 md:hidden">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary dark:text-on-primary-container">Grahak Kavach</h1>
+<div class="flex gap-4 items-center">
+<button aria-label="Search" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="language" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button aria-label="account_circle" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop bg-surface"><section class="app-view active-view" id="view_dashboard" style="display: block;">
+<div class="max-w-container-max mx-auto space-y-16 pb-24 md:pb-8">
+<!-- Page Title -->
+<div class="space-y-2">
+<h2 class="font-display-lg text-display-lg text-primary">Namaste, Citizen 🙏</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Scan labels, file grievances, and protect your consumer rights with AI.</p>
+</div>
+<!-- Hero Section: AI Label Scanner -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden relative">
+<div class="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 relative z-10">
+<div class="flex-1 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-ai-accent font-label-caps text-label-caps">
+<span class="w-2 h-2 rounded-full bg-ai-accent animate-pulse"></span>
+
+                                AI Vision Active
+
+                            </div>
+<h3 class="font-headline-lg text-headline-lg text-primary">Label Intelligence Scanner</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Upload or capture an image of any product label. Our advanced AI instantly verifies compliance, detects misleading claims, and provides a clear Nutri-Score.</p>
+<div class="flex gap-4 mt-6">
+<button class="bg-primary-container text-on-primary px-6 py-3 rounded-lg font-button text-button flex items-center gap-2 hover:bg-primary transition-colors" id="openCameraBtn">
+<span class="material-symbols-outlined">photo_camera</span>
+
+                                    Scan Now
+
+                                </button>
+<button class="bg-surface border border-outline-variant text-primary px-6 py-3 rounded-lg font-button text-button flex items-center gap-2 hover:bg-surface-variant transition-colors" id="uploadFileBtn">
+<span class="material-symbols-outlined">upload_file</span>
+
+                                    Upload Image
+
+                                </button>
+</div>
+</div>
+<div class="w-full md:w-1/3 aspect-square relative rounded-lg overflow-hidden border border-outline-variant bg-surface-container-low flex items-center justify-center" id="scanDropzone">
+<span class="material-symbols-outlined text-outline-variant" style="font-size: 64px;">qr_code_scanner</span>
+<!-- Placeholder for an actual scanner animation or UI if needed -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-ai-accent/10 to-transparent animate-[scan_3s_ease-in-out_infinite]"></div>
+<img id="previewImage" style="display:none; width:100%; height:100%; object-fit:contain;"/><div id="scanLine" style="display:none;"></div></div>
+</div>
+</section>
+<style>
+
+                    @keyframes scan {
+
+                        0% { transform: translateY(-100%); }
+
+                        100% { transform: translateY(100%); }
+
+                    }
+
+                </style>
+<!-- Quick Stats Bento -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between bento-card">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">My Complaints</h4>
+<span class="material-symbols-outlined text-secondary">gavel</span>
+</div>
+<div class="space-y-1">
+<div class="font-display-lg text-display-lg text-primary" id="stat-complaints">0</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-status-warning"></span>
+No complaints filed yet
+</p>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between bento-card">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">Local Compliance</h4>
+<span class="material-symbols-outlined text-secondary">storefront</span>
+</div>
+<div class="space-y-1">
+<div class="font-display-lg text-display-lg text-primary" id="stat-compliance">—</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-status-compliant"></span>
+Scan a product to see compliance
+</p>
+</div>
+</div>
+<!-- Stat 3: Track Grievance (Actionable) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between col-span-1 md:col-span-1 bg-surface-container-low bento-card">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">Track Grievance</h4>
+<span class="material-symbols-outlined text-secondary">search</span>
+</div>
+<div class="space-y-3">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter Docket ID to track complaint status.</p>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-3 pr-10 py-2 font-label-caps text-label-caps focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="e.g. GKV-2026-001" type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary-container">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Complex Section: Recent Scans & Ledger -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Recent Scans List -->
+<section class="lg:col-span-2 space-y-4">
+<h3 class="font-headline-md text-headline-md text-primary section-header-accent">Recent Scans</h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="bg-surface-container-low border-b border-outline-variant px-4 py-3 grid grid-cols-12 gap-4">
+<div class="col-span-6 font-label-caps text-label-caps text-on-surface-variant">Product Details</div>
+<div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant">Nutri-Score</div>
+<div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant text-right">Legal Status</div>
+</div>
+<div class="divide-y divide-outline-variant" id="recent-scans-list">
+<!-- Empty state: shown before any scan is made -->
+<div id="no-scans-placeholder" class="px-4 py-10 flex flex-col items-center gap-3 text-center">
+  <span class="material-symbols-outlined text-outline-variant" style="font-size:40px;">qr_code_scanner</span>
+  <div class="font-body-sm text-body-sm text-on-surface-variant">
+    No scans yet. Upload a product label above to get started.
   </div>
-
-  <!-- Add New Shop Modal -->
-  <div id="addShopModal" class="modal-backdrop">
-    <div class="modal-content">
-      <button class="modal-close" onclick="document.getElementById('addShopModal').classList.remove('open')"><i class="fas fa-times"></i></button>
-      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-plus-store"></i> Register New Retail Store</h3>
-      <form id="addShopForm">
-        <div class="form-group">
-          <label class="form-label" for="newShopName">Shop / Supermarket Name</label>
-          <input type="text" id="newShopName" class="form-input" placeholder="e.g. Fresh Daily Superstore" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="newShopAddress">Street & City Location</label>
-          <input type="text" id="newShopAddress" class="form-input" placeholder="e.g. 14 MG Road, Indiranagar, Bengaluru" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">
-          <i class="fas fa-check"></i> Register Shop
-        </button>
-      </form>
-    </div>
+  <div class="text-xs text-on-surface-variant opacity-60 max-w-xs">
+    Your scan results (Nutri-Score, Legal Metrology compliance, FSSAI checks) will appear here.
   </div>
+</div>
+<!-- Demo scan rows (typical real use cases) -->
+<div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Packaged snack containing Tartrazine (E102) — FSSAI flagged">
+<div class="col-span-6 flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">fastfood</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Kurkure Masala Munch</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Frito-Lay India · Scanned today</div>
+</div>
+</div>
+<div class="col-span-3">
+<span class="inline-block px-2 py-1 rounded bg-status-alert/10 text-status-alert font-label-caps text-label-caps font-bold">D</span>
+</div>
+<div class="col-span-3 text-right">
+<span class="inline-flex items-center gap-1 text-status-warning font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-sm">warning</span>
+Flagged
+</span>
+</div>
+</div>
+<div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Biscuit with undeclared allergens — MRP label font below minimum 1mm">
+<div class="col-span-6 flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bakery_dining</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Britannia Good Day Cashew</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Britannia · Scanned yesterday</div>
+</div>
+</div>
+<div class="col-span-3">
+<span class="inline-block px-2 py-1 rounded bg-status-compliant/10 text-status-compliant font-label-caps text-label-caps font-bold">B</span>
+</div>
+<div class="col-span-3 text-right">
+<span class="inline-flex items-center gap-1 text-status-compliant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-sm">verified</span>
+Compliant
+</span>
+</div>
+</div>
+<div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Packaged drinking water — FSSAI licence and MRP both verified">
+<div class="col-span-6 flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">local_drink</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Bisleri Mineral Water 1L</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Bisleri · Scanned 3 days ago</div>
+</div>
+</div>
+<div class="col-span-3">
+<span class="inline-block px-2 py-1 rounded bg-status-compliant/10 text-status-compliant font-label-caps text-label-caps font-bold">A</span>
+</div>
+<div class="col-span-3 text-right">
+<span class="inline-flex items-center gap-1 text-status-compliant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-sm">verified</span>
+Compliant
+</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant text-center bg-surface-container-low">
+<a class="font-button text-button text-primary hover:underline" href="#">View All Scans</a>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h3 class="font-headline-md text-headline-md text-primary section-header-accent">Shop Compliance History</h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 h-[calc(100%-48px)] flex flex-col">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Search any shop to view past inspection records and citizen complaints filed against them.</p>
+<div class="space-y-3 flex-1">
+<!-- Based on real inspection categories per Legal Metrology Rules 2011 -->
+<div class="flex items-start gap-3 p-3 rounded border border-outline-variant bg-surface">
+<span class="material-symbols-outlined text-status-compliant mt-0.5">verified_user</span>
+<div>
+<div class="font-label-caps text-label-caps font-bold text-primary">Reliance Smart Point — Andheri</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Inspected Jan 2026 · MRP & net qty labels compliant · No violations found.</div>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded border border-outline-variant bg-surface">
+<span class="material-symbols-outlined text-status-alert mt-0.5">report</span>
+<div>
+<div class="font-label-caps text-label-caps font-bold text-primary">Ramesh Kirana Store — Dadar</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Citizen complaint filed · MRP label missing on 3 items · Status: Under Review</div>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded border border-outline-variant bg-surface">
+<span class="material-symbols-outlined text-status-warning mt-0.5">hourglass_empty</span>
+<div>
+<div class="font-label-caps text-label-caps font-bold text-primary">Metro Cash & Carry — Navi Mumbai</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">No inspection records yet · Be the first to scan a product here.</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 bg-surface border border-outline-variant text-primary py-2 rounded-lg font-button text-button hover:bg-surface-variant transition-colors">
+Search Shop by Name or GSTIN
+</button>
+</div>
+</section>
+</div>
+</div>
+ Footer 
+<footer class="bg-surface-container-highest dark:bg-on-surface border-t border-outline-variant dark:border-outline flat no shadows full-width w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-base mt-16">
+<div class="font-label-caps text-label-caps font-bold text-primary dark:text-primary-fixed">Grahak Kavach</div>
+<div class="flex gap-4 font-body-sm text-body-sm font-label-caps text-label-caps">
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Contact Support</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Grievance Redressal</a>
+</div>
+<div class="text-on-surface-variant font-body-sm text-body-sm font-label-caps text-label-caps">
+© 2026 Grahak Kavach · SIH26197 · AICTE Student Innovation (FoodTech &amp; Rural Development)
+</div>
+</footer>
+<input accept="image/*" id="labelFileInput" style="display:none;" type="file"/></section><section class="app-view" id="view_scanner" style="display: none;">
+ Camera Viewfinder Background 
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="A close-up, slightly blurred, realistic perspective from a mobile camera lens looking at a complex nutritional label on a packaged food product. The lighting is bright and even, simulating a well-lit grocery store aisle. The design conveys a high-tech, precise data extraction scenario with subtle reflections on the packaging." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4ivtpmuCyh-3wAtMi16wb_GHkhgVIrZX1fE_-HrEvpTQm-H_1LtSf59aZgIUNyCfZitQTccjqqxqWXt48B_JUJ0h-2s_8fV-33ezpzYcH10SPr43dH__z41XkirhfWx8yN11_xSozojqLS9DRcWc9JKUCoNmv14a7dYNyLQrknfps-B3hUdtWmN37zswHc9w2s81Yoko5yiUKoFhxzaC_7kDWBSWCqWSnJimb6QFxr2sGKq39DzLDnw')"></div>
+ Scanner Overlay 
+<div class="absolute inset-0 flex items-center justify-center p-8">
+<div class="relative w-full aspect-square max-w-md border-2 border-dashed border-ai-accent rounded-lg flex flex-col items-center justify-center bg-black/20 backdrop-blur-sm">
+<!-- Corner Accents -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-ai-accent -translate-x-1 -translate-y-1"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-ai-accent translate-x-1 -translate-y-1"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-ai-accent -translate-x-1 translate-y-1"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-ai-accent translate-x-1 translate-y-1"></div>
+<!-- Animated Scan Line -->
+<div class="scan-line"></div>
+<!-- Status Indicator -->
+<div class="absolute top-4 bg-slate-dark/80 px-3 py-1.5 rounded-full flex items-center gap-2 border border-outline-variant/30">
+<div class="pulsing-dot"></div>
+<span class="font-label-caps text-label-caps text-ai-accent">Visual OCR Active</span>
+</div>
+<!-- Target Reticle -->
+<span class="material-symbols-outlined text-ai-accent text-6xl opacity-50">center_focus_weak</span>
+<p class="mt-4 font-body-sm text-body-sm text-on-primary text-center opacity-80">Align label within frame</p>
+</div>
+</div>
+<div class="w-full max-w-2xl mx-auto mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card" id="resultsContainer" style="display:none;">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant text-center section-header-accent">AI Dual-Regulatory Analysis</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="resultsContent">
+<!-- Legal Metrology Card -->
+<div class="border border-outline-variant rounded-xl p-4 bg-surface flex flex-col gap-3">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">balance</span>
+<h4 class="font-headline-md text-base font-semibold text-primary">Legal Metrology (2011)</h4>
+</div>
+<div class="bg-status-compliant/10 text-status-compliant font-label-caps text-label-caps px-2 py-1 rounded inline-block w-max font-bold" id="lmComplianceBadge">COMPLIANT</div>
+<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant mt-2 flex-1" id="lmChecklist">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-status-compliant text-sm">check_circle</span> MRP Declaration</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-status-compliant text-sm">check_circle</span> Net Quantity</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-status-compliant text-sm">check_circle</span> Mfg Date</li>
+</ul>
+</div>
+<!-- Food Safety Card -->
+<div class="border border-outline-variant rounded-xl p-4 bg-surface flex flex-col gap-3">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">health_and_safety</span>
+<h4 class="font-headline-md text-base font-semibold text-primary">Food Safety (FSSAI)</h4>
+</div>
+<div class="flex gap-1 items-end">
+<span class="font-display-lg text-4xl text-primary font-bold" id="scoreBox_A">A</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant pb-1">Health Score</span>
+</div>
+<div class="space-y-2 font-body-sm text-body-sm text-on-surface-variant mt-2">
+<p class="font-semibold text-status-alert" id="fsIngredients"><span class="material-symbols-outlined text-sm inline-block translate-y-1">warning</span> Contains Tartrazine</p>
+<p id="fsAllergens">Allergens: None</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 bg-error text-on-error py-3 rounded-xl font-button text-button hover:opacity-90 transition-opacity flex items-center justify-center gap-2" id="fileComplaintFromScanBtn" style="display:none;">
+<span class="material-symbols-outlined">gavel</span> File Evidence-Backed Complaint
+            </button>
+</div>
+</section><section class="app-view" id="view_complaints" style="display: none;">
+ Sidebar Navigation (Desktop) 
+<aside class="hidden md:flex flex-col p-base gap-gutter bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline docked h-screen left-0 w-64 fixed mt-20">
+<div class="mb-8 px-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Grahak Kavach</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">GovTech Security</p>
+</div>
+<nav class="flex-grow flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors font-label-caps text-label-caps hover:bg-surface-variant dark:hover:bg-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span>Scanner</span>
+</a>
+<a class="flex items-center gap-3 p-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold transition-colors font-label-caps text-label-caps hover:bg-surface-variant dark:hover:bg-on-surface-variant translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>Complaints</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors font-label-caps text-label-caps hover:bg-surface-variant dark:hover:bg-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Ledger</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors font-label-caps text-label-caps hover:bg-surface-variant dark:hover:bg-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Officer Portal</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+ Form Area 
+<div class="flex-grow w-full md:ml-64 pl-0 md:pl-8 flex flex-col gap-8">
+<!-- Header Section -->
+<div class="flex flex-col gap-2 mb-4">
+<h1 class="font-headline-lg text-headline-lg text-primary">File a Grievance</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Submit verifiable evidence to initiate a formal complaint process.</p>
+<div class="flex gap-2 mt-2" id="routingIndicatorContainer">
+<span class="font-label-caps text-label-caps text-xs bg-status-alert/10 text-status-alert px-2 py-1 rounded border border-status-alert/20" id="routingLM" style="display:none;">Routing to: Dept of Consumer Affairs (Legal Metrology)</span>
+<span class="font-label-caps text-label-caps text-xs bg-status-warning/10 text-status-warning px-2 py-1 rounded border border-status-warning/20" id="routingFS" style="display:none;">Routing to: FSSAI (Food Safety)</span>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Main Form Canvas -->
+<div class="flex-grow flex flex-col gap-8 w-full lg:w-2/3">
+<!-- Step 1: Evidence -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card shadow-sm">
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
+<span class="bg-primary-container text-on-primary-container rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</span>
 
-  <!-- Global Toast Notification Container -->
-  <div id="toastContainer"></div>
+                                Upload Evidence
 
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div class="container footer-content">
-      <div class="footer-credits">
-        <strong>Grahak Kavach (ग्राहक कवच)</strong> — Smart India Hackathon 2026 (SIH26197)
-        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
-          Theme: Agriculture, FoodTech & Rural Development | Ministry Inspiration: SIH26034
+                            </h3>
+<span class="font-label-caps text-label-caps text-ai-accent bg-ai-accent/10 px-2 py-1 rounded flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-ai-accent animate-pulse"></span> AI Analysis Active
+
+                            </span>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-body-md text-body-md text-on-surface-variant">Upload a clear scan of the product label, receipt, or misleading advertisement.</p>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline mb-2 group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
+<span class="font-button text-button text-primary">Click or drag file to upload</span>
+<span class="font-body-sm text-body-sm text-outline mt-1">Supports JPG, PNG, PDF (Max 5MB)</span>
+</div>
+</div>
+</div>
+<!-- Step 2: Vendor Details -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card shadow-sm opacity-60">
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
+<span class="bg-surface-variant text-on-surface-variant rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</span>
+
+                                Vendor Details
+
+                            </h3>
+</div>
+<div class="flex flex-col gap-4 pointer-events-none">
+<label class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Select Vendor from Ledger</span>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded px-4 py-2 pl-10 border-l-4 border-l-transparent focus:border-l-primary focus:outline-none" disabled="" placeholder="Search vendor name or GSTIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-sm" data-icon="search">search</span>
+</div>
+</label>
+<div class="flex items-center gap-4 my-2">
+<hr class="flex-grow border-outline-variant"/>
+<span class="font-label-caps text-label-caps text-outline">OR</span>
+<hr class="flex-grow border-outline-variant"/>
+</div>
+<button class="bg-surface-variant text-on-surface-variant font-button text-button py-2 rounded flex items-center justify-center gap-2" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add New Vendor Details
+
+                            </button>
+</div>
+</div>
+</div>
+<!-- Right Sidebar / Progress -->
+<div class="w-full lg:w-1/3 flex flex-col gap-6">
+<!-- Progress Tracker -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card">
+<h4 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant">Filing Progress</h4>
+<div class="flex flex-col gap-0 border-l-2 border-primary-container ml-3 pl-4">
+<div class="relative pb-6">
+<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-primary-container border-2 border-white"></span>
+<p class="font-button text-button text-primary">1. Evidence Upload</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pending upload</p>
+</div>
+<div class="relative pb-6 opacity-50">
+<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+<p class="font-button text-button text-on-surface">2. Vendor Info</p>
+</div>
+<div class="relative pb-6 opacity-50">
+<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+<p class="font-button text-button text-on-surface">3. Identity Verification</p>
+<p class="font-body-sm text-body-sm text-outline text-xs mt-1">DPDP Act 2023 Compliant</p>
+</div>
+<div class="relative opacity-50">
+<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+<p class="font-button text-button text-on-surface">4. Confirmation</p>
+</div>
+</div>
+</div>
+<!-- Security Notice -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-6 flex items-start gap-4 shadow-lg border border-primary-fixed-dim">
+<span class="material-symbols-outlined text-3xl" data-icon="shield_lock">shield_lock</span>
+<div>
+<h5 class="font-button text-button mb-1">Secure Submission</h5>
+<p class="font-body-sm text-body-sm opacity-90">Your data is processed securely and is compliant with the Digital Personal Data Protection (DPDP) Act 2023.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Actions (Floating) -->
+<div class="sticky bottom-0 bg-surface/90 backdrop-blur-md border-t border-outline-variant p-4 mt-8 flex justify-between items-center rounded-t-xl z-40 lg:w-2/3">
+<button class="font-button text-button text-primary hover:bg-surface-variant px-4 py-2 rounded transition-colors">Save Draft</button>
+<button class="bg-primary text-on-primary font-button text-button px-6 py-2 rounded flex items-center gap-2 hover:bg-primary-fixed-variant transition-colors shadow-md">
+
+                    Next Step <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section><section class="app-view" id="view_officer" style="display: none;">
+<div class="flex justify-between items-end mb-gutter">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary">Enforcement Officer Suite</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Dashboard for Legal Metrology &amp; FSSAI officers.</p>
+</div>
+</div>
+ Bento Grid 
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<!-- Metrics -->
+<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Total Inspections</div>
+<div class="font-headline-lg text-headline-lg text-primary">1,248</div>
+<div class="text-status-compliant font-label-caps text-label-caps mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> +12% this month</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Violations Flagged</div>
+<div class="font-headline-lg text-headline-lg text-status-alert">184</div>
+<div class="text-status-alert font-label-caps text-label-caps mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> +3% this month</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Compliant Stores</div>
+<div class="font-headline-lg text-headline-lg text-status-compliant">982</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Fines Collected</div>
+<div class="font-headline-lg text-headline-lg text-primary font-label-caps">₹14.2M</div>
+</div>
+</div>
+ Complex Layout Area 
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Inspection Logbook -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-surface-variant rounded-xl overflow-hidden flex flex-col">
+<div class="bg-surface p-4 border-b border-surface-variant flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-primary">Official Inspection Logbook</h2>
+<button class="text-ai-accent font-button text-button hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-variant text-secondary font-label-caps text-label-caps">
+<th class="p-4">Store ID / Name</th>
+<th class="p-4">Date</th>
+<th class="p-4">Outcome</th>
+<th class="p-4">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="p-4">
+<div class="font-semibold text-primary">ST-4092</div>
+<div class="text-sm text-on-surface-variant">Metro Supermarket</div>
+</td>
+<td class="p-4 font-label-caps text-label-caps">24 Oct 2024</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-emerald-50 text-status-compliant font-label-caps text-[10px]">Compliant</span>
+</td>
+<td class="p-4"><button class="text-primary font-button text-button hover:underline">Details</button></td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="p-4">
+<div class="font-semibold text-primary">ST-8812</div>
+<div class="text-sm text-on-surface-variant">City Fresh Mart</div>
+</td>
+<td class="p-4 font-label-caps text-label-caps">23 Oct 2024</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-red-50 text-status-alert font-label-caps text-[10px]">Violation</span>
+</td>
+<td class="p-4"><button class="text-primary font-button text-button hover:underline">Details</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Incoming Dockets -->
+<div class="lg:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl flex flex-col h-[500px]">
+<div class="bg-surface p-4 border-b border-surface-variant flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+
+                            Incoming Dockets
+
+                            <span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ai-accent opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-ai-accent"></span>
+</span>
+</h2>
+</div>
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+<div class="border border-surface-variant rounded-lg p-4 bg-surface hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<span class="text-status-warning font-label-caps text-label-caps bg-orange-50 px-2 py-1 rounded">High Priority</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">10m ago</span>
+</div>
+<h3 class="font-semibold text-primary mb-1">Weight Tampering Report</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Citizen reported discrepancies in scale weights at local vendor stall 44.</p>
+<button class="w-full bg-primary-container text-on-primary py-2 rounded font-button text-button hover:bg-primary transition-colors">Dispatch Officer</button>
+</div>
+<div class="border border-surface-variant rounded-lg p-4 bg-surface hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<span class="text-ai-accent font-label-caps text-label-caps bg-indigo-50 px-2 py-1 rounded">Routine</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">1h ago</span>
+</div>
+<h3 class="font-semibold text-primary mb-1">Expired Licensing</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Automated system flagged expired FSSAI license for entity ID 9921.</p>
+<button class="w-full border border-primary-container text-primary-container py-2 rounded font-button text-button hover:bg-surface-container-low transition-colors">Review Case</button>
+</div>
+</div>
+</div>
+</div>
+</section></main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface dark:bg-on-surface border-t border-outline-variant shadow-lg docked full-width bottom-0 rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full p-2 px-6 scale-95 duration-100 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-2xl">photo_camera</span>
+<span class="mt-1 text-[10px]">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-2xl">report_problem</span>
+<span class="mt-1 text-[10px]">Complaints</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-2xl">history_edu</span>
+<span class="mt-1 text-[10px]">Ledger</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant p-2 hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-2xl">shield_person</span>
+<span class="mt-1 text-[10px]">Officer</span>
+</a>
+</nav>
+<script src="js/config.js"></script><script src="js/api.js"></script><script src="js/app.js"></script><script src="js/scanner.js"></script><script src="js/complaints.js"></script><script src="js/shops.js"></script><script src="js/officer.js"></script>
+<!-- Camera Live Modal -->
+<div class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" id="cameraModal" style="display:none;">
+<div class="bg-surface rounded-xl p-6 w-full max-w-md">
+<button class="float-right" id="closeCameraBtn"><span class="material-symbols-outlined">close</span></button>
+<h3 class="text-xl font-bold mb-4">Live Camera</h3>
+<video autoplay="" class="w-full rounded bg-black aspect-video" id="cameraVideo" playsinline=""></video>
+<button class="w-full mt-4 bg-primary-container text-on-primary py-2 rounded font-bold" id="capturePhotoBtn">Snap &amp; Analyze</button>
+</div>
+</div>
+<!-- Receipt Modal -->
+<div class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" id="receiptModal" style="display:none;">
+<div class="bg-surface rounded-xl p-6 w-full max-w-md text-center">
+<h3 class="text-xl font-bold text-status-compliant mb-2">Complaint Dispatched</h3>
+<div class="bg-surface-container p-4 rounded mb-4 text-left text-sm">
+<p>ID: <span class="font-bold" id="receiptTrackingId"></span></p>
+<p>Dept: <span id="receiptDepartment"></span></p>
+<p>Status: <span id="receiptStatus"></span></p>
+<p>Date: <span id="receiptDate"></span></p>
+</div>
+<button class="w-full bg-primary-container text-on-primary py-2 rounded font-bold" onclick="document.getElementById('receiptModal').style.display='none'">Close</button>
+</div>
+</div>
+<!-- Shop Verification/Add Shop Modal etc. can be added later -->
+
+<!-- Kavach AI Floating Chat Button (Nagarik Setu inspired) -->
+<button aria-label="Kavach AI Assistant" id="kavachFAB" title="Ask Kavach AI">
+<div class="fab-ring"></div>
+<span class="material-symbols-outlined" style="font-size: 26px; font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+<!-- Kavach AI Chat Panel -->
+<div aria-label="Kavach AI Assistant" aria-modal="true" id="kavachChatPanel" role="dialog">
+<div class="chat-header">
+<div style="background: rgba(255,255,255,0.15); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 20px;">smart_toy</span>
+</div>
+<div>
+<div style="font-weight: 700; font-size: 15px;">Kavach AI Assistant</div>
+<div style="font-size: 11px; opacity: 0.75;">Consumer Rights Expert</div>
+</div>
+<button aria-label="Close chat" id="closeChatBtn" style="margin-left: auto; background: none; border: none; color: white; cursor: pointer; opacity: 0.75; transition: opacity 0.15s;">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="chatMessages">
+<div class="chat-msg-bot">
+            👋 Namaste! I'm Kavach AI. Ask me about your consumer rights, Legal Metrology rules, FSSAI regulations, or how to file a complaint!
         </div>
-      </div>
-      <div class="footer-links">
-        <a href="#" onclick="App.switchView('scanner'); return false;">Scanner</a>
-        <a href="#" onclick="App.switchView('complaints'); return false;">Complaints</a>
-        <a href="#" onclick="App.switchView('shops'); return false;">Shop Ledger</a>
-        <a href="#" onclick="App.switchView('officer'); return false;">Officer Suite</a>
-      </div>
-    </div>
-  </footer>
+<div class="chat-msg-bot">
+<strong>Try asking:</strong><br/>
+            • "What is the MRP rule?"<br/>
+            • "Is Tartrazine safe?"<br/>
+            • "How do I file a complaint?"
+        </div>
+</div>
+<div class="chat-input-row">
+<input autocomplete="off" id="chatInput" placeholder="Ask about consumer rights..." type="text"/>
+<button aria-label="Send message" id="chatSendBtn">
+<span class="material-symbols-outlined" style="font-size: 18px;">send</span>
+</button>
+</div>
+</div>
+<script>
+(function() {
+    const fab = document.getElementById('kavachFAB');
+    const panel = document.getElementById('kavachChatPanel');
+    const closeBtn = document.getElementById('closeChatBtn');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatMessages = document.getElementById('chatMessages');
 
-  <!-- Scripts -->
-  <script src="js/config.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/scanner.js"></script>
-  <script src="js/complaints.js"></script>
-  <script src="js/shops.js"></script>
-  <script src="js/officer.js"></script>
-  <script src="js/app.js"></script>
-</body>
-</html>
+    // Canned responses for demo
+    const responses = {
+        'mrp': 'Under Legal Metrology Rules 2011, every packaged commodity must display the Maximum Retail Price (MRP) in the format "MRP ₹XX (Inclusive of all taxes)". Selling above MRP is a punishable offence.',
+        'fssai': 'Under FSSAI Food Safety & Standards (Labelling & Display) Regulations 2020, every food product must display: name, ingredients list, nutritional information, allergen declaration, net quantity, and a "Best Before" date.',
+        'tartrazine': '⚠️ Tartrazine (E102) is a synthetic azo food dye. While legal under FSSAI, it has been linked to hyperactivity in children. Always check the ingredients label!',
+        'complaint': 'To file a complaint, click the "File Complaint" tab, upload your product image as evidence, fill in the vendor details, verify your identity, and submit. Your complaint is routed to the appropriate authority (FSSAI or Consumer Affairs).',
+        'default': "I can help with Legal Metrology Rules 2011, FSSAI 2020 Regulations, how to file complaints, and consumer rights under DPDP Act 2023. Could you be more specific about what you need?"
+    };
+
+    function getResponse(msg) {
+        const lower = msg.toLowerCase();
+        if (lower.includes('mrp') || lower.includes('price') || lower.includes('metrology')) return responses.mrp;
+        if (lower.includes('fssai') || lower.includes('food') || lower.includes('label') || lower.includes('nutrition')) return responses.fssai;
+        if (lower.includes('tartrazine') || lower.includes('dye') || lower.includes('additive')) return responses.tartrazine;
+        if (lower.includes('complaint') || lower.includes('file') || lower.includes('report')) return responses.complaint;
+        return responses.default;
+    }
+
+    function appendMsg(text, type) {
+        const div = document.createElement('div');
+        div.className = type === 'user' ? 'chat-msg-user' : 'chat-msg-bot';
+        div.innerHTML = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    fab.addEventListener('click', function() {
+        panel.classList.toggle('open');
+        if (panel.classList.contains('open')) {
+            setTimeout(() => chatInput.focus(), 300);
+        }
+    });
+
+    closeBtn.addEventListener('click', function() {
+        panel.classList.remove('open');
+    });
+
+    function sendMessage() {
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        appendMsg(msg, 'user');
+        chatInput.value = '';
+        setTimeout(function() {
+            appendMsg(getResponse(msg), 'bot');
+        }, 600);
+    }
+
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function(e) {
+        if (!panel.contains(e.target) && e.target !== fab && !fab.contains(e.target)) {
+            panel.classList.remove('open');
+        }
+    });
+})();
+</script>
+</body></html>
+<!-- Citizen Command Center (Desktop) -->
