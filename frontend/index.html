@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grahak Kavach (ग्राहक कवच) — AI Commodity Compliance & Food Safety Platform</title>
+  <meta name="description" content="AI-powered unified platform for Packaged Commodity Compliance (Legal Metrology 2011) and Food Safety (FSSAI 2020). Scan labels, detect violations, and file evidence-backed complaints under DPDP Act 2023.">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core & Module Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/scanner.css">
+  <link rel="stylesheet" href="css/complaints.css">
+  <link rel="stylesheet" href="css/officer.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo" onclick="App.switchView('scanner'); return false;">
+        <div class="logo-shield-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="brand-meta">
+          <div class="brand-title">
+            Grahak Kavach <span class="sih-badge">SIH26197</span>
+          </div>
+          <span class="brand-subtitle">Unified Compliance & Food Safety</span>
+        </div>
+      </a>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav-tabs">
+        <li>
+          <button class="nav-tab-btn active" data-view="scanner">
+            <i class="fas fa-barcode"></i> <span>AI Scanner</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-tab-btn" data-view="complaints">
+            <i class="fas fa-file-shield"></i> <span>File Complaint</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-tab-btn" data-view="track">
+            <i class="fas fa-search-location"></i> <span>Track Status</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-tab-btn" data-view="shops">
+            <i class="fas fa-store"></i> <span>Shop Ledger</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-tab-btn" data-view="officer">
+            <i class="fas fa-user-shield"></i> <span>Officer Portal</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-tab-btn" data-view="gov">
+            <i class="fas fa-landmark"></i> <span>Gov Wings</span>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Action Utilities -->
+      <div class="nav-actions">
+        <div id="backendStatusPill" class="backend-pill">
+          <span class="status-dot"></span> Checking API...
+        </div>
+        <button id="themeToggleBtn" class="theme-btn" title="Toggle Dark/Light Mode">
+          <i class="fas fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="container" style="padding-top: 1.5rem;">
+
+    <!-- Hero Header Banner -->
+    <section class="hero-banner">
+      <div class="hero-pill-tag">
+        <i class="fas fa-sparkles"></i> AI-Powered Dual Regulatory Scanner
+      </div>
+      <h1 class="hero-title">
+        Scan Once. Verify <span class="text-gradient">Legal Compliance</span> & <span class="text-gradient">Food Safety</span>.
+      </h1>
+      <p class="hero-description">
+        Instant AI label inspection under <strong>Legal Metrology Rules, 2011</strong> & <strong>FSSAI 2020 Regulations</strong>. File DPDP 2023 evidence-backed complaints routed straight to enforcement authorities.
+      </p>
+
+      <div class="dual-laws-pills">
+        <div class="law-tag">
+          <i class="fas fa-balance-scale" style="color: var(--accent-blue);"></i>
+          <span><strong>Legal Metrology 2011</strong> (MRP, Net Qty, Mfg Date)</span>
+        </div>
+        <div class="law-tag">
+          <i class="fas fa-shield-virus" style="color: var(--accent-emerald);"></i>
+          <span><strong>FSSAI Labelling 2020</strong> (Nutri-Score, Additives, Expiry)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 1: AI LABEL SCANNER (CONSUMER LEAD FEATURE)
+         ========================================================================= -->
+    <section id="view_scanner" class="app-view active-view">
+      <div class="scanner-grid">
+        
+        <!-- Left: Upload & Camera Dropzone -->
+        <div class="glass-card scan-dropzone-card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fas fa-camera-retro text-gradient"></i> Product Label Capture
+          </h2>
+          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">
+            Upload or capture any packaged food, beverage, or consumer commodity label.
+          </p>
+
+          <input type="file" id="labelFileInput" accept="image/*" style="display: none;">
+
+          <div id="scanDropzone" class="dropzone-box">
+            <div class="dropzone-icon">
+              <i class="fas fa-cloud-arrow-up"></i>
+            </div>
+            <div class="dropzone-text">
+              <h3>Drag & Drop Product Label Image</h3>
+              <p>Supports PNG, JPG, WEBP formats</p>
+            </div>
+          </div>
+
+          <!-- Scanner Action Buttons -->
+          <div class="scanner-actions-bar">
+            <button id="uploadFileBtn" class="btn btn-secondary">
+              <i class="fas fa-folder-open"></i> Browse File
+            </button>
+            <button id="openCameraBtn" class="btn btn-primary">
+              <i class="fas fa-camera"></i> Live Camera
+            </button>
+          </div>
+
+          <!-- Image Preview & Laser Scan Effect -->
+          <div id="previewContainer" class="preview-container">
+            <div id="scanLine" class="scan-line"></div>
+            <img id="previewImage" alt="Scanned Label Preview">
+            <div class="preview-overlay">
+              <span style="font-size: 0.75rem; color: #fff; font-family: var(--font-mono);"><i class="fas fa-eye"></i> Visual OCR Active</span>
+              <button class="btn btn-sm btn-secondary" onclick="document.getElementById('labelFileInput').click()">Change</button>
+            </div>
+          </div>
+
+          <!-- SIH Judge Demo Preset Buttons -->
+          <div class="preset-samples-wrapper">
+            <div class="preset-title">
+              <span><i class="fas fa-flask"></i> Instant Test Presets (Judges Pitch)</span>
+              <span style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: normal;">Click to test</span>
+            </div>
+            <div id="presetList" class="preset-grid"></div>
+          </div>
+        </div>
+
+        <!-- Right: Dual AI Verification Results -->
+        <div class="glass-card results-card">
+          <div class="section-header">
+            <h2 style="font-size: 1.35rem; display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fas fa-clipboard-check text-gradient"></i> AI Dual Analysis Dossier
+            </h2>
+          </div>
+
+          <!-- Placeholder when no image is scanned -->
+          <div id="resultsPlaceholder" class="results-placeholder">
+            <i class="fas fa-barcode-read"></i>
+            <h3>No Label Scanned Yet</h3>
+            <p>Upload a product image or pick a test preset from the left to view instant Legal Metrology & Food Safety compliance results.</p>
+          </div>
+
+          <!-- Results Content -->
+          <div id="resultsContent" class="results-content">
+            
+            <!-- 1. Legal Metrology Module Result -->
+            <div class="result-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <i class="fas fa-scale-balanced" style="color: var(--accent-blue);"></i>
+                  <strong>Legal Metrology (2011 Rules)</strong>
+                </div>
+                <span class="authority-pill dca">Dept. Consumer Affairs</span>
+              </div>
+              <div id="lmComplianceBadge" class="compliance-badge pass">
+                <i class="fas fa-check-circle"></i> Fully Compliant
+              </div>
+              <p id="lmDetailsText" style="font-size: 0.85rem; margin-bottom: 0.5rem;"></p>
+              
+              <!-- Mandatory Checklist -->
+              <div id="lmChecklist" class="lm-checklist"></div>
+            </div>
+
+            <!-- 2. Food Safety & Health Score Result -->
+            <div class="result-section">
+              <div class="section-header">
+                <div class="section-title">
+                  <i class="fas fa-heart-pulse" style="color: var(--accent-emerald);"></i>
+                  <strong>Food Safety & Additives Radar</strong>
+                </div>
+                <span class="authority-pill fssai">FSSAI Authority</span>
+              </div>
+
+              <!-- Nutri-Score Gauge -->
+              <div class="nutri-score-wrapper">
+                <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary);">Health Score:</div>
+                <div class="nutri-score-scale">
+                  <div id="scoreBox_A" class="score-box score-a">A</div>
+                  <div id="scoreBox_B" class="score-box score-b">B</div>
+                  <div id="scoreBox_C" class="score-box score-c">C</div>
+                  <div id="scoreBox_D" class="score-box score-d">D</div>
+                  <div id="scoreBox_E" class="score-box score-e">E</div>
+                </div>
+              </div>
+
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-top: 0.5rem;">Detected Additives & Chemicals:</div>
+              <div id="harmfulIngredientsList" class="harmful-ingredients-list"></div>
+              <p id="fsDetailsText" style="font-size: 0.85rem; margin-top: 0.75rem;"></p>
+            </div>
+
+            <!-- 3. Extracted Raw OCR Accordion -->
+            <details style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; background: rgba(0,0,0,0.2);">
+              <summary style="cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">
+                <i class="fas fa-file-code"></i> View Extracted Raw OCR Text
+              </summary>
+              <div id="extractedOcrText" class="ocr-text-box"></div>
+            </details>
+
+            <!-- Action Button: Bridge to Complaint Wizard -->
+            <button id="fileComplaintFromScanBtn" class="btn btn-outline-danger" style="width: 100%;">
+              <i class="fas fa-bullhorn"></i> File Official Evidence Complaint with this Scan
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 2: FILE EVIDENCE COMPLAINT (DPDP ACT 2023 COMPLIANT)
+         ========================================================================= -->
+    <section id="view_complaints" class="app-view">
+      <div class="complaint-wizard-grid">
+        
+        <!-- Left: Complaint Form -->
+        <div class="glass-card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fas fa-file-signature text-gradient"></i> Evidence-Backed Complaint Portal
+          </h2>
+          <p style="font-size: 0.85rem; margin-bottom: 1.25rem;">
+            Submit verified consumer grievances with cryptographic proof to prevent false reporting.
+          </p>
+
+          <!-- DPDP 2023 Legal Compliance Banner -->
+          <div class="dpdp-compliance-banner">
+            <span class="dpdp-badge"><i class="fas fa-shield-check"></i> DPDP ACT 2023</span>
+            <p>
+              Under the <em>Digital Personal Data Protection Act, 2023</em> & <em>Aadhaar Act</em>, no raw identity numbers are stored. Digital signatures are validated offline to maintain 100% citizen privacy.
+            </p>
+          </div>
+
+          <form id="complaintForm">
+            <!-- Shop Selector -->
+            <div class="form-group">
+              <label class="form-label" for="complaintShopSelect">Retail Store / Vendor Location</label>
+              <select id="complaintShopSelect" class="form-select" required>
+                <option value="">Loading verified shops...</option>
+              </select>
+              <div style="margin-top: 0.35rem; font-size: 0.78rem;">
+                <a href="#" onclick="Shops.openAddShopModal(); return false;"><i class="fas fa-plus-circle"></i> Not listed? Add a new shop</a>
+              </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="form-group">
+              <label class="form-label" for="complaintProductDetails">Product Details & Violation Description</label>
+              <textarea id="complaintProductDetails" class="form-textarea" placeholder="e.g. Volt Energy Drink 250ml missing MRP and containing restricted Tartrazine dye..." required></textarea>
+            </div>
+
+            <!-- Violation Type Selector -->
+            <div class="form-group">
+              <label class="form-label">Nature of Violation</label>
+              <div class="violation-types-grid">
+                <label class="violation-card-radio">
+                  <input type="radio" name="violation_type" value="Legal Metrology" id="violation_lm">
+                  <div class="violation-card-content">
+                    <i class="fas fa-scale-balanced"></i>
+                    <strong>Legal Metrology</strong>
+                    <span>MRP / Weight / Mfg</span>
+                  </div>
+                </label>
+
+                <label class="violation-card-radio">
+                  <input type="radio" name="violation_type" value="Food Safety" id="violation_fs">
+                  <div class="violation-card-content">
+                    <i class="fas fa-shield-virus"></i>
+                    <strong>Food Safety</strong>
+                    <span>Expiry / Harmful Additive</span>
+                  </div>
+                </label>
+
+                <label class="violation-card-radio">
+                  <input type="radio" name="violation_type" value="Both" id="violation_both" checked>
+                  <div class="violation-card-content">
+                    <i class="fas fa-code-branch"></i>
+                    <strong>Both Violations</strong>
+                    <span>Dual Split Routing</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Identity Verification Tier Selector -->
+            <div class="form-group">
+              <label class="form-label">Citizen Identity Verification (Anti-Spam Verification)</label>
+              <div class="verification-tiers-grid">
+                <div class="verify-tier-card selected" data-method="Aadhaar QR (Zero Storage)">
+                  <i class="fas fa-qrcode" style="font-size: 1.25rem; color: var(--accent-emerald);"></i>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                      <strong style="font-size: 0.85rem;">Aadhaar QR Scan</strong>
+                      <span class="trust-badge trust-high">High Trust</span>
+                    </div>
+                    <p style="font-size: 0.72rem; color: var(--text-muted);">Offline signature verified</p>
+                  </div>
+                </div>
+
+                <div class="verify-tier-card" data-method="DigiLocker Auth">
+                  <i class="fas fa-lock" style="font-size: 1.25rem; color: var(--accent-blue);"></i>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                      <strong style="font-size: 0.85rem;">DigiLocker Login</strong>
+                      <span class="trust-badge trust-high">High Trust</span>
+                    </div>
+                    <p style="font-size: 0.72rem; color: var(--text-muted);">OAuth consent gateway</p>
+                  </div>
+                </div>
+
+                <div class="verify-tier-card" data-method="PAN Card OCR">
+                  <i class="fas fa-id-card" style="font-size: 1.25rem; color: var(--accent-amber);"></i>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                      <strong style="font-size: 0.85rem;">PAN / Voter ID</strong>
+                      <span class="trust-badge trust-med">Medium Trust</span>
+                    </div>
+                    <p style="font-size: 0.72rem; color: var(--text-muted);">Masked OCR extraction</p>
+                  </div>
+                </div>
+
+                <div class="verify-tier-card" data-method="Phone OTP">
+                  <i class="fas fa-mobile-screen" style="font-size: 1.25rem; color: var(--accent-cyan);"></i>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                      <strong style="font-size: 0.85rem;">Mobile OTP</strong>
+                      <span class="trust-badge trust-low">Fallback</span>
+                    </div>
+                    <p style="font-size: 0.72rem; color: var(--text-muted);">SMS verification code</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hidden evidence input -->
+            <input type="hidden" id="complaintEvidenceInput" value="evidence_product_sample.jpg">
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              <i class="fas fa-paper-plane"></i> File Authenticated Complaint
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Smart Auto-Routing Live Visualizer -->
+        <div>
+          <div class="glass-card">
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fas fa-sitemap text-gradient"></i> Smart Multi-Dept Routing Engine
+            </h3>
+            <p style="font-size: 0.82rem;">
+              Grahak Kavach automatically evaluates legal jurisdictions and routes grievance dockets to the correct enforcement authority.
+            </p>
+
+            <div class="routing-preview-box">
+              <div class="routing-header">
+                <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted);">TARGET RECIPIENT:</span>
+                <span id="autoRoutedBadge" class="routed-department-badge both">
+                  <i class="fas fa-code-branch"></i> Dual Routing: DCA + FSSAI
+                </span>
+              </div>
+              <p id="routingDescText" style="font-size: 0.82rem; color: var(--text-secondary);"></p>
+            </div>
+
+            <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+              <h4 style="font-size: 0.9rem; margin-bottom: 0.4rem;"><i class="fas fa-gavel" style="color: var(--accent-cyan);"></i> Why Verified Complaints Matter:</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">
+                Unlike unverified social media complaints, our DPDP-authenticated dossiers generate legally actionable enforcement records that trigger physical officer inspections.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 3: PUBLIC COMPLAINT STATUS TRACKING
+         ========================================================================= -->
+    <section id="view_track" class="app-view">
+      <div class="glass-card" style="max-width: 720px; margin: 0 auto;">
+        <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+          <i class="fas fa-satellite-dish text-gradient"></i> Real-Time Grievance Tracker
+        </h2>
+        <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">
+          Enter your 8-character Docket Tracking ID to inspect the current investigation status and enforcement timeline.
+        </p>
+
+        <div class="tracking-search-bar">
+          <input type="text" id="trackingIdInput" class="form-input" placeholder="Enter Tracking ID (e.g. GK-8F2B1A)">
+          <button id="trackComplaintBtn" class="btn btn-primary">
+            <i class="fas fa-search"></i> Track
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-muted);">
+          <span>Try sample tracking IDs:</span>
+          <a href="#" onclick="document.getElementById('trackingIdInput').value='GK-8F2B1A'; Complaints.searchTrackingStatus('GK-8F2B1A'); return false;">GK-8F2B1A</a>,
+          <a href="#" onclick="document.getElementById('trackingIdInput').value='GK-A491C2'; Complaints.searchTrackingStatus('GK-A491C2'); return false;">GK-A491C2</a>
+        </div>
+
+        <!-- Tracking Timeline Result Container -->
+        <div id="trackingTimelineResults" style="display: none;"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 4: SHOP COMPLIANCE HISTORY EXPLORER
+         ========================================================================= -->
+    <section id="view_shops" class="app-view">
+      <div class="glass-card" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fas fa-store-slash text-gradient"></i> Citizen Shop Compliance Ledger
+            </h2>
+            <p style="font-size: 0.85rem;">
+              Search local retail grocery stores & supermarkets to view official past inspection results and resolved violations.
+            </p>
+          </div>
+          <button id="addNewShopBtn" class="btn btn-secondary btn-sm">
+            <i class="fas fa-plus"></i> Register Shop
+          </button>
+        </div>
+      </div>
+
+      <div class="shop-history-container">
+        <!-- Left: Search & Shop List -->
+        <div class="glass-card">
+          <div class="form-group">
+            <input type="text" id="shopSearchInput" class="form-input" placeholder="Search by shop name or street...">
+          </div>
+          <div id="shopSearchResultsList" class="shop-list-group"></div>
+        </div>
+
+        <!-- Right: Shop Details & Trust Score -->
+        <div id="shopHistoryDetailsView" class="glass-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <h3 id="shopDetailName" style="font-size: 1.35rem; margin-bottom: 0.25rem;">Select a Shop</h3>
+              <p id="shopDetailAddress" style="font-size: 0.85rem; color: var(--text-muted);"></p>
+            </div>
+          </div>
+
+          <!-- Trust Meter -->
+          <div class="shop-trust-meter">
+            <div id="shopTrustScoreCircle" class="trust-circle">--</div>
+            <div>
+              <h4 style="font-size: 1rem; margin-bottom: 0.2rem;">Compliance Trust Index</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Derived from official Legal Metrology field inspections & resolved grievances.</p>
+            </div>
+          </div>
+
+          <!-- Inspection Records -->
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-user-shield" style="color: var(--accent-indigo);"></i> Recorded Official Inspections
+          </h4>
+          <div id="shopInspectionsList" style="margin-bottom: 1.5rem;"></div>
+
+          <!-- Resolved Grievances -->
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-check-double" style="color: var(--accent-emerald);"></i> Resolved Citizen Grievances
+          </h4>
+          <div id="shopResolvedComplaintsList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 5: OFFICER ENFORCEMENT PORTAL (JWT AUTH)
+         ========================================================================= -->
+    <section id="view_officer" class="app-view">
+      
+      <!-- Login View -->
+      <div id="officerAuthView" class="glass-card officer-auth-container">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <div class="logo-shield-icon" style="margin: 0 auto 0.75rem; width: 48px; height: 48px; font-size: 1.5rem;">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <h2 style="font-size: 1.35rem;">Legal Metrology Officer Login</h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Enforcement & Inspection Portal</p>
+        </div>
+
+        <form id="officerLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="officerUsername">Officer Username</label>
+            <input type="text" id="officerUsername" class="form-input" value="officer" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="officerPassword">Password</label>
+            <input type="password" id="officerPassword" class="form-input" value="password" required>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 1.25rem;">
+            <i class="fas fa-info-circle"></i> Demo Credentials: <code>officer</code> / <code>password</code>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <i class="fas fa-sign-in-alt"></i> Access Enforcement Suite
+          </button>
+        </form>
+      </div>
+
+      <!-- Dashboard View (After Login) -->
+      <div id="officerDashboardView" style="display: none;">
+        <div class="officer-dashboard-header">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.25rem;">
+              <h2 style="font-size: 1.5rem;">Inspector Control Center</h2>
+              <span class="officer-badge"><i class="fas fa-badge-check"></i> Zonal Inspector #04</span>
+            </div>
+            <p style="font-size: 0.85rem;">Central Legal Metrology & Packaged Commodity Enforcement</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button id="openLogInspectionBtn" class="btn btn-primary btn-sm">
+              <i class="fas fa-plus-circle"></i> Log Field Inspection
+            </button>
+            <button id="officerLogoutBtn" class="btn btn-secondary btn-sm">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="glass-card metric-card">
+            <div class="metric-icon-box blue"><i class="fas fa-clipboard-list"></i></div>
+            <div class="metric-data">
+              <h3 id="metricTotalInsp">0</h3>
+              <p>Total Inspections</p>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-box rose"><i class="fas fa-triangle-exclamation"></i></div>
+            <div class="metric-data">
+              <h3 id="metricViolations">0</h3>
+              <p>Violations Flagged</p>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-box emerald"><i class="fas fa-circle-check"></i></div>
+            <div class="metric-data">
+              <h3 id="metricPass">0</h3>
+              <p>Compliant Stores</p>
+            </div>
+          </div>
+          <div class="glass-card metric-card">
+            <div class="metric-icon-box amber"><i class="fas fa-coins"></i></div>
+            <div class="metric-data">
+              <h3>₹ 35,000</h3>
+              <p>Fines Compounded</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inspections History Table -->
+        <div class="glass-card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 1rem;"><i class="fas fa-history text-gradient"></i> Official Inspection Logbook</h3>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Retail Shop</th>
+                  <th>Product Audited</th>
+                  <th>Compliance</th>
+                  <th>Findings / Compounding Detail</th>
+                  <th>Date Logged</th>
+                </tr>
+              </thead>
+              <tbody id="officerInspectionsTableBody">
+                <tr><td colspan="5" style="text-align:center;">Loading inspections...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         VIEW 6: GOVERNMENT WINGS SIMULATION (PITCH DEMO MODE)
+         ========================================================================= -->
+    <section id="view_gov" class="app-view">
+      <div class="glass-card" style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.35rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.6rem;">
+          <i class="fas fa-landmark text-gradient"></i> Regulatory Authority Dispatch Portals
+        </h2>
+        <p style="font-size: 0.85rem;">
+          Simulated backend government integration showcases how filed citizen complaints arrive at the respective ministry dashboards.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        
+        <!-- DCA Portal View -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <i class="fas fa-balance-scale" style="font-size: 1.75rem; color: var(--accent-blue);"></i>
+            <div>
+              <h3 style="font-size: 1.1rem;">Dept. of Consumer Affairs (DCA)</h3>
+              <span class="authority-pill dca">Legal Metrology Wing</span>
+            </div>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-subtle); font-size: 0.82rem;">
+            <div style="color: var(--accent-blue); font-weight: 700; margin-bottom: 0.5rem;">
+              <i class="fas fa-inbox"></i> Incoming Legal Metrology Dockets:
+            </div>
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-subtle);">
+              <strong>Docket #GK-8F2B1A</strong>: Missing MRP on 250ml energy drink canister. Assigned to Area Inspector.
+            </div>
+            <div style="padding: 0.5rem 0;">
+              <strong>Docket #GK-39C104</strong>: Net Weight underweight by 14% on packaged flour. Compounding fine queued.
+            </div>
+          </div>
+        </div>
+
+        <!-- FSSAI Portal View -->
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <i class="fas fa-shield-virus" style="font-size: 1.75rem; color: var(--accent-emerald);"></i>
+            <div>
+              <h3 style="font-size: 1.1rem;">FSSAI Food Safety Wing</h3>
+              <span class="authority-pill fssai">Enforcement & Sampling</span>
+            </div>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-subtle); font-size: 0.82rem;">
+            <div style="color: var(--accent-emerald); font-weight: 700; margin-bottom: 0.5rem;">
+              <i class="fas fa-inbox"></i> Incoming Food Safety Dockets:
+            </div>
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-subtle);">
+              <strong>Docket #GK-8F2B1A</strong>: Unapproved Tartrazine synthetic dye without statutory health warning.
+            </div>
+            <div style="padding: 0.5rem 0;">
+              <strong>Docket #GK-98B21F</strong>: Expired dairy confectionary sold on retail shelf. Sample collection ordered.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- Camera Live Modal -->
+  <div id="cameraModal" class="modal-backdrop">
+    <div class="modal-content" style="max-width: 500px;">
+      <button class="modal-close" id="closeCameraBtn"><i class="fas fa-times"></i></button>
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-camera"></i> Live Camera Label Capture</h3>
+      <video id="cameraVideo" autoplay playsinline></video>
+      <div style="display: flex; gap: 1rem; margin-top: 1.25rem;">
+        <button id="capturePhotoBtn" class="btn btn-primary" style="flex: 1;">
+          <i class="fas fa-circle-dot"></i> Snap & Analyze
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DPDP Identity Verification Simulation Modal -->
+  <div id="verificationSimModal" class="modal-backdrop">
+    <div class="modal-content">
+      <button class="modal-close" onclick="Complaints.closeVerificationModal()"><i class="fas fa-times"></i></button>
+      <h3 id="verifModalTitle" style="font-size: 1.2rem; margin-bottom: 0.5rem;"></h3>
+      <div id="verifModalBody"></div>
+      <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="Complaints.closeVerificationModal()">
+        <i class="fas fa-check-shield"></i> Confirm Identity Verification
+      </button>
+    </div>
+  </div>
+
+  <!-- Complaint Receipt Modal -->
+  <div id="receiptModal" class="modal-backdrop">
+    <div class="modal-content" style="text-align: center;">
+      <button class="modal-close" onclick="document.getElementById('receiptModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+      <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem;">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.35rem;">Complaint Docket Dispatched</h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+        Your grievance has been cryptographically signed and routed to the official enforcement queue.
+      </p>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; text-align: left; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">DOCKET TRACKING ID:</span>
+          <strong id="receiptTrackingId" style="font-family: var(--font-mono); color: var(--accent-cyan);"></strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">ROUTED AUTHORITY:</span>
+          <strong id="receiptDepartment" style="font-size: 0.85rem;"></strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">CURRENT STATUS:</span>
+          <span id="receiptStatus" style="color: var(--accent-emerald); font-size: 0.85rem; font-weight: 700;"></span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">TIME OF FILING:</span>
+          <span id="receiptDate" style="font-size: 0.78rem; font-family: var(--font-mono);"></span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="btn btn-primary" style="flex: 1;" onclick="
+          const trk = document.getElementById('receiptTrackingId').innerText;
+          document.getElementById('receiptModal').classList.remove('open');
+          App.switchView('track');
+          document.getElementById('trackingIdInput').value = trk;
+          Complaints.searchTrackingStatus(trk);
+        ">
+          <i class="fas fa-search"></i> Track Live Status
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log Inspection Modal (Officer) -->
+  <div id="logInspectionModal" class="modal-backdrop">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('logInspectionModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-file-circle-check"></i> Log Legal Metrology Inspection</h3>
+      <form id="logInspectionForm">
+        <div class="form-group">
+          <label class="form-label" for="inspShopSelect">Inspected Retail Store</label>
+          <select id="inspShopSelect" class="form-select" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inspProductName">Product Description / Batch Scanned</label>
+          <input type="text" id="inspProductName" class="form-input" placeholder="e.g. Snack Brand 100g Pkg" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inspIsCompliant">Inspection Outcome</label>
+          <select id="inspIsCompliant" class="form-select">
+            <option value="true">Pass — Fully Compliant</option>
+            <option value="false">Violation Detected (Compounding Action)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inspViolationDetails">Detailed Findings & Action Taken</label>
+          <textarea id="inspViolationDetails" class="form-textarea" placeholder="Record mandatory rule violations or compounding fine receipt number..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <i class="fas fa-save"></i> Save Official Inspection Record
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add New Shop Modal -->
+  <div id="addShopModal" class="modal-backdrop">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('addShopModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;"><i class="fas fa-plus-store"></i> Register New Retail Store</h3>
+      <form id="addShopForm">
+        <div class="form-group">
+          <label class="form-label" for="newShopName">Shop / Supermarket Name</label>
+          <input type="text" id="newShopName" class="form-input" placeholder="e.g. Fresh Daily Superstore" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="newShopAddress">Street & City Location</label>
+          <input type="text" id="newShopAddress" class="form-input" placeholder="e.g. 14 MG Road, Indiranagar, Bengaluru" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <i class="fas fa-check"></i> Register Shop
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="footer-credits">
+        <strong>Grahak Kavach (ग्राहक कवच)</strong> — Smart India Hackathon 2026 (SIH26197)
+        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+          Theme: Agriculture, FoodTech & Rural Development | Ministry Inspiration: SIH26034
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#" onclick="App.switchView('scanner'); return false;">Scanner</a>
+        <a href="#" onclick="App.switchView('complaints'); return false;">Complaints</a>
+        <a href="#" onclick="App.switchView('shops'); return false;">Shop Ledger</a>
+        <a href="#" onclick="App.switchView('officer'); return false;">Officer Suite</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/complaints.js"></script>
+  <script src="js/shops.js"></script>
+  <script src="js/officer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
