@@ -1,0 +1,69 @@
+from pydantic import BaseModel
+from typing import Optional, List
+from datetime import datetime
+
+class ShopBase(BaseModel):
+    name: str
+    address: str
+
+class ShopCreate(ShopBase):
+    pass
+
+class Shop(ShopBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class InspectionBase(BaseModel):
+    shop_id: int
+    product_scanned: str
+    is_compliant: bool
+    violation_details: Optional[str] = None
+
+class InspectionCreate(InspectionBase):
+    pass
+
+class Inspection(InspectionBase):
+    id: int
+    date_logged: datetime
+    officer_id: int
+
+    class Config:
+        from_attributes = True
+
+class ComplaintBase(BaseModel):
+    shop_id: int
+    product_details: str
+    violation_type: str
+    verification_method: str
+
+class ComplaintCreate(ComplaintBase):
+    evidence_url: Optional[str] = None
+
+class Complaint(ComplaintBase):
+    id: int
+    tracking_id: str
+    status: str
+    routed_to: Optional[str] = None
+    is_verified: bool
+    date_filed: datetime
+
+    class Config:
+        from_attributes = True
+
+class ScanResult(BaseModel):
+    extracted_text: str
+    legal_metrology: dict # e.g. {"is_compliant": True, "details": "MRP, quantity present"}
+    food_safety: dict # e.g. {"health_score": "B", "harmful_ingredients": []}
+
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
