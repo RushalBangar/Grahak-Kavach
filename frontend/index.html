@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -10,898 +11,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-
         tailwind.config = {
-
           darkMode: "class",
-
           theme: {
-
             extend: {
-
               "colors": {
-
-                      "tertiary-fixed": "#ffddba",
-
-                      "on-surface": "#181c1e",
-
-                      "error": "#ba1a1a",
-
-                      "surface": "#faf9fd",
-
-                      "primary-fixed": "#d6e3ff",
-
-                      "on-tertiary": "#ffffff",
-
-                      "on-tertiary-container": "#c6955e",
-
-                      "on-primary": "#ffffff",
-
-                      "surface-container": "#ebeef0",
-
-                      "on-error": "#ffffff",
-
-                      "ai-accent": "#5C6AC4",
-
-                      "on-secondary-container": "#596376",
-
-                      "secondary-fixed": "#d9e3f9",
-
-                      "surface-dim": "#d7dadc",
-
-                      "surface-bright": "#faf9fd",
-
-                      "tertiary-container": "#4f2e00",
-
-                      "surface-container-high": "#e5e9eb",
-
-                      "secondary-fixed-dim": "#bdc7dc",
-
-                      "on-secondary-fixed": "#121c2c",
-
                       "surface-variant": "#e0e3e5",
-
-                      "primary-fixed-dim": "#adc7f7",
-
-                      "on-tertiary-fixed-variant": "#633f0f",
-
-                      "inverse-on-surface": "#eef1f3",
-
-                      "on-error-container": "#93000a",
-
-                      "status-alert": "#DC2626",
-
-                      "inverse-primary": "#adc7f7",
-
-                      "error-container": "#ffdad6",
-
-                      "tertiary-fixed-dim": "#f2bc82",
-
-                      "on-background": "#181c1e",
-
-                      "secondary-container": "#d6e0f6",
-
-                      "outline-variant": "#c4c6cf",
-
-                      "status-warning": "#D97706",
-
-                      "surface-tint": "#455f88",
-
-                      "surface-container-lowest": "#ffffff",
-
-                      "status-compliant": "#059669",
-
-                      "surface-container-highest": "#e0e3e5",
-
-                      "on-surface-variant": "#43474e",
-
-                      "on-secondary-fixed-variant": "#3d4759",
-
-                      "on-primary-container": "#86a0cd",
-
-                      "primary": "#000080",
-
-                      "background": "#faf9fd",
-
-                      "primary-container": "#0000b3",
-
-                      "on-primary-fixed": "#001b3c",
-
-                      "outline": "#74777f",
-
-                      "secondary": "#555f71",
-
-                      "on-tertiary-fixed": "#2b1700",
-
+                      "deep-navy": "#1a365d",
                       "on-secondary": "#ffffff",
-
-                      "slate-dark": "#0F172A",
-
+                      "on-primary-container": "#86a0cd",
+                      "outline": "#74777f",
+                      "secondary-container": "#d5e3fc",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "on-primary-fixed": "#001b3c",
+                      "glass-border": "rgba(255, 255, 255, 0.4)",
+                      "inverse-primary": "#adc7f7",
+                      "primary-fixed": "#d6e3ff",
+                      "on-background": "#191c1e",
+                      "surface": "#f7f9fb",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#455f88",
+                      "primary-container": "#1a365d",
+                      "inverse-surface": "#2d3133",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c4c6cf",
+                      "primary-fixed-dim": "#adc7f7",
+                      "slate-text": "#1e293b",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-bright": "#f7f9fb",
+                      "secondary": "#515f74",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#002045",
+                      "accent-indigo": "#6366f1",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-error": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "surface-dim": "#d8dadc",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-container": "#9194ff",
+                      "glass-surface": "rgba(255, 255, 255, 0.7)",
+                      "background": "#f7f9fb",
+                      "on-secondary-container": "#57657a",
+                      "on-tertiary-fixed": "#07006c",
+                      "secondary-fixed": "#d5e3fc",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-fixed-variant": "#3a485b",
                       "on-primary-fixed-variant": "#2d476f",
-
-                      "tertiary": "#321b00",
-
-                      "surface-container-low": "#f1f4f6",
-
-                      "inverse-surface": "#2d3133"
-
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "tertiary": "#09007b",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#e1e0ff",
+                      "on-surface": "#191c1e",
+                      "tertiary-container": "#1910af",
+                      "on-surface-variant": "#43474e"
               },
-
               "borderRadius": {
-
-                      "DEFAULT": "0.5rem",
-
-                      "lg": "0.75rem",
-
-                      "xl": "1rem",
-
-                      "2xl": "1.25rem",
-
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
                       "full": "9999px"
-
               },
-
               "spacing": {
-
-                      "container-max": "1280px",
-
-                      "margin-mobile": "16px",
-
                       "margin-desktop": "40px",
-
                       "gutter": "24px",
-
-                      "base": "8px"
-
+                      "unit": "8px",
+                      "margin-mobile": "16px",
+                      "container-max": "1280px"
               },
-
               "fontFamily": {
-
-                      "label-caps": [
-
-                              "JetBrains Mono"
-
-                      ],
-
-                      "body-sm": [
-
-                              "Inter"
-
-                      ],
-
-                      "headline-lg-mobile": [
-
-                              "Plus Jakarta Sans"
-
-                      ],
-
-                      "body-md": [
-
-                              "Inter"
-
-                      ],
-
-                      "body-lg": [
-
-                              "Inter"
-
-                      ],
-
-                      "headline-md": [
-
-                              "Plus Jakarta Sans"
-
-                      ],
-
-                      "display-lg": [
-
-                              "Plus Jakarta Sans"
-
-                      ],
-
-                      "button": [
-
-                              "Inter"
-
-                      ],
-
-                      "headline-lg": [
-
-                              "Plus Jakarta Sans"
-
-                      ]
-
+                      "label-caps": ["Plus Jakarta Sans", "sans-serif"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                      "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                      "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                      "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                      "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+                      "button": ["Plus Jakarta Sans", "sans-serif"],
+                      "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                      "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                      "sans": ["Plus Jakarta Sans", "sans-serif"]
               },
-
               "fontSize": {
-
-                      "label-caps": [
-
-                              "12px",
-
-                              {
-
-                                      "lineHeight": "16px",
-
-                                      "letterSpacing": "0.05em",
-
-                                      "fontWeight": "500"
-
-                              }
-
-                      ],
-
-                      "body-sm": [
-
-                              "14px",
-
-                              {
-
-                                      "lineHeight": "20px",
-
-                                      "fontWeight": "400"
-
-                              }
-
-                      ],
-
-                      "headline-lg-mobile": [
-
-                              "24px",
-
-                              {
-
-                                      "lineHeight": "32px",
-
-                                      "fontWeight": "600"
-
-                              }
-
-                      ],
-
-                      "body-md": [
-
-                              "16px",
-
-                              {
-
-                                      "lineHeight": "24px",
-
-                                      "fontWeight": "400"
-
-                              }
-
-                      ],
-
-                      "body-lg": [
-
-                              "18px",
-
-                              {
-
-                                      "lineHeight": "28px",
-
-                                      "fontWeight": "400"
-
-                              }
-
-                      ],
-
-                      "headline-md": [
-
-                              "24px",
-
-                              {
-
-                                      "lineHeight": "32px",
-
-                                      "fontWeight": "600"
-
-                              }
-
-                      ],
-
-                      "display-lg": [
-
-                              "48px",
-
-                              {
-
-                                      "lineHeight": "56px",
-
-                                      "letterSpacing": "-0.02em",
-
-                                      "fontWeight": "700"
-
-                              }
-
-                      ],
-
-                      "button": [
-
-                              "14px",
-
-                              {
-
-                                      "lineHeight": "20px",
-
-                                      "fontWeight": "600"
-
-                              }
-
-                      ],
-
-                      "headline-lg": [
-
-                              "32px",
-
-                              {
-
-                                      "lineHeight": "40px",
-
-                                      "fontWeight": "600"
-
-                              }
-
-                      ]
-
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "button": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
               }
-
-      },
-
-          },
-
+            }
+          }
         }
-
-    </script>
-<style>
-    .app-view { display: none; }
-    .active-view { display: block; }
-    
-    /* Mobile Bottom Nav Active States */
-    .mobile-nav-btn { transition: color 0.2s; }
-    .mobile-nav-btn.active { color: #000080; font-weight: 700; }
-    .mobile-nav-btn.active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
-    .mobile-nav-btn.active .icon-container { background: #d6e3ff; }
-
-    /* ── NAVBAR REDESIGN ── */
-    #main-nav {
-        background: #ffffff;
-        border-right: 1px solid #e8eaf0;
-        display: flex;
-        flex-direction: column;
-        width: 256px;
-        height: 100vh;
-        flex-shrink: 0;
-        z-index: 20;
-        font-family: 'Inter', sans-serif;
-        box-shadow: 4px 0 24px rgba(0,0,128,0.04);
-    }
-    /* Brand area */
-    #main-nav .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 20px 20px 16px;
-        border-bottom: 1px solid #f0f0f6;
-    }
-    #main-nav .nav-brand-logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #000080, #3949ab);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        box-shadow: 0 4px 12px rgba(0,0,128,0.25);
-    }
-    #main-nav .nav-brand-logo .material-symbols-outlined {
-        color: white;
-        font-size: 20px;
-        font-variation-settings: 'FILL' 1;
-    }
-    #main-nav .nav-brand-name {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 1.2;
-        color: #000080;
-        letter-spacing: -0.01em;
-    }
-    #main-nav .nav-brand-tag {
-        font-family: 'Inter', sans-serif;
-        font-size: 11px;
-        font-weight: 500;
-        color: #74777f;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        margin-top: 1px;
-    }
-    /* Nav section label */
-    #main-nav .nav-section-label {
-        font-family: 'Inter', sans-serif;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #aeb3c0;
-        padding: 16px 20px 6px;
-    }
-    /* Nav items */
-    #main-nav .nav-items {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        padding: 8px 12px;
-        overflow-y: auto;
-    }
-    #main-nav .nav-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 12px;
-        border-radius: 10px;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        color: #44474f;
-        text-decoration: none;
-        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
-        position: relative;
-        cursor: pointer;
-    }
-    #main-nav .nav-item:hover {
-        background: #f0f1ff;
-        color: #000080;
-        transform: translateX(2px);
-    }
-    #main-nav .nav-item.active {
-        background: linear-gradient(135deg, rgba(0,0,128,0.1), rgba(57,73,171,0.06));
-        color: #000080;
-        font-weight: 600;
-    }
-    #main-nav .nav-item.active::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 20%;
-        bottom: 20%;
-        width: 3px;
-        border-radius: 0 3px 3px 0;
-        background: #000080;
-    }
-    #main-nav .nav-item .nav-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background: transparent;
-        transition: background 0.15s ease;
-    }
-    #main-nav .nav-item .nav-icon .material-symbols-outlined {
-        font-size: 20px;
-        color: currentColor;
-    }
-    #main-nav .nav-item.active .nav-icon {
-        background: rgba(0,0,128,0.1);
-    }
-    #main-nav .nav-item:hover .nav-icon {
-        background: rgba(0,0,128,0.07);
-    }
-    /* Emergency / Bottom section */
-    #main-nav .nav-bottom {
-        padding: 12px;
-        border-top: 1px solid #f0f0f6;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
-    #main-nav .nav-emergency {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 10px;
-        background: #fff5f5;
-        color: #c0392b;
-        font-family: 'Inter', sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        border: 1px solid #fcd0cc;
-        cursor: pointer;
-        transition: background 0.15s, transform 0.15s;
-        margin-bottom: 4px;
-    }
-    #main-nav .nav-emergency:hover {
-        background: #ffe8e6;
-        transform: translateX(2px);
-    }
-    #main-nav .nav-secondary {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 9px 12px;
-        border-radius: 10px;
-        font-family: 'Inter', sans-serif;
-        font-size: 13px;
-        font-weight: 400;
-        color: #74777f;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background 0.15s, color 0.15s;
-    }
-    #main-nav .nav-secondary:hover {
-        background: #f5f5f5;
-        color: #44474f;
-    }
-    #main-nav .nav-secondary .material-symbols-outlined {
-        font-size: 18px;
-    }
-
-    /* ── COLLAPSE / EXPAND ── */
-    #main-nav {
-        position: relative;
-        transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow: visible; /* allow tooltips to escape */
-    }
-
-    /* ---- collapsed rail ---- */
-    #main-nav.collapsed { width: 64px; }
-
-    /* hide labels smoothly */
-    .nav-item-label,
-    .nav-emergency-label,
-    .nav-secondary-label,
-    .nav-brand-text {
-        transition: opacity 0.18s ease, max-width 0.25s ease;
-        overflow: hidden;
-        white-space: nowrap;
-        max-width: 200px;
-        opacity: 1;
-    }
-    #main-nav.collapsed .nav-item-label,
-    #main-nav.collapsed .nav-emergency-label,
-    #main-nav.collapsed .nav-secondary-label,
-    #main-nav.collapsed .nav-brand-text {
-        max-width: 0;
-        opacity: 0;
-    }
-
-    /* hide section label entirely when collapsed */
-    #main-nav.collapsed .nav-section-label {
-        height: 0;
-        padding: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: height 0.2s, opacity 0.15s;
-    }
-
-    /* brand area: just logo centered when collapsed */
-    #main-nav .nav-brand {
-        overflow: hidden;
-    }
-    #main-nav.collapsed .nav-brand {
-        padding: 18px 0 14px;
-        justify-content: center;
-    }
-
-    /* nav items centering when collapsed */
-    #main-nav.collapsed .nav-items {
-        padding: 8px 6px;
-        align-items: center;
-    }
-    #main-nav.collapsed .nav-item {
-        padding: 0;
-        width: 48px;
-        height: 48px;
-        justify-content: center;
-        gap: 0;
-        border-radius: 12px;
-    }
-    #main-nav.collapsed .nav-item .nav-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-    }
-
-    /* bottom section when collapsed */
-    #main-nav.collapsed .nav-bottom {
-        padding: 8px 6px;
-        align-items: center;
-    }
-    #main-nav.collapsed .nav-emergency {
-        padding: 0;
-        width: 48px;
-        height: 44px;
-        justify-content: center;
-        border-radius: 12px;
-    }
-    #main-nav.collapsed .nav-secondary {
-        padding: 0;
-        width: 48px;
-        height: 40px;
-        justify-content: center;
-        gap: 0;
-        border-radius: 10px;
-    }
-
-    /* ── FLOATING TOGGLE BUTTON on right edge ── */
-    #navToggleBtn {
-        position: absolute;
-        top: 50%;
-        right: -14px;
-        transform: translateY(-50%);
-        z-index: 100;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 1px solid #e0e3ef;
-        background: #ffffff;
-        color: #000080;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(0,0,128,0.15);
-        transition: background 0.15s, box-shadow 0.15s;
-    }
-    #navToggleBtn:hover {
-        background: #f0f1ff;
-        box-shadow: 0 4px 14px rgba(0,0,128,0.22);
-    }
-    #navToggleBtn .material-symbols-outlined { font-size: 18px; }
-    #main-nav.collapsed #navToggleBtn .toggle-icon { transform: rotate(180deg); display: inline-block; transition: transform 0.28s ease; }
-    #main-nav:not(.collapsed) #navToggleBtn .toggle-icon { transform: rotate(0deg); display: inline-block; transition: transform 0.28s ease; }
-
-    /* ── TOOLTIPS (only when collapsed) ── */
-    #main-nav.collapsed .nav-item[data-tooltip]:hover::after,
-    #main-nav.collapsed .nav-secondary[data-tooltip]:hover::after,
-    #main-nav.collapsed .nav-emergency[data-tooltip]:hover::after {
-        content: attr(data-tooltip);
-        position: fixed;
-        left: 72px;
-        background: #1a1b2e;
-        color: #fff;
-        font-family: 'Inter', sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        padding: 6px 12px;
-        border-radius: 7px;
-        white-space: nowrap;
-        pointer-events: none;
-        z-index: 9999;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    }
-    
-    /* --- Nagarik Setu Inspired Enhancements --- */
-
-    /* Smooth global transitions */
-    * { box-sizing: border-box; }
-
-    /* Bento card hover lift effect */
-    .bento-card {
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-    }
-    .bento-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 32px rgba(0, 0, 128, 0.12);
-    }
-
-    /* Animated AI Glow on scan dropzone */
-    @keyframes kavach-glow {
-        0%, 100% { box-shadow: 0 0 12px 2px rgba(92, 106, 196, 0.3), inset 0 0 20px rgba(92, 106, 196, 0.05); }
-        50% { box-shadow: 0 0 28px 6px rgba(92, 106, 196, 0.5), inset 0 0 30px rgba(92, 106, 196, 0.1); }
-    }
-    #scanDropzone {
-        animation: kavach-glow 3s ease-in-out infinite;
-        border-radius: 1rem !important;
-        border: 2px solid rgba(92, 106, 196, 0.4) !important;
-    }
-
-    /* Floating Kavach AI Chat FAB */
-    #kavachFAB {
-        position: fixed;
-        bottom: 28px;
-        right: 28px;
-        z-index: 9999;
-        background: linear-gradient(135deg, #000080, #5C6AC4);
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 8px 24px rgba(0, 0, 128, 0.35);
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-        border: none;
-    }
-    #kavachFAB:hover {
-        transform: scale(1.12) translateY(-2px);
-        box-shadow: 0 14px 36px rgba(0, 0, 128, 0.45);
-    }
-    #kavachFAB .fab-ring {
-        position: absolute;
-        inset: -4px;
-        border-radius: 50%;
-        border: 2px solid rgba(92, 106, 196, 0.4);
-        animation: fab-pulse 2.5s ease-in-out infinite;
-    }
-    @keyframes fab-pulse {
-        0%, 100% { opacity: 0.4; transform: scale(1); }
-        50% { opacity: 0.1; transform: scale(1.2); }
-    }
-
-    /* Kavach AI Chat Panel */
-    #kavachChatPanel {
-        position: fixed;
-        bottom: 104px;
-        right: 28px;
-        z-index: 9998;
-        width: 360px;
-        max-height: 520px;
-        display: flex;
-        flex-direction: column;
-        background: #faf9fd;
-        border: 1px solid rgba(0,0,128,0.15);
-        border-radius: 1.25rem;
-        box-shadow: 0 20px 60px rgba(0, 0, 128, 0.18);
-        overflow: hidden;
-        transform: scale(0.85) translateY(16px);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
-    }
-    #kavachChatPanel.open {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-        pointer-events: all;
-    }
-    #kavachChatPanel .chat-header {
-        background: linear-gradient(135deg, #000080, #5C6AC4);
-        color: white;
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    #chatMessages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .chat-msg-bot {
-        background: #e8eaf6;
-        color: #1a1b1e;
-        padding: 10px 14px;
-        border-radius: 0 12px 12px 12px;
-        font-size: 13px;
-        line-height: 1.5;
-        max-width: 88%;
-        align-self: flex-start;
-    }
-    .chat-msg-user {
-        background: #000080;
-        color: white;
-        padding: 10px 14px;
-        border-radius: 12px 0 12px 12px;
-        font-size: 13px;
-        line-height: 1.5;
-        max-width: 88%;
-        align-self: flex-end;
-    }
-    .chat-input-row {
-        display: flex;
-        gap: 8px;
-        padding: 12px;
-        border-top: 1px solid #e0e3e5;
-        background: white;
-    }
-    .chat-input-row input {
-        flex: 1;
-        border: 1px solid #c4c6cf;
-        border-radius: 24px;
-        padding: 8px 16px;
-        font-size: 13px;
-        outline: none;
-        transition: border-color 0.2s;
-    }
-    .chat-input-row input:focus { border-color: #000080; }
-    .chat-input-row button {
-        background: #000080;
-        color: white;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-    }
-    .chat-input-row button:hover { background: #0000b3; }
-
-    /* Nav sidebar enhancements */
-    nav .nav-tab-btn {
-        transition: all 0.18s ease;
-    }
-    nav .nav-tab-btn:hover {
-        transform: translateX(4px);
-    }
-
-    /* Section header left border accent (Nagarik Setu style) */
-    .section-header-accent {
-        border-left: 4px solid #000080;
-        padding-left: 12px;
-    }
-</style></head>
-<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden font-body-md">
+</script>
+<link href="css/style.css" rel="stylesheet"/></head>
+<body class="text-on-background antialiased flex h-screen overflow-hidden font-sans"><div class="ambient-glow-1"></div><div class="ambient-glow-2"></div>
 <!-- SideNavBar (Desktop) -->
-<nav id="main-nav" class="hidden md:flex">
-  <!-- Floating toggle button on right edge -->
-  <button id="navToggleBtn" aria-label="Toggle sidebar">
-    <span class="material-symbols-outlined toggle-icon">chevron_left</span>
-  </button>
-
-  <!-- Brand -->
-  <div class="nav-brand">
-    <div class="nav-brand-logo">
-      <span class="material-symbols-outlined">shield</span>
-    </div>
-    <div class="nav-brand-text">
-      <div class="nav-brand-name">Grahak Kavach</div>
-      <div class="nav-brand-tag">SIH26197 · GovTech</div>
-    </div>
-  </div>
-
-  <!-- Main Nav Items -->
-  <div class="nav-section-label"><span class="nav-section-label-text">Main Menu</span></div>
-  <div class="nav-items">
-    <a class="nav-item active nav-tab-btn" data-view="scanner" data-tooltip="AI Scanner" href="#">
-      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">qr_code_scanner</span></span>
-      <span class="nav-item-label">AI Scanner</span>
-    </a>
-    <a class="nav-item nav-tab-btn" data-view="complaints" data-tooltip="File Complaint" href="#">
-      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">gavel</span></span>
-      <span class="nav-item-label">File Complaint</span>
-    </a>
-    <a class="nav-item nav-tab-btn" data-view="dashboard" data-tooltip="Shop Ledger" href="#">
-      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">manage_search</span></span>
-      <span class="nav-item-label">Shop Ledger</span>
-    </a>
-    <a class="nav-item nav-tab-btn" data-view="officer" data-tooltip="Officer Portal" href="#">
-      <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">admin_panel_settings</span></span>
-      <span class="nav-item-label">Officer Portal</span>
-    </a>
-  </div>
-
-  <!-- Bottom Actions -->
-  <div class="nav-bottom">
-    <button class="nav-emergency" data-tooltip="Emergency Support">
-      <span class="material-symbols-outlined" style="font-size:18px;">emergency_home</span>
-      <span class="nav-emergency-label">Emergency Support</span>
-    </button>
-    <a class="nav-secondary" href="#" data-tooltip="Settings">
-      <span class="material-symbols-outlined">settings</span>
-      <span class="nav-secondary-label">Settings</span>
-    </a>
-    <a class="nav-secondary" href="#" data-tooltip="Logout">
-      <span class="material-symbols-outlined">logout</span>
-      <span class="nav-secondary-label">Logout</span>
-    </a>
-  </div>
+<nav class="hidden md:flex" id="main-nav">
+<!-- Floating toggle button on right edge -->
+<button aria-label="Toggle sidebar" id="navToggleBtn">
+<span class="material-symbols-outlined toggle-icon">chevron_left</span>
+</button>
+<!-- Brand -->
+<div class="nav-brand">
+<div class="nav-brand-logo">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div class="nav-brand-text">
+<div class="nav-brand-name">Grahak Kavach</div>
+<div class="nav-brand-tag">SIH26197 · GovTech</div>
+</div>
+</div>
+<!-- Main Nav Items -->
+<div class="nav-section-label"><span class="nav-section-label-text">Main Menu</span></div>
+<div class="nav-items">
+<a class="nav-item active nav-tab-btn" data-tooltip="AI Scanner" data-view="scanner" href="#">
+<span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">qr_code_scanner</span></span>
+<span class="nav-item-label">AI Scanner</span>
+</a>
+<a class="nav-item nav-tab-btn" data-tooltip="File Complaint" data-view="complaints" href="#">
+<span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">gavel</span></span>
+<span class="nav-item-label">File Complaint</span>
+</a>
+<a class="nav-item nav-tab-btn" data-tooltip="Shop Ledger" data-view="dashboard" href="#">
+<span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">manage_search</span></span>
+<span class="nav-item-label">Shop Ledger</span>
+</a>
+<a class="nav-item nav-tab-btn" data-tooltip="Officer Portal" data-view="officer" href="#">
+<span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">admin_panel_settings</span></span>
+<span class="nav-item-label">Officer Portal</span>
+</a>
+</div>
+<!-- Bottom Actions -->
+<div class="nav-bottom">
+<button class="nav-emergency" data-tooltip="Emergency Support">
+<span class="material-symbols-outlined" style="font-size:18px;">emergency_home</span>
+<span class="nav-emergency-label">Emergency Support</span>
+</button>
+<a class="nav-secondary" data-tooltip="Settings" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="nav-secondary-label">Settings</span>
+</a>
+<a class="nav-secondary" data-tooltip="Logout" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="nav-secondary-label">Logout</span>
+</a>
+</div>
 </nav>
-
 <script>
 (function() {
   const nav = document.getElementById('main-nav');
@@ -922,146 +183,99 @@
 <!-- Main Content Area -->
 <div class="flex-1 flex flex-col h-full overflow-hidden">
 <!-- TopAppBar (Mobile & Desktop Header Area) -->
-<header class="bg-primary dark:bg-primary-container flex justify-between items-center w-full px-4 h-16 shrink-0 md:hidden shadow-md relative z-20">
-<h1 class="font-headline-lg text-[22px] font-bold text-on-primary dark:text-on-primary-container">Grahak Kavach</h1>
-<div class="flex gap-4 items-center">
-<button aria-label="Search" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
-<span class="material-symbols-outlined">search</span>
+<header class="flex justify-between items-center w-full px-margin-mobile h-16 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm shrink-0 md:hidden relative z-20">
+<button class="text-deep-navy hover:bg-on-surface-variant/10 transition-all duration-300 active:scale-95 p-2 rounded-full flex items-center justify-center nav-tab-btn" data-view="dashboard">
+<span class="material-symbols-outlined" data-icon="home">home</span>
 </button>
-<button aria-label="language" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
-<span class="material-symbols-outlined">language</span>
+<div class="font-headline-md text-headline-md font-bold text-deep-navy">Grahak Kavach</div>
+<button class="text-deep-navy hover:bg-on-surface-variant/10 transition-all duration-300 active:scale-95 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
 </button>
-<button aria-label="account_circle" class="text-on-primary hover:opacity-100 transition-opacity opacity-80">
-<span class="material-symbols-outlined">account_circle</span>
-</button>
-</div>
 </header>
 <!-- Main Scrollable Canvas -->
-<main class="flex-1 overflow-y-auto p-4 md:p-10 bg-surface pb-24 md:pb-10"><section class="app-view active-view" id="view_dashboard" style="display: block;">
+<main class="flex-1 overflow-y-auto p-4 md:p-10 pb-24 md:pb-10 relative z-10" style="background: transparent;"><section class="app-view active-view" id="view_dashboard" style="display: block;">
 <div class="max-w-container-max mx-auto space-y-12">
-<!-- Page Title -->
-<div class="space-y-2">
-<h2 class="font-display-lg text-display-lg text-primary">Namaste, Citizen 🙏</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Scan labels, file grievances, and protect your consumer rights with AI.</p>
+<div class="space-y-8 mb-8" id="new-glass-dashboard-top">
+<!-- Hero Section (Glassmorphism) -->
+<div class="glass-hero p-8 md:p-12 relative overflow-hidden flex flex-col items-center text-center mt-2">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+<div class="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-full bg-deep-navy/10 text-deep-navy shadow-sm">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">policy</span>
 </div>
-<!-- Hero Section: AI Label Scanner -->
-<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden relative">
-<div class="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 relative z-10">
-<div class="flex-1 space-y-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-ai-accent font-label-caps text-label-caps">
-<span class="w-2 h-2 rounded-full bg-ai-accent animate-pulse"></span>
-
-                                AI Vision Active
-
-                            </div>
-<h3 class="font-headline-lg text-headline-lg text-primary">Label Intelligence Scanner</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Upload or capture an image of any product label. Our advanced AI instantly verifies compliance, detects misleading claims, and provides a clear Nutri-Score.</p>
-<div class="flex gap-4 mt-6">
-<button class="bg-primary-container text-on-primary px-6 py-3 rounded-lg font-button text-button flex items-center gap-2 hover:bg-primary transition-colors" id="openCameraBtn">
-<span class="material-symbols-outlined">photo_camera</span>
-
-                                    Scan Now
-
-                                </button>
-<button class="bg-surface border border-outline-variant text-primary px-6 py-3 rounded-lg font-button text-button flex items-center gap-2 hover:bg-surface-variant transition-colors" id="uploadFileBtn">
-<span class="material-symbols-outlined">upload_file</span>
-
-                                    Upload Image
-
-                                </button>
+<h1 class="font-headline-lg-mobile text-[28px] md:font-display-lg md:text-display-lg text-deep-navy mb-4 font-bold leading-tight">
+            Verify Every Label.<br/>Protect Your Rights.
+        </h1>
+<p class="font-body-md text-body-md text-slate-text/80 mb-8 max-w-lg mx-auto">
+            AI-powered regulatory scanner for Legal Metrology &amp; FSSAI compliance.
+        </p>
+<button class="glow-button w-full md:w-auto bg-deep-navy text-on-primary font-button text-button py-4 px-10 rounded-xl shadow-[0_8px_20px_rgba(26,54,93,0.3)] flex items-center justify-center gap-2 hover:bg-primary transition-all active:scale-[0.98] nav-tab-btn" data-view="scanner">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+            Scan Label Now
+        </button>
 </div>
+<!-- Secondary Actions Grid (Bento style) -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<!-- File Grievance -->
+<button class="glass-card p-5 flex flex-col items-start gap-3 hover:bg-white/80 transition-colors active:scale-95 group col-span-2 md:col-span-1 nav-tab-btn" data-view="complaints">
+<div class="w-12 h-12 rounded-xl bg-error/10 text-error flex items-center justify-center group-hover:bg-error/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">report_problem</span>
 </div>
-<div class="w-full md:w-1/3 aspect-square relative rounded-lg overflow-hidden border border-outline-variant bg-surface-container-low flex items-center justify-center" id="scanDropzone">
-<span class="material-symbols-outlined text-outline-variant" style="font-size: 64px;">qr_code_scanner</span>
-<!-- Placeholder for an actual scanner animation or UI if needed -->
-<div class="absolute inset-0 bg-gradient-to-b from-transparent via-ai-accent/10 to-transparent animate-[scan_3s_ease-in-out_infinite]"></div>
-<img id="previewImage" style="display:none; width:100%; height:100%; object-fit:contain;"/><div id="scanLine" style="display:none;"></div></div>
+<div class="text-left mt-2">
+<h3 class="font-headline-md text-headline-md text-deep-navy text-lg">File Grievance</h3>
+<p class="font-body-sm text-body-sm text-slate-text/70 mt-1">Report violations quickly with AI proof</p>
 </div>
-</section>
-<style>
-
-                    @keyframes scan {
-
-                        0% { transform: translateY(-100%); }
-
-                        100% { transform: translateY(100%); }
-
-                    }
-
-                </style>
-<!-- Quick Stats Bento -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<!-- Stat 1 -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between bento-card">
-<div class="flex justify-between items-start mb-4">
-<h4 class="font-label-caps text-label-caps text-on-surface-variant">My Complaints</h4>
-<span class="material-symbols-outlined text-secondary">gavel</span>
+</button>
+<!-- View Shop Ledger -->
+<button class="glass-card p-5 flex flex-col items-start gap-3 hover:bg-white/80 transition-colors active:scale-95 group nav-tab-btn" data-view="dashboard">
+<div class="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center group-hover:bg-accent-indigo/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">storefront</span>
 </div>
-<div class="space-y-1">
-<div class="font-display-lg text-display-lg text-primary" id="stat-complaints">0</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-status-warning"></span>
-No complaints filed yet
-</p>
+<div class="text-left mt-2">
+<h3 class="font-headline-md text-headline-md text-deep-navy text-base">Shop Ledger</h3>
+<p class="font-body-sm text-body-sm text-slate-text/70 mt-1">Verify business history</p>
 </div>
+</button>
+<!-- Officer Portal -->
+<button class="glass-card p-5 flex flex-col items-start gap-3 hover:bg-white/80 transition-colors active:scale-95 group nav-tab-btn" data-view="officer">
+<div class="w-12 h-12 rounded-xl bg-emerald-600/10 text-emerald-700 flex items-center justify-center group-hover:bg-emerald-600/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
 </div>
-<!-- Stat 2 -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between bento-card">
-<div class="flex justify-between items-start mb-4">
-<h4 class="font-label-caps text-label-caps text-on-surface-variant">Local Compliance</h4>
-<span class="material-symbols-outlined text-secondary">storefront</span>
+<div class="text-left mt-2">
+<h3 class="font-headline-md text-headline-md text-deep-navy text-base">Gov Officer</h3>
+<p class="font-body-sm text-body-sm text-slate-text/70 mt-1">Official inspections</p>
 </div>
-<div class="space-y-1">
-<div class="font-display-lg text-display-lg text-primary" id="stat-compliance">—</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-status-compliant"></span>
-Scan a product to see compliance
-</p>
-</div>
-</div>
-<!-- Stat 3: Track Grievance (Actionable) -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between col-span-1 md:col-span-1 bg-surface-container-low bento-card">
-<div class="flex justify-between items-start mb-4">
-<h4 class="font-label-caps text-label-caps text-on-surface-variant">Track Grievance</h4>
-<span class="material-symbols-outlined text-secondary">search</span>
-</div>
-<div class="space-y-3">
-<p class="font-body-sm text-body-sm text-on-surface-variant">Enter Docket ID to track complaint status.</p>
-<div class="relative">
-<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-3 pr-10 py-2 font-label-caps text-label-caps focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="e.g. GKV-2026-001" type="text"/>
-<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary-container">
-<span class="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
 </div>
-</div>
-</section>
+<!-- Page Title -->
+<!-- Hero Section: AI Label Scanner -->
+<!-- Quick Stats Bento -->
 <!-- Complex Section: Recent Scans & Ledger -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
 <!-- Recent Scans List -->
 <section class="lg:col-span-2 space-y-4">
 <h3 class="font-headline-md text-headline-md text-primary section-header-accent">Recent Scans</h3>
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
-<div class="bg-surface-container-low border-b border-outline-variant px-4 py-3 grid grid-cols-12 gap-4">
+<div class="border rounded-xl overflow-hidden glass-card border-none">
+<div class="border-b px-4 py-3 grid grid-cols-12 gap-4 glass-card border-none">
 <div class="col-span-6 font-label-caps text-label-caps text-on-surface-variant">Product Details</div>
 <div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant">Nutri-Score</div>
 <div class="col-span-3 font-label-caps text-label-caps text-on-surface-variant text-right">Legal Status</div>
 </div>
 <div class="divide-y divide-outline-variant" id="recent-scans-list">
 <!-- Empty state: shown before any scan is made -->
-<div id="no-scans-placeholder" class="px-4 py-10 flex flex-col items-center gap-3 text-center">
-  <span class="material-symbols-outlined text-outline-variant" style="font-size:40px;">qr_code_scanner</span>
-  <div class="font-body-sm text-body-sm text-on-surface-variant">
+<div class="px-4 py-10 flex flex-col items-center gap-3 text-center" id="no-scans-placeholder">
+<span class="material-symbols-outlined text-outline-variant" style="font-size:40px;">qr_code_scanner</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
     No scans yet. Upload a product label above to get started.
   </div>
-  <div class="text-xs text-on-surface-variant opacity-60 max-w-xs">
+<div class="text-xs text-on-surface-variant opacity-60 max-w-xs">
     Your scan results (Nutri-Score, Legal Metrology compliance, FSSAI checks) will appear here.
   </div>
 </div>
 <!-- Demo scan rows (typical real use cases) -->
 <div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Packaged snack containing Tartrazine (E102) — FSSAI flagged">
 <div class="col-span-6 flex gap-3 items-center">
-<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<div class="w-10 h-10 rounded border flex items-center justify-center glass-card border-none">
 <span class="material-symbols-outlined text-secondary text-sm">fastfood</span>
 </div>
 <div>
@@ -1081,7 +295,7 @@ Flagged
 </div>
 <div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Biscuit with undeclared allergens — MRP label font below minimum 1mm">
 <div class="col-span-6 flex gap-3 items-center">
-<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<div class="w-10 h-10 rounded border flex items-center justify-center glass-card border-none">
 <span class="material-symbols-outlined text-secondary text-sm">bakery_dining</span>
 </div>
 <div>
@@ -1101,7 +315,7 @@ Compliant
 </div>
 <div class="px-4 py-4 grid grid-cols-12 gap-4 items-center hover:bg-surface-bright transition-colors cursor-pointer" title="Packaged drinking water — FSSAI licence and MRP both verified">
 <div class="col-span-6 flex gap-3 items-center">
-<div class="w-10 h-10 rounded bg-surface-container border border-outline-variant flex items-center justify-center">
+<div class="w-10 h-10 rounded border flex items-center justify-center glass-card border-none">
 <span class="material-symbols-outlined text-secondary text-sm">local_drink</span>
 </div>
 <div>
@@ -1120,14 +334,14 @@ Compliant
 </div>
 </div>
 </div>
-<div class="p-4 border-t border-outline-variant text-center bg-surface-container-low">
+<div class="p-4 border-t text-center glass-card border-none">
 <a class="font-button text-button text-primary hover:underline" href="#">View All Scans</a>
 </div>
 </div>
 </section>
 <section class="space-y-4">
 <h3 class="font-headline-md text-headline-md text-primary section-header-accent">Shop Compliance History</h3>
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 h-[calc(100%-48px)] flex flex-col">
+<div class="border rounded-xl p-6 h-[calc(100%-48px)] flex flex-col glass-card border-none">
 <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Search any shop to view past inspection records and citizen complaints filed against them.</p>
 <div class="space-y-3 flex-1">
 <!-- Based on real inspection categories per Legal Metrology Rules 2011 -->
@@ -1135,7 +349,7 @@ Compliant
 <span class="material-symbols-outlined text-status-compliant mt-0.5">verified_user</span>
 <div>
 <div class="font-label-caps text-label-caps font-bold text-primary">Reliance Smart Point — Andheri</div>
-<div class="font-body-sm text-body-sm text-on-surface-variant">Inspected Jan 2026 · MRP & net qty labels compliant · No violations found.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Inspected Jan 2026 · MRP &amp; net qty labels compliant · No violations found.</div>
 </div>
 </div>
 <div class="flex items-start gap-3 p-3 rounded border border-outline-variant bg-surface">
@@ -1148,7 +362,7 @@ Compliant
 <div class="flex items-start gap-3 p-3 rounded border border-outline-variant bg-surface">
 <span class="material-symbols-outlined text-status-warning mt-0.5">hourglass_empty</span>
 <div>
-<div class="font-label-caps text-label-caps font-bold text-primary">Metro Cash & Carry — Navi Mumbai</div>
+<div class="font-label-caps text-label-caps font-bold text-primary">Metro Cash &amp; Carry — Navi Mumbai</div>
 <div class="font-body-sm text-body-sm text-on-surface-variant">No inspection records yet · Be the first to scan a product here.</div>
 </div>
 </div>
@@ -1161,7 +375,7 @@ Search Shop by Name or GSTIN
 </div>
 </div>
  Footer 
-<footer class="bg-surface-container-highest dark:bg-on-surface border-t border-outline-variant dark:border-outline flat no shadows full-width w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-base mt-16">
+<footer class="dark:bg-on-surface border-t dark:border-outline flat no shadows full-width w-full py-12 px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-base mt-16 glass-card border-none">
 <div class="font-label-caps text-label-caps font-bold text-primary dark:text-primary-fixed">Grahak Kavach</div>
 <div class="flex gap-4 font-body-sm text-body-sm font-label-caps text-label-caps">
 <a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
@@ -1173,7 +387,7 @@ Search Shop by Name or GSTIN
 © 2026 Grahak Kavach · SIH26197 · AICTE Student Innovation (FoodTech &amp; Rural Development)
 </div>
 </footer>
-<input accept="image/*" id="labelFileInput" style="display:none;" type="file"/></section><section class="app-view" id="view_scanner" style="display: none;">
+<input accept="image/*" id="labelFileInput" style="display:none;" type="file"/></section><section class="app-view relative min-h-[70vh] flex flex-col w-full" id="view_scanner" style="display: none;">
  Camera Viewfinder Background 
 <div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="A close-up, slightly blurred, realistic perspective from a mobile camera lens looking at a complex nutritional label on a packaged food product. The lighting is bright and even, simulating a well-lit grocery store aisle. The design conveys a high-tech, precise data extraction scenario with subtle reflections on the packaging." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4ivtpmuCyh-3wAtMi16wb_GHkhgVIrZX1fE_-HrEvpTQm-H_1LtSf59aZgIUNyCfZitQTccjqqxqWXt48B_JUJ0h-2s_8fV-33ezpzYcH10SPr43dH__z41XkirhfWx8yN11_xSozojqLS9DRcWc9JKUCoNmv14a7dYNyLQrknfps-B3hUdtWmN37zswHc9w2s81Yoko5yiUKoFhxzaC_7kDWBSWCqWSnJimb6QFxr2sGKq39DzLDnw')"></div>
  Scanner Overlay 
@@ -1196,7 +410,7 @@ Search Shop by Name or GSTIN
 <p class="mt-4 font-body-sm text-body-sm text-on-primary text-center opacity-80">Align label within frame</p>
 </div>
 </div>
-<div class="w-full max-w-2xl mx-auto mt-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card" id="resultsContainer" style="display:none;">
+<div class="w-full max-w-2xl mx-auto mt-8 border rounded-xl p-6 glass-card border-none" id="resultsContainer" style="display:none;">
 <h3 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant text-center section-header-accent">AI Dual-Regulatory Analysis</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="resultsContent">
 <!-- Legal Metrology Card -->
@@ -1234,7 +448,7 @@ Search Shop by Name or GSTIN
 </div>
 </section><section class="app-view" id="view_complaints" style="display: none;">
  Sidebar Navigation (Desktop) 
-<aside class="hidden md:flex flex-col p-base gap-gutter bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline docked h-screen left-0 w-64 fixed mt-20">
+<aside class="hidden md:flex flex-col p-base gap-gutter dark:bg-inverse-surface border-r dark:border-outline docked h-screen left-0 w-64 fixed mt-20 glass-card border-none">
 <div class="mb-8 px-4">
 <h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Grahak Kavach</h2>
 <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">GovTech Security</p>
@@ -1283,7 +497,7 @@ Search Shop by Name or GSTIN
 <!-- Main Form Canvas -->
 <div class="flex-grow flex flex-col gap-8 w-full lg:w-2/3">
 <!-- Step 1: Evidence -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card shadow-sm">
+<div class="border rounded-xl p-6 glass-card shadow-sm border-none">
 <div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
 <h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
 <span class="bg-primary-container text-on-primary-container rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</span>
@@ -1298,7 +512,7 @@ Search Shop by Name or GSTIN
 </div>
 <div class="flex flex-col gap-4">
 <p class="font-body-md text-body-md text-on-surface-variant">Upload a clear scan of the product label, receipt, or misleading advertisement.</p>
-<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group glass-card border-none">
 <span class="material-symbols-outlined text-4xl text-outline mb-2 group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
 <span class="font-button text-button text-primary">Click or drag file to upload</span>
 <span class="font-body-sm text-body-sm text-outline mt-1">Supports JPG, PNG, PDF (Max 5MB)</span>
@@ -1306,7 +520,7 @@ Search Shop by Name or GSTIN
 </div>
 </div>
 <!-- Step 2: Vendor Details -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card shadow-sm opacity-60">
+<div class="border rounded-xl p-6 glass-card shadow-sm opacity-60 border-none">
 <div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
 <h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
 <span class="bg-surface-variant text-on-surface-variant rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</span>
@@ -1319,7 +533,7 @@ Search Shop by Name or GSTIN
 <label class="flex flex-col gap-1">
 <span class="font-label-caps text-label-caps text-on-surface-variant">Select Vendor from Ledger</span>
 <div class="relative">
-<input class="w-full bg-surface-container-low border border-outline-variant rounded px-4 py-2 pl-10 border-l-4 border-l-transparent focus:border-l-primary focus:outline-none" disabled="" placeholder="Search vendor name or GSTIN..." type="text"/>
+<input class="w-full border rounded px-4 py-2 pl-10 border-l-4 border-l-transparent focus:border-l-primary focus:outline-none glass-card border-none" disabled="" placeholder="Search vendor name or GSTIN..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-sm" data-icon="search">search</span>
 </div>
 </label>
@@ -1338,7 +552,7 @@ Search Shop by Name or GSTIN
 <!-- Right Sidebar / Progress -->
 <div class="w-full lg:w-1/3 flex flex-col gap-6">
 <!-- Progress Tracker -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 glass-card">
+<div class="border rounded-xl p-6 glass-card border-none">
 <h4 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant">Filing Progress</h4>
 <div class="flex flex-col gap-0 border-l-2 border-primary-container ml-3 pl-4">
 <div class="relative pb-6">
@@ -1390,21 +604,21 @@ Search Shop by Name or GSTIN
  Bento Grid 
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
 <!-- Metrics -->
-<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="md:col-span-1 border rounded-xl p-6 flex flex-col justify-between glass-card border-none">
 <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Total Inspections</div>
 <div class="font-headline-lg text-headline-lg text-primary">1,248</div>
 <div class="text-status-compliant font-label-caps text-label-caps mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> +12% this month</div>
 </div>
-<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="md:col-span-1 border rounded-xl p-6 flex flex-col justify-between glass-card border-none">
 <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Violations Flagged</div>
 <div class="font-headline-lg text-headline-lg text-status-alert">184</div>
 <div class="text-status-alert font-label-caps text-label-caps mt-2 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> +3% this month</div>
 </div>
-<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="md:col-span-1 border rounded-xl p-6 flex flex-col justify-between glass-card border-none">
 <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Compliant Stores</div>
 <div class="font-headline-lg text-headline-lg text-status-compliant">982</div>
 </div>
-<div class="md:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl p-6 flex flex-col justify-between">
+<div class="md:col-span-1 border rounded-xl p-6 flex flex-col justify-between glass-card border-none">
 <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Fines Collected</div>
 <div class="font-headline-lg text-headline-lg text-primary font-label-caps">₹14.2M</div>
 </div>
@@ -1412,7 +626,7 @@ Search Shop by Name or GSTIN
  Complex Layout Area 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
 <!-- Inspection Logbook -->
-<div class="lg:col-span-2 bg-surface-container-lowest border border-surface-variant rounded-xl overflow-hidden flex flex-col">
+<div class="lg:col-span-2 border rounded-xl overflow-hidden flex flex-col glass-card border-none">
 <div class="bg-surface p-4 border-b border-surface-variant flex justify-between items-center">
 <h2 class="font-headline-md text-headline-md text-primary">Official Inspection Logbook</h2>
 <button class="text-ai-accent font-button text-button hover:underline">View All</button>
@@ -1420,7 +634,7 @@ Search Shop by Name or GSTIN
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-surface-container-low border-b border-surface-variant text-secondary font-label-caps text-label-caps">
+<tr class="border-b text-secondary font-label-caps text-label-caps glass-card border-none">
 <th class="p-4">Store ID / Name</th>
 <th class="p-4">Date</th>
 <th class="p-4">Outcome</th>
@@ -1428,7 +642,7 @@ Search Shop by Name or GSTIN
 </tr>
 </thead>
 <tbody class="font-body-md text-body-md">
-<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<tr class="border-b hover:bg-surface-container-low transition-colors glass-card border-none">
 <td class="p-4">
 <div class="font-semibold text-primary">ST-4092</div>
 <div class="text-sm text-on-surface-variant">Metro Supermarket</div>
@@ -1439,7 +653,7 @@ Search Shop by Name or GSTIN
 </td>
 <td class="p-4"><button class="text-primary font-button text-button hover:underline">Details</button></td>
 </tr>
-<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<tr class="border-b hover:bg-surface-container-low transition-colors glass-card border-none">
 <td class="p-4">
 <div class="font-semibold text-primary">ST-8812</div>
 <div class="text-sm text-on-surface-variant">City Fresh Mart</div>
@@ -1455,7 +669,7 @@ Search Shop by Name or GSTIN
 </div>
 </div>
 <!-- Incoming Dockets -->
-<div class="lg:col-span-1 bg-surface-container-lowest border border-surface-variant rounded-xl flex flex-col h-[500px]">
+<div class="lg:col-span-1 border rounded-xl flex flex-col h-[500px] glass-card border-none">
 <div class="bg-surface p-4 border-b border-surface-variant flex justify-between items-center">
 <h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
 
@@ -1484,7 +698,7 @@ Search Shop by Name or GSTIN
 </div>
 <h3 class="font-semibold text-primary mb-1">Expired Licensing</h3>
 <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Automated system flagged expired FSSAI license for entity ID 9921.</p>
-<button class="w-full border border-primary-container text-primary-container py-2 rounded font-button text-button hover:bg-surface-container-low transition-colors">Review Case</button>
+<button class="w-full border border-primary-container text-primary-container py-2 rounded font-button text-button hover:bg-surface-container-low transition-colors glass-card border-none">Review Case</button>
 </div>
 </div>
 </div>
@@ -1492,30 +706,31 @@ Search Shop by Name or GSTIN
 </section></main>
 </div>
 <!-- BottomNavBar (Mobile) -->
-<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-2 py-2 md:hidden bg-surface dark:bg-on-surface border-t border-outline-variant shadow-[0_-4px_16px_rgba(0,0,128,0.06)] rounded-t-2xl pb-safe">
-<a class="nav-tab-btn mobile-nav-btn active flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="scanner" href="#">
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe h-20 bg-glass-surface backdrop-blur-xl border-t border-glass-border shadow-[0_-4px_20px_rgba(26,54,93,0.08)] rounded-t-2xl">
+<a class="nav-tab-btn mobile-nav-btn active flex flex-col items-center justify-center text-primary font-bold hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="scanner" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
-<span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+<span class="material-symbols-outlined mb-1 text-2xl" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
 </div>
-<span class="text-[10px] font-label-caps tracking-wide">Scanner</span>
+<span class="font-label-caps text-label-caps text-[10px]">Scan</span>
 </a>
-<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="complaints" href="#">
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="complaints" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
-<span class="material-symbols-outlined text-2xl">gavel</span>
+<span class="material-symbols-outlined mb-1 text-2xl">gavel</span>
 </div>
-<span class="text-[10px] font-label-caps tracking-wide">Report</span>
+<span class="font-label-caps text-label-caps text-[10px]">Report</span>
 </a>
-<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="dashboard" href="#">
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="dashboard" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
-<span class="material-symbols-outlined text-2xl">manage_search</span>
+<span class="material-symbols-outlined mb-1 text-2xl">manage_search</span>
 </div>
-<span class="text-[10px] font-label-caps tracking-wide">Ledger</span>
+<span class="font-label-caps text-label-caps text-[10px]">Ledger</span>
 </a>
-<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" data-view="officer" href="#">
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="officer" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
-<span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
+<span class="material-symbols-outlined mb-1 text-2xl">shield_person</span>
 </div>
-<span class="text-[10px] font-label-caps tracking-wide">Officer</span>
+<span class="font-label-caps text-label-caps text-[10px]">Officer</span>
 </a>
 </nav>
 <script src="js/config.js"></script><script src="js/api.js"></script><script src="js/app.js"></script><script src="js/scanner.js"></script><script src="js/complaints.js"></script><script src="js/shops.js"></script><script src="js/officer.js"></script>
@@ -1532,7 +747,7 @@ Search Shop by Name or GSTIN
 <div class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" id="receiptModal" style="display:none;">
 <div class="bg-surface rounded-xl p-6 w-full max-w-md text-center">
 <h3 class="text-xl font-bold text-status-compliant mb-2">Complaint Dispatched</h3>
-<div class="bg-surface-container p-4 rounded mb-4 text-left text-sm">
+<div class="p-4 rounded mb-4 text-left text-sm glass-card border-none">
 <p>ID: <span class="font-bold" id="receiptTrackingId"></span></p>
 <p>Dept: <span id="receiptDepartment"></span></p>
 <p>Status: <span id="receiptStatus"></span></p>
@@ -1542,7 +757,6 @@ Search Shop by Name or GSTIN
 </div>
 </div>
 <!-- Shop Verification/Add Shop Modal etc. can be added later -->
-
 <!-- Kavach AI Floating Chat Button (Nagarik Setu inspired) -->
 <button aria-label="Kavach AI Assistant" id="kavachFAB" title="Ask Kavach AI">
 <div class="fab-ring"></div>
