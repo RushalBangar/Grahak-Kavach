@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Officer Dashboard - Grahak Kavach</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -129,9 +131,39 @@
           </tr>
         </thead>
         <tbody id="complaints-queue">
-          <!-- Fetched via API -->
+          <!-- Fetched via API, skeleton loading default -->
           <tr>
-            <td colspan="6" class="text-center" style="padding: 24px; color: #64748b;">Loading complaints...</td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text short"></div></td>
+            <td><div class="skeleton" style="width: 80px; height: 32px; border-radius: 4px;"></div></td>
+          </tr>
+          <tr>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text short"></div></td>
+            <td><div class="skeleton" style="width: 80px; height: 32px; border-radius: 4px;"></div></td>
+          </tr>
+          <tr>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text short"></div>
+            </td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text short"></div></td>
+            <td><div class="skeleton" style="width: 80px; height: 32px; border-radius: 4px;"></div></td>
           </tr>
         </tbody>
       </table>
@@ -189,6 +221,15 @@
               document.getElementById('complaints-queue').innerHTML = '<tr><td colspan="6" class="text-center text-danger">Failed to load queue.</td></tr>';
           }
       });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.log('SW registration failed: ', err);
+        });
+      });
+    }
   </script>
 </body>
 </html>

@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>File Complaint - Grahak Kavach</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -141,10 +143,25 @@
               let method = 'Phone OTP';
               if(verMethods[1].checked) method = 'Aadhaar QR';
 
+              const shopName = document.getElementById('comp-shop').value.trim();
+              const violationType = document.getElementById('comp-type').value;
+              const desc = document.getElementById('comp-desc').value.trim();
+
+              if (!shopName) {
+                  showToast("Please enter the Shop Name / ID.", "warning");
+                  nextStep(2); // Go back to details tab
+                  return;
+              }
+              if (!desc || desc.length < 10) {
+                  showToast("Description must be at least 10 characters long.", "warning");
+                  nextStep(2);
+                  return;
+              }
+
               const payload = {
                   shop_id: 1, // hardcoded for demo
-                  product_details: document.getElementById('comp-desc').value || "Scanned Product",
-                  violation_type: document.getElementById('comp-type').value || "Both",
+                  product_details: desc,
+                  violation_type: violationType,
                   verification_method: method
               };
 
@@ -156,6 +173,15 @@
               showToast("Error submitting complaint", "error");
           }
       });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.log('SW registration failed: ', err);
+        });
+      });
+    }
   </script>
 </body>
 </html>

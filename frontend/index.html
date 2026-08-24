@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Grahak Kavach</title>
+  <title>Grahak Kavach - Your shield at every purchase</title>
+  <meta name="description" content="Your intelligent shield against food safety and legal metrology violations. Scan labels, detect issues, and file complaints instantly.">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://grahak-kavach.app/">
+  <meta property="og:title" content="Grahak Kavach">
+  <meta property="og:description" content="Your intelligent shield against food safety and legal metrology violations.">
+  <meta property="og:image" content="https://grahak-kavach.app/assets/logo.svg">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -108,5 +121,14 @@
 
   </div>
   <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.log('SW registration failed: ', err);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
