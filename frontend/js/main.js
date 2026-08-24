@@ -11,14 +11,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Camera mock logic for scan.html
+  // Camera logic for scan.html
   const startScanBtn = document.getElementById('start-scan');
   const fileUploadInput = document.getElementById('file-upload');
   const processingOverlay = document.getElementById('processing-overlay');
+  
+  const videoElement = document.getElementById('camera-feed');
+  const canvasElement = document.getElementById('camera-canvas');
 
-  if (startScanBtn && processingOverlay) {
+  // Initialize camera if video element exists
+  if (videoElement) {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+      .then(stream => {
+        videoElement.srcObject = stream;
+      })
+      .catch(err => {
+        console.error("Camera access denied or unavailable", err);
+        // Fallback gracefully (user can still use file upload)
+      });
+  }
+
+  if (startScanBtn && processingOverlay && videoElement && canvasElement) {
     startScanBtn.addEventListener('click', () => {
-      startProcessing();
+      // Draw current video frame to canvas
+      const context = canvasElement.getContext('2d');
+      canvasElement.width = videoElement.videoWidth;
+      canvasElement.height = videoElement.videoHeight;
+      context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+      
+      // Convert canvas to blob/file
+      canvasElement.toBlob(blob => {
+        if (blob) {
+          const file = new File([blob], "capture.jpg", { type: "image/jpeg" });
+          startProcessing(file);
+        } else {
+          alert("Failed to capture image.");
+        }
+      }, 'image/jpeg', 0.9);
     });
   }
 

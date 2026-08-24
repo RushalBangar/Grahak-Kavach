@@ -90,9 +90,16 @@
     </div>
 
     <div class="content animate-slide-up">
-      <div class="viewfinder mb-4 shadow">
-        <div class="viewfinder-frame"></div>
-        <p style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8;">Fit the label inside this frame</p>
+      <div class="viewfinder mb-4 shadow" style="position: relative;">
+        <!-- Real Camera Feed -->
+        <video id="camera-feed" autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"></video>
+        
+        <!-- UI overlay for scanning -->
+        <div class="viewfinder-frame" style="z-index: 2;"></div>
+        <p style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
+        
+        <!-- Hidden canvas to grab image -->
+        <canvas id="camera-canvas" style="display: none;"></canvas>
       </div>
       
       <p class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
