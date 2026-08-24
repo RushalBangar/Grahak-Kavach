@@ -192,9 +192,10 @@ p { color: var(--text-main); font-size: 1rem; margin-bottom: var(--spacing-md); 
 
 /* Bottom Navigation */
 .bottom-nav {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 480px; /* Aligns with .app-container */
   display: flex;
   justify-content: space-around;
   padding: 12px 0;

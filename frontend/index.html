@@ -8,37 +8,103 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="app-container">
+  <div class="app-container" style="overflow-y: auto;">
     
-    <div class="content flex-center text-center animate-slide-up" style="flex: 1; padding: 32px;">
-      
-      <!-- Logo Container -->
-      <div class="mb-4" style="width: 120px; height: 120px; background: white; border-radius: 50%; padding: 24px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; justify-content: center;">
+    <!-- Hero Section -->
+    <div class="content flex-center text-center animate-slide-up" style="flex: none; padding: 48px 32px 32px 32px;">
+      <div class="mb-4" style="width: 100px; height: 100px; background: white; border-radius: 50%; padding: 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; justify-content: center;">
         <img src="assets/logo.svg" alt="Grahak Kavach Logo" style="width: 100%; height: 100%;">
       </div>
+      <h1 style="font-size: 2rem; margin-bottom: 8px;">Grahak Kavach</h1>
+      <p class="text-muted" style="font-size: 1.1rem; max-width: 300px; margin: 0 auto 32px auto;">Your intelligent shield against food safety and legal metrology violations.</p>
 
-      <h1>Grahak Kavach</h1>
-      <p class="text-muted mb-8" style="font-size: 1.1rem;">Your shield at every purchase</p>
-
-      <div class="glass-panel" style="width: 100%; padding: 32px 24px; display: flex; flex-direction: column; gap: 16px;">
-        <h3 style="margin-bottom: 8px;">Check Product Safety</h3>
-        <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 16px;">Scan any product label to instantly verify compliance, ingredients, and safety warnings.</p>
-        
-        <a href="scan.html" class="btn btn-primary" style="padding: 16px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
-          Scan a Product
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Bottom Action for Officer (De-emphasized) -->
-    <div style="padding: 24px; text-align: center;">
-      <a href="officer-login.html" class="btn btn-secondary" style="font-size: 0.875rem; padding: 10px 16px; width: auto; border-radius: 8px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        I'm an Officer
+      <a href="scan.html" class="btn btn-primary" style="padding: 16px; width: 100%; max-width: 300px; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+        Start Scanning Now
       </a>
     </div>
+
+    <!-- How It Works Section -->
+    <div style="padding: 32px 24px;">
+      <h2 class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">How It Works</h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
+          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Scan the Label</h4>
+            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Use your phone's camera to scan any product's ingredient list, MRP, or expiry date.</p>
+          </div>
+        </div>
+        
+        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
+          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">AI Analysis</h4>
+            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Our AI instantly checks against FSSAI and Legal Metrology regulations to detect issues.</p>
+          </div>
+        </div>
+        
+        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
+          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</div>
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Report Instantly</h4>
+            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Found a violation? File a verified complaint directly to government authorities in one tap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div style="padding: 32px 24px; background: rgba(255,255,255,0.4);">
+      <h2 class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">Key Features</h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="glass-card" style="padding: 16px; text-align: center;">
+          <svg style="color: var(--warning); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <div style="font-weight: 600; font-size: 0.9rem;">Food Safety</div>
+        </div>
+        <div class="glass-card" style="padding: 16px; text-align: center;">
+          <svg style="color: var(--primary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <div style="font-weight: 600; font-size: 0.9rem;">Expiry Check</div>
+        </div>
+        <div class="glass-card" style="padding: 16px; text-align: center;">
+          <svg style="color: var(--secondary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <div style="font-weight: 600; font-size: 0.9rem;">MRP Validation</div>
+        </div>
+        <div class="glass-card" style="padding: 16px; text-align: center;">
+          <svg style="color: var(--danger); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <div style="font-weight: 600; font-size: 0.9rem;">Govt Reporting</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official Portal Section -->
+    <div style="padding: 40px 24px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05);">
+      <div style="width: 56px; height: 56px; background: #1e293b; color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <h3 style="margin-bottom: 8px;">Are you a Government Official?</h3>
+      <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 24px;">Access the secure dashboard to view and manage citizen complaints in real-time.</p>
+      <a href="officer-login.html" class="btn btn-secondary" style="width: 100%; max-width: 250px;">
+        Access Officer Portal
+      </a>
+    </div>
+
+    <!-- Landing Page Footer -->
+    <footer style="padding: 32px 24px; text-align: center; color: var(--text-muted); font-size: 0.8rem; background: rgba(255,255,255,0.6);">
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 16px;">
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+        <a href="#" style="color: var(--text-muted); text-decoration: none;">Contact Us</a>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+        <img src="assets/logo.svg" alt="Logo" style="width: 16px; height: 16px; opacity: 0.6;">
+        <span style="font-weight: 600;">Grahak Kavach</span>
+      </div>
+      <div>&copy; 2026 Grahak Kavach. All rights reserved.</div>
+      <div style="margin-top: 4px; font-size: 0.7rem;">Built for Smart India Hackathon</div>
+    </footer>
 
   </div>
   <script src="js/main.js"></script>
