@@ -5,6 +5,7 @@
 const Complaints = {
   selectedVerificationMethod: 'Aadhaar QR (Zero Storage)',
   isIdentityVerified: true,
+  currentStep: 1,
 
   init() {
     this.bindEvents();
@@ -18,6 +19,12 @@ const Complaints = {
     const tierCards = document.querySelectorAll('.verify-tier-card');
     const trackSearchBtn = document.getElementById('trackComplaintBtn');
     const trackInput = document.getElementById('trackingIdInput');
+
+    const nextBtn = document.getElementById('wizardNextBtn');
+    const backBtn = document.getElementById('wizardBackBtn');
+
+    if (nextBtn) nextBtn.addEventListener('click', () => this.nextStep());
+    if (backBtn) backBtn.addEventListener('click', () => this.prevStep());
 
     if (form) {
       form.addEventListener('submit', (e) => this.handleComplaintSubmit(e));
@@ -128,6 +135,105 @@ const Complaints = {
     const modal = document.getElementById('verificationSimModal');
     if (modal) modal.classList.remove('open');
     App.showToast('Identity verified securely under DPDP Act 2023!', 'success');
+  },
+
+
+  nextStep() {
+    if (this.currentStep === 1) {
+      const consent = document.getElementById('consentCheckbox');
+      if (!consent || !consent.checked) {
+        App.showToast('Please consent to identity verification to proceed.', 'warning');
+        return;
+      }
+      this.isIdentityVerified = true;
+    }
+
+    if (this.currentStep === 2) {
+      const shopId = document.getElementById('complaintShopSelect').value;
+      const prodDetails = document.getElementById('complaintProductDetails').value;
+      if (!shopId) {
+        App.showToast('Please select a retail shop.', 'warning');
+        return;
+      }
+      if (!prodDetails.trim()) {
+        App.showToast('Please describe the product and issue.', 'warning');
+        return;
+      }
+      // Populate review section
+      document.getElementById('reviewIdentity').innerText = this.selectedVerificationMethod;
+      document.getElementById('reviewIssue').innerText = prodDetails;
+      document.getElementById('reviewVendor').innerText = document.getElementById('complaintShopSelect').options[document.getElementById('complaintShopSelect').selectedIndex].text;
+      document.getElementById('reviewRouting').innerText = document.querySelector('input[name="violation_type"]:checked')?.value || 'Both';
+    }
+
+    if (this.currentStep === 3) {
+      this.submitComplaint();
+      return;
+    }
+
+    this.currentStep++;
+    this.updateWizardUI();
+  },
+
+  prevStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      this.updateWizardUI();
+    }
+  },
+
+  updateWizardUI() {
+    // Update steps
+    for (let i = 1; i <= 3; i++) {
+      const stepEl = document.getElementById('step' + i);
+      const trackerEl = document.getElementById('trackerStep' + i);
+      
+      if (stepEl) {
+        if (i === this.currentStep) {
+          stepEl.classList.add('active');
+          stepEl.style.opacity = '1';
+          stepEl.style.pointerEvents = 'auto';
+        } else {
+          stepEl.classList.remove('active');
+          stepEl.style.opacity = '0.5';
+          stepEl.style.pointerEvents = 'none';
+        }
+      }
+
+      if (trackerEl) {
+        if (i <= this.currentStep) {
+          trackerEl.style.opacity = '1';
+        } else {
+          trackerEl.style.opacity = '0.5';
+        }
+      }
+    }
+
+    // Update buttons
+    const nextBtn = document.getElementById('wizardNextBtn');
+    const backBtn = document.getElementById('wizardBackBtn');
+    
+    if (backBtn) {
+      backBtn.style.visibility = this.currentStep === 1 ? 'hidden' : 'visible';
+    }
+    
+    if (nextBtn) {
+      if (this.currentStep === 3) {
+        nextBtn.innerHTML = 'Submit Grievance <span class="material-symbols-outlined text-sm">gavel</span>';
+        nextBtn.classList.remove('bg-primary');
+        nextBtn.classList.add('bg-error');
+      } else {
+        nextBtn.innerHTML = 'Next Step <span class="material-symbols-outlined text-sm">arrow_forward</span>';
+        nextBtn.classList.add('bg-primary');
+        nextBtn.classList.remove('bg-error');
+      }
+    }
+  },
+
+  submitComplaint() {
+    // Call the original submit logic directly
+    const mockEvent = { preventDefault: () => {} };
+    this.handleComplaintSubmit(mockEvent);
   },
 
   async handleComplaintSubmit(e) {

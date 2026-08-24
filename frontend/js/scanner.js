@@ -103,6 +103,7 @@ const Scanner = {
   processImageFile(file) {
     const previewBox = document.getElementById('previewContainer');
     const previewImg = document.getElementById('previewImage');
+    const statusText = document.querySelector('#view_scanner .font-label-caps.text-ai-accent');
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -114,16 +115,27 @@ const Scanner = {
     reader.readAsDataURL(file);
 
     this.startScanAnimation();
+    if (statusText) statusText.innerText = 'Reading label...';
 
-    API.analyzeLabel(file).then(result => {
-      this.stopScanAnimation();
-      this.currentScannedResult = result;
-      this.renderResults(result);
-      App.showToast('Product Label Analysis Complete!', 'success');
-    }).catch(err => {
-      this.stopScanAnimation();
-      App.showToast('Failed to analyze label', 'error');
-    });
+    setTimeout(() => {
+      if (statusText) statusText.innerText = 'Checking compliance...';
+      
+      setTimeout(() => {
+        if (statusText) statusText.innerText = 'Analyzing ingredients...';
+        
+        API.analyzeLabel(file).then(result => {
+          this.stopScanAnimation();
+          if (statusText) statusText.innerText = 'Visual OCR Active';
+          this.currentScannedResult = result;
+          this.renderResults(result);
+          App.showToast('Product Label Analysis Complete!', 'success');
+        }).catch(err => {
+          this.stopScanAnimation();
+          if (statusText) statusText.innerText = 'Visual OCR Active';
+          App.showToast('Failed to analyze label', 'error');
+        });
+      }, 1000);
+    }, 1000);
   },
 
   // Camera Live Capture
@@ -184,9 +196,14 @@ const Scanner = {
   renderResults(data) {
     const placeholder = document.getElementById('resultsPlaceholder');
     const content = document.getElementById('resultsContent');
-    if (!placeholder || !content) return;
+    const container = document.getElementById('resultsContainer');
+    if (!content) return;
 
-    placeholder.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'none';
+    if (container) {
+      container.style.display = 'block';
+      container.classList.add('active');
+    }
     content.classList.add('active');
 
     // 1. Legal Metrology Module

@@ -130,7 +130,7 @@
 <!-- Main Nav Items -->
 <div class="nav-section-label"><span class="nav-section-label-text">Main Menu</span></div>
 <div class="nav-items">
-<a class="nav-item active nav-tab-btn" data-tooltip="AI Scanner" data-view="scanner" href="#">
+<a class="nav-item nav-tab-btn" data-tooltip="AI Scanner" data-view="scanner" href="#">
 <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">qr_code_scanner</span></span>
 <span class="nav-item-label">AI Scanner</span>
 </a>
@@ -138,7 +138,7 @@
 <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">gavel</span></span>
 <span class="nav-item-label">File Complaint</span>
 </a>
-<a class="nav-item nav-tab-btn" data-tooltip="Shop Ledger" data-view="dashboard" href="#">
+<a class="nav-item nav-tab-btn" data-tooltip="Shop Ledger" data-view="shop_history" href="#">
 <span class="nav-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">manage_search</span></span>
 <span class="nav-item-label">Shop Ledger</span>
 </a>
@@ -184,7 +184,7 @@
 <div class="flex-1 flex flex-col h-full overflow-hidden">
 <!-- TopAppBar (Mobile & Desktop Header Area) -->
 <header class="flex justify-between items-center w-full px-margin-mobile h-16 bg-glass-surface backdrop-blur-md border-b border-glass-border shadow-sm shrink-0 md:hidden relative z-20">
-<button class="text-deep-navy hover:bg-on-surface-variant/10 transition-all duration-300 active:scale-95 p-2 rounded-full flex items-center justify-center nav-tab-btn" data-view="dashboard">
+<button class="text-deep-navy hover:bg-on-surface-variant/10 transition-all duration-300 active:scale-95 p-2 rounded-full flex items-center justify-center nav-tab-btn" data-view="shop_history">
 <span class="material-symbols-outlined" data-icon="home">home</span>
 </button>
 <div class="font-headline-md text-headline-md font-bold text-deep-navy">Grahak Kavach</div>
@@ -193,7 +193,30 @@
 </button>
 </header>
 <!-- Main Scrollable Canvas -->
-<main class="flex-1 overflow-y-auto p-4 md:p-10 pb-24 md:pb-10 relative z-10" style="background: transparent;"><section class="app-view active-view" id="view_dashboard" style="display: block;">
+<main class="flex-1 overflow-y-auto p-4 md:p-10 pb-24 md:pb-10 relative z-10" style="background: transparent;"><section class="app-view active-view" id="view_landing">
+<div class="max-w-container-max mx-auto h-full flex flex-col items-center justify-center space-y-12 py-20 px-4">
+    <div class="text-center space-y-4">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 text-primary mb-4 shadow-sm">
+            <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+        </div>
+        <h1 class="font-display-lg text-4xl md:text-5xl text-primary font-bold">GrahakKavach</h1>
+        <p class="font-body-lg text-lg text-slate-text/80">Your shield at every purchase</p>
+    </div>
+    
+    <div class="flex flex-col w-full max-w-sm space-y-4 mt-10">
+        <button class="glow-button w-full bg-primary text-on-primary font-button text-lg py-5 px-6 rounded-xl shadow-[0_8px_20px_rgba(0,32,69,0.3)] flex items-center justify-center gap-3 hover:bg-primary-fixed-variant transition-all active:scale-[0.98] nav-tab-btn" data-view="scanner">
+            <span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+            Scan a Product
+        </button>
+        
+        <button class="w-full bg-transparent border border-outline-variant text-primary font-button text-base py-3 px-6 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-variant transition-all active:scale-[0.98] nav-tab-btn" data-view="officer_login">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            I'm an Officer
+        </button>
+    </div>
+</div>
+</section>
+<section class="app-view" id="view_shop_history">
 <div class="max-w-container-max mx-auto space-y-12">
 <div class="space-y-8 mb-8" id="new-glass-dashboard-top">
 <!-- Hero Section (Glassmorphism) -->
@@ -226,7 +249,7 @@
 </div>
 </button>
 <!-- View Shop Ledger -->
-<button class="glass-card p-5 flex flex-col items-start gap-3 hover:bg-white/80 transition-colors active:scale-95 group nav-tab-btn" data-view="dashboard">
+<button class="glass-card p-5 flex flex-col items-start gap-3 hover:bg-white/80 transition-colors active:scale-95 group nav-tab-btn" data-view="shop_history">
 <div class="w-12 h-12 rounded-xl bg-accent-indigo/10 text-accent-indigo flex items-center justify-center group-hover:bg-accent-indigo/20 transition-colors">
 <span class="material-symbols-outlined text-2xl">storefront</span>
 </div>
@@ -387,7 +410,7 @@ Search Shop by Name or GSTIN
 © 2026 Grahak Kavach · SIH26197 · AICTE Student Innovation (FoodTech &amp; Rural Development)
 </div>
 </footer>
-<input accept="image/*" id="labelFileInput" style="display:none;" type="file"/></section><section class="app-view relative min-h-[70vh] flex flex-col w-full" id="view_scanner" style="display: none;">
+<input accept="image/*" id="labelFileInput" style="display:none;" type="file"/></section><section class="app-view relative min-h-[70vh] flex flex-col w-full" id="view_scanner">
  Camera Viewfinder Background 
 <div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="A close-up, slightly blurred, realistic perspective from a mobile camera lens looking at a complex nutritional label on a packaged food product. The lighting is bright and even, simulating a well-lit grocery store aisle. The design conveys a high-tech, precise data extraction scenario with subtle reflections on the packaging." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4ivtpmuCyh-3wAtMi16wb_GHkhgVIrZX1fE_-HrEvpTQm-H_1LtSf59aZgIUNyCfZitQTccjqqxqWXt48B_JUJ0h-2s_8fV-33ezpzYcH10SPr43dH__z41XkirhfWx8yN11_xSozojqLS9DRcWc9JKUCoNmv14a7dYNyLQrknfps-B3hUdtWmN37zswHc9w2s81Yoko5yiUKoFhxzaC_7kDWBSWCqWSnJimb6QFxr2sGKq39DzLDnw')"></div>
  Scanner Overlay 
@@ -446,7 +469,7 @@ Search Shop by Name or GSTIN
 <span class="material-symbols-outlined">gavel</span> File Evidence-Backed Complaint
             </button>
 </div>
-</section><section class="app-view" id="view_complaints" style="display: none;">
+</section><section class="app-view" id="view_complaints">
  Sidebar Navigation (Desktop) 
 <aside class="hidden md:flex flex-col p-base gap-gutter dark:bg-inverse-surface border-r dark:border-outline docked h-screen left-0 w-64 fixed mt-20 glass-card border-none">
 <div class="mb-8 px-4">
@@ -495,85 +518,114 @@ Search Shop by Name or GSTIN
 </div>
 <div class="flex flex-col lg:flex-row gap-8">
 <!-- Main Form Canvas -->
-<div class="flex-grow flex flex-col gap-8 w-full lg:w-2/3">
-<!-- Step 1: Evidence -->
-<div class="border rounded-xl p-6 glass-card shadow-sm border-none">
-<div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
-<span class="bg-primary-container text-on-primary-container rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</span>
+<div class="flex-grow flex flex-col gap-8 w-full lg:w-2/3" id="complaintWizard">
+    <!-- Step 1: Identity Verification -->
+    <div class="wizard-step border rounded-xl p-6 glass-card shadow-sm border-none active" id="step1">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
+            <h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
+                <span class="bg-primary-container text-on-primary-container rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</span>
+                Identity Verification
+            </h3>
+        </div>
+        <div class="flex flex-col gap-4">
+            <p class="font-body-md text-on-surface-variant">Choose a verification method (DPDP 2023 Compliant).</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border rounded-lg p-4 cursor-pointer hover:bg-surface-variant transition-colors verify-tier-card selected" data-method="Aadhaar QR">
+                    <h4 class="font-bold text-primary"><i class="fas fa-qrcode"></i> Aadhaar QR</h4>
+                    <p class="text-sm text-slate-text/70">Most trusted, instant, zero storage</p>
+                </div>
+                <div class="border rounded-lg p-4 cursor-pointer hover:bg-surface-variant transition-colors verify-tier-card" data-method="Phone OTP">
+                    <h4 class="font-bold text-primary"><i class="fas fa-mobile-alt"></i> Phone OTP</h4>
+                    <p class="text-sm text-slate-text/70">Fastest, no document needed</p>
+                </div>
+            </div>
+            <label class="flex items-center gap-2 mt-2">
+                <input type="checkbox" id="consentCheckbox" class="rounded border-outline-variant">
+                <span class="text-sm text-slate-text/80">I consent to identity verification for filing a formal grievance.</span>
+            </label>
+        </div>
+    </div>
 
-                                Upload Evidence
+    <!-- Step 2: Complaint Details -->
+    <div class="wizard-step border rounded-xl p-6 glass-card shadow-sm opacity-50 pointer-events-none border-none" id="step2">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
+            <h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
+                <span class="bg-surface-variant text-on-surface-variant rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</span>
+                Complaint Details
+            </h3>
+        </div>
+        <div class="flex flex-col gap-4">
+            <label class="flex flex-col gap-1">
+                <span class="font-label-caps text-on-surface-variant">Product & Issue Description</span>
+                <textarea id="complaintProductDetails" rows="3" class="border rounded px-4 py-2 focus:border-primary focus:outline-none glass-card border-none" placeholder="Describe the violation..."></textarea>
+            </label>
+            <label class="flex flex-col gap-1">
+                <span class="font-label-caps text-on-surface-variant">Select Vendor from Ledger</span>
+                <select id="complaintShopSelect" class="border rounded px-4 py-2 focus:border-primary focus:outline-none glass-card border-none">
+                    <option value="">-- Select Retail Shop --</option>
+                </select>
+            </label>
+            <label class="flex flex-col gap-1">
+                <span class="font-label-caps text-on-surface-variant">Upload Evidence (Optional)</span>
+                <input type="file" id="complaintEvidenceInput" class="border rounded px-4 py-2 focus:border-primary focus:outline-none glass-card border-none">
+            </label>
+            <div class="flex flex-col gap-1 mt-2">
+                <span class="font-label-caps text-on-surface-variant">Violation Type</span>
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-2"><input type="radio" name="violation_type" value="Legal Metrology" id="violation_lm"> Legal Metrology</label>
+                    <label class="flex items-center gap-2"><input type="radio" name="violation_type" value="Food Safety" id="violation_fs"> Food Safety</label>
+                    <label class="flex items-center gap-2"><input type="radio" name="violation_type" value="Both" id="violation_both" checked> Both</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                            </h3>
-<span class="font-label-caps text-label-caps text-ai-accent bg-ai-accent/10 px-2 py-1 rounded flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-ai-accent animate-pulse"></span> AI Analysis Active
-
-                            </span>
-</div>
-<div class="flex flex-col gap-4">
-<p class="font-body-md text-body-md text-on-surface-variant">Upload a clear scan of the product label, receipt, or misleading advertisement.</p>
-<div class="border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group glass-card border-none">
-<span class="material-symbols-outlined text-4xl text-outline mb-2 group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
-<span class="font-button text-button text-primary">Click or drag file to upload</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Supports JPG, PNG, PDF (Max 5MB)</span>
-</div>
-</div>
-</div>
-<!-- Step 2: Vendor Details -->
-<div class="border rounded-xl p-6 glass-card shadow-sm opacity-60 border-none">
-<div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
-<span class="bg-surface-variant text-on-surface-variant rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</span>
-
-                                Vendor Details
-
-                            </h3>
-</div>
-<div class="flex flex-col gap-4 pointer-events-none">
-<label class="flex flex-col gap-1">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Select Vendor from Ledger</span>
-<div class="relative">
-<input class="w-full border rounded px-4 py-2 pl-10 border-l-4 border-l-transparent focus:border-l-primary focus:outline-none glass-card border-none" disabled="" placeholder="Search vendor name or GSTIN..." type="text"/>
-<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-sm" data-icon="search">search</span>
-</div>
-</label>
-<div class="flex items-center gap-4 my-2">
-<hr class="flex-grow border-outline-variant"/>
-<span class="font-label-caps text-label-caps text-outline">OR</span>
-<hr class="flex-grow border-outline-variant"/>
-</div>
-<button class="bg-surface-variant text-on-surface-variant font-button text-button py-2 rounded flex items-center justify-center gap-2" disabled="">
-<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add New Vendor Details
-
-                            </button>
-</div>
-</div>
+    <!-- Step 3: Review & Submit -->
+    <div class="wizard-step border rounded-xl p-6 glass-card shadow-sm opacity-50 pointer-events-none border-none" id="step3">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-outline-variant">
+            <h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 section-header-accent">
+                <span class="bg-surface-variant text-on-surface-variant rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">3</span>
+                Review & Submit
+            </h3>
+        </div>
+        <div class="flex flex-col gap-4">
+            <div class="bg-surface-variant/20 p-4 rounded-lg text-sm">
+                <p><strong>Identity:</strong> <span id="reviewIdentity">Not Verified</span></p>
+                <p><strong>Issue:</strong> <span id="reviewIssue">N/A</span></p>
+                <p><strong>Vendor:</strong> <span id="reviewVendor">N/A</span></p>
+                <p><strong>Routing:</strong> <span id="reviewRouting">N/A</span></p>
+            </div>
+            <div class="bg-error/10 text-error p-3 rounded-lg text-sm flex items-center gap-2">
+                <span class="material-symbols-outlined text-xl">warning</span>
+                <span>False complaints are a punishable offense under law.</span>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Right Sidebar / Progress -->
 <div class="w-full lg:w-1/3 flex flex-col gap-6">
 <!-- Progress Tracker -->
-<div class="border rounded-xl p-6 glass-card border-none">
-<h4 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant">Filing Progress</h4>
-<div class="flex flex-col gap-0 border-l-2 border-primary-container ml-3 pl-4">
-<div class="relative pb-6">
-<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-primary-container border-2 border-white"></span>
-<p class="font-button text-button text-primary">1. Evidence Upload</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Pending upload</p>
-</div>
-<div class="relative pb-6 opacity-50">
-<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
-<p class="font-button text-button text-on-surface">2. Vendor Info</p>
-</div>
-<div class="relative pb-6 opacity-50">
-<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
-<p class="font-button text-button text-on-surface">3. Identity Verification</p>
-<p class="font-body-sm text-body-sm text-outline text-xs mt-1">DPDP Act 2023 Compliant</p>
-</div>
-<div class="relative opacity-50">
-<span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
-<p class="font-button text-button text-on-surface">4. Confirmation</p>
-</div>
-</div>
+<div class="border rounded-xl p-6 glass-card border-none" id="complaintProgressTracker">
+    <h4 class="font-headline-md text-headline-md text-primary mb-4 pb-2 border-b border-outline-variant">Filing Progress</h4>
+    <div class="flex flex-col gap-0 border-l-2 border-primary-container ml-3 pl-4">
+        <div class="relative pb-6" id="trackerStep1">
+            <span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-primary-container border-2 border-white"></span>
+            <p class="font-button text-button text-primary">1. Identity Verification</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">DPDP Act 2023 Compliant</p>
+        </div>
+        <div class="relative pb-6 opacity-50" id="trackerStep2">
+            <span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+            <p class="font-button text-button text-on-surface">2. Complaint Details</p>
+        </div>
+        <div class="relative pb-6 opacity-50" id="trackerStep3">
+            <span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+            <p class="font-button text-button text-on-surface">3. Review & Submit</p>
+        </div>
+        <div class="relative opacity-50" id="trackerStep4">
+            <span class="absolute -left-[23px] top-0 w-3 h-3 rounded-full bg-surface-variant border-2 border-white"></span>
+            <p class="font-button text-button text-on-surface">4. Confirmation</p>
+        </div>
+    </div>
 </div>
 <!-- Security Notice -->
 <div class="bg-primary-container text-on-primary-container rounded-xl p-6 flex items-start gap-4 shadow-lg border border-primary-fixed-dim">
@@ -587,14 +639,40 @@ Search Shop by Name or GSTIN
 </div>
 <!-- Bottom Actions (Floating) -->
 <div class="sticky bottom-0 bg-surface/90 backdrop-blur-md border-t border-outline-variant p-4 mt-8 flex justify-between items-center rounded-t-xl z-40 lg:w-2/3">
-<button class="font-button text-button text-primary hover:bg-surface-variant px-4 py-2 rounded transition-colors">Save Draft</button>
-<button class="bg-primary text-on-primary font-button text-button px-6 py-2 rounded flex items-center gap-2 hover:bg-primary-fixed-variant transition-colors shadow-md">
+<button id="wizardBackBtn" class="font-button text-button text-primary hover:bg-surface-variant px-4 py-2 rounded transition-colors" style="visibility: hidden;">Back</button>
+<button id="wizardNextBtn" class="bg-primary text-on-primary font-button text-button px-6 py-2 rounded flex items-center gap-2 hover:bg-primary-fixed-variant transition-colors shadow-md">
 
-                    Next Step <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+                    Next Step <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </button>
 </div>
 </div>
-</section><section class="app-view" id="view_officer" style="display: none;">
+</section><section class="app-view" id="view_officer_login">
+<div class="max-w-md mx-auto h-full flex flex-col items-center justify-center space-y-8 py-20 px-4">
+    <div class="text-center space-y-2">
+        <span class="material-symbols-outlined text-4xl text-primary">admin_panel_settings</span>
+        <h2 class="font-headline-lg text-2xl text-primary font-bold">Officer Portal</h2>
+        <p class="font-body-sm text-slate-text/70">Authorized personnel only.</p>
+    </div>
+    
+    <div class="w-full bg-surface border border-outline-variant rounded-xl p-6 glass-card shadow-sm border-none">
+        <div class="space-y-4">
+            <label class="flex flex-col gap-1">
+                <span class="font-label-caps text-on-surface-variant">Officer ID</span>
+                <input type="text" class="border rounded px-4 py-2 focus:border-primary focus:outline-none" placeholder="Enter ID (e.g., LM-4092)">
+            </label>
+            <label class="flex flex-col gap-1">
+                <span class="font-label-caps text-on-surface-variant">Password / Secure PIN</span>
+                <input type="password" class="border rounded px-4 py-2 focus:border-primary focus:outline-none" placeholder="••••••••">
+            </label>
+            <button class="w-full mt-4 bg-primary text-on-primary py-3 rounded-lg font-button nav-tab-btn" data-view="officer">
+                Secure Login
+            </button>
+        </div>
+    </div>
+    <button class="text-sm text-primary underline nav-tab-btn" data-view="landing">Back to Consumer View</button>
+</div>
+</section>
+<section class="app-view" id="view_officer">
 <div class="flex justify-between items-end mb-gutter">
 <div>
 <h1 class="font-display-lg text-display-lg text-primary">Enforcement Officer Suite</h1>
@@ -708,7 +786,7 @@ Search Shop by Name or GSTIN
 <!-- BottomNavBar (Mobile) -->
 <!-- BottomNavBar (Mobile) -->
 <nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe h-20 bg-glass-surface backdrop-blur-xl border-t border-glass-border shadow-[0_-4px_20px_rgba(26,54,93,0.08)] rounded-t-2xl">
-<a class="nav-tab-btn mobile-nav-btn active flex flex-col items-center justify-center text-primary font-bold hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="scanner" href="#">
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-primary font-bold hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="scanner" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
 <span class="material-symbols-outlined mb-1 text-2xl" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
 </div>
@@ -720,7 +798,7 @@ Search Shop by Name or GSTIN
 </div>
 <span class="font-label-caps text-label-caps text-[10px]">Report</span>
 </a>
-<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="dashboard" href="#">
+<a class="nav-tab-btn mobile-nav-btn flex flex-col items-center justify-center text-secondary opacity-70 hover:bg-white/20 transition-transform duration-200 ease-out active:scale-90 p-2 w-16 h-full" data-view="shop_history" href="#">
 <div class="icon-container flex items-center justify-center w-12 h-8 rounded-full mb-1 transition-colors duration-200">
 <span class="material-symbols-outlined mb-1 text-2xl">manage_search</span>
 </div>

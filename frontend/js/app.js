@@ -3,7 +3,7 @@
  */
 
 const App = {
-  currentView: 'scanner',
+  currentView: 'landing',
 
   init() {
     this.setupTheme();
@@ -23,6 +23,17 @@ const App = {
   // Switch SPA Views
   switchView(viewName) {
     this.currentView = viewName;
+
+    const mainNav = document.getElementById('main-nav');
+    const mobileNav = document.querySelector('nav.fixed.bottom-0');
+    
+    if (viewName === 'landing' || viewName === 'officer_login') {
+      if (mainNav) mainNav.style.display = 'none';
+      if (mobileNav) mobileNav.style.display = 'none';
+    } else {
+      if (mainNav) mainNav.style.display = '';
+      if (mobileNav) mobileNav.style.display = '';
+    }
 
     // Update Nav Tab Buttons
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
