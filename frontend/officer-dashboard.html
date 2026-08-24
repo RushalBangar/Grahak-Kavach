@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Officer Dashboard - Grahak Kavach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Desktop layout for Officer */
+    body { background-color: #f8fafc; background-image: none; flex-direction: row; }
+    .sidebar { width: 260px; background: #1e293b; color: white; min-height: 100vh; padding: 24px 0; display: flex; flex-direction: column; }
+    .sidebar-brand { padding: 0 24px; display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+    .sidebar-nav a { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: #cbd5e1; text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
+    .sidebar-nav a:hover, .sidebar-nav a.active { background: #334155; color: white; border-left: 4px solid var(--primary-color); padding-left: 20px; }
+    .main-panel { flex: 1; padding: 32px 48px; max-height: 100vh; overflow-y: auto; }
+    
+    /* Table styles */
+    .data-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+    .data-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
+    .data-table tr:hover { background: #f8fafc; }
+  </style>
+</head>
+<body>
+  
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="assets/logo.svg" alt="Logo" style="width: 32px; height: 32px; filter: brightness(0) invert(1);">
+      <h3 style="margin: 0; font-size: 1.1rem; color: white;">Grahak Kavach</h3>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a href="#" class="active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Citizen Complaints
+      </a>
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Log Inspection
+      </a>
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        My Inspections
+      </a>
+    </nav>
+
+    <div style="margin-top: auto; padding: 24px;">
+      <a href="index.html" style="color: #94a3b8; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        Logout Session
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-panel animate-slide-up">
+    
+    <div class="flex-between mb-8">
+      <div>
+        <h2>Citizen Complaints Queue</h2>
+        <p class="text-muted">Prioritized list of unverified consumer reports.</p>
+      </div>
+      <div style="background: white; padding: 12px 24px; border-radius: var(--radius-md); box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; gap: 24px;">
+        <div>
+          <div class="text-muted" style="font-size: 0.8rem;">Open</div>
+          <div style="font-size: 1.25rem; font-weight: 700; color: #1e293b;">24</div>
+        </div>
+        <div>
+          <div class="text-muted" style="font-size: 0.8rem;">High Priority</div>
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">5</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Shop Details</th>
+          <th>Issue Reported</th>
+          <th>Date</th>
+          <th>Priority</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family: monospace; color: #64748b;">#CMP-9082</td>
+          <td>
+            <strong>Gupta General Store</strong><br>
+            <span style="color: #64748b; font-size: 0.8rem;">45, Station Road, Malad East</span>
+          </td>
+          <td>Selling expired dairy products</td>
+          <td>Today, 10:45 AM</td>
+          <td><span class="badge badge-danger">High</span></td>
+          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+        </tr>
+        <tr>
+          <td style="font-family: monospace; color: #64748b;">#CMP-9081</td>
+          <td>
+            <strong>Ramesh Provisions</strong><br>
+            <span style="color: #64748b; font-size: 0.8rem;">12, Main Market Road, Andheri West</span>
+          </td>
+          <td>MRP tag overwritten with marker</td>
+          <td>Yesterday, 4:20 PM</td>
+          <td><span class="badge badge-warning">Medium</span></td>
+          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+        </tr>
+        <tr>
+          <td style="font-family: monospace; color: #64748b;">#CMP-9079</td>
+          <td>
+            <strong>Supermart Daily</strong><br>
+            <span style="color: #64748b; font-size: 0.8rem;">Vile Parle East</span>
+          </td>
+          <td>No manufacturing date on snacks</td>
+          <td>Aug 22, 2026</td>
+          <td><span class="badge badge-success" style="background: #e2e8f0; color: #475569;">Low</span></td>
+          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </main>
+
+</body>
+</html>

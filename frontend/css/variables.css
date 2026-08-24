@@ -1,0 +1,44 @@
+/* variables.css */
+:root {
+  /* Brand Colors - Light Theme with Trust Green */
+  --primary-color: #059669; /* Trust Green */
+  --primary-hover: #047857;
+  --primary-light: #d1fae5;
+  --secondary-color: #0f172a; /* Deep Slate for text */
+  --accent-color: #3b82f6; /* Blue for links/accents */
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-light: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+  --danger: #ef4444;
+  --danger-light: #fef2f2;
+
+  /* Backgrounds */
+  --bg-body: #f8fafc; /* Very light slate for contrast against white glass */
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-solid: rgba(255, 255, 255, 0.95);
+  
+  /* Glassmorphism Tokens */
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --glass-shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+
+  /* Spacing & Borders */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}

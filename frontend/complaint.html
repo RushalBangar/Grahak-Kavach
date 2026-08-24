@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File a Complaint - Grahak Kavach</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <div class="header glass-header">
+      <a href="results.html" style="color: var(--text-main);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </a>
+      <h3 style="margin: 0; font-size: 1.1rem;">File a Complaint</h3>
+      <div style="width: 24px;"></div>
+    </div>
+
+    <div class="content animate-slide-up" style="padding-bottom: 80px;">
+      
+      <!-- Progress Indicator -->
+      <div class="flex-between mb-4" style="padding: 0 16px;">
+        <div style="width: 30%; height: 4px; background: var(--primary-color); border-radius: 4px;"></div>
+        <div style="width: 30%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 4px;"></div>
+        <div style="width: 30%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 4px;"></div>
+      </div>
+
+      <div class="glass-card mb-4">
+        <h4 style="margin-bottom: 16px;">Step 1: Identity Verification</h4>
+        <p class="text-muted mb-4" style="font-size: 0.85rem;">To prevent spam and ensure genuine reporting, please verify your identity. This protects your complaint.</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Option 1 -->
+          <label class="glass-panel" style="padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--primary-light); cursor: pointer; display: flex; align-items: flex-start; gap: 12px; background: white;">
+            <input type="radio" name="verification" checked style="margin-top: 4px; accent-color: var(--primary-color);">
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Phone OTP</div>
+              <div class="text-muted" style="font-size: 0.8rem;">Fastest, no document needed</div>
+            </div>
+          </label>
+          
+          <!-- Option 2 -->
+          <label class="glass-panel" style="padding: 16px; border-radius: var(--radius-md); border: 1px solid #e2e8f0; cursor: pointer; display: flex; align-items: flex-start; gap: 12px;">
+            <input type="radio" name="verification" style="margin-top: 4px; accent-color: var(--primary-color);">
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Aadhaar QR</div>
+              <div class="text-muted" style="font-size: 0.8rem;">Most trusted, instant</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-group mt-4">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-control glass-input" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+
+      <!-- Warning/Consent -->
+      <div style="background: var(--warning-light); border-left: 4px solid var(--warning); padding: 12px; border-radius: 4px; margin-bottom: 24px; font-size: 0.8rem; color: #b45309;">
+        By proceeding, you consent to sharing this information with regulatory authorities. False complaints are a punishable offense under law.
+      </div>
+
+      <button class="btn btn-primary" onclick="alert('Proceeding to Step 2...')">
+        Send OTP
+      </button>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav glass-nav">
+      <a href="scan.html" class="nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+        Scan
+      </a>
+      <a href="history.html" class="nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        History
+      </a>
+      <a href="complaint.html" class="nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+        Complaints
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>
