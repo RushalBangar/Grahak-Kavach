@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Contact Us - Grahak Kavach</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <div class="header glass-header">
+      <a href="index.html" style="color: var(--text-main);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </a>
+      <h3 style="margin: 0; font-size: 1.1rem;">Contact Us</h3>
+      <div style="width: 24px;"></div>
+    </div>
+
+    <div class="content animate-slide-up" style="padding: 24px;">
+      
+      <div class="glass-card mb-4" style="padding: 24px; text-align: center;">
+        <svg style="color: var(--primary-color); margin-bottom: 16px;" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <h3 style="margin-bottom: 8px;">Get in Touch</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">For support, legal inquiries, or partnership opportunities, please reach out to our core team.</p>
+        
+        <a href="mailto:support@grahak-kavach.app" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Email Support Team</a>
+      </div>
+
+      <div class="glass-card" style="padding: 20px;">
+        <h4 style="margin-bottom: 12px; font-size: 1rem;">Grievance Officer</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+          <strong>Name:</strong> Nodal Officer, Grahak Kavach<br>
+          <strong>Email:</strong> nodal@grahak-kavach.app<br>
+          <strong>Response Time:</strong> 24-48 business hours
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
+</body>
+</html>

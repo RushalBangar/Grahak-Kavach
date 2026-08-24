@@ -50,6 +50,14 @@
               <input type="radio" name="verification" value="Aadhaar QR" style="width: 18px; height: 18px;">
               <span style="font-weight: 500;">Aadhaar QR Scan</span>
             </label>
+            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
+              <input type="radio" name="verification" value="DigiLocker" style="width: 18px; height: 18px;">
+              <span style="font-weight: 500;">DigiLocker</span>
+            </label>
+            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
+              <input type="radio" name="verification" value="PAN / Voter ID" style="width: 18px; height: 18px;">
+              <span style="font-weight: 500;">PAN / Voter ID / DL</span>
+            </label>
           </div>
         </div>
         <button class="btn btn-primary" onclick="nextStep(2)">Proceed</button>
@@ -139,9 +147,8 @@
       document.getElementById('submit-complaint').addEventListener('click', async () => {
           try {
               // Get selected verification method
-              const verMethods = document.getElementsByName('verification');
-              let method = 'Phone OTP';
-              if(verMethods[1].checked) method = 'Aadhaar QR';
+              const selectedVer = document.querySelector('input[name="verification"]:checked');
+              const method = selectedVer ? selectedVer.value : 'Phone OTP';
 
               const shopName = document.getElementById('comp-shop').value.trim();
               const violationType = document.getElementById('comp-type').value;

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Terms of Service - Grahak Kavach</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <div class="header glass-header">
+      <a href="index.html" style="color: var(--text-main);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </a>
+      <h3 style="margin: 0; font-size: 1.1rem;">Terms of Service</h3>
+      <div style="width: 24px;"></div>
+    </div>
+
+    <div class="content animate-slide-up" style="padding: 24px;">
+      <h2 style="margin-bottom: 16px;">Terms of Use</h2>
+      
+      <div class="glass-card mb-4" style="padding: 20px;">
+        <h4 style="margin-bottom: 8px;">Acceptable Use</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Grahak Kavach is a tool designed to empower consumers to verify product safety and legal metrology compliance. It is intended for personal, non-commercial use.</p>
+      </div>
+
+      <div class="glass-card mb-4" style="padding: 20px; border-left: 4px solid var(--danger);">
+        <h4 style="margin-bottom: 8px; color: var(--danger);">False Complaints Warning</h4>
+        <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6; font-weight: 500;">Filing a false or malicious complaint is a punishable offense under applicable law. By submitting a complaint, you certify that the information provided is accurate and truthful to the best of your knowledge.</p>
+      </div>
+
+      <div class="glass-card mb-4" style="padding: 20px;">
+        <h4 style="margin-bottom: 8px;">Disclaimer</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">While our system strives for high accuracy, the analysis provided is for informational purposes and should not be solely relied upon as legally binding without official laboratory testing or inspector verification.</p>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
+</body>
+</html>

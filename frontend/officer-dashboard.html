@@ -102,17 +102,26 @@
     
     <div class="flex-between mb-8">
       <div>
-        <h2>Citizen Complaints Queue</h2>
-        <p class="text-muted">Prioritized list of unverified consumer reports.</p>
-      </div>
-      <div class="stats-container" style="background: white; padding: 12px 24px; border-radius: var(--radius-md); box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; gap: 24px;">
-        <div>
-          <div class="text-muted" style="font-size: 0.8rem;">Open</div>
-          <div id="open-count" style="font-size: 1.25rem; font-weight: 700; color: #1e293b;">-</div>
+        <h2>Dashboard</h2>
+        <div style="display: flex; gap: 24px; margin-top: 16px; border-bottom: 2px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+          <a href="#" style="text-decoration: none; color: var(--primary-color); font-weight: 600; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; margin-bottom: -10px;">Citizen Complaints Queue</a>
+          <a href="#" style="text-decoration: none; color: var(--text-muted); font-weight: 500; padding-bottom: 8px;">My Inspections</a>
         </div>
-        <div>
-          <div class="text-muted" style="font-size: 0.8rem;">High Priority</div>
-          <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">-</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 16px;">
+        <button class="btn btn-primary" style="display: flex; align-items: center; gap: 8px;" onclick="showToast('Inspection logging modal would open here.', 'success')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Log New Inspection
+        </button>
+        <div class="stats-container" style="background: white; padding: 12px 24px; border-radius: var(--radius-md); box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; gap: 24px;">
+          <div>
+            <div class="text-muted" style="font-size: 0.8rem;">Open</div>
+            <div id="open-count" style="font-size: 1.25rem; font-weight: 700; color: #1e293b;">-</div>
+          </div>
+          <div>
+            <div class="text-muted" style="font-size: 0.8rem;">High Priority</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">-</div>
+          </div>
         </div>
       </div>
     </div>

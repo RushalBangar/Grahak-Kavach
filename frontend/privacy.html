@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Privacy Policy - Grahak Kavach</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <div class="header glass-header">
+      <a href="index.html" style="color: var(--text-main);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </a>
+      <h3 style="margin: 0; font-size: 1.1rem;">Privacy Policy</h3>
+      <div style="width: 24px;"></div>
+    </div>
+
+    <div class="content animate-slide-up" style="padding: 24px;">
+      <h2 style="margin-bottom: 16px;">Data Privacy & Protection</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Effective Date: August 24, 2026</p>
+      
+      <div class="glass-card mb-4" style="padding: 20px;">
+        <h4 style="margin-bottom: 8px;">1. Data Collection</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">We collect scan images and ingredient text locally on your device. This data is only transmitted to our servers if you explicitly choose to file a complaint.</p>
+      </div>
+
+      <div class="glass-card mb-4" style="padding: 20px;">
+        <h4 style="margin-bottom: 8px;">2. Identity Verification</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Aadhaar numbers and other sensitive IDs are <strong>never stored</strong> in our database. We only record a verified/unverified status flag returned by the authentication gateway.</p>
+      </div>
+
+      <div class="glass-card mb-4" style="padding: 20px;">
+        <h4 style="margin-bottom: 8px;">3. DPDP Act Compliance</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">In accordance with the Digital Personal Data Protection (DPDP) Act, your data is used strictly for the stated purpose of regulatory compliance reporting. You have the right to request deletion of your complaint data at any time.</p>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
+</body>
+</html>
