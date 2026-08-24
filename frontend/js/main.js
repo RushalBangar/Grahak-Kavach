@@ -23,20 +23,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (fileUploadInput && processingOverlay) {
-    fileUploadInput.addEventListener('change', (e) => {
+    fileUploadInput.addEventListener('change', async (e) => {
       if (e.target.files.length > 0) {
-        startProcessing();
+        await startProcessing(e.target.files[0]);
       }
     });
   }
 
-  function startProcessing() {
+  async function startProcessing(file) {
     processingOverlay.classList.remove('hidden');
     processingOverlay.style.display = 'flex';
     
-    // Simulate OCR and API call delay
-    setTimeout(() => {
-      window.location.href = 'results.html';
-    }, 2500);
+    try {
+        // Only works if api.js is loaded
+        if (typeof API !== 'undefined' && file) {
+            const result = await API.scan(file);
+            sessionStorage.setItem('scanResult', JSON.stringify(result));
+            window.location.href = 'results.html';
+        } else {
+            // Mock fallback if no file or API
+            setTimeout(() => {
+                window.location.href = 'results.html';
+            }, 2500);
+        }
+    } catch (error) {
+        console.error("Scan error:", error);
+        alert("There was an error analyzing the label. Please try again.");
+        processingOverlay.style.display = 'none';
+    }
   }
 });

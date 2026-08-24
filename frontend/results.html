@@ -37,26 +37,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             Legal Metrology
           </h4>
-          <span class="badge badge-warning">1 Issue Found</span>
+          <span id="lm-badge" class="badge badge-warning">1 Issue Found</span>
         </div>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
-            <svg style="color: var(--success);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            MRP Present
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
-            <svg style="color: var(--success);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Net Quantity
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
-            <svg style="color: var(--success);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Mfg Date
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--danger); font-weight: 500;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            Consumer Care
-          </div>
+        <div id="lm-container" style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 12px;">
+            <div id="lm-details" style="font-size: 0.9rem; color: var(--text-main);">
+                Awaiting scan...
+            </div>
         </div>
       </div>
 
@@ -67,13 +54,11 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
             Food Safety
           </h4>
-          <span class="badge badge-danger">Score: 6/10</span>
+          <span id="fs-badge" class="badge badge-danger">Score: -</span>
         </div>
         
-        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-main); margin-top: 12px; line-height: 1.8;">
-          <li><span style="color: var(--danger); font-weight: 500;">Contains Tartrazine (E102)</span></li>
-          <li><span style="color: var(--warning); font-weight: 500;">High sodium content detected</span></li>
-          <li>Expiry: <span style="color: var(--success); font-weight: 500;">Valid until Dec 2026</span></li>
+        <ul id="harmful-list" style="padding-left: 20px; font-size: 0.9rem; color: var(--text-main); margin-top: 12px; line-height: 1.8;">
+          <li>Awaiting scan...</li>
         </ul>
       </div>
 
@@ -106,5 +91,45 @@
     </div>
 
   </div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const resultString = sessionStorage.getItem('scanResult');
+      if (resultString) {
+        const result = JSON.parse(resultString);
+        
+        // Update Legal Metrology
+        const lmBadge = document.getElementById('lm-badge');
+        const lmContainer = document.getElementById('lm-container');
+        if(lmBadge && result.legal_metrology) {
+            lmBadge.className = result.legal_metrology.is_compliant ? "badge badge-success" : "badge badge-warning";
+            lmBadge.textContent = result.legal_metrology.is_compliant ? "Compliant" : "Issue Found";
+            // Update details (a real app would map the details string to the icons)
+            document.getElementById('lm-details').textContent = result.legal_metrology.details;
+        }
+
+        // Update Food Safety
+        const fsBadge = document.getElementById('fs-badge');
+        if(fsBadge && result.food_safety) {
+            const score = result.food_safety.health_score;
+            fsBadge.className = score === 'A' ? 'badge badge-success' : (score === 'B' ? 'badge badge-warning' : 'badge badge-danger');
+            fsBadge.textContent = `Score: ${score}`;
+            
+            const harmList = document.getElementById('harmful-list');
+            if(harmList && result.food_safety.harmful_ingredients) {
+                harmList.innerHTML = '';
+                if(result.food_safety.harmful_ingredients.length === 0) {
+                    harmList.innerHTML = '<li><span style="color: var(--success); font-weight: 500;">No harmful ingredients detected.</span></li>';
+                } else {
+                    result.food_safety.harmful_ingredients.forEach(ing => {
+                        harmList.innerHTML += `<li><span style="color: var(--danger); font-weight: 500;">Contains ${ing}</span></li>`;
+                    });
+                }
+            }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

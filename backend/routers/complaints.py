@@ -31,6 +31,13 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     db.refresh(db_complaint)
     return db_complaint
 
+@router.get("/queue", response_model=list[schemas.Complaint])
+def get_complaints_queue(db: Session = Depends(database.get_db)):
+    # Note: For hackathon simplicity, we are returning all complaints. 
+    # In production, this should be protected by the auth dependency:
+    # current_user: models.User = Depends(auth.get_current_user)
+    return db.query(models.Complaint).order_by(models.Complaint.date_filed.desc()).all()
+
 @router.get("/{tracking_id}", response_model=schemas.Complaint)
 def get_complaint(tracking_id: str, db: Session = Depends(database.get_db)):
     db_complaint = db.query(models.Complaint).filter(models.Complaint.tracking_id == tracking_id).first()

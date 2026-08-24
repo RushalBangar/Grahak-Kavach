@@ -61,8 +61,8 @@
         By proceeding, you consent to sharing this information with regulatory authorities. False complaints are a punishable offense under law.
       </div>
 
-      <button class="btn btn-primary" onclick="alert('Proceeding to Step 2...')">
-        Send OTP
+      <button id="submit-complaint" class="btn btn-primary">
+        Send OTP / Verify
       </button>
 
     </div>
@@ -84,5 +84,31 @@
     </div>
 
   </div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+      document.getElementById('submit-complaint').addEventListener('click', async () => {
+          try {
+              // Get selected verification method
+              const verMethods = document.getElementsByName('verification');
+              let method = 'Phone OTP';
+              if(verMethods[1].checked) method = 'Aadhaar QR';
+
+              const payload = {
+                  shop_id: 1, // hardcoded for demo
+                  product_details: "Scanned Product",
+                  violation_type: "Both", // hardcoded for demo based on scan results
+                  verification_method: method
+              };
+
+              const response = await API.submitComplaint(payload);
+              alert(`Complaint filed successfully!\nTracking ID: ${response.tracking_id}`);
+              window.location.href = 'history.html'; // Redirect to history
+          } catch (e) {
+              console.error(e);
+              alert("Error submitting complaint");
+          }
+      });
+  </script>
 </body>
 </html>

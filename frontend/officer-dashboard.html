@@ -62,11 +62,11 @@
       <div style="background: white; padding: 12px 24px; border-radius: var(--radius-md); box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; gap: 24px;">
         <div>
           <div class="text-muted" style="font-size: 0.8rem;">Open</div>
-          <div style="font-size: 1.25rem; font-weight: 700; color: #1e293b;">24</div>
+          <div id="open-count" style="font-size: 1.25rem; font-weight: 700; color: #1e293b;">-</div>
         </div>
         <div>
           <div class="text-muted" style="font-size: 0.8rem;">High Priority</div>
-          <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">5</div>
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">-</div>
         </div>
       </div>
     </div>
@@ -82,44 +82,66 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="complaints-queue">
+        <!-- Fetched via API -->
         <tr>
-          <td style="font-family: monospace; color: #64748b;">#CMP-9082</td>
-          <td>
-            <strong>Gupta General Store</strong><br>
-            <span style="color: #64748b; font-size: 0.8rem;">45, Station Road, Malad East</span>
-          </td>
-          <td>Selling expired dairy products</td>
-          <td>Today, 10:45 AM</td>
-          <td><span class="badge badge-danger">High</span></td>
-          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
-        </tr>
-        <tr>
-          <td style="font-family: monospace; color: #64748b;">#CMP-9081</td>
-          <td>
-            <strong>Ramesh Provisions</strong><br>
-            <span style="color: #64748b; font-size: 0.8rem;">12, Main Market Road, Andheri West</span>
-          </td>
-          <td>MRP tag overwritten with marker</td>
-          <td>Yesterday, 4:20 PM</td>
-          <td><span class="badge badge-warning">Medium</span></td>
-          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
-        </tr>
-        <tr>
-          <td style="font-family: monospace; color: #64748b;">#CMP-9079</td>
-          <td>
-            <strong>Supermart Daily</strong><br>
-            <span style="color: #64748b; font-size: 0.8rem;">Vile Parle East</span>
-          </td>
-          <td>No manufacturing date on snacks</td>
-          <td>Aug 22, 2026</td>
-          <td><span class="badge badge-success" style="background: #e2e8f0; color: #475569;">Low</span></td>
-          <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+          <td colspan="6" class="text-center" style="padding: 24px; color: #64748b;">Loading complaints...</td>
         </tr>
       </tbody>
     </table>
 
   </main>
+  
+  <script src="js/api.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+          // Check auth
+          const token = localStorage.getItem('officer_token');
+          if (!token) {
+              window.location.href = 'officer-login.html';
+              return;
+          }
 
+          // Fetch queue
+          try {
+              const queue = await API.getComplaintsQueue();
+              const tbody = document.getElementById('complaints-queue');
+              tbody.innerHTML = '';
+              
+              document.getElementById('open-count').textContent = queue.length;
+              
+              if (queue.length === 0) {
+                  tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding: 24px; color: #64748b;">No complaints in queue.</td></tr>';
+                  return;
+              }
+
+              queue.forEach(comp => {
+                  // Mock shop detail mapping for demo
+                  const priority = comp.violation_type === 'Food Safety' || comp.violation_type === 'Both' ? 'High' : 'Medium';
+                  const badgeClass = priority === 'High' ? 'badge-danger' : 'badge-warning';
+                  
+                  const dateStr = new Date(comp.date_filed).toLocaleDateString();
+
+                  tbody.innerHTML += `
+                    <tr>
+                      <td style="font-family: monospace; color: #64748b;">#${comp.tracking_id}</td>
+                      <td>
+                        <strong>Shop ID: ${comp.shop_id}</strong><br>
+                        <span style="color: #64748b; font-size: 0.8rem;">${comp.product_details}</span>
+                      </td>
+                      <td>${comp.violation_type} Violation</td>
+                      <td>${dateStr}</td>
+                      <td><span class="badge ${badgeClass}">${priority}</span></td>
+                      <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+                    </tr>
+                  `;
+              });
+
+          } catch (e) {
+              console.error(e);
+              document.getElementById('complaints-queue').innerHTML = '<tr><td colspan="6" class="text-center text-danger">Failed to load queue.</td></tr>';
+          }
+      });
+  </script>
 </body>
 </html>

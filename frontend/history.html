@@ -17,53 +17,34 @@
       
       <div class="form-group">
         <div style="position: relative;">
-          <input type="text" class="form-control glass-input" placeholder="Search by shop name or PIN code..." style="padding-left: 40px; border-radius: var(--radius-full);">
+          <input type="text" id="shop-search" class="form-control glass-input" placeholder="Search by shop name or PIN code..." style="padding-left: 40px; border-radius: var(--radius-full);">
           <svg style="position: absolute; left: 14px; top: 12px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
       </div>
 
-      <h4 class="mt-2 mb-4" style="font-size: 0.95rem;">Nearby Shops (Based on Location)</h4>
+      <h4 class="mt-2 mb-4" style="font-size: 0.95rem;">Search Results</h4>
 
-      <!-- Shop Card 1 -->
-      <div class="glass-card mb-4" style="padding: 16px;">
-        <div class="flex-between mb-2">
-          <h4 style="margin: 0; font-size: 1.05rem;">Ramesh Provisions</h4>
-          <span class="badge badge-success">Compliant</span>
-        </div>
-        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">12, Main Market Road, Andheri West</p>
-        
-        <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-          <div>
-            <div style="font-weight: 600; color: var(--text-main);">Aug 10, 2026</div>
-            <div class="text-muted">Last Inspection</div>
+      <div id="results-container">
+          <!-- Default Mock Shop Card -->
+          <div class="glass-card mb-4" style="padding: 16px;">
+            <div class="flex-between mb-2">
+              <h4 style="margin: 0; font-size: 1.05rem;">Ramesh Provisions</h4>
+              <span class="badge badge-success">Compliant</span>
+            </div>
+            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">12, Main Market Road, Andheri West</p>
+            
+            <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
+              <div>
+                <div style="font-weight: 600; color: var(--text-main);">Aug 10, 2026</div>
+                <div class="text-muted">Last Inspection</div>
+              </div>
+              <div>
+                <div style="font-weight: 600; color: var(--success);">0</div>
+                <div class="text-muted">Active Complaints</div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div style="font-weight: 600; color: var(--success);">0</div>
-            <div class="text-muted">Active Complaints</div>
-          </div>
-        </div>
       </div>
-
-      <!-- Shop Card 2 -->
-      <div class="glass-card mb-4" style="padding: 16px;">
-        <div class="flex-between mb-2">
-          <h4 style="margin: 0; font-size: 1.05rem;">Gupta General Store</h4>
-          <span class="badge badge-warning">Under Review</span>
-        </div>
-        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">45, Station Road, Malad East</p>
-        
-        <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-          <div>
-            <div style="font-weight: 600; color: var(--text-main);">Jun 15, 2026</div>
-            <div class="text-muted">Last Inspection</div>
-          </div>
-          <div>
-            <div style="font-weight: 600; color: var(--warning);">2</div>
-            <div class="text-muted">Active Complaints</div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- Bottom Navigation -->
@@ -83,5 +64,56 @@
     </div>
 
   </div>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+      let searchTimeout;
+      document.getElementById('shop-search').addEventListener('input', (e) => {
+          clearTimeout(searchTimeout);
+          const query = e.target.value;
+          
+          if(query.length < 2) return; // only search if > 2 chars
+
+          searchTimeout = setTimeout(async () => {
+              try {
+                  const shops = await API.searchShops(query);
+                  const container = document.getElementById('results-container');
+                  container.innerHTML = ''; // clear
+
+                  if(shops.length === 0) {
+                      container.innerHTML = '<p class="text-center text-muted">No shops found matching your query.</p>';
+                      return;
+                  }
+
+                  shops.forEach(shop => {
+                      // simple mock status logic since db doesn't have status field directly
+                      const isCompliant = shop.id % 2 === 0; 
+                      
+                      container.innerHTML += `
+                      <div class="glass-card mb-4" style="padding: 16px;">
+                        <div class="flex-between mb-2">
+                          <h4 style="margin: 0; font-size: 1.05rem;">${shop.name}</h4>
+                          <span class="badge badge-${isCompliant ? 'success' : 'warning'}">${isCompliant ? 'Compliant' : 'Under Review'}</span>
+                        </div>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">${shop.address}</p>
+                        
+                        <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
+                          <div>
+                            <div style="font-weight: 600; color: var(--text-main);">Recently</div>
+                            <div class="text-muted">Last Inspection</div>
+                          </div>
+                          <div>
+                            <div style="font-weight: 600; color: var(--text-main);">-</div>
+                            <div class="text-muted">Active Complaints</div>
+                          </div>
+                        </div>
+                      </div>`;
+                  });
+              } catch (e) {
+                  console.error(e);
+              }
+          }, 500); // 500ms debounce
+      });
+  </script>
 </body>
 </html>
