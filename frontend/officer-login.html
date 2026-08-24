@@ -57,7 +57,7 @@
               localStorage.setItem('officer_token', data.access_token);
               window.location.href = 'officer-dashboard.html';
           } catch (err) {
-              alert("Login failed. Check your credentials.");
+              showToast("Login failed. Check your credentials.", "error");
           }
       });
   </script>
