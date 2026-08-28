@@ -54,6 +54,18 @@ const API = {
 
     // --- Firebase OTP Auth Flow ---
     sendOTP: async (phoneNumber) => {
+        // List of authorized officer phone numbers
+        const AUTHORIZED_OFFICERS = [
+            '+919876543210', // Example officer 1
+            '+919999999999'  // Example officer 2
+            // TODO: Add your actual phone number here to test it!
+        ];
+
+        if (!AUTHORIZED_OFFICERS.includes(phoneNumber)) {
+            alert("Unauthorized Access. This number is not registered as an officer.");
+            throw new Error("Unauthorized phone number");
+        }
+
         if (!window.recaptchaVerifier) {
             // Initialize invisible recaptcha
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
