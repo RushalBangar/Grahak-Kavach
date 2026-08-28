@@ -97,10 +97,10 @@ const API = {
             // UI transitions
             document.getElementById('step-1-form').style.display = 'none';
             document.getElementById('step-2-form').style.display = 'block';
-            if(typeof showToast === 'function') showToast("OTP Sent to " + phoneNumber, "success");
+            if(typeof showToast === 'function') { showToast("OTP Sent to " + phoneNumber, "success"); } else { alert("OTP Sent to " + phoneNumber); }
         } catch (error) {
             console.error("Error sending OTP", error);
-            if(typeof showToast === 'function') showToast("Failed to send OTP. Please try again.", "error");
+            alert("Error sending OTP: " + error.message);
             if (window.recaptchaVerifier) window.recaptchaVerifier.render().then(widgetId => grecaptcha.reset(widgetId));
         }
     },
@@ -114,13 +114,13 @@ const API = {
             const token = await user.getIdToken();
             localStorage.setItem('officer_token', token);
             
-            if(typeof showToast === 'function') showToast("Login successful!", "success");
+            if(typeof showToast === 'function') { showToast("Login successful!", "success"); } else { alert("Login successful!"); }
             setTimeout(() => {
                 window.location.href = 'officer-dashboard.html';
             }, 1000);
         } catch (error) {
             console.error("Error verifying OTP", error);
-            if(typeof showToast === 'function') showToast("Invalid OTP entered.", "error");
+            alert("Invalid OTP entered or verification failed.");
         }
     },
 
