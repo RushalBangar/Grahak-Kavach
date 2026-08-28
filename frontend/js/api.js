@@ -35,6 +35,7 @@ const API = {
     },
 
     officerLogin: async (username, password) => {
+        // Kept for fallback / legacy
         const formData = new URLSearchParams();
         formData.append('username', username);
         formData.append('password', password);
@@ -51,9 +52,71 @@ const API = {
         return await response.json();
     },
 
+    // --- Firebase OTP Auth Flow ---
+    sendOTP: async (phoneNumber) => {
+        if (!window.recaptchaVerifier) {
+            // Initialize invisible recaptcha
+            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                'size': 'invisible',
+                'callback': (response) => {
+                    // reCAPTCHA solved
+                }
+            });
+        }
+        
+        try {
+            const confirmationResult = await firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
+            window.confirmationResult = confirmationResult;
+            
+            // UI transitions
+            document.getElementById('step-1-form').style.display = 'none';
+            document.getElementById('step-2-form').style.display = 'block';
+            if(typeof showToast === 'function') showToast("OTP Sent to " + phoneNumber, "success");
+        } catch (error) {
+            console.error("Error sending OTP", error);
+            if(typeof showToast === 'function') showToast("Failed to send OTP. Please try again.", "error");
+            if (window.recaptchaVerifier) window.recaptchaVerifier.render().then(widgetId => grecaptcha.reset(widgetId));
+        }
+    },
+
+    verifyOTP: async (otp) => {
+        try {
+            const result = await window.confirmationResult.confirm(otp);
+            const user = result.user;
+            
+            // Get Firebase ID token to use as officer token
+            const token = await user.getIdToken();
+            localStorage.setItem('officer_token', token);
+            
+            if(typeof showToast === 'function') showToast("Login successful!", "success");
+            setTimeout(() => {
+                window.location.href = 'officer-dashboard.html';
+            }, 1000);
+        } catch (error) {
+            console.error("Error verifying OTP", error);
+            if(typeof showToast === 'function') showToast("Invalid OTP entered.", "error");
+        }
+    },
+
     getComplaintsQueue: async () => {
         const response = await fetch(`${API_BASE_URL}/api/complaints/queue`);
         if (!response.ok) throw new Error('Failed to fetch queue');
         return await response.json();
     }
 };
+
+// Initialize Firebase if included on the page
+if (typeof firebase !== 'undefined') {
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQD0e3s09RJ7_MgXytRYb18uxomHkoZZc",
+      authDomain: "grahak-kavach.firebaseapp.com",
+      projectId: "grahak-kavach",
+      storageBucket: "grahak-kavach.firebasestorage.app",
+      messagingSenderId: "975024396204",
+      appId: "1:975024396204:web:e11c7858eb3aac5c6d8c09",
+      measurementId: "G-Z08C4BB73D"
+    };
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+}
