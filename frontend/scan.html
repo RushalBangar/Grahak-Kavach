@@ -88,8 +88,14 @@
       <a href="index.html" style="color: var(--text-main);">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
       </a>
-      <h3 style="margin: 0; font-size: 1.1rem;">Scan Label</h3>
-      <div style="width: 24px;"></div> <!-- Spacer for flex balance -->
+      <h3 data-i18n="scan_label_title" style="margin: 0; font-size: 1.1rem;">Scan Label</h3>
+      <div style="width: auto;">
+        <select class="lang-switcher">
+          <option value="en">EN</option>
+          <option value="mr">MR</option>
+          <option value="hi">HI</option>
+        </select>
+      </div>
     </div>
 
     <div class="content animate-slide-up">
@@ -107,18 +113,17 @@
         
         <!-- UI overlay for scanning -->
         <div class="viewfinder-frame" style="z-index: 2;"></div>
-        <p style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
+        <p data-i18n="fit_label" style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
         
         <!-- Hidden canvas to grab image -->
         <canvas id="camera-canvas" style="display: none;"></canvas>
       </div>
       
-      <p class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
+      <p data-i18n="make_sure_visible" class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
 
       <div class="flex-row" style="gap: 16px; padding: 0 16px;">
-        <button id="start-scan" class="btn btn-primary" style="flex: 2; padding: 18px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
-          Capture
+        <button id="start-scan" class="btn btn-primary" style="flex: 2; padding: 18px;" data-i18n="capture">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg> Capture
         </button>
         
         <label class="btn btn-secondary" style="flex: 1; padding: 18px; cursor: pointer;">
@@ -131,11 +136,13 @@
     <!-- Processing Overlay (Screen 3) -->
     <div id="processing-overlay" class="scan-overlay">
       <div class="loader-line"></div>
-      <h3 style="color: white;">Reading label...</h3>
-      <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Checking compliance rules</p>
+      <h3 data-i18n="reading_label" style="color: white;">Reading label...</h3>
+      <p data-i18n="checking_compliance" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Checking compliance rules</p>
     </div>
 
   </div>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script src="js/main.js"></script>
   <script>

@@ -23,46 +23,54 @@
 <body>
   <div class="app-container" style="overflow-y: auto;">
     
+    <!-- Language Switcher -->
+    <div class="lang-container">
+      <select class="lang-switcher">
+        <option value="en">EN</option>
+        <option value="mr">MR</option>
+        <option value="hi">HI</option>
+      </select>
+    </div>
+
     <!-- Hero Section -->
-    <div class="content flex-center text-center animate-slide-up" style="flex: none; padding: 48px 32px 32px 32px;">
+    <div class="content flex-center text-center animate-slide-up" style="flex: none; padding: 48px 32px 32px 32px; padding-top: 60px;">
       <div class="mb-4" style="width: 100px; height: 100px; background: white; border-radius: 50%; padding: 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; justify-content: center;">
         <img src="assets/logo.svg" alt="Grahak Kavach Logo" style="width: 100%; height: 100%;">
       </div>
-      <h1 style="font-size: 2rem; margin-bottom: 8px;">Grahak Kavach</h1>
-      <p class="text-muted" style="font-size: 1.1rem; max-width: 300px; margin: 0 auto 32px auto;">Your intelligent shield against food safety and legal metrology violations.</p>
+      <h1 data-i18n="app_title" style="font-size: 2rem; margin-bottom: 8px;">Grahak Kavach</h1>
+      <p data-i18n="hero_subtitle" class="text-muted" style="font-size: 1.1rem; max-width: 300px; margin: 0 auto 32px auto;">Your intelligent shield against food safety and legal metrology violations.</p>
 
-      <a href="scan.html" class="btn btn-primary" style="padding: 16px; width: 100%; max-width: 300px; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
-        Start Scanning Now
+      <a href="scan.html" class="btn btn-primary" style="padding: 16px; width: 100%; max-width: 300px; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);" data-i18n="start_scanning_now">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg> Start Scanning Now
       </a>
     </div>
 
     <!-- How It Works Section -->
     <div style="padding: 32px 24px;">
-      <h2 class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">How It Works</h2>
+      <h2 data-i18n="how_it_works" class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">How It Works</h2>
       
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
           <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
           <div>
-            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Scan the Label</h4>
-            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Use your phone's camera to scan any product's ingredient list, MRP, or expiry date.</p>
+            <h4 data-i18n="scan_label" style="margin-bottom: 4px; font-size: 1.1rem;">Scan the Label</h4>
+            <p data-i18n="scan_label_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Use your phone's camera to scan any product's ingredient list, MRP, or expiry date.</p>
           </div>
         </div>
         
         <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
           <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
           <div>
-            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Analysis</h4>
-            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Our system instantly extracts label data and checks it against FSSAI and Legal Metrology regulations to detect issues.</p>
+            <h4 data-i18n="analysis" style="margin-bottom: 4px; font-size: 1.1rem;">Analysis</h4>
+            <p data-i18n="analysis_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Our system instantly extracts label data and checks it against FSSAI and Legal Metrology regulations to detect issues.</p>
           </div>
         </div>
         
         <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
           <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</div>
           <div>
-            <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Report Instantly</h4>
-            <p class="text-muted" style="font-size: 0.9rem; margin: 0;">Found a violation? File a verified complaint directly to government authorities in one tap.</p>
+            <h4 data-i18n="report_instantly" style="margin-bottom: 4px; font-size: 1.1rem;">Report Instantly</h4>
+            <p data-i18n="report_instantly_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Found a violation? File a verified complaint directly to government authorities in one tap.</p>
           </div>
         </div>
       </div>
@@ -70,32 +78,32 @@
 
     <!-- Features Section -->
     <div style="padding: 32px 24px; background: rgba(255,255,255,0.4);">
-      <h2 class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">Key Features</h2>
+      <h2 data-i18n="key_features" class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">Key Features</h2>
       
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: var(--warning); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">Food Safety</div>
+          <div data-i18n="food_safety" style="font-weight: 600; font-size: 0.9rem;">Food Safety</div>
         </div>
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: var(--primary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">Expiry Check</div>
+          <div data-i18n="expiry_check" style="font-weight: 600; font-size: 0.9rem;">Expiry Check</div>
         </div>
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: var(--secondary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">MRP Validation</div>
+          <div data-i18n="mrp_validation" style="font-weight: 600; font-size: 0.9rem;">MRP Validation</div>
         </div>
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: #6366f1; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">Shop History</div>
+          <div data-i18n="shop_history" style="font-weight: 600; font-size: 0.9rem;">Shop History</div>
         </div>
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: #8b5cf6; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">Legal Metrology Check</div>
+          <div data-i18n="legal_metrology_check" style="font-weight: 600; font-size: 0.9rem;">Legal Metrology Check</div>
         </div>
         <div class="glass-card" style="padding: 16px; text-align: center;">
           <svg style="color: #3b82f6; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <div style="font-weight: 600; font-size: 0.9rem;">Govt Reporting</div>
+          <div data-i18n="govt_reporting" style="font-weight: 600; font-size: 0.9rem;">Govt Reporting</div>
         </div>
       </div>
     </div>
@@ -105,24 +113,26 @@
       <div style="width: 56px; height: 56px; background: #1e293b; color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
       </div>
-      <h3 style="margin-bottom: 8px;">Are you a Government Official?</h3>
-      <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 24px;">Access the secure dashboard to view and manage citizen complaints in real-time.</p>
-      <a href="officer-login.html" class="btn btn-secondary" style="width: 100%; max-width: 250px;">
+      <h3 data-i18n="gov_official_q" style="margin-bottom: 8px;">Are you a Government Official?</h3>
+      <p data-i18n="gov_official_desc" class="text-muted" style="font-size: 0.9rem; margin-bottom: 24px;">Access the secure dashboard to view and manage citizen complaints in real-time.</p>
+      <a href="officer-login.html" class="btn btn-secondary" style="width: 100%; max-width: 250px;" data-i18n="access_officer_portal">
         Access Officer Portal
       </a>
     </div>
 
     <!-- Footer -->
     <footer style="padding: 32px 24px 100px; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-      <p style="margin-bottom: 16px;">© 2026 Grahak Kavach. All rights reserved.</p>
+      <p data-i18n="copyright" style="margin-bottom: 16px;">© 2026 Grahak Kavach. All rights reserved.</p>
       <div style="display: flex; justify-content: center; gap: 16px;">
-        <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
-        <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
-        <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Contact Us</a>
+        <a href="privacy.html" data-i18n="privacy_policy" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+        <a href="terms.html" data-i18n="terms_of_service" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+        <a href="contact.html" data-i18n="contact_us" style="color: var(--text-muted); text-decoration: none;">Contact Us</a>
       </div>
     </footer>
 
   </div>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
   <script>
     if ('serviceWorker' in navigator) {

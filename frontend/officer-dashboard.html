@@ -98,11 +98,18 @@
     </div>
   </aside>
 
-  <main class="main-panel animate-slide-up">
+  <main class="main-panel animate-slide-up" style="position: relative;">
+    <div class="lang-container" style="position: absolute; top: 16px; right: 16px;">
+      <select class="lang-switcher">
+        <option value="en">EN</option>
+        <option value="mr">MR</option>
+        <option value="hi">HI</option>
+      </select>
+    </div>
     
     <div class="flex-between mb-8">
       <div>
-        <h2>Dashboard</h2>
+        <h2 data-i18n="officer_dashboard">Dashboard</h2>
         <div style="display: flex; gap: 24px; margin-top: 16px; border-bottom: 2px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
           <a href="#" style="text-decoration: none; color: var(--primary-color); font-weight: 600; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; margin-bottom: -10px;">Citizen Complaints Queue</a>
           <a href="#" style="text-decoration: none; color: var(--text-muted); font-weight: 500; padding-bottom: 8px;">My Inspections</a>
@@ -180,6 +187,8 @@
 
   </main>
   
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script>
       document.addEventListener('DOMContentLoaded', async () => {

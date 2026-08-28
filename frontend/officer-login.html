@@ -16,27 +16,34 @@
   </style>
 </head>
 <body>
+  <div class="lang-container" style="position: absolute; top: 16px; right: 16px;">
+    <select class="lang-switcher">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+  </div>
   <div class="officer-container">
     <div class="login-box animate-slide-up">
       
       <div class="flex-center mb-8">
         <img src="assets/logo.svg" alt="Logo" style="width: 60px; height: 60px; margin-bottom: 16px;">
-        <h2 style="margin: 0; color: #1e293b;">Officer Portal</h2>
+        <h2 data-i18n="officer_portal" style="margin: 0; color: #1e293b;">Officer Portal</h2>
         <p class="text-muted">Secure Access System</p>
       </div>
 
       <form id="login-form">
         <div class="form-group">
-          <label class="form-label">Officer ID (Username)</label>
-          <input type="text" id="username" class="form-control" placeholder="officer1" required>
+          <label class="form-label" data-i18n="email_address">Officer ID (Username)</label>
+          <input type="text" id="username" class="form-control" placeholder="officer1" data-i18n="email_placeholder" required>
         </div>
         
         <div class="form-group mb-8">
-          <label class="form-label">Password / OTP</label>
-          <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+          <label class="form-label" data-i18n="password">Password / OTP</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" data-i18n="password_placeholder" required>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="background-color: #1e293b;">
+        <button type="submit" class="btn btn-primary" style="background-color: #1e293b;" data-i18n="login">
           Secure Login
         </button>
       </form>
@@ -48,6 +55,8 @@
       </div>
     </div>
   </div>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script>
       document.getElementById('login-form').addEventListener('submit', async (e) => {

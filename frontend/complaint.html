@@ -16,8 +16,14 @@
       <a href="results.html" style="color: var(--text-main);">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
       </a>
-      <h3 style="margin: 0; font-size: 1.1rem;">File a Complaint</h3>
-      <div style="width: 24px;"></div>
+      <h3 data-i18n="file_complaint_title" style="margin: 0; font-size: 1.1rem;">File a Complaint</h3>
+      <div style="width: auto;">
+        <select class="lang-switcher">
+          <option value="en">EN</option>
+          <option value="mr">MR</option>
+          <option value="hi">HI</option>
+        </select>
+      </div>
     </div>
 
     <div class="content animate-slide-up" style="padding-bottom: 80px;">
@@ -70,11 +76,11 @@
           <p class="text-muted">What went wrong?</p>
         </div>
         <div class="form-group">
-          <label class="form-label">Shop Name / ID</label>
-          <input type="text" id="comp-shop" class="form-control glass-input" placeholder="e.g. Ramesh Provisions">
+          <label class="form-label" data-i18n="store_name">Shop Name / ID</label>
+          <input type="text" id="comp-shop" class="form-control glass-input" placeholder="e.g. Ramesh Provisions" data-i18n="store_placeholder">
         </div>
         <div class="form-group">
-          <label class="form-label">Violation Type</label>
+          <label class="form-label" data-i18n="violation_type">Violation Type</label>
           <select id="comp-type" class="form-control glass-input">
             <option value="Legal Metrology">Legal Metrology (MRP, Dates)</option>
             <option value="Food Safety">Food Safety (Spoiled, Harmful)</option>
@@ -82,8 +88,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Description</label>
-          <textarea id="comp-desc" class="form-control glass-input" rows="3" placeholder="Describe the issue..."></textarea>
+          <label class="form-label" data-i18n="additional_details">Description</label>
+          <textarea id="comp-desc" class="form-control glass-input" rows="3" placeholder="Describe the issue..." data-i18n="desc_placeholder"></textarea>
         </div>
         <div style="display: flex; gap: 12px;">
           <button class="btn btn-secondary" style="flex: 1;" onclick="nextStep(1)">Back</button>
@@ -109,7 +115,7 @@
         </div>
         <div style="display: flex; gap: 12px;">
           <button class="btn btn-secondary" style="flex: 1;" onclick="nextStep(2)">Back</button>
-          <button id="submit-complaint" class="btn btn-primary" style="flex: 2;">Submit Complaint</button>
+          <button id="submit-complaint" class="btn btn-primary" style="flex: 2;" data-i18n="submit_complaint">Submit Complaint</button>
         </div>
       </div>
 
@@ -119,19 +125,21 @@
     <div class="bottom-nav glass-nav">
       <a href="scan.html" class="nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
-        Scan
+        <span data-i18n="scan_nav">Scan</span>
       </a>
       <a href="history.html" class="nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        History
+        <span data-i18n="history_nav">History</span>
       </a>
       <a href="complaint.html" class="nav-item active">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-        Complaints
+        <span data-i18n="complaints_nav">Complaints</span>
       </a>
     </div>
 
   </div>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script src="js/main.js"></script>
   <script>
