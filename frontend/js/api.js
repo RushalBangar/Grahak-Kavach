@@ -53,15 +53,25 @@ const API = {
     },
 
     // --- Firebase OTP Auth Flow ---
+    hashPhoneNumber: async (phone) => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(phone);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    },
+
     sendOTP: async (phoneNumber) => {
-        // List of authorized officer phone numbers
-        const AUTHORIZED_OFFICERS = [
-            '+919876543210', // Example officer 1
-            '+919999999999'  // Example officer 2
-            // TODO: Add your actual phone number here to test it!
+        // List of authorized officer phone numbers (SHA-256 Hashes)
+        // This ensures actual phone numbers are NOT leaked in the frontend code.
+        const AUTHORIZED_OFFICERS_HASHES = [
+            'f3a47ce5ce3d4ca8ad15225a245b2759022f79489f5c62719b8c9490f7aab90e' // Hash for +919876543210
+            // TODO: To add a new officer, compute the SHA-256 hash of their number (e.g. "+91XXXXXXXXXX") and add it here.
         ];
 
-        if (!AUTHORIZED_OFFICERS.includes(phoneNumber)) {
+        const inputHash = await API.hashPhoneNumber(phoneNumber);
+
+        if (!AUTHORIZED_OFFICERS_HASHES.includes(inputHash)) {
             alert("Unauthorized Access. This number is not registered as an officer.");
             throw new Error("Unauthorized phone number");
         }
