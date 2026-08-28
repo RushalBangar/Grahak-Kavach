@@ -65,8 +65,12 @@ const API = {
         // List of authorized officer phone numbers (SHA-256 Hashes)
         // This ensures actual phone numbers are NOT leaked in the frontend code.
         const AUTHORIZED_OFFICERS_HASHES = [
-            'f3a47ce5ce3d4ca8ad15225a245b2759022f79489f5c62719b8c9490f7aab90e' // Hash for +919876543210
-            // TODO: To add a new officer, compute the SHA-256 hash of their number (e.g. "+91XXXXXXXXXX") and add it here.
+            '19ba44147568b058ae9051f10363fdba6055e688fe804a247ebfff8fe939bf51', // Hash for 8329810968
+            '6b4a6469e5f3dedef7810a6a78b8ac6c04087e426a89fc1d7ba5bf99148cdbcf', // Hash for 7558748139
+            '1757d05c1f9649e316679591815f4226e14f53e24e71a8f237c167a33ab40493', // Hash for 9552872589
+            '5586146697218518d948cd5ee830db4bb4be6129d2d21924e1df24b9b45faa1d', // Hash for 8856909511
+            'bcd5fff8baadc3729dd7037fec41ca6da423f22363bb69557c84afbbd33668ec', // Hash for 9673295139
+            'bae5ff652da6375bb2aba60746b3945f3d4223b9ab331f5b7424184cb8a8f5fa'  // Hash for 8788804038
         ];
 
         const inputHash = await API.hashPhoneNumber(phoneNumber);
