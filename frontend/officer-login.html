@@ -34,10 +34,9 @@
 
       <div id="step-1-form">
         <div class="form-group mb-8">
-          <label class="form-label" data-i18n="mobile_number">Mobile Number</label>
+          <label class="form-label" data-i18n="email_address">Email Address</label>
           <div style="display: flex; align-items: center; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--radius-md); padding: 0 12px;">
-            <span style="color: var(--text-muted); font-weight: 500; margin-right: 8px;">+91</span>
-            <input type="tel" id="mobile-number" style="border: none; background: transparent; padding: 12px 0; width: 100%; outline: none;" placeholder="98XXXXXXXX" required>
+            <input type="email" id="email-input" style="border: none; background: transparent; padding: 12px 0; width: 100%; outline: none;" placeholder="officer@example.com" required>
           </div>
         </div>
 
@@ -57,8 +56,6 @@
         </button>
       </div>
 
-      <!-- Invisible reCAPTCHA container -->
-      <div id="recaptcha-container"></div>
 
       <div class="mt-8 text-center" style="font-size: 0.75rem; color: #94a3b8;">
         Unauthorized access is prohibited. All actions are logged.
@@ -68,22 +65,19 @@
     </div>
   </div>
   
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  
+
   <script src="js/translations.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script>
-      // The API file handles the actual Firebase initialization and logic.
+      // The API file handles the native OTP backend logic.
       document.getElementById('send-otp-btn').addEventListener('click', async () => {
-          const phone = document.getElementById('mobile-number').value.trim();
-          if(phone.length < 10) {
-              alert("Please enter a valid mobile number"); // Using simple alert for brevity, showToast in api.js
+          const email = document.getElementById('email-input').value.trim();
+          if(!email.includes('@')) {
+              alert("Please enter a valid email address");
               return;
           }
-          await API.sendOTP('+91' + phone);
+          await API.sendOTP(email);
       });
 
       document.getElementById('verify-otp-btn').addEventListener('click', async () => {

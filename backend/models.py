@@ -46,3 +46,11 @@ class Complaint(Base):
     date_filed = Column(DateTime, default=datetime.datetime.utcnow)
     
     shop = relationship("Shop", back_populates="complaints")
+
+class OTPRequest(Base):
+    __tablename__ = "otp_requests"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, index=True)
+    otp_code = Column(String)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    is_used = Column(Boolean, default=False)

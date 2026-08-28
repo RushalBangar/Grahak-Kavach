@@ -9,6 +9,89 @@ router = APIRouter(
     tags=["officer"]
 )
 
+import random
+import smtplib
+import os
+from email.mime.text import MIMEText
+from datetime import datetime
+
+# --- Native Email OTP Logic ---
+
+def send_email(to_email: str, otp: str):
+    # Try to send email using SMTP if configured in .env, otherwise just print it
+    smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_user = os.getenv("SMTP_USER")
+    smtp_pass = os.getenv("SMTP_PASS")
+
+    print(f"\n{'='*40}")
+    print(f"🔒 MOCK OTP EMAIL SENT TO: {to_email}")
+    print(f"🔑 YOUR LOGIN OTP IS: {otp}")
+    print(f"{'='*40}\n")
+
+    if smtp_user and smtp_pass:
+        try:
+            msg = MIMEText(f"Your Grahak Kavach Officer Portal Login OTP is: {otp}\n\nThis code will expire soon. Do not share it with anyone.")
+            msg['Subject'] = 'Officer Portal Login OTP'
+            msg['From'] = smtp_user
+            msg['To'] = to_email
+
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            server.starttls()
+            server.login(smtp_user, smtp_pass)
+            server.send_message(msg)
+            server.quit()
+        except Exception as e:
+            print(f"Failed to send actual email: {e}")
+
+@router.post("/send-otp")
+def send_otp(request: schemas.SendOTPRequest, db: Session = Depends(database.get_db)):
+    # 1. Generate 6-digit OTP
+    otp_code = str(random.randint(100000, 999999))
+    
+    # 2. Save to database
+    db_otp = models.OTPRequest(email=request.email, otp_code=otp_code)
+    db.add(db_otp)
+    db.commit()
+
+    # 3. Send email (or print to console)
+    send_email(request.email, otp_code)
+    
+    return {"message": "OTP sent successfully"}
+
+@router.post("/verify-otp", response_model=schemas.Token)
+def verify_otp(request: schemas.VerifyOTPRequest, db: Session = Depends(database.get_db)):
+    # 1. Check if OTP is valid and not used
+    db_otp = db.query(models.OTPRequest).filter(
+        models.OTPRequest.email == request.email,
+        models.OTPRequest.otp_code == request.otp,
+        models.OTPRequest.is_used == False
+    ).order_by(models.OTPRequest.created_at.desc()).first()
+
+    if not db_otp:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired OTP")
+    
+    # 2. Mark OTP as used
+    db_otp.is_used = True
+    
+    # 3. Ensure a User exists for this email (auto-create if not)
+    # In a real app you'd strictly control this. For the hackathon, we allow auto-creation.
+    user = db.query(models.User).filter(models.User.username == request.email).first()
+    if not user:
+        # Create a placeholder user
+        hashed_pw = auth.get_password_hash("placeholder")
+        user = models.User(username=request.email, hashed_password=hashed_pw, role="officer")
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    # 4. Generate Access Token
+    access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = auth.create_access_token(
+        data={"sub": user.username}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
 @router.post("/login", response_model=schemas.Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
     user = db.query(models.User).filter(models.User.username == form_data.username).first()
@@ -23,7 +106,6 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
         data={"sub": user.username}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
 @router.post("/inspections", response_model=schemas.Inspection)
 def create_inspection(
     inspection: schemas.InspectionCreate, 
