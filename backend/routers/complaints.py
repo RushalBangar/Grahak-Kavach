@@ -31,7 +31,7 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     db.refresh(db_complaint)
     return db_complaint
 
-@router.get("/queue", response_model=list[schemas.Complaint])
+@router.get("/queue", response_model=list[schemas.ComplaintWithShop])
 def get_complaints_queue(db: Session = Depends(database.get_db)):
     # Note: For hackathon simplicity, we are returning all complaints. 
     # In production, this should be protected by the auth dependency:
@@ -43,4 +43,20 @@ def get_complaint(tracking_id: str, db: Session = Depends(database.get_db)):
     db_complaint = db.query(models.Complaint).filter(models.Complaint.tracking_id == tracking_id).first()
     if db_complaint is None:
         raise HTTPException(status_code=404, detail="Complaint not found")
+    return db_complaint
+
+@router.patch("/{tracking_id}", response_model=schemas.Complaint)
+def update_complaint_status(tracking_id: str, update_data: schemas.ComplaintUpdate, db: Session = Depends(database.get_db)):
+    db_complaint = db.query(models.Complaint).filter(models.Complaint.tracking_id == tracking_id).first()
+    if db_complaint is None:
+        raise HTTPException(status_code=404, detail="Complaint not found")
+    
+    if update_data.status:
+        db_complaint.status = update_data.status
+    
+    # We could also save `notes` if we add a `notes` column to the Complaint model, 
+    # but for the hackathon, updating the status is sufficient.
+    
+    db.commit()
+    db.refresh(db_complaint)
     return db_complaint

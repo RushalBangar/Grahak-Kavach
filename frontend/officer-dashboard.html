@@ -65,6 +65,30 @@
     .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
     .data-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
     .data-table tr:hover { background: #f8fafc; }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: white; border-radius: 16px; width: 100%; max-width: 500px;
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+    .modal-header { padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 24px; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: 0.2s; }
+    .close-btn:hover { color: #0f172a; }
   </style>
 </head>
 <body>
@@ -185,59 +209,168 @@
       </table>
     </div>
 
+  <!-- Review Modal HTML -->
+    <div class="modal-overlay" id="review-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="margin:0; font-size: 1.25rem;">Review Complaint</h3>
+                <button class="close-btn" onclick="closeReviewModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+                    <h4 id="modal-tracking-id" style="color: #64748b; margin: 0 0 8px 0; font-family: monospace;">#---</h4>
+                    <h2 id="modal-shop-name" style="margin: 0 0 4px 0; color: #1e293b;">---</h2>
+                    <p id="modal-shop-address" style="margin: 0; color: #64748b; font-size: 0.9rem;">---</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                    <div>
+                        <label style="display:block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px;">Violation Type</label>
+                        <strong id="modal-violation-type">---</strong>
+                    </div>
+                    <div>
+                        <label style="display:block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px;">Verification</label>
+                        <strong id="modal-verification">---</strong>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <label style="display:block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Update Status</label>
+                    <select id="modal-status" class="input" style="width: 100%; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                        <option value="Pending">Pending</option>
+                        <option value="Verified">Verified</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 24px; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn btn-secondary" onclick="closeReviewModal()">Cancel</button>
+                <button id="save-status-btn" class="btn btn-primary" onclick="saveComplaintStatus()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
   </main>
   
   <script src="js/translations.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/api.js"></script>
   <script>
-      document.addEventListener('DOMContentLoaded', async () => {
-          // Check auth
-          const token = localStorage.getItem('officer_token');
-          if (!token) {
-              window.location.href = 'officer-login.html';
-              return;
-          }
+      let currentQueue = [];
+      let activeTrackingId = null;
 
-          // Fetch queue
+      function openReviewModal(trackingId) {
+          const comp = currentQueue.find(c => c.tracking_id === trackingId);
+          if(!comp) return;
+          
+          activeTrackingId = trackingId;
+          document.getElementById('modal-tracking-id').textContent = '#' + comp.tracking_id;
+          document.getElementById('modal-shop-name').textContent = comp.shop.name;
+          document.getElementById('modal-shop-address').textContent = comp.shop.address;
+          document.getElementById('modal-violation-type').textContent = comp.violation_type;
+          document.getElementById('modal-verification').textContent = comp.verification_method;
+          document.getElementById('modal-status').value = comp.status;
+          
+          document.getElementById('review-modal').classList.add('active');
+      }
+      
+      function closeReviewModal() {
+          document.getElementById('review-modal').classList.remove('active');
+      }
+
+      async function saveComplaintStatus() {
+          if(!activeTrackingId) return;
+          const newStatus = document.getElementById('modal-status').value;
+          
           try {
-              const queue = await API.getComplaintsQueue();
+              document.getElementById('save-status-btn').textContent = 'Saving...';
+              await API.updateComplaintStatus(activeTrackingId, newStatus);
+              
+              if(typeof showToast === 'function') { showToast('Status updated successfully', 'success'); }
+              closeReviewModal();
+              loadDashboardData(); // Reload the table
+          } catch(e) {
+              console.error(e);
+              if(typeof showToast === 'function') { showToast('Failed to update status', 'error'); }
+          } finally {
+              document.getElementById('save-status-btn').textContent = 'Save Changes';
+          }
+      }
+
+      async function loadDashboardData() {
+          try {
+              currentQueue = await API.getComplaintsQueue();
               const tbody = document.getElementById('complaints-queue');
               tbody.innerHTML = '';
               
-              document.getElementById('open-count').textContent = queue.length;
-              
-              if (queue.length === 0) {
-                  tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding: 24px; color: #64748b;">No complaints in queue.</td></tr>';
+              let openCount = 0;
+              let highPriorityCount = 0;
+
+              if (currentQueue.length === 0) {
+                  tbody.innerHTML = '<tr><td colspan="7" class="text-center" style="padding: 24px; color: #64748b;">No complaints in queue.</td></tr>';
+                  document.getElementById('open-count').textContent = 0;
+                  document.getElementById('high-priority-count').textContent = 0;
                   return;
               }
 
-              queue.forEach(comp => {
-                  // Mock shop detail mapping for demo
-                  const priority = comp.violation_type === 'Food Safety' || comp.violation_type === 'Both' ? 'High' : 'Medium';
+              currentQueue.forEach(comp => {
+                  if (comp.status !== 'Resolved') openCount++;
+                  
+                  const isHighPriority = comp.violation_type === 'Food Safety' || comp.violation_type === 'Both';
+                  if (isHighPriority && comp.status !== 'Resolved') highPriorityCount++;
+                  
+                  const priority = isHighPriority ? 'High' : 'Medium';
                   const badgeClass = priority === 'High' ? 'badge-danger' : 'badge-warning';
                   
+                  // Status badge coloring
+                  let statusColor = '#94a3b8'; // grey
+                  if(comp.status === 'Pending') statusColor = '#eab308'; // yellow
+                  if(comp.status === 'Verified') statusColor = '#3b82f6'; // blue
+                  if(comp.status === 'In Progress') statusColor = '#8b5cf6'; // purple
+                  if(comp.status === 'Resolved') statusColor = '#10b981'; // green
+
                   const dateStr = new Date(comp.date_filed).toLocaleDateString();
 
                   tbody.innerHTML += `
                     <tr>
                       <td style="font-family: monospace; color: #64748b;">#${comp.tracking_id}</td>
                       <td>
-                        <strong>Shop ID: ${comp.shop_id}</strong><br>
-                        <span style="color: #64748b; font-size: 0.8rem;">${comp.product_details}</span>
+                        <strong>${comp.shop ? comp.shop.name : 'Unknown Shop'}</strong><br>
+                        <span style="color: #64748b; font-size: 0.8rem; display: block; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            ${comp.shop ? comp.shop.address : 'No address provided'}
+                        </span>
                       </td>
                       <td>${comp.violation_type} Violation</td>
                       <td>${dateStr}</td>
                       <td><span class="badge ${badgeClass}">${priority}</span></td>
-                      <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Review</button></td>
+                      <td>
+                        <span style="display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; background: ${statusColor}22; color: ${statusColor};">
+                            ${comp.status}
+                        </span>
+                      </td>
+                      <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openReviewModal('${comp.tracking_id}')">Review</button></td>
                     </tr>
                   `;
               });
+              
+              document.getElementById('open-count').textContent = openCount;
+              document.getElementById('high-priority-count').textContent = highPriorityCount;
 
           } catch (e) {
               console.error(e);
-              document.getElementById('complaints-queue').innerHTML = '<tr><td colspan="6" class="text-center text-danger">Failed to load queue.</td></tr>';
+              document.getElementById('complaints-queue').innerHTML = '<tr><td colspan="7" class="text-center text-danger" style="padding:24px;">Failed to load queue. Please ensure the backend is running.</td></tr>';
           }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+          // Check auth
+          const token = localStorage.getItem('officer_token');
+          if (!token) {
+              window.location.href = 'officer-login.html';
+              return;
+          }
+          loadDashboardData();
       });
   </script>
   <script>

@@ -113,6 +113,18 @@ const API = {
         const response = await fetch(`${API_BASE_URL}/api/complaints/queue`);
         if (!response.ok) throw new Error('Failed to fetch queue');
         return await response.json();
+    },
+
+    updateComplaintStatus: async (trackingId, status) => {
+        const response = await fetch(`${API_BASE_URL}/api/complaints/${trackingId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: status })
+        });
+        if (!response.ok) throw new Error('Failed to update complaint status');
+        return await response.json();
     }
 };
 

@@ -52,6 +52,16 @@ class Complaint(ComplaintBase):
     class Config:
         from_attributes = True
 
+class ComplaintWithShop(Complaint):
+    shop: Shop
+
+    class Config:
+        from_attributes = True
+
+class ComplaintUpdate(BaseModel):
+    status: Optional[str] = None
+    notes: Optional[str] = None
+
 class ScanResult(BaseModel):
     extracted_text: str
     legal_metrology: dict # e.g. {"is_compliant": True, "details": "MRP, quantity present"}
