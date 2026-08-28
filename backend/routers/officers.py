@@ -17,32 +17,29 @@ from datetime import datetime
 
 # --- Native Email OTP Logic ---
 
+import urllib.request
+import json
+
 def send_email(to_email: str, otp: str):
-    # Try to send email using SMTP if configured in .env, otherwise just print it
-    smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    smtp_user = os.getenv("SMTP_USER")
-    smtp_pass = os.getenv("SMTP_PASS")
+    script_url = os.getenv("GOOGLE_SCRIPT_URL")
 
     print(f"\n{'='*40}")
-    print(f"🔒 MOCK OTP EMAIL SENT TO: {to_email}")
+    print(f"🔒 OTP LOGGED FOR: {to_email}")
     print(f"🔑 YOUR LOGIN OTP IS: {otp}")
     print(f"{'='*40}\n")
 
-    if smtp_user and smtp_pass:
+    if script_url:
         try:
-            msg = MIMEText(f"Your Grahak Kavach Officer Portal Login OTP is: {otp}\n\nThis code will expire soon. Do not share it with anyone.")
-            msg['Subject'] = 'Officer Portal Login OTP'
-            msg['From'] = smtp_user
-            msg['To'] = to_email
-
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls()
-            server.login(smtp_user, smtp_pass)
-            server.send_message(msg)
-            server.quit()
+            data = json.dumps({"email": to_email, "otp": otp}).encode('utf-8')
+            req = urllib.request.Request(
+                script_url, 
+                data=data, 
+                headers={'Content-Type': 'application/json'}
+            )
+            response = urllib.request.urlopen(req, timeout=10)
+            print("Successfully relayed email request to Google Apps Script")
         except Exception as e:
-            print(f"Failed to send actual email: {e}")
+            print(f"Failed to relay email: {e}")
 
 @router.post("/send-otp")
 def send_otp(request: schemas.SendOTPRequest, db: Session = Depends(database.get_db)):
