@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 import models, database, auth
 from routers import scan, complaints, officers, shops
+from websocket_manager import manager
 
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
@@ -41,3 +42,12 @@ def startup_event():
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the API. Go to /docs to view the Swagger documentation."}
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)

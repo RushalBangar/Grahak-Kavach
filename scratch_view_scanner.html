@@ -1,0 +1,37 @@
+<section class="app-view" id="view_scanner" style="display: none;">
+ Camera Viewfinder Background
+ <div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="A close-up, slightly blurred, realistic perspective from a mobile camera lens looking at a complex nutritional label on a packaged food product. The lighting is bright and even, simulating a well-lit grocery store aisle. The design conveys a high-tech, precise data extraction scenario with subtle reflections on the packaging." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4ivtpmuCyh-3wAtMi16wb_GHkhgVIrZX1fE_-HrEvpTQm-H_1LtSf59aZgIUNyCfZitQTccjqqxqWXt48B_JUJ0h-2s_8fV-33ezpzYcH10SPr43dH__z41XkirhfWx8yN11_xSozojqLS9DRcWc9JKUCoNmv14a7dYNyLQrknfps-B3hUdtWmN37zswHc9w2s81Yoko5yiUKoFhxzaC_7kDWBSWCqWSnJimb6QFxr2sGKq39DzLDnw')">
+ </div>
+ Scanner Overlay
+ <div class="absolute inset-0 flex items-center justify-center p-8">
+  <div class="relative w-full aspect-square max-w-md border-2 border-dashed border-ai-accent rounded-lg flex flex-col items-center justify-center bg-black/20 backdrop-blur-sm">
+   <!-- Corner Accents -->
+   <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-ai-accent -translate-x-1 -translate-y-1">
+   </div>
+   <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-ai-accent translate-x-1 -translate-y-1">
+   </div>
+   <div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-ai-accent -translate-x-1 translate-y-1">
+   </div>
+   <div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-ai-accent translate-x-1 translate-y-1">
+   </div>
+   <!-- Animated Scan Line -->
+   <div class="scan-line">
+   </div>
+   <!-- Status Indicator -->
+   <div class="absolute top-4 bg-slate-dark/80 px-3 py-1.5 rounded-full flex items-center gap-2 border border-outline-variant/30">
+    <div class="pulsing-dot">
+    </div>
+    <span class="font-label-caps text-label-caps text-ai-accent">
+     Visual OCR Active
+    </span>
+   </div>
+   <!-- Target Reticle -->
+   <span class="material-symbols-outlined text-ai-accent text-6xl opacity-50">
+    center_focus_weak
+   </span>
+   <p class="mt-4 font-body-sm text-body-sm text-on-primary text-center opacity-80">
+    Align label within frame
+   </p>
+  </div>
+ </div>
+</section>

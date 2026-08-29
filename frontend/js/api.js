@@ -109,6 +109,34 @@ const API = {
         }
     },
 
+    logInspection: async (inspectionData) => {
+        const token = localStorage.getItem('officer_token');
+        const response = await fetch(`${API_BASE_URL}/api/officer/inspections`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(inspectionData),
+        });
+
+        if (!response.ok) throw new Error('Failed to log inspection');
+        return await response.json();
+    },
+
+    getMyInspections: async () => {
+        const token = localStorage.getItem('officer_token');
+        const response = await fetch(`${API_BASE_URL}/api/officer/inspections`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch inspections');
+        return await response.json();
+    },
+
     getComplaintsQueue: async () => {
         const response = await fetch(`${API_BASE_URL}/api/complaints/queue`);
         if (!response.ok) throw new Error('Failed to fetch queue');

@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 import models, schemas, database
 import uuid
+from websocket_manager import manager
 
 router = APIRouter(
     prefix="/api/complaints",
@@ -9,7 +10,7 @@ router = APIRouter(
 )
 
 @router.post("/", response_model=schemas.Complaint)
-def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(database.get_db)):
+def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: BackgroundTasks, db: Session = Depends(database.get_db)):
     # Auto-routing logic based on violation type
     routed_to = None
     if complaint.violation_type == "Legal Metrology":
@@ -29,6 +30,9 @@ def create_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     db.add(db_complaint)
     db.commit()
     db.refresh(db_complaint)
+    
+    background_tasks.add_task(manager.broadcast, {"type": "NEW_COMPLAINT"})
+    
     return db_complaint
 
 @router.get("/queue", response_model=list[schemas.ComplaintWithShop])
@@ -46,7 +50,7 @@ def get_complaint(tracking_id: str, db: Session = Depends(database.get_db)):
     return db_complaint
 
 @router.patch("/{tracking_id}", response_model=schemas.Complaint)
-def update_complaint_status(tracking_id: str, update_data: schemas.ComplaintUpdate, db: Session = Depends(database.get_db)):
+def update_complaint_status(tracking_id: str, update_data: schemas.ComplaintUpdate, background_tasks: BackgroundTasks, db: Session = Depends(database.get_db)):
     db_complaint = db.query(models.Complaint).filter(models.Complaint.tracking_id == tracking_id).first()
     if db_complaint is None:
         raise HTTPException(status_code=404, detail="Complaint not found")
@@ -59,4 +63,7 @@ def update_complaint_status(tracking_id: str, update_data: schemas.ComplaintUpda
     
     db.commit()
     db.refresh(db_complaint)
+    
+    background_tasks.add_task(manager.broadcast, {"type": "STATUS_UPDATE", "tracking_id": tracking_id, "status": update_data.status})
+    
     return db_complaint
