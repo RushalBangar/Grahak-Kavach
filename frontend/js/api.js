@@ -153,6 +153,12 @@ const API = {
         });
         if (!response.ok) throw new Error('Failed to update complaint status');
         return await response.json();
+    },
+
+    getLegalMetrologyDocs: async () => {
+        const response = await fetch(`${API_BASE_URL}/api/legal-metrology/`);
+        if (!response.ok) throw new Error('Failed to fetch legal documents');
+        return await response.json();
     }
 };
 

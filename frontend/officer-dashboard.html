@@ -142,6 +142,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         My Inspections
       </a>
+      <a href="#" id="nav-legal" onclick="switchTab('legal'); if(window.innerWidth<=768) document.querySelector('.sidebar').classList.remove('open')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Rules & Guidelines
+      </a>
     </nav>
 
     <div style="margin-top: auto; padding: 24px;">
@@ -272,6 +276,29 @@
             <tbody id="my-inspections-list">
               <!-- Fetched via API -->
               <tr><td colspan="5" class="text-center" style="padding: 24px; color: #64748b;">Loading your inspections...</td></tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="section-legal" style="display: none;">
+        <div style="background: white; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); margin-bottom: 24px;">
+          <h3 style="margin-top: 0; color: #1e293b; font-size: 1.25rem;">Legal Metrology Documents</h3>
+          <p style="color: #64748b; font-size: 0.95rem;">Reference documents, acts, and rules for inspections.</p>
+        </div>
+        
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="legal-docs-list">
+              <!-- Fetched via API -->
+              <tr><td colspan="3" class="text-center" style="padding: 24px; color: #64748b;">Loading documents...</td></tr>
             </tbody>
           </table>
         </div>
@@ -459,6 +486,7 @@
           document.getElementById('section-complaints').style.display = 'none';
           document.getElementById('section-log').style.display = 'none';
           document.getElementById('section-my').style.display = 'none';
+          document.getElementById('section-legal').style.display = 'none';
           
           // Show selected
           document.getElementById('section-' + tab).style.display = 'block';
@@ -467,6 +495,8 @@
               loadMyInspections();
           } else if (tab === 'complaints') {
               loadDashboardData();
+          } else if (tab === 'legal') {
+              loadLegalDocs();
           }
       }
 
@@ -526,6 +556,39 @@
           } catch(err) {
               console.error(err);
               tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger" style="padding: 24px;">Failed to load inspections.</td></tr>';
+          }
+      }
+
+      async function loadLegalDocs() {
+          const tbody = document.getElementById('legal-docs-list');
+          tbody.innerHTML = '<tr><td colspan="3" class="text-center" style="padding: 24px; color: #64748b;">Loading documents...</td></tr>';
+          try {
+              const data = await API.getLegalMetrologyDocs();
+              tbody.innerHTML = '';
+              if (data.length === 0) {
+                  tbody.innerHTML = '<tr><td colspan="3" class="text-center" style="padding: 24px; color: #64748b;">No documents available.</td></tr>';
+                  return;
+              }
+              
+              // Sort by category
+              data.sort((a, b) => a.category.localeCompare(b.category));
+              
+              data.forEach(doc => {
+                  tbody.innerHTML += `
+                    <tr>
+                      <td><span class="badge" style="background: #e2e8f0; color: #475569; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 500;">${doc.category}</span></td>
+                      <td style="font-weight: 500; color: #1e293b;">${doc.title}</td>
+                      <td>
+                        <a href="${doc.url}" target="_blank" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem; text-decoration: none; display: inline-block;">
+                           Download PDF
+                        </a>
+                      </td>
+                    </tr>
+                  `;
+              });
+          } catch(err) {
+              console.error(err);
+              tbody.innerHTML = '<tr><td colspan="3" class="text-center text-danger" style="padding: 24px;">Failed to load documents.</td></tr>';
           }
       }
 

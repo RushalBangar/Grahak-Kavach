@@ -2,7 +2,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 import models, database, auth
-from routers import scan, complaints, officers, shops
+from routers import scan, complaints, officers, shops, legal
 from websocket_manager import manager
 
 # Create database tables
@@ -30,6 +30,7 @@ app.include_router(scan.router)
 app.include_router(complaints.router)
 app.include_router(officers.router)
 app.include_router(shops.router)
+app.include_router(legal.router)
 
 @app.on_event("startup")
 def startup_event():

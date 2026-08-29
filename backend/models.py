@@ -54,3 +54,10 @@ class OTPRequest(Base):
     otp_code = Column(String)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     is_used = Column(Boolean, default=False)
+
+class LegalMetrologyDocument(Base):
+    __tablename__ = "legal_metrology_documents"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    url = Column(String)
+    category = Column(String, index=True)
