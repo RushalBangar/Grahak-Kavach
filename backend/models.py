@@ -40,6 +40,7 @@ class Complaint(Base):
     violation_type = Column(String) # "Legal Metrology", "Food Safety", "Both"
     status = Column(String, default="Pending", index=True) # Pending, Verified, Routed, Resolved
     routed_to = Column(String, nullable=True) # "DCA", "FSSAI", "Both"
+    user_email = Column(String, nullable=True)
     evidence_url = Column(String, nullable=True)
     verification_method = Column(String) # Aadhaar QR, DigiLocker, PAN, etc.
     is_verified = Column(Boolean, default=False)

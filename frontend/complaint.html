@@ -66,6 +66,11 @@
             </label>
           </div>
         </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label">Email Address (For Notifications)</label>
+          <input type="email" id="comp-email" class="form-control glass-input" placeholder="Enter your email to receive updates" required>
+        </div>
         <button class="btn btn-primary" onclick="nextStep(2)">Proceed</button>
       </div>
 
@@ -161,7 +166,13 @@
               const shopName = document.getElementById('comp-shop').value.trim();
               const violationType = document.getElementById('comp-type').value;
               const desc = document.getElementById('comp-desc').value.trim();
+              const userEmail = document.getElementById('comp-email').value.trim();
 
+              if (!userEmail) {
+                  showToast("Please enter your email address for notifications.", "warning");
+                  nextStep(1);
+                  return;
+              }
               if (!shopName) {
                   showToast("Please enter the Shop Name / ID.", "warning");
                   nextStep(2); // Go back to details tab
@@ -177,7 +188,8 @@
                   shop_id: 1, // hardcoded for demo
                   product_details: desc,
                   violation_type: violationType,
-                  verification_method: method
+                  verification_method: method,
+                  user_email: userEmail
               };
 
               const response = await API.submitComplaint(payload);

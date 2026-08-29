@@ -33,6 +33,18 @@ def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: Backg
     
     background_tasks.add_task(manager.broadcast, {"type": "NEW_COMPLAINT"})
     
+    if complaint.user_email:
+        # Mocking email send to user or using the same Google Script relay
+        def send_complaint_ack(email: str, tracking_id: str):
+            print(f"\n{'='*40}")
+            print(f"📧 EMAIL SENT TO: {email}")
+            print(f"SUBJECT: Complaint Received - Tracking ID: {tracking_id}")
+            print(f"BODY: Thank you for submitting your complaint. We have received it and it will be reviewed soon. Appropriate actions will be taken.")
+            print(f"{'='*40}\n")
+            # If there's an actual email relay, we could hook it here.
+        
+        background_tasks.add_task(send_complaint_ack, complaint.user_email, db_complaint.tracking_id)
+    
     return db_complaint
 
 @router.get("/queue", response_model=list[schemas.ComplaintWithShop])
