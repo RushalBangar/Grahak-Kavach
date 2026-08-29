@@ -24,14 +24,37 @@ async def analyze_label(file: UploadFile = File(...)):
     # TODO: In a production app, implement real NLP / AI logic to parse the text.
     # For now, we mock the analysis based on whether certain keywords appear.
     
+    import re
     text_lower = extracted_text.lower()
     
-    # Mocked Legal Metrology check
-    has_mrp = "mrp" in text_lower or "rs" in text_lower
-    has_qty = "net qty" in text_lower or "net weight" in text_lower or "ml" in text_lower or "g" in text_lower
-    has_date = "mfg" in text_lower or "date" in text_lower or "exp" in text_lower
+    # Rule-Based Engine for Legal Metrology (Packaged Commodities) Rules, 2011
+    # 1. Manufacturer / Packer Details
+    has_manufacturer = bool(re.search(r'(manufactured|packed|marketed|mktd|mfd)\s*(by|for)?', text_lower))
     
-    is_compliant = has_mrp and has_qty and has_date
+    # 2. Net Quantity (Checking for standard units: g, kg, ml, L, unit, piece, U, N)
+    has_qty = bool(re.search(r'(net\s*(wt\.?|weight|qty|quantity)|vol\.?|volume)?\s*:?\s*\d+(\.\d+)?\s*(g|kg|ml|l|ltr|pcs|pieces?|units?|u|n)\b', text_lower))
+    
+    # 3. Month & Year of Manufacture/Packaging/Import
+    has_date = bool(re.search(r'(mfg|pkd|manufactured|packed|use\s*by|exp|expiry)\s*(date|d)?\s*:?\s*\d{1,4}[/\-\.]\d{1,4}([/\-\.]\d{1,4})?', text_lower))
+    
+    # 4. MRP (inclusive of all taxes)
+    has_mrp = bool(re.search(r'mrp\s*(rs\.?|₹|inr)?\s*:?\s*\d+(\.\d+)?', text_lower))
+    
+    # 5. Consumer Care Details
+    has_consumer_care = bool(re.search(r'(consumer\s*care|customer\s*care|customercare|feedback|complaints|toll\s*free|email|ph\.?|tel\.?)', text_lower))
+    
+    missing_fields = []
+    if not has_manufacturer: missing_fields.append("Manufacturer/Packer Details")
+    if not has_qty: missing_fields.append("Net Quantity")
+    if not has_date: missing_fields.append("Mfg/Expiry Date")
+    if not has_mrp: missing_fields.append("MRP")
+    if not has_consumer_care: missing_fields.append("Consumer Care Info")
+    
+    is_compliant = len(missing_fields) == 0
+    
+    details_msg = "Compliant with Legal Metrology (Packaged Commodities) Rules."
+    if not is_compliant:
+        details_msg = f"Non-Compliant. Missing: {', '.join(missing_fields)}."
     
     # Mocked Food Safety check
     # Check for some common harmful ingredients in our mocked database
@@ -46,7 +69,7 @@ async def analyze_label(file: UploadFile = File(...)):
         extracted_text=extracted_text,
         legal_metrology={
             "is_compliant": is_compliant,
-            "details": f"Found MRP: {has_mrp}, Qty: {has_qty}, Date: {has_date}"
+            "details": details_msg
         },
         food_safety={
             "health_score": health_score,
