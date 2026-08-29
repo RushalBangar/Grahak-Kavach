@@ -15,6 +15,16 @@ const API = {
         return await response.json();
     },
 
+    scanBarcode: async (barcode) => {
+        const response = await fetch(`${API_BASE_URL}/api/scan/barcode/${barcode}`, {
+            method: 'GET'
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch barcode data');
+        }
+        return await response.json();
+    },
+
     submitComplaint: async (complaintData) => {
         const response = await fetch(`${API_BASE_URL}/api/complaints/`, {
             method: 'POST',

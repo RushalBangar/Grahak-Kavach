@@ -76,3 +76,31 @@ async def analyze_label(file: UploadFile = File(...)):
             "harmful_ingredients": found_harmful
         }
     )
+
+@router.get("/barcode/{barcode}")
+def scan_barcode(barcode: str):
+    import urllib.request
+    import json
+    
+    url = f"https://world.openfoodfacts.org/api/v0/product/{barcode}.json"
+    
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'GrahakKavach/1.0'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = json.loads(response.read().decode())
+            
+        if data.get('status') == 1:
+            product = data.get('product', {})
+            return {
+                "found": True,
+                "product_name": product.get('product_name', 'Unknown'),
+                "brand": product.get('brands', 'Unknown'),
+                "ingredients_text": product.get('ingredients_text', ''),
+                "nutriscore_grade": product.get('nutriscore_grade', 'unknown').upper(),
+                "nova_group": product.get('nova_group', 'unknown'),
+                "image_url": product.get('image_url', '')
+            }
+        else:
+            return {"found": False, "message": "Product not found in Open Food Facts database."}
+    except Exception as e:
+        return {"found": False, "message": f"Error verifying barcode: {str(e)}"}

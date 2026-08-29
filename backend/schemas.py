@@ -38,6 +38,8 @@ class ComplaintBase(BaseModel):
     violation_type: str
     verification_method: str
     user_email: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 class ComplaintCreate(ComplaintBase):
     evidence_url: Optional[str] = None

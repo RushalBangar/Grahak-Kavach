@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime, Float
 from sqlalchemy.orm import relationship
 import datetime
 from database import Base
@@ -41,6 +41,8 @@ class Complaint(Base):
     status = Column(String, default="Pending", index=True) # Pending, Verified, Routed, Resolved
     routed_to = Column(String, nullable=True) # "DCA", "FSSAI", "Both"
     user_email = Column(String, nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     evidence_url = Column(String, nullable=True)
     verification_method = Column(String) # Aadhaar QR, DigiLocker, PAN, etc.
     is_verified = Column(Boolean, default=False)

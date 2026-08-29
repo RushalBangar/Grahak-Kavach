@@ -183,13 +183,30 @@
                   nextStep(2);
                   return;
               }
+              
+              // Get user location for mapping
+              let lat = null;
+              let lng = null;
+              try {
+                  const position = await new Promise((resolve, reject) => {
+                      if (!navigator.geolocation) reject("Not supported");
+                      navigator.geolocation.getCurrentPosition(resolve, reject, {timeout: 5000});
+                  });
+                  lat = position.coords.latitude;
+                  lng = position.coords.longitude;
+              } catch (err) {
+                  console.log("Geolocation error or denied:", err);
+                  // We continue even if location is denied
+              }
 
               const payload = {
                   shop_id: 1, // hardcoded for demo
                   product_details: desc,
                   violation_type: violationType,
                   verification_method: method,
-                  user_email: userEmail
+                  user_email: userEmail,
+                  latitude: lat,
+                  longitude: lng
               };
 
               const response = await API.submitComplaint(payload);

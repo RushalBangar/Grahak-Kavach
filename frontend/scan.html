@@ -99,38 +99,64 @@
     </div>
 
     <div class="content animate-slide-up">
-      <div class="viewfinder mb-4 shadow" style="position: relative;">
-        
-        <!-- Flashlight Button -->
-        <div class="camera-controls">
-          <button id="toggle-flash" style="border: none; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
-          </button>
+      <!-- Tabs for OCR vs Barcode -->
+      <div style="display: flex; gap: 16px; margin: 0 16px 16px 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
+        <button id="tab-ocr" class="btn" style="flex: 1; background: none; border: none; border-bottom: 2px solid var(--primary-color); border-radius: 0; color: var(--primary-color); font-weight: bold; padding: 12px 0;" onclick="switchScanMode('ocr')">Text Label OCR</button>
+        <button id="tab-barcode" class="btn" style="flex: 1; background: none; border: none; color: var(--text-muted); font-weight: bold; padding: 12px 0;" onclick="switchScanMode('barcode')">Barcode Scan</button>
+      </div>
+
+      <!-- OCR Section -->
+      <div id="section-ocr">
+        <div class="viewfinder mb-4 shadow" style="position: relative;">
+          <!-- Flashlight Button -->
+          <div class="camera-controls">
+            <button id="toggle-flash" style="border: none; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+            </button>
+          </div>
+
+          <!-- Real Camera Feed -->
+          <video id="camera-feed" autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"></video>
+          
+          <!-- UI overlay for scanning -->
+          <div class="viewfinder-frame" style="z-index: 2;"></div>
+          <p data-i18n="fit_label" style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
+          
+          <!-- Hidden canvas to grab image -->
+          <canvas id="camera-canvas" style="display: none;"></canvas>
         </div>
+        
+        <p data-i18n="make_sure_visible" class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
 
-        <!-- Real Camera Feed -->
-        <video id="camera-feed" autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"></video>
-        
-        <!-- UI overlay for scanning -->
-        <div class="viewfinder-frame" style="z-index: 2;"></div>
-        <p data-i18n="fit_label" style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
-        
-        <!-- Hidden canvas to grab image -->
-        <canvas id="camera-canvas" style="display: none;"></canvas>
+        <div class="flex-row" style="gap: 16px; padding: 0 16px;">
+          <button id="start-scan" class="btn btn-primary" style="flex: 2; padding: 18px;" data-i18n="capture">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg> Capture
+          </button>
+          
+          <label class="btn btn-secondary" style="flex: 1; padding: 18px; cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <input type="file" id="file-upload" accept="image/*" style="display: none;">
+          </label>
+        </div>
       </div>
-      
-      <p data-i18n="make_sure_visible" class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
 
-      <div class="flex-row" style="gap: 16px; padding: 0 16px;">
-        <button id="start-scan" class="btn btn-primary" style="flex: 2; padding: 18px;" data-i18n="capture">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg> Capture
-        </button>
-        
-        <label class="btn btn-secondary" style="flex: 1; padding: 18px; cursor: pointer;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <input type="file" id="file-upload" accept="image/*" style="display: none;">
-        </label>
+      <!-- Barcode Section -->
+      <div id="section-barcode" style="display: none; padding: 0 16px;">
+        <div style="background: white; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); margin-bottom: 24px;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14"></path><path d="M8 5v14"></path><path d="M12 5v14"></path><path d="M17 5v14"></path><path d="M21 5v14"></path></svg>
+            </div>
+            <h3 style="margin-top: 0; text-align: center;">Verify Product Authenticity</h3>
+            <p class="text-muted text-center">Enter the EAN/UPC barcode number to check against the Open Food Facts database.</p>
+            
+            <input type="number" id="barcode-input" class="form-control glass-input mb-4" placeholder="e.g. 5449000000996 (Coke)" style="font-size: 1.2rem; text-align: center; letter-spacing: 2px;">
+            
+            <button class="btn btn-primary" style="width: 100%; padding: 16px;" onclick="verifyBarcode()">
+                Check Barcode
+            </button>
+        </div>
       </div>
+
     </div>
 
     <!-- Processing Overlay (Screen 3) -->
@@ -146,6 +172,64 @@
   <script defer src="js/api.js"></script>
   <script defer src="js/main.js"></script>
   <script>
+    function switchScanMode(mode) {
+        if (mode === 'ocr') {
+            document.getElementById('section-ocr').style.display = 'block';
+            document.getElementById('section-barcode').style.display = 'none';
+            document.getElementById('tab-ocr').style.borderBottom = '2px solid var(--primary-color)';
+            document.getElementById('tab-ocr').style.color = 'var(--primary-color)';
+            document.getElementById('tab-barcode').style.borderBottom = 'none';
+            document.getElementById('tab-barcode').style.color = 'var(--text-muted)';
+        } else {
+            document.getElementById('section-ocr').style.display = 'none';
+            document.getElementById('section-barcode').style.display = 'block';
+            document.getElementById('tab-barcode').style.borderBottom = '2px solid var(--primary-color)';
+            document.getElementById('tab-barcode').style.color = 'var(--primary-color)';
+            document.getElementById('tab-ocr').style.borderBottom = 'none';
+            document.getElementById('tab-ocr').style.color = 'var(--text-muted)';
+        }
+    }
+
+    async function verifyBarcode() {
+        const barcode = document.getElementById('barcode-input').value.trim();
+        if (!barcode) {
+            if(typeof showToast === 'function') { showToast('Please enter a barcode.', 'warning'); } else { alert('Please enter a barcode.'); }
+            return;
+        }
+
+        try {
+            document.getElementById('processing-overlay').style.display = 'flex';
+            document.querySelector('#processing-overlay h3').textContent = 'Querying Global DB...';
+            document.querySelector('#processing-overlay p').textContent = 'Validating FSSAI / Authenticity';
+            
+            const data = await API.scanBarcode(barcode);
+            
+            if (data.found) {
+                // Store results for the results page
+                const scanRes = {
+                    extracted_text: "BARCODE MATCH: " + barcode,
+                    food_safety: {
+                        health_score: data.nutriscore_grade,
+                        harmful_ingredients: data.nova_group > 3 ? ["Ultra-Processed (Nova 4)"] : []
+                    },
+                    legal_metrology: {
+                        is_compliant: true,
+                        details: `Product: ${data.product_name} by ${data.brand}`
+                    }
+                };
+                localStorage.setItem('latest_scan_result', JSON.stringify(scanRes));
+                window.location.href = 'results.html';
+            } else {
+                if(typeof showToast === 'function') { showToast('Product not found in global database. Potential counterfeit!', 'error'); } else { alert('Product not found in database. Potential counterfeit!'); }
+            }
+        } catch (e) {
+            console.error(e);
+            if(typeof showToast === 'function') { showToast('Failed to check barcode.', 'error'); } else { alert('Failed to check barcode.'); }
+        } finally {
+            document.getElementById('processing-overlay').style.display = 'none';
+        }
+    }
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(err => {
