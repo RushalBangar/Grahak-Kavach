@@ -41,8 +41,20 @@ def send_email(to_email: str, otp: str):
         except Exception as e:
             print(f"Failed to relay email: {e}")
 
+ALLOWED_OFFICER_EMAILS = [
+    "ghotekarabhay0@gmail.com",
+    "vaishnavilokhande671@gmail.com",
+    "duyantinchaudhari@gmail.com",
+    "rushikeshwagh2501@gmail.com",
+    "sanskarmuthe186@gmail.com",
+    "rushalbangar19@gmail.com"
+]
+
 @router.post("/send-otp")
 def send_otp(request: schemas.SendOTPRequest, db: Session = Depends(database.get_db)):
+    if request.email not in ALLOWED_OFFICER_EMAILS:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Email not authorized for officer access.")
+    
     # 1. Generate 6-digit OTP
     otp_code = str(random.randint(100000, 999999))
     
@@ -91,6 +103,12 @@ def verify_otp(request: schemas.VerifyOTPRequest, db: Session = Depends(database
 
 @router.post("/login", response_model=schemas.Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
+    if form_data.username not in ALLOWED_OFFICER_EMAILS:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Email not authorized for officer access.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     user = db.query(models.User).filter(models.User.username == form_data.username).first()
     if not user or not auth.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
