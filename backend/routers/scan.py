@@ -19,7 +19,11 @@ async def analyze_label(file: UploadFile = File(...)):
     try:
         extracted_text = pytesseract.image_to_string(image)
     except Exception as e:
-        extracted_text = "OCR Failed or Tesseract not installed."
+        extracted_text = ""
+        
+    if not extracted_text or not extracted_text.strip():
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="Please scan a valid product label. No text was detected.")
         
     # TODO: In a production app, implement real NLP / AI logic to parse the text.
     # For now, we mock the analysis based on whether certain keywords appear.

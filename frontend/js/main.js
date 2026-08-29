@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (error) {
         console.error("Scan error:", error);
-        showToast("There was an error analyzing the label. Please try again.", "error");
+        showToast(error.message || "There was an error analyzing the label. Please try again.", "error");
         processingOverlay.style.display = 'none';
     }
   }
