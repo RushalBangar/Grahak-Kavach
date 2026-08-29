@@ -21,12 +21,12 @@ class Shop(Base):
 class Inspection(Base):
     __tablename__ = "inspections"
     id = Column(Integer, primary_key=True, index=True)
-    shop_id = Column(Integer, ForeignKey("shops.id"))
+    shop_id = Column(Integer, ForeignKey("shops.id"), index=True)
     product_scanned = Column(String)
     is_compliant = Column(Boolean, default=True)
     violation_details = Column(String, nullable=True)
     date_logged = Column(DateTime, default=datetime.datetime.utcnow)
-    officer_id = Column(Integer, ForeignKey("users.id"))
+    officer_id = Column(Integer, ForeignKey("users.id"), index=True)
     
     shop = relationship("Shop", back_populates="inspections")
     officer = relationship("User")
@@ -35,10 +35,10 @@ class Complaint(Base):
     __tablename__ = "complaints"
     id = Column(Integer, primary_key=True, index=True)
     tracking_id = Column(String, unique=True, index=True)
-    shop_id = Column(Integer, ForeignKey("shops.id"))
+    shop_id = Column(Integer, ForeignKey("shops.id"), index=True)
     product_details = Column(String)
     violation_type = Column(String) # "Legal Metrology", "Food Safety", "Both"
-    status = Column(String, default="Pending") # Pending, Verified, Routed, Resolved
+    status = Column(String, default="Pending", index=True) # Pending, Verified, Routed, Resolved
     routed_to = Column(String, nullable=True) # "DCA", "FSSAI", "Both"
     evidence_url = Column(String, nullable=True)
     verification_method = Column(String) # Aadhaar QR, DigiLocker, PAN, etc.

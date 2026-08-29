@@ -1,5 +1,6 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 import models, database, auth
 from routers import scan, complaints, officers, shops
 from websocket_manager import manager
@@ -21,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Enable GZip compression
+app.add_middleware(GZipMiddleware, minimum_size=500)
 
 app.include_router(scan.router)
 app.include_router(complaints.router)
