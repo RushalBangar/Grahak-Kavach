@@ -50,3 +50,54 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if user is None:
         raise credentials_exception
     return user
+
+import hmac
+import hashlib
+import time
+import os
+import json
+import urllib.request
+import urllib.parse
+from fastapi import Header, Request
+
+API_SECRET_KEY = os.getenv("API_SECRET_KEY", "default_dev_secret")
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY", "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe")
+
+def verify_api_signature(x_app_timestamp: str = Header(...), x_app_signature: str = Header(...)):
+    try:
+        ts = int(x_app_timestamp)
+        now = int(time.time() * 1000)
+        if abs(now - ts) > 5 * 60 * 1000:
+            raise HTTPException(status_code=403, detail="Request expired")
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid timestamp")
+        
+    expected_signature = hmac.new(
+        API_SECRET_KEY.encode('utf-8'),
+        x_app_timestamp.encode('utf-8'),
+        hashlib.sha256
+    ).hexdigest()
+    
+    if not hmac.compare_digest(expected_signature, x_app_signature):
+        raise HTTPException(status_code=403, detail="Invalid signature")
+
+async def verify_captcha(x_captcha_token: str = Header(...)):
+    if not x_captcha_token:
+        raise HTTPException(status_code=400, detail="Missing CAPTCHA token")
+        
+    url = "https://www.google.com/recaptcha/api/siteverify"
+    data = urllib.parse.urlencode({
+        "secret": RECAPTCHA_SECRET_KEY,
+        "response": x_captcha_token
+    }).encode('utf-8')
+    
+    try:
+        req = urllib.request.Request(url, data=data)
+        with urllib.request.urlopen(req, timeout=10) as response:
+            result = json.loads(response.read().decode())
+            if not result.get("success"):
+                raise HTTPException(status_code=403, detail="CAPTCHA verification failed")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="CAPTCHA service error")

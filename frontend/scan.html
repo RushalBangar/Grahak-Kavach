@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     .viewfinder {
       position: relative;
@@ -151,6 +152,10 @@
             
             <input type="number" id="barcode-input" class="form-control glass-input mb-4" placeholder="e.g. 5449000000996 (Coke)" style="font-size: 1.2rem; text-align: center; letter-spacing: 2px;">
             
+            <div class="form-group mb-4" style="display: flex; justify-content: center;">
+              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+            </div>
+            
             <button class="btn btn-primary" style="width: 100%; padding: 16px;" onclick="verifyBarcode()">
                 Check Barcode
             </button>
@@ -198,11 +203,17 @@
         }
 
         try {
+            const captchaToken = grecaptcha.getResponse();
+            if (!captchaToken) {
+                if(typeof showToast === 'function') { showToast('Please complete the CAPTCHA verification.', 'error'); } else { alert('Please complete the CAPTCHA verification.'); }
+                return;
+            }
+
             document.getElementById('processing-overlay').style.display = 'flex';
             document.querySelector('#processing-overlay h3').textContent = 'Querying Global DB...';
             document.querySelector('#processing-overlay p').textContent = 'Validating FSSAI / Authenticity';
             
-            const data = await API.scanBarcode(barcode);
+            const data = await API.scanBarcode(barcode, captchaToken);
             
             if (data.found) {
                 // Store results for the results page

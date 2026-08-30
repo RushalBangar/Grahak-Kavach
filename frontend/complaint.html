@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <div class="app-container">
@@ -118,6 +119,9 @@
         <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-bottom: 24px;">
           By submitting, you consent to sharing this info with authorities. False complaints are punishable by law.
         </div>
+        <div class="form-group mb-4" style="display: flex; justify-content: center;">
+          <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+        </div>
         <div style="display: flex; gap: 12px;">
           <button class="btn btn-secondary" style="flex: 1;" onclick="nextStep(2)">Back</button>
           <button id="submit-complaint" class="btn btn-primary" style="flex: 2;" data-i18n="submit_complaint">Submit Complaint</button>
@@ -184,6 +188,12 @@
                   return;
               }
               
+              const captchaToken = grecaptcha.getResponse();
+              if (!captchaToken) {
+                  showToast("Please complete the CAPTCHA verification.", "error");
+                  return;
+              }
+              
               // Get user location for mapping
               let lat = null;
               let lng = null;
@@ -209,7 +219,7 @@
                   longitude: lng
               };
 
-              const response = await API.submitComplaint(payload);
+              const response = await API.submitComplaint(payload, captchaToken);
               showToast(`Complaint filed successfully! Tracking ID: ${response.tracking_id}`, "success");
               setTimeout(() => { window.location.href = 'history.html'; }, 1500);
           } catch (e) {

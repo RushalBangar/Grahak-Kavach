@@ -3,6 +3,8 @@ import pytesseract
 from PIL import Image
 import io
 import schemas
+from fastapi import Depends
+import auth
 
 router = APIRouter(
     prefix="/api/scan",
@@ -81,7 +83,7 @@ async def analyze_label(file: UploadFile = File(...)):
         }
     )
 
-@router.get("/barcode/{barcode}")
+@router.get("/barcode/{barcode}", dependencies=[Depends(auth.verify_api_signature), Depends(auth.verify_captcha)])
 def scan_barcode(barcode: str):
     import urllib.request
     import json

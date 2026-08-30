@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
-import models, schemas, database
+import models, schemas, database, auth
 import uuid
 from websocket_manager import manager
 
@@ -9,7 +9,7 @@ router = APIRouter(
     tags=["complaints"]
 )
 
-@router.post("/", response_model=schemas.Complaint)
+@router.post("/", response_model=schemas.Complaint, dependencies=[Depends(auth.verify_api_signature), Depends(auth.verify_captcha)])
 def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: BackgroundTasks, db: Session = Depends(database.get_db)):
     # Auto-routing logic based on violation type
     routed_to = None

@@ -2,6 +2,27 @@
 const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
     ? 'http://127.0.0.1:8000' 
     : 'https://grahak-kavach-26.onrender.com';
+const API_SECRET_KEY = "default_dev_secret";
+
+async function generateSignatureHeaders() {
+    const timestamp = Date.now().toString();
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(API_SECRET_KEY);
+    const msgData = encoder.encode(timestamp);
+
+    const cryptoKey = await window.crypto.subtle.importKey(
+        'raw', keyData, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+    );
+
+    const signatureBuffer = await window.crypto.subtle.sign('HMAC', cryptoKey, msgData);
+    const signatureArray = Array.from(new Uint8Array(signatureBuffer));
+    const signatureHex = signatureArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    return {
+        'X-App-Timestamp': timestamp,
+        'X-App-Signature': signatureHex
+    };
+}
 
 const API = {
     scan: async (imageFile) => {
@@ -20,9 +41,16 @@ const API = {
         return await response.json();
     },
 
-    scanBarcode: async (barcode) => {
+    scanBarcode: async (barcode, captchaToken) => {
+        const sigHeaders = await generateSignatureHeaders();
+        const headers = { ...sigHeaders };
+        if (captchaToken) {
+            headers['x-captcha-token'] = captchaToken;
+        }
+        
         const response = await fetch(`${API_BASE_URL}/api/scan/barcode/${barcode}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: headers
         });
         if (!response.ok) {
             throw new Error('Failed to fetch barcode data');
@@ -30,12 +58,19 @@ const API = {
         return await response.json();
     },
 
-    submitComplaint: async (complaintData) => {
+    submitComplaint: async (complaintData, captchaToken) => {
+        const sigHeaders = await generateSignatureHeaders();
+        const headers = {
+            'Content-Type': 'application/json',
+            ...sigHeaders
+        };
+        if (captchaToken) {
+            headers['x-captcha-token'] = captchaToken;
+        }
+
         const response = await fetch(`${API_BASE_URL}/api/complaints/`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify(complaintData),
         });
 
