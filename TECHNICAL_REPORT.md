@@ -7,8 +7,8 @@
 ## 1. System Architecture
 
 The application is built on a decoupled Client-Server architecture:
-- **Frontend**: A static, Progressive Web App (PWA) built with Vanilla web technologies to ensure maximum compatibility, fast load times, and simple hosting (e.g., GitHub Pages, Render static hosting).
-- **Backend**: A RESTful API built with Python, providing high performance, asynchronous request handling, and strict data validation.
+- **Frontend**: A static, Progressive Web App (PWA) built with Vanilla web technologies to ensure maximum compatibility, fast load times, and simple hosting on **Vercel**.
+- **Backend**: A RESTful API built with Python, providing high performance, asynchronous request handling, and strict data validation, deployed on **Render**.
 - **Database**: A relational database model used for structured storage of users, complaints, shops, and inspection logs.
 
 ---
