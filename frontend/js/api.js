@@ -1,5 +1,7 @@
 // api.js
-const API_BASE_URL = 'https://grahak-kavach-26.onrender.com';
+const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+    ? 'http://127.0.0.1:8000' 
+    : 'https://grahak-kavach-26.onrender.com';
 
 const API = {
     scan: async (imageFile) => {
