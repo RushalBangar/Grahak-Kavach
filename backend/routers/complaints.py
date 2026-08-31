@@ -20,7 +20,28 @@ router = APIRouter(
 # Note: For production, this should be stored in the database.
 otp_store: Dict[str, dict] = {}
 
-def send_email_smtp(to_email: str, subject: str, body: str):
+import urllib.request
+import json
+
+def send_email_smtp(to_email: str, subject: str, body: str, is_otp: bool = False, otp_code: str = ""):
+    script_url = os.getenv("GOOGLE_SCRIPT_URL")
+    
+    # If it's an OTP and we have a Google Script URL, use it (Render blocks outbound SMTP)
+    if is_otp and script_url:
+        try:
+            data = json.dumps({"email": to_email, "otp": otp_code}).encode('utf-8')
+            req = urllib.request.Request(
+                script_url, 
+                data=data, 
+                headers={'Content-Type': 'application/json'}
+            )
+            urllib.request.urlopen(req, timeout=10)
+            print("Successfully relayed email request to Google Apps Script")
+            return
+        except Exception as e:
+            print(f"Failed to relay email: {e}")
+
+    # Fallback to SMTP
     smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
     smtp_port = int(os.getenv("SMTP_PORT", 587))
     smtp_user = os.getenv("SMTP_USER")
@@ -36,7 +57,8 @@ def send_email_smtp(to_email: str, subject: str, body: str):
     msg['To'] = to_email
 
     try:
-        server = smtplib.SMTP(smtp_server, smtp_port)
+        # 5 second timeout to prevent hanging on hosts that block SMTP port 587
+        server = smtplib.SMTP(smtp_server, smtp_port, timeout=5)
         server.starttls()
         server.login(smtp_user, smtp_pass)
         server.send_message(msg)
@@ -44,6 +66,8 @@ def send_email_smtp(to_email: str, subject: str, body: str):
         print(f"Successfully sent email to {to_email}")
     except Exception as e:
         print(f"Failed to send email to {to_email}: {str(e)}")
+        # Raise an exception so the frontend knows it failed instead of silently failing
+        raise Exception("Failed to send email. Ensure SMTP is not blocked by your host.")
 
 @router.post("/send-verification")
 def send_verification(req: schemas.ComplaintVerificationSend):
@@ -57,9 +81,12 @@ def send_verification(req: schemas.ComplaintVerificationSend):
     }
     
     body = f"Your verification code for filing a complaint on Grahak Kavach is: {otp_code}\n\nThis code will expire in 10 minutes."
-    send_email_smtp(email, "Grahak Kavach - Complaint Verification Code", body)
     
-    return {"message": f"Verification code sent to {email}"}
+    try:
+        send_email_smtp(email, "Grahak Kavach - Complaint Verification Code", body, is_otp=True, otp_code=otp_code)
+        return {"message": f"Verification code sent to {email}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to send email. Check your host's SMTP configuration.")
 
 @router.post("/verify")
 def verify_verification(req: schemas.ComplaintVerificationVerify):
