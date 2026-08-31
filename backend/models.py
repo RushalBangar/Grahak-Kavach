@@ -49,6 +49,10 @@ class Complaint(Base):
     date_filed = Column(DateTime, default=datetime.datetime.utcnow)
     
     shop = relationship("Shop", back_populates="complaints")
+    
+    @property
+    def shop_name(self):
+        return self.shop.name if self.shop else "Unknown"
 
 class OTPRequest(Base):
     __tablename__ = "otp_requests"
