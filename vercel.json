@@ -1,29 +1,30 @@
 {
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/frontend/index.html" },
-    { "source": "/officer-dashboard.html", "destination": "/frontend/officer-dashboard.html" },
-    { "source": "/officer-dashboard", "destination": "/frontend/officer-dashboard.html" },
-    { "source": "/officer-login.html", "destination": "/frontend/officer-login.html" },
-    { "source": "/officer-login", "destination": "/frontend/officer-login.html" },
-    { "source": "/complaint.html", "destination": "/frontend/complaint.html" },
-    { "source": "/complaint", "destination": "/frontend/complaint.html" },
-    { "source": "/results.html", "destination": "/frontend/results.html" },
-    { "source": "/results", "destination": "/frontend/results.html" },
-    { "source": "/index.html", "destination": "/frontend/index.html" },
-    { "source": "/css/(.*)", "destination": "/frontend/css/$1" },
-    { "source": "/js/(.*)", "destination": "/frontend/js/$1" },
-    { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
-    { "source": "/sw.js", "destination": "/frontend/sw.js" },
-    { "source": "/manifest.json", "destination": "/frontend/manifest.json" }
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
+    }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/(.*).html",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).(js|css|svg|png|jpg|jpeg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=86400"
         }
       ]
     }
