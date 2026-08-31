@@ -81,6 +81,14 @@
         </ul>
       </div>
 
+      <!-- OCR Text Section for Debugging -->
+      <div class="glass-card mb-4" style="border-left: 4px solid var(--primary-color);">
+        <h4 style="margin-top: 0; margin-bottom: 8px;">Extracted Text (OCR)</h4>
+        <div id="ocr-text-display" style="font-size: 0.8rem; color: var(--text-muted); max-height: 150px; overflow-y: auto; white-space: pre-wrap; background: rgba(0,0,0,0.02); padding: 8px; border-radius: 4px;">
+          Awaiting scan...
+        </div>
+      </div>
+
       <!-- Action Buttons -->
       <div class="flex-row mt-4" style="gap: 12px;">
         <a href="complaint.html" class="btn btn-secondary" style="flex: 1; border-color: var(--warning); color: var(--warning);" data-i18n="file_complaint">
@@ -148,6 +156,12 @@
                     });
                 }
             }
+        }
+        
+        // Show OCR Text
+        const ocrTextDisplay = document.getElementById('ocr-text-display');
+        if (ocrTextDisplay && result.extracted_text) {
+            ocrTextDisplay.textContent = result.extracted_text;
         }
       }
     });

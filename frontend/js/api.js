@@ -1,5 +1,5 @@
 // api.js
-const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') 
     ? 'http://127.0.0.1:8000' 
     : 'https://grahak-kavach-26.onrender.com';
 const API_SECRET_KEY = "default_dev_secret";
