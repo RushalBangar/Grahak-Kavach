@@ -6,6 +6,8 @@ import schemas
 from fastapi import Depends
 import auth
 import database
+from sqlalchemy.orm import Session
+import models
 router = APIRouter(
     prefix="/api/scan",
     tags=["scan"]
