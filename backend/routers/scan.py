@@ -105,7 +105,8 @@ async def analyze_label(file: UploadFile = File(...), db: Session = Depends(data
             alert_msg = f"{ing.common_name} ({ing.risk_level})"
             if ing.health_concern:
                 alert_msg += f" - {ing.health_concern}"
-            found_harmful.append(alert_msg)
+            if alert_msg not in found_harmful:
+                found_harmful.append(alert_msg)
     
     health_score = "A"
     if len(found_harmful) > 0:
