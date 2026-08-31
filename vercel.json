@@ -1,38 +1,21 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/frontend/index.html"
-    },
-    {
-      "source": "/officer-dashboard",
-      "destination": "/frontend/officer-dashboard.html"
-    },
-    {
-      "source": "/officer-login",
-      "destination": "/frontend/officer-login.html"
-    },
-    {
-      "source": "/complaint",
-      "destination": "/frontend/complaint.html"
-    },
-    {
-      "source": "/results",
-      "destination": "/frontend/results.html"
-    },
-    {
-      "source": "/css/(.*)",
-      "destination": "/frontend/css/$1"
-    },
-    {
-      "source": "/js/(.*)",
-      "destination": "/frontend/js/$1"
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": "/frontend/assets/$1"
-    }
+    { "source": "/", "destination": "/frontend/index.html" },
+    { "source": "/officer-dashboard.html", "destination": "/frontend/officer-dashboard.html" },
+    { "source": "/officer-dashboard", "destination": "/frontend/officer-dashboard.html" },
+    { "source": "/officer-login.html", "destination": "/frontend/officer-login.html" },
+    { "source": "/officer-login", "destination": "/frontend/officer-login.html" },
+    { "source": "/complaint.html", "destination": "/frontend/complaint.html" },
+    { "source": "/complaint", "destination": "/frontend/complaint.html" },
+    { "source": "/results.html", "destination": "/frontend/results.html" },
+    { "source": "/results", "destination": "/frontend/results.html" },
+    { "source": "/index.html", "destination": "/frontend/index.html" },
+    { "source": "/css/(.*)", "destination": "/frontend/css/$1" },
+    { "source": "/js/(.*)", "destination": "/frontend/js/$1" },
+    { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
+    { "source": "/sw.js", "destination": "/frontend/sw.js" },
+    { "source": "/manifest.json", "destination": "/frontend/manifest.json" }
   ],
   "headers": [
     {
