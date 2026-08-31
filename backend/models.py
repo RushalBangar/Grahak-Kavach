@@ -70,3 +70,15 @@ class ChatRule(Base):
     id = Column(Integer, primary_key=True, index=True)
     keywords = Column(String, index=True) # comma separated keywords
     response_text = Column(String)
+
+class Ingredient(Base):
+    __tablename__ = "ingredients"
+    id = Column(Integer, primary_key=True, index=True)
+    ins_code = Column(String, index=True, nullable=True)
+    common_name = Column(String, index=True)
+    category = Column(String)
+    risk_level = Column(String)
+    legal_status = Column(String)
+    health_concern = Column(String)
+    commonly_found_in = Column(String, nullable=True)
+    source = Column(String, nullable=True)
