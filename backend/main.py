@@ -1,9 +1,11 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 import models, database, auth
 from routers import scan, complaints, officers, shops, legal, chat
 from websocket_manager import manager
+import traceback
 
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
@@ -13,6 +15,15 @@ app = FastAPI(
     description="Backend for Smart India Hackathon 2026 Project (SIH26197)",
     version="1.0.0"
 )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    error_details = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+    print(f"Global Exception: {error_details}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal Server Error", "traceback": error_details}
+    )
 
 # Allow CORS for frontend
 app.add_middleware(
