@@ -37,12 +37,14 @@ class ComplaintBase(BaseModel):
     product_details: str
     violation_type: str
     verification_method: str
+    user_name: Optional[str] = None
     user_email: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
+    evidence_url: Optional[str] = None
 
 class ComplaintCreate(ComplaintBase):
-    evidence_url: Optional[str] = None
+    pass
 
 class Complaint(ComplaintBase):
     id: int

@@ -57,6 +57,10 @@
         </div>
 
         <input type="hidden" name="verification" value="Email OTP" checked>
+        <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="comp-name" class="form-control glass-input" placeholder="e.g. Rahul Sharma" required>
+        </div>
         
         <div id="interactive-ver" class="form-group mb-4" style="background: rgba(0,0,0,0.02); padding: 16px; border-radius: var(--radius-md);">
            <label class="form-label" id="ver-label">Enter Email Address</label>
@@ -246,7 +250,13 @@
               const violationType = document.getElementById('comp-type').value;
               const desc = document.getElementById('comp-desc').value.trim();
               const userEmail = document.getElementById('comp-email').value.trim();
+              const userName = document.getElementById('comp-name').value.trim();
 
+              if (!userName) {
+                  showToast("Please enter your Full Name.", "warning");
+                  nextStep(1);
+                  return;
+              }
               if (!userEmail) {
                   showToast("Please enter your email address for notifications.", "warning");
                   nextStep(1);
@@ -289,6 +299,7 @@
                   product_details: desc,
                   violation_type: violationType,
                   verification_method: method,
+                  user_name: userName,
                   user_email: userEmail,
                   latitude: lat,
                   longitude: lng

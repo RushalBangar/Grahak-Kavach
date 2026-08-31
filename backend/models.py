@@ -40,6 +40,7 @@ class Complaint(Base):
     violation_type = Column(String) # "Legal Metrology", "Food Safety", "Both"
     status = Column(String, default="Pending", index=True) # Pending, Verified, Routed, Resolved
     routed_to = Column(String, nullable=True) # "DCA", "FSSAI", "Both"
+    user_name = Column(String, nullable=True)
     user_email = Column(String, nullable=True)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
