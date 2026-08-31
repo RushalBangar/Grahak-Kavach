@@ -6,6 +6,22 @@
       "destination": "/frontend/index.html"
     },
     {
+      "source": "/officer-dashboard",
+      "destination": "/frontend/officer-dashboard.html"
+    },
+    {
+      "source": "/officer-login",
+      "destination": "/frontend/officer-login.html"
+    },
+    {
+      "source": "/complaint",
+      "destination": "/frontend/complaint.html"
+    },
+    {
+      "source": "/results",
+      "destination": "/frontend/results.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/frontend/$1"
     }
