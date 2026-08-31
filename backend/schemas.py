@@ -87,3 +87,14 @@ class SendOTPRequest(BaseModel):
 class VerifyOTPRequest(BaseModel):
     email: str
     otp: str
+
+class ChatQuery(BaseModel):
+    message: str
+
+class ChatRule(BaseModel):
+    id: int
+    keywords: str
+    response_text: str
+
+    class Config:
+        from_attributes = True

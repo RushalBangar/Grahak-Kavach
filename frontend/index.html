@@ -213,30 +213,7 @@
           chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      function getBotResponse(query) {
-          const q = query.toLowerCase();
-          
-          // Rule Engine Logic
-          if (q.includes('mrp') || q.includes('over price') || q.includes('extra') || q.includes('charge')) {
-              return "<b>Rule 18(2) of Legal Metrology (Packaged Commodities) Rules, 2011:</b> No retail dealer or other person including manufacturer, packer, importer and wholesale dealer shall make any sale of any commodity in packed form at a price exceeding the retail sale price (MRP) thereof.";
-          }
-          if (q.includes('expiry') || q.includes('date') || q.includes('mfg')) {
-              return "<b>Rule 6 of Legal Metrology Rules:</b> Every package must clearly display the month and year of manufacture or packing, as well as the 'Best Before' or 'Use By' date. If it is missing, you can file a complaint.";
-          }
-          if (q.includes('weight') || q.includes('quantity') || q.includes('less')) {
-              return "<b>Rule 19:</b> Short weight or volume is a strict offense. The declared Net Quantity on the package must exactly match the contents inside.";
-          }
-          if (q.includes('complaint') || q.includes('file') || q.includes('report')) {
-              return "You can click on the <b>'Complaints'</b> tab at the bottom of the app to officially report the violation to the authorities. Upload a photo of the receipt and the product.";
-          }
-          if (q.includes('adulteration') || q.includes('food') || q.includes('spoiled')) {
-              return "<b>FSSAI Act 2006:</b> Selling unsafe or sub-standard food is a severe offense. Please take clear photos of the product and file a 'Food Safety' complaint via the app immediately.";
-          }
-          
-          return "I can help you with rules regarding MRP, Expiry Dates, Net Quantity, or how to file a complaint. Could you rephrase your question?";
-      }
-
-      function sendChatMessage() {
+      async function sendChatMessage() {
           const input = document.getElementById('chat-input');
           const text = input.value.trim();
           if (!text) return;
@@ -245,11 +222,24 @@
           appendMessage(text, true);
           input.value = '';
           
-          // Simulate typing delay
-          setTimeout(() => {
-              const response = getBotResponse(text);
-              appendMessage(response, false);
-          }, 600);
+          // Show typing indicator
+          const chatMessages = document.getElementById('chat-messages');
+          const typingDiv = document.createElement('div');
+          typingDiv.id = 'typing-indicator';
+          typingDiv.style = "background: white; color: #334155; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; font-size: 0.9rem; font-style: italic;";
+          typingDiv.innerHTML = "Typing...";
+          chatMessages.appendChild(typingDiv);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+
+          try {
+              const response = await API.sendChatMessage(text);
+              chatMessages.removeChild(typingDiv);
+              appendMessage(response.response, false);
+          } catch (error) {
+              chatMessages.removeChild(typingDiv);
+              appendMessage("Sorry, I am having trouble connecting to the server.", false);
+              console.error("Chat error:", error);
+          }
       }
 
       // Enter key to send

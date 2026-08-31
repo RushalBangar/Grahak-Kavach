@@ -64,3 +64,9 @@ class LegalMetrologyDocument(Base):
     title = Column(String, index=True)
     url = Column(String)
     category = Column(String, index=True)
+
+class ChatRule(Base):
+    __tablename__ = "chat_rules"
+    id = Column(Integer, primary_key=True, index=True)
+    keywords = Column(String, index=True) # comma separated keywords
+    response_text = Column(String)
