@@ -58,6 +58,22 @@ const API = {
         return await response.json();
     },
 
+    uploadEvidence: async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const response = await fetch(`${API_BASE_URL}/api/complaints/upload-evidence`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.detail || 'Evidence upload failed');
+        }
+        return await response.json(); // returns { url: "..." }
+    },
+
     submitComplaint: async (complaintData, captchaToken) => {
         const sigHeaders = await generateSignatureHeaders();
         const headers = {

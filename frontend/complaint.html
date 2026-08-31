@@ -294,6 +294,24 @@
                   // We continue even if location is denied
               }
 
+              let evidenceUrl = null;
+              const evidenceInput = document.getElementById('comp-evidence');
+              if (evidenceInput.files && evidenceInput.files.length > 0) {
+                  try {
+                      document.getElementById('submit-complaint').textContent = "Uploading Image...";
+                      document.getElementById('submit-complaint').disabled = true;
+                      const uploadRes = await API.uploadEvidence(evidenceInput.files[0]);
+                      if (uploadRes && uploadRes.url) {
+                          evidenceUrl = uploadRes.url;
+                      }
+                  } catch (uploadErr) {
+                      console.error("Evidence upload failed:", uploadErr);
+                      showToast("Failed to upload evidence image. Proceeding without it.", "warning");
+                  }
+                  document.getElementById('submit-complaint').textContent = "Submit Complaint";
+                  document.getElementById('submit-complaint').disabled = false;
+              }
+
               const payload = {
                   shop_name: shopName,
                   product_details: desc,
@@ -302,8 +320,12 @@
                   user_name: userName,
                   user_email: userEmail,
                   latitude: lat,
-                  longitude: lng
+                  longitude: lng,
+                  evidence_url: evidenceUrl
               };
+
+              document.getElementById('submit-complaint').textContent = "Submitting...";
+              document.getElementById('submit-complaint').disabled = true;
 
               const response = await API.submitComplaint(payload, captchaToken);
               showToast(`Complaint filed successfully! Tracking ID: ${response.tracking_id}`, "success");

@@ -1,20 +1,54 @@
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, UploadFile, File
 from sqlalchemy.orm import Session
 import models, schemas, database, auth
 import uuid
-from websocket_manager import manager
-
+import os
 import smtplib
 import random
-import os
 from email.mime.text import MIMEText
 from typing import Dict
 from datetime import datetime, timedelta
+from websocket_manager import manager
+from supabase import create_client, Client
 
 router = APIRouter(
     prefix="/api/complaints",
     tags=["complaints"]
 )
+
+# Initialize Supabase Client
+supabase_url = os.getenv("SUPABASE_URL")
+supabase_key = os.getenv("SUPABASE_KEY")
+supabase: Client = None
+if supabase_url and supabase_key:
+    supabase = create_client(supabase_url, supabase_key)
+
+@router.post("/upload-evidence")
+async def upload_evidence(file: UploadFile = File(...)):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Supabase Storage is not configured.")
+    
+    file_ext = file.filename.split(".")[-1] if "." in file.filename else "jpg"
+    unique_filename = f"{uuid.uuid4()}.{file_ext}"
+    
+    try:
+        # Read file contents
+        file_bytes = await file.read()
+        
+        # Upload to Supabase 'evidence' bucket
+        supabase.storage.from_("evidence").upload(
+            path=unique_filename,
+            file=file_bytes,
+            file_options={"content-type": file.content_type}
+        )
+        
+        # Get public URL
+        public_url = supabase.storage.from_("evidence").get_public_url(unique_filename)
+        return {"url": public_url}
+    except Exception as e:
+        print(f"Error uploading to Supabase: {e}")
+        raise HTTPException(status_code=500, detail="Failed to upload image.")
+
 
 # In-memory store for OTPs: { "email": {"otp": "123456", "expires_at": datetime} }
 # Note: For production, this should be stored in the database.
