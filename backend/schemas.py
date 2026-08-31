@@ -88,6 +88,15 @@ class VerifyOTPRequest(BaseModel):
     email: str
     otp: str
 
+class ComplaintVerificationSend(BaseModel):
+    method: str
+    identifier: str
+
+class ComplaintVerificationVerify(BaseModel):
+    method: str
+    identifier: str
+    otp: str
+
 class ChatQuery(BaseModel):
     message: str
 

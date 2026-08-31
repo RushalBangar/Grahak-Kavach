@@ -9,6 +9,21 @@ router = APIRouter(
     tags=["complaints"]
 )
 
+@router.post("/send-verification")
+def send_verification(req: schemas.ComplaintVerificationSend):
+    # Mock sending OTP
+    print(f"Mocking OTP send to {req.identifier} via {req.method}")
+    return {"message": f"Verification code sent to {req.identifier}"}
+
+@router.post("/verify")
+def verify_verification(req: schemas.ComplaintVerificationVerify):
+    # Mock verifying OTP (always accept '123456' for demonstration)
+    if req.otp == "123456":
+        return {"success": True, "message": "Identity verified successfully"}
+    else:
+        raise HTTPException(status_code=400, detail="Invalid verification code")
+
+
 @router.post("/", response_model=schemas.Complaint, dependencies=[Depends(auth.verify_api_signature), Depends(auth.verify_captcha)])
 def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: BackgroundTasks, db: Session = Depends(database.get_db)):
     # Auto-routing logic based on violation type

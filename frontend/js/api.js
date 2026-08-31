@@ -78,6 +78,32 @@ const API = {
         return await response.json();
     },
 
+    sendComplaintVerification: async (method, identifier) => {
+        const response = await fetch(`${API_BASE_URL}/api/complaints/send-verification`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method, identifier }),
+        });
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.detail || 'Failed to send verification');
+        }
+        return await response.json();
+    },
+
+    verifyComplaintOTP: async (method, identifier, otp) => {
+        const response = await fetch(`${API_BASE_URL}/api/complaints/verify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method, identifier, otp }),
+        });
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.detail || 'Invalid verification code');
+        }
+        return await response.json();
+    },
+
     searchShops: async (query) => {
         const response = await fetch(`${API_BASE_URL}/api/shops/search?query=${encodeURIComponent(query)}`);
         if (!response.ok) throw new Error('Shop search failed');
