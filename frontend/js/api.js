@@ -74,7 +74,14 @@ const API = {
             body: JSON.stringify(complaintData),
         });
 
-        if (!response.ok) throw new Error('Complaint submission failed');
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            if (errData.traceback) {
+                console.error("Server Exception Traceback:\n", errData.traceback);
+                throw new Error("Server Error: " + (errData.detail || "Internal Server Error"));
+            }
+            throw new Error(errData.detail || 'Complaint submission failed');
+        }
         return await response.json();
     },
 
