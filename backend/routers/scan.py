@@ -1,6 +1,4 @@
 from fastapi import APIRouter, File, UploadFile
-import pytesseract
-from PIL import Image
 import io
 import schemas
 from fastapi import Depends
@@ -15,14 +13,36 @@ router = APIRouter(
 
 @router.post("/analyze", response_model=schemas.ScanResult)
 async def analyze_label(file: UploadFile = File(...), db: Session = Depends(database.get_db)):
-    # Read the uploaded image
     content = await file.read()
-    image = Image.open(io.BytesIO(content))
     
-    # Perform OCR using pytesseract
+    # Perform OCR using ocr.space API since Tesseract is not available on Render free tier
     try:
-        extracted_text = pytesseract.image_to_string(image)
+        import base64
+        import urllib.request
+        import urllib.parse
+        import json
+        
+        base64_encoded = base64.b64encode(content).decode('utf-8')
+        base64_image = f"data:{file.content_type};base64,{base64_encoded}"
+        
+        url = "https://api.ocr.space/parse/image"
+        data = urllib.parse.urlencode({
+            'apikey': 'helloworld',
+            'base64Image': base64_image,
+            'language': 'eng'
+        }).encode('utf-8')
+        
+        req = urllib.request.Request(url, data=data)
+        with urllib.request.urlopen(req, timeout=15) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            
+        extracted_text = ""
+        if result.get("ParsedResults"):
+            for res in result["ParsedResults"]:
+                if res.get("ParsedText"):
+                    extracted_text += res["ParsedText"] + "\n"
     except Exception as e:
+        print(f"OCR Error: {e}")
         extracted_text = ""
         
     if not extracted_text or not extracted_text.strip():
