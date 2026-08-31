@@ -33,7 +33,7 @@ class Inspection(InspectionBase):
         from_attributes = True
 
 class ComplaintBase(BaseModel):
-    shop_id: int
+    shop_name: str
     product_details: str
     violation_type: str
     verification_method: str
@@ -46,6 +46,7 @@ class ComplaintCreate(ComplaintBase):
 
 class Complaint(ComplaintBase):
     id: int
+    shop_id: int
     tracking_id: str
     status: str
     routed_to: Optional[str] = None

@@ -45,25 +45,7 @@
       <h4 class="mt-2 mb-4" style="font-size: 0.95rem;">Search Results</h4>
 
       <div id="results-container">
-          <!-- Default Mock Shop Card -->
-          <div class="glass-card mb-4" style="padding: 16px;">
-            <div class="flex-between mb-2">
-              <h4 style="margin: 0; font-size: 1.05rem;">Ramesh Provisions</h4>
-              <span class="badge badge-success">Compliant</span>
-            </div>
-            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">12, Main Market Road, Andheri West</p>
-            
-            <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-              <div>
-                <div style="font-weight: 600; color: var(--text-main);">Aug 10, 2026</div>
-                <div class="text-muted">Last Inspection</div>
-              </div>
-              <div>
-                <div style="font-weight: 600; color: var(--success);">0</div>
-                <div class="text-muted">Active Complaints</div>
-              </div>
-            </div>
-          </div>
+          <div class="text-center text-muted" id="loading-msg" style="padding: 2rem;">Loading recent complaints...</div>
       </div>
     </div>
 
@@ -89,59 +71,82 @@
   <script defer src="js/api.js"></script>
   <script defer src="js/main.js"></script>
   <script>
-      let searchTimeout;
-      document.getElementById('shop-search').addEventListener('input', (e) => {
-          clearTimeout(searchTimeout);
-          const query = e.target.value;
+      let allComplaints = [];
+
+      async function loadComplaints() {
           const container = document.getElementById('results-container');
-          
-          if(query.length < 2) return; // only search if > 2 chars
-          
-          // Show skeleton loader
-          container.innerHTML = `
-            <div class="glass-card mb-4 skeleton" style="padding: 16px; height: 120px; border-radius: var(--radius-lg);"></div>
-            <div class="glass-card mb-4 skeleton" style="padding: 16px; height: 120px; border-radius: var(--radius-lg);"></div>
-          `;
-
-          searchTimeout = setTimeout(async () => {
-              try {
-                  const shops = await API.searchShops(query);
-                  container.innerHTML = ''; // clear
-
-                  if(shops.length === 0) {
-                      container.innerHTML = '<p class="text-center text-muted">No shops found matching your query.</p>';
-                      return;
-                  }
-
-                  shops.forEach(shop => {
-                      // simple mock status logic since db doesn't have status field directly
-                      const isCompliant = shop.id % 2 === 0; 
-                      
-                      container.innerHTML += `
-                      <div class="glass-card mb-4" style="padding: 16px;">
-                        <div class="flex-between mb-2">
-                          <h4 style="margin: 0; font-size: 1.05rem;">${shop.name}</h4>
-                          <span class="badge badge-${isCompliant ? 'success' : 'warning'}">${isCompliant ? 'Compliant' : 'Under Review'}</span>
-                        </div>
-                        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">${shop.address}</p>
-                        
-                        <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-                          <div>
-                            <div style="font-weight: 600; color: var(--text-main);">Recently</div>
-                            <div class="text-muted">Last Inspection</div>
-                          </div>
-                          <div>
-                            <div style="font-weight: 600; color: var(--text-main);">-</div>
-                            <div class="text-muted">Active Complaints</div>
-                          </div>
-                        </div>
-                      </div>`;
-                  });
-              } catch (e) {
-                  console.error(e);
-                  container.innerHTML = '<p class="text-center text-danger">Error fetching results.</p>';
+          try {
+              if (typeof API === 'undefined') {
+                  throw new Error("API not loaded");
               }
-          }, 500); // 500ms debounce
+              const complaints = await API.getComplaintsQueue();
+              allComplaints = complaints;
+              renderComplaints(complaints);
+          } catch (e) {
+              console.error(e);
+              container.innerHTML = `<div class="text-center text-muted" style="color:var(--danger)!important;">Failed to load complaints. ${e.message}</div>`;
+          }
+      }
+
+      function renderComplaints(complaintsList) {
+          const container = document.getElementById('results-container');
+          container.innerHTML = '';
+          
+          if(complaintsList.length === 0) {
+              container.innerHTML = '<p class="text-center text-muted">No recent complaints found.</p>';
+              return;
+          }
+
+          complaintsList.forEach(c => {
+              const dateStr = new Date(c.date_filed).toLocaleDateString('en-IN', {
+                  day: 'numeric', month: 'short', year: 'numeric'
+              });
+              
+              const isResolved = c.status === 'Resolved';
+              const shopName = c.shop ? c.shop.name : c.shop_name;
+              
+              container.innerHTML += `
+              <div class="glass-card mb-4" style="padding: 16px;">
+                <div class="flex-between mb-2">
+                  <h4 style="margin: 0; font-size: 1.05rem;">ID: ${c.tracking_id}</h4>
+                  <span class="badge badge-${isResolved ? 'success' : 'warning'}">${c.status}</span>
+                </div>
+                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 4px;">Shop: <strong>${shopName}</strong></p>
+                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">Violation: ${c.violation_type} (${c.routed_to})</p>
+                
+                <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
+                  <div>
+                    <div style="font-weight: 600; color: var(--text-main);">${dateStr}</div>
+                    <div class="text-muted">Date Filed</div>
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; color: ${c.is_verified ? 'var(--success)' : 'var(--text-muted)'};">${c.is_verified ? 'Yes' : 'No'}</div>
+                    <div class="text-muted">Verified</div>
+                  </div>
+                </div>
+              </div>
+              `;
+          });
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+          loadComplaints();
+          
+          document.getElementById('shop-search').addEventListener('input', (e) => {
+              const query = e.target.value.toLowerCase().trim();
+              if(!query) {
+                  renderComplaints(allComplaints);
+                  return;
+              }
+              
+              const filtered = allComplaints.filter(c => {
+                  const sName = c.shop ? c.shop.name.toLowerCase() : (c.shop_name || "").toLowerCase();
+                  const tId = c.tracking_id.toLowerCase();
+                  return sName.includes(query) || tId.includes(query);
+              });
+              
+              renderComplaints(filtered);
+          });
       });
   </script>
   <script>

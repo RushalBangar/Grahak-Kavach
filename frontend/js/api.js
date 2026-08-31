@@ -110,6 +110,12 @@ const API = {
         return await response.json();
     },
 
+    getComplaintsQueue: async () => {
+        const response = await fetch(`${API_BASE_URL}/api/complaints/queue`);
+        if (!response.ok) throw new Error('Failed to fetch complaints queue');
+        return await response.json();
+    },
+
     officerLogin: async (username, password) => {
         // Kept for fallback / legacy
         const formData = new URLSearchParams();

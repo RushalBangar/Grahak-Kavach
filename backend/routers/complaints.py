@@ -20,18 +20,18 @@ router = APIRouter(
 # Note: For production, this should be stored in the database.
 otp_store: Dict[str, dict] = {}
 
-def send_real_email(to_email: str, otp: str):
+def send_email_smtp(to_email: str, subject: str, body: str):
     smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
     smtp_port = int(os.getenv("SMTP_PORT", 587))
     smtp_user = os.getenv("SMTP_USER")
     smtp_pass = os.getenv("SMTP_PASS")
     
     if not smtp_user or not smtp_pass:
-        print(f"SMTP Credentials missing. Logging OTP instead: {otp} to {to_email}")
+        print(f"SMTP Credentials missing. Logging email instead:\nTo: {to_email}\nSub: {subject}\nBody:\n{body}")
         return
 
-    msg = MIMEText(f"Your verification code for filing a complaint on Grahak Kavach is: {otp}\n\nThis code will expire in 10 minutes.")
-    msg['Subject'] = 'Grahak Kavach - Complaint Verification Code'
+    msg = MIMEText(body)
+    msg['Subject'] = subject
     msg['From'] = f"Grahak Kavach <{smtp_user}>"
     msg['To'] = to_email
 
@@ -41,7 +41,7 @@ def send_real_email(to_email: str, otp: str):
         server.login(smtp_user, smtp_pass)
         server.send_message(msg)
         server.quit()
-        print(f"Successfully sent OTP to {to_email}")
+        print(f"Successfully sent email to {to_email}")
     except Exception as e:
         print(f"Failed to send email to {to_email}: {str(e)}")
 
@@ -56,7 +56,8 @@ def send_verification(req: schemas.ComplaintVerificationSend):
         "expires_at": datetime.now() + timedelta(minutes=10)
     }
     
-    send_real_email(email, otp_code)
+    body = f"Your verification code for filing a complaint on Grahak Kavach is: {otp_code}\n\nThis code will expire in 10 minutes."
+    send_email_smtp(email, "Grahak Kavach - Complaint Verification Code", body)
     
     return {"message": f"Verification code sent to {email}"}
 
@@ -82,6 +83,14 @@ def verify_verification(req: schemas.ComplaintVerificationVerify):
 
 @router.post("/", response_model=schemas.Complaint, dependencies=[Depends(auth.verify_api_signature), Depends(auth.verify_captcha)])
 def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: BackgroundTasks, db: Session = Depends(database.get_db)):
+    # Look up or create the shop
+    shop = db.query(models.Shop).filter(models.Shop.name.ilike(complaint.shop_name)).first()
+    if not shop:
+        shop = models.Shop(name=complaint.shop_name, address="Unknown location (auto-created)")
+        db.add(shop)
+        db.commit()
+        db.refresh(shop)
+
     # Auto-routing logic based on violation type
     routed_to = None
     if complaint.violation_type == "Legal Metrology":
@@ -91,8 +100,13 @@ def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: Backg
     elif complaint.violation_type == "Both":
         routed_to = "Both"
         
+    # Extract dict but exclude shop_name, and add shop_id
+    complaint_data = complaint.dict()
+    complaint_data.pop("shop_name", None)
+    
     db_complaint = models.Complaint(
-        **complaint.dict(),
+        **complaint_data,
+        shop_id=shop.id,
         tracking_id=str(uuid.uuid4())[:8].upper(),
         routed_to=routed_to,
         status="Verified" if complaint.verification_method != "None" else "Pending",
@@ -105,14 +119,10 @@ def create_complaint(complaint: schemas.ComplaintCreate, background_tasks: Backg
     background_tasks.add_task(manager.broadcast, {"type": "NEW_COMPLAINT"})
     
     if complaint.user_email:
-        # Mocking email send to user or using the same Google Script relay
         def send_complaint_ack(email: str, tracking_id: str):
-            print(f"\n{'='*40}")
-            print(f"📧 EMAIL SENT TO: {email}")
-            print(f"SUBJECT: Complaint Received - Tracking ID: {tracking_id}")
-            print(f"BODY: Thank you for submitting your complaint. We have received it and it will be reviewed soon. Appropriate actions will be taken.")
-            print(f"{'='*40}\n")
-            # If there's an actual email relay, we could hook it here.
+            subject = f"Complaint Received - Tracking ID: {tracking_id}"
+            body = f"Thank you for submitting your complaint via Grahak Kavach.\n\nYour complaint has been successfully received and verified.\nYour Tracking ID is: {tracking_id}\n\nYou can track the status of your complaint on the Grahak Kavach portal.\n\nAppropriate actions will be taken shortly."
+            send_email_smtp(email, subject, body)
         
         background_tasks.add_task(send_complaint_ack, complaint.user_email, db_complaint.tracking_id)
     

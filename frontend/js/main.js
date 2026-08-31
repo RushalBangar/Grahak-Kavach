@@ -131,10 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.setItem('scanResult', JSON.stringify(result));
             window.location.href = 'results.html';
         } else {
-            // Mock fallback if no file or API
-            setTimeout(() => {
-                window.location.href = 'results.html';
-            }, 2500);
+            throw new Error("Unable to contact scanner. Please check your internet connection.");
         }
     } catch (error) {
         console.error("Scan error:", error);

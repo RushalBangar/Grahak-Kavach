@@ -5,14 +5,14 @@ import io
 import schemas
 from fastapi import Depends
 import auth
-
+import database
 router = APIRouter(
     prefix="/api/scan",
     tags=["scan"]
 )
 
 @router.post("/analyze", response_model=schemas.ScanResult)
-async def analyze_label(file: UploadFile = File(...)):
+async def analyze_label(file: UploadFile = File(...), db: Session = Depends(database.get_db)):
     # Read the uploaded image
     content = await file.read()
     image = Image.open(io.BytesIO(content))
@@ -27,9 +27,6 @@ async def analyze_label(file: UploadFile = File(...)):
         from fastapi import HTTPException
         raise HTTPException(status_code=400, detail="Please scan a valid product label. No text was detected.")
         
-    # TODO: In a production app, implement real NLP / AI logic to parse the text.
-    # For now, we mock the analysis based on whether certain keywords appear.
-    
     import re
     text_lower = extracted_text.lower()
     
@@ -62,10 +59,31 @@ async def analyze_label(file: UploadFile = File(...)):
     if not is_compliant:
         details_msg = f"Non-Compliant. Missing: {', '.join(missing_fields)}."
     
-    # Mocked Food Safety check
-    # Check for some common harmful ingredients in our mocked database
-    harmful_db = ["tartrazine", "msg", "high fructose corn syrup", "aspartame"]
-    found_harmful = [ing for ing in harmful_db if ing in text_lower]
+    import models
+    # Food Safety check using Supabase database
+    found_harmful = []
+    
+    ingredients = db.query(models.Ingredient).all()
+    
+    for ing in ingredients:
+        matched = False
+        # Check by Common Name
+        if ing.common_name and ing.common_name.lower() in text_lower:
+            matched = True
+            
+        # Check by INS Code
+        if not matched and ing.ins_code:
+            codes = [c.strip().lower() for c in ing.ins_code.split('/')]
+            for c in codes:
+                if c and c in text_lower:
+                    matched = True
+                    break
+                    
+        if matched and ing.risk_level in ["Caution", "Harmful"]:
+            alert_msg = f"{ing.common_name} ({ing.risk_level})"
+            if ing.health_concern:
+                alert_msg += f" - {ing.health_concern}"
+            found_harmful.append(alert_msg)
     
     health_score = "A"
     if len(found_harmful) > 0:
