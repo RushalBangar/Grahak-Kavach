@@ -53,40 +53,20 @@
       <div id="step-1" class="wizard-step">
         <div class="mb-4">
           <h2>Identity Verification</h2>
-          <p class="text-muted">As per Govt directives, anonymous complaints are not accepted.</p>
+          <p class="text-muted">As per Govt directives, anonymous complaints are not accepted. Please verify your email.</p>
         </div>
 
-        <div class="form-group mb-4">
-          <label class="form-label">Verification Method</label>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
-              <input type="radio" name="verification" value="Phone OTP" checked style="width: 18px; height: 18px;" onchange="updateVerUI()">
-              <span style="font-weight: 500;">Phone OTP</span>
-            </label>
-            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
-              <input type="radio" name="verification" value="Aadhaar" style="width: 18px; height: 18px;" onchange="updateVerUI()">
-              <span style="font-weight: 500;">Aadhaar (OTP)</span>
-            </label>
-            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
-              <input type="radio" name="verification" value="DigiLocker" style="width: 18px; height: 18px;" onchange="updateVerUI()">
-              <span style="font-weight: 500;">DigiLocker</span>
-            </label>
-            <label class="glass-card" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin: 0; padding: 12px;">
-              <input type="radio" name="verification" value="PAN / Voter ID" style="width: 18px; height: 18px;" onchange="updateVerUI()">
-              <span style="font-weight: 500;">PAN / Voter ID / DL</span>
-            </label>
-          </div>
-        </div>
+        <input type="hidden" name="verification" value="Email OTP" checked>
         
         <div id="interactive-ver" class="form-group mb-4" style="background: rgba(0,0,0,0.02); padding: 16px; border-radius: var(--radius-md);">
-           <label class="form-label" id="ver-label">Enter Phone Number</label>
+           <label class="form-label" id="ver-label">Enter Email Address</label>
            <div style="display: flex; gap: 8px;">
-               <input type="text" id="ver-input" class="form-control glass-input" placeholder="e.g. 9876543210">
+               <input type="email" id="ver-input" class="form-control glass-input" placeholder="e.g. user@example.com">
                <button class="btn btn-secondary" id="btn-send-otp" onclick="sendComplaintOTP()">Send OTP</button>
            </div>
            
            <div id="otp-section" style="display: none; margin-top: 16px;">
-               <label class="form-label">Enter 6-digit OTP (Mock: 123456)</label>
+               <label class="form-label">Enter 6-digit OTP (Sent to your email)</label>
                <div style="display: flex; gap: 8px;">
                    <input type="number" id="ver-otp" class="form-control glass-input" placeholder="123456">
                    <button class="btn btn-primary" id="btn-verify-otp" onclick="verifyComplaintOTP()">Verify</button>
@@ -94,10 +74,9 @@
            </div>
         </div>
 
-        <div class="form-group mb-4">
-          <label class="form-label">Email Address (For Notifications)</label>
-          <input type="email" id="comp-email" class="form-control glass-input" placeholder="Enter your email to receive updates" required>
-        </div>
+        <!-- Hidden but kept to not break JS logic down below if it looks for it -->
+        <input type="hidden" id="comp-email" value="">
+
         <button class="btn btn-primary" onclick="proceedToStep2()">Proceed</button>
       </div>
 
@@ -181,42 +160,11 @@
   <script>
       let isVerified = false;
 
-      function updateVerUI() {
-          const method = document.querySelector('input[name="verification"]:checked').value;
-          const label = document.getElementById('ver-label');
-          const input = document.getElementById('ver-input');
-          const section = document.getElementById('interactive-ver');
-          
-          isVerified = false;
-          
-          if (method === 'Phone OTP') {
-              section.style.display = 'block';
-              label.textContent = 'Enter Phone Number';
-              input.placeholder = 'e.g. 9876543210';
-          } else if (method === 'Aadhaar') {
-              section.style.display = 'block';
-              label.textContent = 'Enter 12-digit Aadhaar Number';
-              input.placeholder = 'e.g. 1234 5678 9012';
-          } else {
-              // DigiLocker or PAN/Voter ID are assumed verified externally for this mock
-              section.style.display = 'none';
-              isVerified = true; 
-          }
-          
-          document.getElementById('otp-section').style.display = 'none';
-          document.getElementById('ver-input').disabled = false;
-          document.getElementById('btn-send-otp').disabled = false;
-      }
-      
-      // Initialize on load
-      window.addEventListener('DOMContentLoaded', updateVerUI);
-
       async function sendComplaintOTP() {
-          const method = document.querySelector('input[name="verification"]:checked').value;
           const identifier = document.getElementById('ver-input').value.trim();
           
           if (!identifier) {
-              if(typeof showToast === 'function') { showToast('Please enter your ' + (method === 'Aadhaar' ? 'Aadhaar' : 'Phone') + ' number.', 'warning'); } else { alert('Please enter identifier.'); }
+              if(typeof showToast === 'function') { showToast('Please enter your email address.', 'warning'); } else { alert('Please enter identifier.'); }
               return;
           }
           
@@ -224,7 +172,7 @@
               document.getElementById('btn-send-otp').textContent = 'Sending...';
               document.getElementById('btn-send-otp').disabled = true;
               
-              await API.sendComplaintVerification(method, identifier);
+              await API.sendComplaintVerification('Email OTP', identifier);
               
               if(typeof showToast === 'function') { showToast('OTP sent successfully!', 'success'); } else { alert('OTP sent!'); }
               document.getElementById('otp-section').style.display = 'block';
@@ -238,7 +186,6 @@
       }
 
       async function verifyComplaintOTP() {
-          const method = document.querySelector('input[name="verification"]:checked').value;
           const identifier = document.getElementById('ver-input').value.trim();
           const otp = document.getElementById('ver-otp').value.trim();
           
@@ -251,7 +198,7 @@
               document.getElementById('btn-verify-otp').textContent = 'Verifying...';
               document.getElementById('btn-verify-otp').disabled = true;
               
-              await API.verifyComplaintOTP(method, identifier, otp);
+              await API.verifyComplaintOTP('Email OTP', identifier, otp);
               
               isVerified = true;
               if(typeof showToast === 'function') { showToast('Identity verified successfully!', 'success'); } else { alert('Verified!'); }
@@ -260,6 +207,9 @@
               document.getElementById('btn-verify-otp').className = 'btn btn-primary';
               document.getElementById('btn-verify-otp').style.background = 'var(--success)';
               document.getElementById('ver-otp').disabled = true;
+              
+              // Sync the hidden comp-email for the submission payload
+              document.getElementById('comp-email').value = identifier;
           } catch (e) {
               console.error(e);
               if(typeof showToast === 'function') { showToast(e.message, 'error'); } else { alert(e.message); }
@@ -269,16 +219,8 @@
       }
 
       function proceedToStep2() {
-          const method = document.querySelector('input[name="verification"]:checked').value;
-          const userEmail = document.getElementById('comp-email').value.trim();
-          
-          if (!userEmail) {
-              if(typeof showToast === 'function') { showToast("Please enter your email address.", "warning"); } else { alert("Enter email."); }
-              return;
-          }
-          
-          if (!isVerified && (method === 'Phone OTP' || method === 'Aadhaar')) {
-              if(typeof showToast === 'function') { showToast("Please verify your identity using OTP first.", "warning"); } else { alert("Please verify identity first."); }
+          if (!isVerified) {
+              if(typeof showToast === 'function') { showToast("Please verify your email address using OTP first.", "warning"); } else { alert("Please verify identity first."); }
               return;
           }
           

@@ -4,21 +4,77 @@ import models, schemas, database, auth
 import uuid
 from websocket_manager import manager
 
+import smtplib
+import random
+import os
+from email.mime.text import MIMEText
+from typing import Dict
+from datetime import datetime, timedelta
+
 router = APIRouter(
     prefix="/api/complaints",
     tags=["complaints"]
 )
 
+# In-memory store for OTPs: { "email": {"otp": "123456", "expires_at": datetime} }
+# Note: For production, this should be stored in the database.
+otp_store: Dict[str, dict] = {}
+
+def send_real_email(to_email: str, otp: str):
+    smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+    smtp_port = int(os.getenv("SMTP_PORT", 587))
+    smtp_user = os.getenv("SMTP_USER")
+    smtp_pass = os.getenv("SMTP_PASS")
+    
+    if not smtp_user or not smtp_pass:
+        print(f"SMTP Credentials missing. Logging OTP instead: {otp} to {to_email}")
+        return
+
+    msg = MIMEText(f"Your verification code for filing a complaint on Grahak Kavach is: {otp}\n\nThis code will expire in 10 minutes.")
+    msg['Subject'] = 'Grahak Kavach - Complaint Verification Code'
+    msg['From'] = f"Grahak Kavach <{smtp_user}>"
+    msg['To'] = to_email
+
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_user, smtp_pass)
+        server.send_message(msg)
+        server.quit()
+        print(f"Successfully sent OTP to {to_email}")
+    except Exception as e:
+        print(f"Failed to send email to {to_email}: {str(e)}")
+
 @router.post("/send-verification")
 def send_verification(req: schemas.ComplaintVerificationSend):
-    # Mock sending OTP
-    print(f"Mocking OTP send to {req.identifier} via {req.method}")
-    return {"message": f"Verification code sent to {req.identifier}"}
+    email = req.identifier.strip().lower()
+    otp_code = str(random.randint(100000, 999999))
+    
+    # Store OTP with a 10 minute expiration
+    otp_store[email] = {
+        "otp": otp_code,
+        "expires_at": datetime.now() + timedelta(minutes=10)
+    }
+    
+    send_real_email(email, otp_code)
+    
+    return {"message": f"Verification code sent to {email}"}
 
 @router.post("/verify")
 def verify_verification(req: schemas.ComplaintVerificationVerify):
-    # Mock verifying OTP (always accept '123456' for demonstration)
-    if req.otp == "123456":
+    email = req.identifier.strip().lower()
+    
+    record = otp_store.get(email)
+    if not record:
+        raise HTTPException(status_code=400, detail="No OTP requested for this email.")
+        
+    if datetime.now() > record["expires_at"]:
+        del otp_store[email]
+        raise HTTPException(status_code=400, detail="OTP has expired. Please request a new one.")
+        
+    if req.otp == record["otp"]:
+        # Success! Remove it so it can't be reused
+        del otp_store[email]
         return {"success": True, "message": "Identity verified successfully"}
     else:
         raise HTTPException(status_code=400, detail="Invalid verification code")
