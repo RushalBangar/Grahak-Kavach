@@ -19,10 +19,19 @@
   
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
   <!-- Tailwind CSS & Fonts -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  </noscript>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -157,12 +166,12 @@
     <span class="font-headline-md text-headline-md-mobile font-bold text-on-background dark:text-surface-bright" data-i18n="app_title">Grahak Kavach</span>
   </div>
   <div class="lang-container relative">
-    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-label-bold pl-4 pr-9 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+    <select aria-label="Select Language" class="lang-switcher bg-surface-container-low text-primary font-label-bold text-label-bold pl-4 pr-9 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
       <option value="en">EN</option>
       <option value="mr">MR</option>
       <option value="hi">HI</option>
     </select>
-    <span class="material-symbols-outlined text-[18px] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+    <span class="material-symbols-outlined text-[18px] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-primary" aria-hidden="true">expand_more</span>
   </div>
 </header>
 
@@ -172,7 +181,7 @@
   <!-- Hero Section -->
   <section class="flex flex-col items-center text-center gap-stack-lg pt-8">
     <div class="bg-surface-container-lowest w-24 h-24 rounded-full flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.05)] border border-surface-container mb-2 p-2">
-      <img src="assets/logo.svg" alt="Grahak Kavach Logo" style="width: 100%; height: 100%;">
+      <img src="assets/logo.svg" alt="Grahak Kavach Logo" width="80" height="80" decoding="async" style="width: 100%; height: 100%;">
     </div>
     <div class="flex flex-col gap-stack-sm max-w-2xl mx-auto">
       <!-- Security Badge Ported from previous edit -->
@@ -302,8 +311,8 @@
 </main>
 
 <!-- Kavach Assistant FAB -->
-<button onclick="toggleChat()" class="fixed bottom-24 right-4 md:bottom-8 md:right-8 bg-safe-green text-on-primary w-14 h-14 rounded-full shadow-[0_10px_20px_rgba(0,135,90,0.3)] flex items-center justify-center hover:scale-105 transition-transform z-40">
-  <span class="material-symbols-outlined fill-icon text-[28px]">chat</span>
+<button onclick="toggleChat()" aria-label="Toggle AI Assistant Chat" class="fixed bottom-24 right-4 md:bottom-8 md:right-8 bg-safe-green text-on-primary w-14 h-14 rounded-full shadow-[0_10px_20px_rgba(0,135,90,0.3)] flex items-center justify-center hover:scale-105 transition-transform z-40">
+  <span class="material-symbols-outlined fill-icon text-[28px]" aria-hidden="true">chat</span>
 </button>
 
 <!-- Footer -->
@@ -342,11 +351,11 @@
       <!-- Header -->
       <div style="background: var(--primary-color); color: white; padding: 16px; display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               <strong style="font-size: 1rem;">Kavach Assistant</strong>
           </div>
-          <button style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center;" onclick="toggleChat()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <button style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center;" aria-label="Close Chat" onclick="toggleChat()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
       </div>
       
@@ -357,17 +366,17 @@
           </div>
           <!-- Quick replies -->
           <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
-              <button class="chat-quick-reply" onclick="sendQuickReply('Can a shopkeeper charge above MRP?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">Over MRP?</button>
-              <button class="chat-quick-reply" onclick="sendQuickReply('No expiry date on packet')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">No Expiry Date?</button>
-              <button class="chat-quick-reply" onclick="sendQuickReply('How to file a complaint?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">File Complaint</button>
+              <button class="chat-quick-reply" aria-label="Ask about over MRP" onclick="sendQuickReply('Can a shopkeeper charge above MRP?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">Over MRP?</button>
+              <button class="chat-quick-reply" aria-label="Ask about no expiry date" onclick="sendQuickReply('No expiry date on packet')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">No Expiry Date?</button>
+              <button class="chat-quick-reply" aria-label="Ask how to file complaint" onclick="sendQuickReply('How to file a complaint?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">File Complaint</button>
           </div>
       </div>
       
       <!-- Input -->
       <div style="padding: 12px; background: white; border-top: 1px solid #f1f5f9; display: flex; gap: 8px;">
-          <input type="text" id="chat-input" placeholder="Type your question..." style="flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 16px; font-size: 0.9rem; outline: none;">
-          <button onclick="sendChatMessage()" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <input type="text" id="chat-input" aria-label="Type your message" placeholder="Type your question..." style="flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 16px; font-size: 0.9rem; outline: none;">
+          <button onclick="sendChatMessage()" aria-label="Send Message" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
       </div>
   </div>
