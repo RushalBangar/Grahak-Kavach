@@ -1,4 +1,4 @@
-const CACHE_NAME = 'grahak-kavach-v2';
+const CACHE_NAME = 'grahak-kavach-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -27,17 +27,19 @@ self.addEventListener('fetch', (event) => {
   if (!event.request.url.startsWith('http')) return;
   
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((response) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, response.clone());
-          return response;
+    fetch(event.request)
+      .then((response) => {
+        // Network success: cache the new response and return it
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone);
         });
-      });
-    })
+        return response;
+      })
+      .catch(() => {
+        // Network failure (offline): fallback to cache
+        return caches.match(event.request);
+      })
   );
 });
 
