@@ -185,10 +185,10 @@
   </div>
 
   <!-- ====== OCR SECTION ====== -->
-  <div id="section-ocr" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center pt-20">
+  <div id="section-ocr" class="absolute inset-0 w-full h-full flex flex-col items-center pt-24 pb-28 px-4 z-10">
     
     <!-- Camera Viewfinder Container (rounded card with camera inside) -->
-    <div class="relative w-[90%] max-w-sm aspect-square rounded-2xl overflow-hidden bg-surface-container border-2 border-outline-variant shadow-lg">
+    <div class="relative w-[90%] max-w-[320px] aspect-square rounded-2xl overflow-hidden bg-surface-container border-2 border-outline-variant shadow-lg flex-shrink-0 mx-auto mt-auto">
       <!-- Real Camera Feed -->
       <video id="camera-feed" autoplay playsinline class="absolute inset-0 w-full h-full object-cover z-0"></video>
       
@@ -225,28 +225,31 @@
     <!-- Hidden canvas -->
     <canvas id="camera-canvas" style="display: none;"></canvas>
 
-    <!-- Scan Mode Chips -->
-    <div class="z-10 mt-4 flex items-center gap-2 px-4">
-      <button onclick="setScanFocus(this, 'ingredients')" class="mode-chip active px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Ingredients</button>
-      <button onclick="setScanFocus(this, 'mrp')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">MRP</button>
-      <button onclick="setScanFocus(this, 'expiry')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Expiry Date</button>
+    <!-- Chips & Privacy wrapped in flexible space -->
+    <div class="flex-1 flex flex-col items-center justify-center min-h-0 w-full py-2">
+      <!-- Scan Mode Chips -->
+      <div class="z-10 flex flex-wrap items-center justify-center gap-2 px-2">
+        <button onclick="setScanFocus(this, 'ingredients')" class="mode-chip active px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Ingredients</button>
+        <button onclick="setScanFocus(this, 'mrp')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">MRP</button>
+        <button onclick="setScanFocus(this, 'expiry')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Expiry Date</button>
+      </div>
+
+      <!-- Privacy Badge -->
+      <div class="z-10 mt-3 flex items-center gap-1.5 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/50 max-w-full">
+        <span class="material-symbols-outlined text-[14px] text-safe-green shrink-0" style="font-variation-settings: 'FILL' 1;">lock</span>
+        <span class="text-[10px] text-outline font-label-bold truncate">Data stays on your device until you tap Capture</span>
+      </div>
     </div>
 
-    <!-- Privacy Badge -->
-    <div class="z-10 mt-2 flex items-center gap-1.5 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/50">
-      <span class="material-symbols-outlined text-[14px] text-safe-green" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <span class="text-[11px] text-outline font-label-bold">Data stays on your device until you tap Capture</span>
-    </div>
-
-    <!-- Bottom Action Controls -->
-    <div class="absolute bottom-24 w-full flex justify-around items-center px-8 z-10">
+    <!-- Bottom Action Controls (no longer absolute) -->
+    <div class="w-full max-w-sm flex justify-around items-center px-4 pb-4 mb-auto z-10">
       <!-- Gallery Upload -->
       <label class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors border border-outline-variant active:scale-95 shadow-sm cursor-pointer">
         <span class="material-symbols-outlined text-on-surface">photo_library</span>
         <input type="file" id="file-upload" accept="image/*" class="hidden">
       </label>
       <!-- Primary Scan Button with Pulse Ring -->
-      <button id="start-scan" onclick="triggerCapture()" class="capture-btn relative w-20 h-20 bg-safe-green rounded-full flex items-center justify-center p-1 hover:scale-105 transition-transform active:scale-90 shadow-[0_4px_14px_rgba(0,135,90,0.35)]">
+      <button id="start-scan" onclick="triggerCapture()" class="capture-btn relative w-[72px] h-[72px] bg-safe-green rounded-full flex items-center justify-center p-1 hover:scale-105 transition-transform active:scale-90 shadow-[0_4px_14px_rgba(0,135,90,0.35)] shrink-0">
         <div class="w-full h-full border-4 border-white/40 rounded-full pointer-events-none"></div>
       </button>
       <!-- Torch Toggle (outside viewfinder duplicate for easy access) -->
