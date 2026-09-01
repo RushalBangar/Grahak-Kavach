@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
   <title>Contact Us - Grahak Kavach</title>
+
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+          spacing: {
+            "base-unit": "8px", "margin-desktop": "32px", "stack-sm": "8px", "gutter": "16px",
+            "stack-md": "16px", "section-gap": "64px", "stack-lg": "32px", "margin-mobile": "16px"
+          },
+          fontFamily: {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+    .card-shadow { box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02); }
+    .card-shadow-lg { box-shadow: 0 10px 30px -15px rgba(0,0,0,0.12); }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4HZYJ6RHJ"></script>
@@ -15,57 +77,230 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container">
-    
-    <div class="header glass-header">
-      <a href="index.html" style="color: var(--text-main);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      </a>
-      <h3 data-i18n="contact_title" style="margin: 0; font-size: 1.1rem;">Contact Us</h3>
-      <div style="width: auto;">
-        <select class="lang-switcher">
-          <option value="en">EN</option>
-          <option value="mr">MR</option>
-          <option value="hi">HI</option>
-        </select>
-      </div>
-    </div>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pb-24 md:pb-0">
 
-    <div class="content animate-slide-up" style="padding: 24px;">
-      
-      <div class="glass-card mb-4" style="padding: 24px; text-align: center;">
-        <svg style="color: var(--primary-color); margin-bottom: 16px;" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <h3 style="margin-bottom: 8px;">Get in Touch</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">For support, legal inquiries, or partnership opportunities, please reach out to our core team.</p>
-        
-        <a href="mailto:support@grahak-kavach.app" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Email Support Team</a>
-      </div>
-
-      <div class="glass-card" style="padding: 20px;">
-        <h4 style="margin-bottom: 12px; font-size: 1rem;">Grievance Officer</h4>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-          <strong>Name:</strong> Nodal Officer, Grahak Kavach<br>
-          <strong>Email:</strong> nodal@grahak-kavach.app<br>
-          <strong>Response Time:</strong> 24-48 business hours
-        </p>
-      </div>
-
+<!-- Mobile Header -->
+<header class="md:hidden bg-background w-full px-margin-mobile py-3 flex flex-row items-center justify-between sticky top-0 z-40 border-b border-outline-variant/40">
+  <div class="flex items-center gap-2">
+    <a href="index.html" class="text-on-surface w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 flex items-center justify-center">
+      <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[22px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+      <span class="font-headline-sm text-[20px] text-on-background font-bold" data-i18n="contact_title">Contact Us</span>
     </div>
   </div>
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/main.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+  <div class="relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-[13px] pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<!-- Desktop Header -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-desktop py-4 bg-background sticky top-0 z-50 border-b border-outline-variant/40">
+  <div class="flex items-center gap-2 text-primary">
+    <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+    <span class="font-headline-md text-headline-md font-bold text-on-background">Grahak Kavach</span>
+  </div>
+  <nav class="flex gap-8">
+    <a class="font-button-text text-[15px] text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+    <a class="font-button-text text-[15px] text-on-surface-variant hover:text-primary transition-colors" href="history.html">History</a>
+    <a class="font-button-text text-[15px] text-on-surface-variant hover:text-primary transition-colors" href="complaint.html">Report</a>
+    <a class="font-button-text text-[15px] text-on-surface-variant hover:text-primary transition-colors" href="#">Profile</a>
+  </nav>
+  <div class="relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-[13px] pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<main class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-8 pb-16 flex flex-col gap-10">
+
+  <!-- Hero Section -->
+  <section class="flex flex-col gap-2 items-start md:items-center text-left md:text-center max-w-3xl mx-auto">
+    <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">Contact Us</h1>
+    <p class="text-[16px] text-on-surface-variant leading-relaxed">We're here to help. Reach out for support, legal inquiries, or partnership opportunities.</p>
+  </section>
+
+  <!-- Main Content Grid -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+
+    <!-- Left Column: Info Cards -->
+    <div class="flex flex-col gap-5">
+
+      <!-- Get in Touch Card -->
+      <div class="bg-surface-container-lowest p-5 md:p-6 rounded-2xl border border-outline-variant/60 card-shadow-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </div>
+          <h2 class="font-headline-md text-[20px] text-on-background font-bold">Get in Touch</h2>
+        </div>
+        <p class="text-[14px] text-on-surface-variant leading-relaxed mb-5">For support, legal inquiries, or partnership opportunities, please reach out to our core team.</p>
+        <a class="inline-flex items-center justify-center gap-2 bg-safe-green text-on-primary font-button-text text-[15px] px-6 py-3 rounded-xl hover:opacity-90 transition-all shadow-md active:scale-[0.98] w-full sm:w-auto no-underline" href="mailto:support@grahak-kavach.app">
+          <span class="material-symbols-outlined text-[20px]">outgoing_mail</span>
+          Email Support Team
+        </a>
+      </div>
+
+      <!-- Grievance Officer Card -->
+      <div class="bg-surface-container-lowest p-5 md:p-6 rounded-2xl border-l-[5px] border-l-trust-blue border border-outline-variant/60 card-shadow-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-trust-blue/10 flex items-center justify-center text-trust-blue shrink-0">
+            <span class="material-symbols-outlined text-[20px]">gavel</span>
+          </div>
+          <h2 class="font-headline-sm text-[17px] text-on-background font-bold">Grievance Officer</h2>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div>
+            <span class="font-label-bold text-[11px] text-on-surface-variant uppercase tracking-wider">Name</span>
+            <p class="text-[15px] text-on-background font-medium mt-0.5">Grahak Kavach</p>
+          </div>
+          <div>
+            <span class="font-label-bold text-[11px] text-on-surface-variant uppercase tracking-wider">Email</span>
+            <a class="block text-[15px] text-trust-blue hover:underline mt-0.5 no-underline" href="mailto:grahak.kavach@gmail.com">grahah.kavach@gmail.com</a>
+          </div>
+          <div>
+            <span class="font-label-bold text-[11px] text-on-surface-variant uppercase tracking-wider">Response Time</span>
+            <p class="text-[15px] text-on-background flex items-center gap-1.5 mt-0.5">
+              <span class="material-symbols-outlined text-warning-amber text-[18px]">schedule</span>
+              24-48 business hours
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Contact Form -->
+    <div class="bg-surface-container-lowest p-5 md:p-6 rounded-2xl border border-outline-variant/60 card-shadow-lg">
+      <h2 class="font-headline-sm text-[17px] text-on-background font-bold mb-5">Send us a message</h2>
+      <form class="flex flex-col gap-4" id="contact-form">
+        <div>
+          <label class="block font-label-bold text-[13px] text-on-background mb-1.5" for="contact-name">Full Name</label>
+          <input class="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 text-[15px] text-on-background placeholder:text-outline focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all" id="contact-name" placeholder="John Doe" type="text"/>
+        </div>
+        <div>
+          <label class="block font-label-bold text-[13px] text-on-background mb-1.5" for="contact-email">Email Address</label>
+          <input class="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 text-[15px] text-on-background placeholder:text-outline focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all" id="contact-email" placeholder="john@example.com" type="email"/>
+        </div>
+        <div>
+          <label class="block font-label-bold text-[13px] text-on-background mb-1.5" for="contact-subject">Subject</label>
+          <div class="relative">
+            <select class="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 text-[15px] text-on-background focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all appearance-none cursor-pointer pr-10" id="contact-subject">
+              <option disabled selected value="">Select a subject...</option>
+              <option value="support">General Support</option>
+              <option value="legal">Legal Inquiry</option>
+              <option value="partnership">Partnership Opportunity</option>
+              <option value="feedback">Feedback</option>
+            </select>
+            <span class="material-symbols-outlined text-[18px] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+          </div>
+        </div>
+        <div>
+          <label class="block font-label-bold text-[13px] text-on-background mb-1.5" for="contact-message">Message</label>
+          <textarea class="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 text-[15px] text-on-background placeholder:text-outline focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all resize-none" id="contact-message" placeholder="How can we help you?" rows="4"></textarea>
+        </div>
+        <button class="mt-2 w-full bg-trust-blue text-on-primary font-button-text text-[15px] py-3.5 rounded-xl hover:opacity-90 transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2" type="button" id="contact-submit-btn">
+          Send Message
+          <span class="material-symbols-outlined text-[18px]">send</span>
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="flex flex-col items-center gap-2 w-full py-8 px-margin-mobile mb-20 md:mb-0 bg-background">
+  <div class="text-on-surface font-bold text-[13px] mb-1">Grahak Kavach</div>
+  <div class="flex gap-4 flex-wrap justify-center">
+    <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors no-underline" href="#">Privacy Policy</a>
+    <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors no-underline" href="#">Terms of Service</a>
+    <a class="text-[13px] text-primary underline hover:opacity-80 transition-colors" href="contact.html">Contact Us</a>
+  </div>
+  <div class="text-[12px] text-center text-outline mt-2">
+    © 2026 Grahak Kavach. All rights reserved.
+  </div>
+</footer>
+
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant/50 shadow-[0_-2px_10px_rgba(0,0,0,0.04)]">
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="index.html">
+    <span class="material-symbols-outlined text-[22px]">home</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="scan.html">
+    <span class="material-symbols-outlined text-[22px]">document_scanner</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Scan</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="complaint.html">
+    <span class="material-symbols-outlined text-[22px]">report</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Report</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-1.5 w-16 no-underline" href="contact.html">
+    <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">contact_support</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Support</span>
+  </a>
+</nav>
+
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/main.js"></script>
+<script>
+  // Simple contact form handler
+  document.addEventListener('DOMContentLoaded', () => {
+    const submitBtn = document.getElementById('contact-submit-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const subject = document.getElementById('contact-subject').value;
+        const message = document.getElementById('contact-message').value.trim();
+
+        if (!name || !email || !subject || !message) {
+          if (typeof showToast === 'function') {
+            showToast('Please fill in all fields.', 'warning');
+          } else {
+            alert('Please fill in all fields.');
+          }
+          return;
+        }
+
+        // Show sending state
+        submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Sending...';
+        submitBtn.disabled = true;
+
+        // Simulate send (replace with real API call)
+        setTimeout(() => {
+          if (typeof showToast === 'function') {
+            showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+          } else {
+            alert('Message sent successfully!');
+          }
+          document.getElementById('contact-form').reset();
+          submitBtn.innerHTML = 'Send Message <span class="material-symbols-outlined text-[18px]">send</span>';
+          submitBtn.disabled = false;
+        }, 1500);
       });
     }
-  </script>
+  });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+    });
+  }
+</script>
 </body>
 </html>

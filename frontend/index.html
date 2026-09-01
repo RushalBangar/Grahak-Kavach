@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Grahak Kavach - Your shield at every purchase</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Grahak Kavach - Your intelligent shield</title>
   <meta name="description" content="Your intelligent shield against food safety and legal metrology violations. Scan labels, detect issues, and file complaints instantly.">
   
   <!-- Open Graph / Social -->
@@ -18,7 +18,126 @@
   <meta name="theme-color" content="#10b981">
   
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Tailwind CSS & Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#171d19",
+            "surface": "#f5fbf4",
+            "on-primary-container": "#ffffff",
+            "surface-bright": "#f5fbf4",
+            "outline-variant": "#bdcac0",
+            "outline": "#6e7a71",
+            "text-ink": "#172B4D",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#dae2ff",
+            "error-container": "#ffdad6",
+            "inverse-on-surface": "#edf2ec",
+            "on-secondary-fixed": "#001848",
+            "surface-container": "#eaefe9",
+            "primary-fixed-dim": "#71dba6",
+            "warning-amber": "#FFAB00",
+            "surface-tint": "#006c47",
+            "on-primary-fixed": "#002113",
+            "tertiary-container": "#ba5855",
+            "on-secondary-fixed-variant": "#0040a2",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#2c322e",
+            "background": "#f5fbf4",
+            "on-primary-fixed-variant": "#005235",
+            "surface-container-low": "#f0f5ef",
+            "inverse-primary": "#71dba6",
+            "safe-green": "#00875A",
+            "on-tertiary-fixed": "#410005",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "violation-red": "#DE350B",
+            "secondary-fixed-dim": "#b2c5ff",
+            "surface-container-high": "#e4eae3",
+            "primary": "#006b47",
+            "on-secondary": "#ffffff",
+            "surface-variant": "#dee4de",
+            "surface-container-highest": "#dee4de",
+            "secondary": "#0453cd",
+            "trust-blue": "#0052CC",
+            "on-tertiary-fixed-variant": "#7d2a2a",
+            "secondary-container": "#356ee7",
+            "tertiary-fixed": "#ffdad7",
+            "tertiary": "#9b403e",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#ffb3af",
+            "on-error-container": "#93000a",
+            "surface-muted": "#F4F5F7",
+            "on-surface-variant": "#3e4942",
+            "surface-dim": "#d6dbd5",
+            "primary-container": "#00875a",
+            "primary-fixed": "#8df7c1",
+            "on-surface": "#171d19",
+            "on-tertiary-container": "#ffffff",
+            "on-secondary-container": "#fefcff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "16px",
+            "base-unit": "8px",
+            "stack-sm": "8px",
+            "margin-mobile": "16px",
+            "section-gap": "64px",
+            "stack-md": "16px",
+            "stack-lg": "32px",
+            "margin-desktop": "32px"
+          },
+          "fontFamily": {
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Manrope"],
+            "label-bold": ["Plus Jakarta Sans"],
+            "headline-md": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "button-text": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Manrope"],
+            "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+        background-color: theme('colors.background');
+        color: theme('colors.on-background');
+        min-height: max(884px, 100dvh);
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .fill-icon {
+        font-variation-settings: 'FILL' 1;
+    }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4HZYJ6RHJ"></script>
@@ -26,249 +145,312 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container" style="overflow-y: auto;">
-    
-    <!-- Language Switcher -->
-    <div class="lang-container">
-      <select class="lang-switcher">
-        <option value="en">EN</option>
-        <option value="mr">MR</option>
-        <option value="hi">HI</option>
-      </select>
+<body class="font-body-md antialiased min-h-screen flex flex-col relative pb-20 md:pb-0">
+
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-on-background flex justify-between items-center w-full px-margin-mobile py-4 sticky top-0 z-50">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary dark:text-primary-fixed fill-icon" style="font-size: 28px;">shield</span>
+    <span class="font-headline-md text-headline-md-mobile font-bold text-on-background dark:text-surface-bright" data-i18n="app_title">Grahak Kavach</span>
+  </div>
+  <div class="lang-container relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-label-bold pl-4 pr-9 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[18px] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-section-gap flex flex-col gap-section-gap">
+  
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center text-center gap-stack-lg pt-8">
+    <div class="bg-surface-container-lowest w-24 h-24 rounded-full flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.05)] border border-surface-container mb-2 p-2">
+      <img src="assets/logo.svg" alt="Grahak Kavach Logo" style="width: 100%; height: 100%;">
     </div>
-
-    <!-- Hero Section -->
-    <div class="content flex-center text-center animate-slide-up" style="flex: none; padding: 48px 32px 32px 32px; padding-top: 60px;">
-      <div class="mb-4" style="width: 100px; height: 100px; background: white; border-radius: 50%; padding: 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; justify-content: center;">
-        <img src="assets/logo.svg" alt="Grahak Kavach Logo" style="width: 100%; height: 100%;">
+    <div class="flex flex-col gap-stack-sm max-w-2xl mx-auto">
+      <!-- Security Badge Ported from previous edit -->
+      <div class="inline-flex items-center justify-center gap-1 bg-surface-container-high text-on-surface-variant font-label-bold text-[12px] px-3 py-1 rounded-full w-fit mx-auto mb-2 border border-outline-variant/50 shadow-sm">
+        <span class="material-symbols-outlined text-[14px] text-safe-green">lock</span>
+        Secure & Tamper-Proof Platform
       </div>
-      <h1 data-i18n="app_title" style="font-size: 2rem; margin-bottom: 8px;">Grahak Kavach</h1>
-      <p data-i18n="hero_subtitle" class="text-muted" style="font-size: 1.1rem; max-width: 300px; margin: 0 auto 32px auto;">Your intelligent shield against food safety and legal metrology violations.</p>
-
-      <div style="display: flex; gap: 12px; justify-content: center; width: 100%; max-width: 320px; margin: 0 auto; flex-direction: column;">
-        <a href="scan.html" class="btn btn-primary" style="padding: 16px; width: 100%; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);" data-i18n="start_scanning_now">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg> Start Scanning Now
-        </a>
-        <a href="history.html" class="btn btn-secondary" style="padding: 16px; width: 100%; font-size: 1.1rem; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); color: var(--text-color); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);" data-i18n="track_complaint">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Track Complaint
-        </a>
-      </div>
-    </div>
-
-    <!-- How It Works Section -->
-    <div style="padding: 32px 24px;">
-      <h2 data-i18n="how_it_works" class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">How It Works</h2>
       
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
-          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
-          <div>
-            <h4 data-i18n="scan_label" style="margin-bottom: 4px; font-size: 1.1rem;">Scan the Label</h4>
-            <p data-i18n="scan_label_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Use your phone's camera to scan any product's ingredient list, MRP, or expiry date.</p>
-          </div>
-        </div>
-        
-        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
-          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
-          <div>
-            <h4 data-i18n="analysis" style="margin-bottom: 4px; font-size: 1.1rem;">Analysis</h4>
-            <p data-i18n="analysis_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Our system instantly extracts label data and checks it against FSSAI and Legal Metrology regulations to detect issues.</p>
-          </div>
-        </div>
-        
-        <div class="glass-card" style="display: flex; gap: 16px; align-items: flex-start; padding: 20px;">
-          <div style="background: var(--primary-light); color: var(--primary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</div>
-          <div>
-            <h4 data-i18n="report_instantly" style="margin-bottom: 4px; font-size: 1.1rem;">Report Instantly</h4>
-            <p data-i18n="report_instantly_desc" class="text-muted" style="font-size: 0.9rem; margin: 0;">Found a violation? File a verified complaint directly to government authorities in one tap.</p>
-          </div>
-        </div>
-      </div>
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background" data-i18n="app_title">Grahak Kavach</h1>
+      <p class="font-body-lg text-body-lg text-outline" data-i18n="hero_subtitle">Your intelligent shield against food safety and legal metrology violations.</p>
     </div>
-
-    <!-- Features Section -->
-    <div style="padding: 32px 24px; background: rgba(255,255,255,0.4);">
-      <h2 data-i18n="key_features" class="text-center" style="font-size: 1.5rem; margin-bottom: 24px;">Key Features</h2>
-      
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: var(--warning); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-          <div data-i18n="food_safety" style="font-weight: 600; font-size: 0.9rem;">Food Safety</div>
-        </div>
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: var(--primary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          <div data-i18n="expiry_check" style="font-weight: 600; font-size: 0.9rem;">Expiry Check</div>
-        </div>
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: var(--secondary-color); margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          <div data-i18n="mrp_validation" style="font-weight: 600; font-size: 0.9rem;">MRP Validation</div>
-        </div>
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: #6366f1; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <div data-i18n="shop_history" style="font-weight: 600; font-size: 0.9rem;">Shop History</div>
-        </div>
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: #8b5cf6; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <div data-i18n="legal_metrology_check" style="font-weight: 600; font-size: 0.9rem;">Legal Metrology Check</div>
-        </div>
-        <div class="glass-card" style="padding: 16px; text-align: center;">
-          <svg style="color: #3b82f6; margin-bottom: 12px;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <div data-i18n="govt_reporting" style="font-weight: 600; font-size: 0.9rem;">Govt Reporting</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Official Portal Section -->
-    <div style="padding: 40px 24px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05);">
-      <div style="width: 56px; height: 56px; background: #1e293b; color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <h3 data-i18n="gov_official_q" style="margin-bottom: 8px;">Are you a Government Official?</h3>
-      <p data-i18n="gov_official_desc" class="text-muted" style="font-size: 0.9rem; margin-bottom: 24px;">Access the secure dashboard to view and manage citizen complaints in real-time.</p>
-      <a href="officer-login.html" class="btn btn-secondary" style="width: 100%; max-width: 250px;" data-i18n="access_officer_portal">
-        Access Officer Portal
+    <div class="flex flex-col gap-stack-md w-full max-w-sm mt-4">
+      <a class="bg-safe-green text-on-primary font-button-text text-button-text py-4 px-6 rounded-lg shadow-[0_4px_14px_rgba(0,135,90,0.39)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95" href="scan.html" data-i18n="start_scanning_now">
+        <span class="material-symbols-outlined fill-icon">photo_camera</span>
+        Start Scanning Now
+      </a>
+      <a class="bg-surface-container-lowest text-text-ink font-button-text text-button-text py-4 px-6 rounded-lg border border-outline-variant shadow-sm flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors active:scale-95" href="history.html" data-i18n="track_complaint">
+        <span class="material-symbols-outlined">search</span>
+        Track Complaint
       </a>
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer style="padding: 32px 24px 100px; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-      <p data-i18n="copyright" style="margin-bottom: 16px;">© 2026 Grahak Kavach. All rights reserved.</p>
-      <div style="display: flex; justify-content: center; gap: 16px;">
-        <a href="privacy.html" data-i18n="privacy_policy" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
-        <a href="terms.html" data-i18n="terms_of_service" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
-        <a href="contact.html" data-i18n="contact_us" style="color: var(--text-muted); text-decoration: none;">Contact Us</a>
+  <!-- How It Works Section -->
+  <section class="flex flex-col gap-stack-lg pt-8">
+    <h2 class="font-headline-md text-headline-md text-center text-on-background" data-i18n="how_it_works">How It Works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <!-- Step 1 -->
+      <div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant shadow-[0_8px_16px_rgba(0,0,0,0.03)] flex flex-col gap-stack-md">
+        <div class="w-10 h-10 rounded-full bg-primary-fixed-dim/30 text-safe-green font-headline-sm text-headline-sm flex items-center justify-center">1</div>
+        <div class="flex flex-col gap-1">
+          <h3 class="font-headline-sm text-headline-sm text-on-background" data-i18n="scan_label">Scan the Label</h3>
+          <p class="font-body-sm text-body-sm text-outline" data-i18n="scan_label_desc">Use your phone's camera to scan any product's ingredient list, MRP, or expiry date.</p>
+        </div>
       </div>
-    </footer>
+      <!-- Step 2 -->
+      <div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant shadow-[0_8px_16px_rgba(0,0,0,0.03)] flex flex-col gap-stack-md">
+        <div class="w-10 h-10 rounded-full bg-primary-fixed-dim/30 text-safe-green font-headline-sm text-headline-sm flex items-center justify-center">2</div>
+        <div class="flex flex-col gap-1">
+          <h3 class="font-headline-sm text-headline-sm text-on-background" data-i18n="analysis">Analysis</h3>
+          <p class="font-body-sm text-body-sm text-outline" data-i18n="analysis_desc">Our system instantly extracts label data and checks it against FSSAI and Legal Metrology regulations to detect issues.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant shadow-[0_8px_16px_rgba(0,0,0,0.03)] flex flex-col gap-stack-md">
+        <div class="w-10 h-10 rounded-full bg-primary-fixed-dim/30 text-safe-green font-headline-sm text-headline-sm flex items-center justify-center">3</div>
+        <div class="flex flex-col gap-1">
+          <h3 class="font-headline-sm text-headline-sm text-on-background" data-i18n="report_instantly">Report Instantly</h3>
+          <p class="font-body-sm text-body-sm text-outline" data-i18n="report_instantly_desc">Found a violation? File a verified complaint directly to government authorities in one tap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Key Features Section -->
+  <section class="flex flex-col gap-stack-lg pt-8">
+    <h2 class="font-headline-md text-headline-md text-center text-on-background" data-i18n="key_features">Key Features</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-gutter">
+      <!-- Feature 1 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-warning-amber text-[32px]">warning</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="food_safety">Food Safety</span>
+      </div>
+      <!-- Feature 2 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-safe-green text-[32px]">calendar_today</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="expiry_check">Expiry Check</span>
+      </div>
+      <!-- Feature 3 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-text-ink text-[32px]">attach_money</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="mrp_validation">MRP Validation</span>
+      </div>
+      <!-- Feature 4 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-trust-blue text-[32px]">history</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="shop_history">Shop History</span>
+      </div>
+      <!-- Feature 5 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-[#9b59b6] text-[32px]">shopping_bag</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="legal_metrology_check">Legal Metrology Check</span>
+      </div>
+      <!-- Feature 6 -->
+      <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant shadow-sm flex flex-col items-center text-center gap-stack-sm hover:shadow-md transition-shadow">
+        <span class="material-symbols-outlined text-trust-blue text-[32px]">local_police</span>
+        <span class="font-label-bold text-label-bold text-on-background" data-i18n="govt_reporting">Govt Reporting</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Security Banner (Re-applied with Tailwind) -->
+  <section class="bg-on-secondary-fixed rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-stack-lg mt-8 relative overflow-hidden shadow-lg border border-surface-variant">
+    <div class="absolute -right-8 -top-8 opacity-5 md:opacity-10 pointer-events-none">
+      <span class="material-symbols-outlined fill-icon" style="font-size: 200px;">shield_lock</span>
+    </div>
+    <div class="flex flex-col gap-2 relative z-10 md:max-w-xl text-center md:text-left">
+      <div class="flex items-center justify-center md:justify-start gap-1 mb-1">
+        <span class="material-symbols-outlined text-primary-fixed fill-icon text-[18px]">gpp_good</span>
+        <span class="font-label-bold text-label-bold text-primary-fixed uppercase tracking-widest">Bank-Grade Security</span>
+      </div>
+      <h3 class="font-headline-md text-headline-md text-on-primary">Your Privacy & Data are Protected</h3>
+      <p class="font-body-md text-body-md text-secondary-fixed-dim">Every complaint is protected by strict server-side validation and encrypted protocols. Fraudulent submissions and frontend tampering are automatically blocked by our intelligent backend shield.</p>
+    </div>
+    <div class="relative z-10 w-full md:w-auto flex justify-center">
+      <div class="bg-on-primary/10 backdrop-blur-sm border border-on-primary/20 p-4 rounded-xl flex items-center gap-4 w-full md:w-auto">
+        <span class="material-symbols-outlined text-primary-fixed text-[40px] fill-icon">verified_user</span>
+        <div class="flex flex-col text-left">
+          <span class="font-label-bold text-label-bold text-on-primary">100% Secure</span>
+          <span class="font-body-sm text-body-sm text-secondary-fixed-dim">Backend Validated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Officer Portal Section -->
+  <section class="bg-surface-container-low rounded-2xl p-8 flex flex-col items-center text-center gap-stack-md mt-8 border border-surface-variant">
+    <div class="w-16 h-16 rounded-full bg-on-background flex items-center justify-center mb-2">
+      <span class="material-symbols-outlined text-surface-bright fill-icon" style="font-size: 32px;">admin_panel_settings</span>
+    </div>
+    <h3 class="font-headline-sm text-headline-sm text-on-background" data-i18n="gov_official_q">Are you a Government Official?</h3>
+    <p class="font-body-sm text-body-sm text-outline max-w-md mx-auto" data-i18n="gov_official_desc">Access the secure dashboard to view and manage citizen complaints in real-time.</p>
+    <a class="mt-2 bg-transparent text-trust-blue border border-trust-blue/30 font-button-text text-button-text py-3 px-6 rounded-lg hover:bg-trust-blue/5 transition-colors" href="officer-login.html" data-i18n="access_officer_portal">
+      Access Officer Portal
+    </a>
+  </section>
+</main>
+
+<!-- Kavach Assistant FAB -->
+<button onclick="toggleChat()" class="fixed bottom-24 right-4 md:bottom-8 md:right-8 bg-safe-green text-on-primary w-14 h-14 rounded-full shadow-[0_10px_20px_rgba(0,135,90,0.3)] flex items-center justify-center hover:scale-105 transition-transform z-40">
+  <span class="material-symbols-outlined fill-icon text-[28px]">chat</span>
+</button>
+
+<!-- Footer -->
+<footer class="bg-background dark:bg-on-background w-full py-8 px-margin-mobile mb-20 md:mb-0 flex flex-col items-center gap-stack-sm w-full border-t border-surface-variant mt-auto">
+  <p class="font-body-sm text-body-sm text-center text-on-surface font-bold" data-i18n="copyright">© 2026 Grahak Kavach. All rights reserved.</p>
+  <div class="flex flex-wrap justify-center gap-4 mt-2">
+    <a class="font-body-sm text-body-sm text-outline dark:text-outline-variant hover:text-primary transition-colors" href="privacy.html" data-i18n="privacy_policy">Privacy Policy</a>
+    <a class="font-body-sm text-body-sm text-outline dark:text-outline-variant hover:text-primary transition-colors" href="terms.html" data-i18n="terms_of_service">Terms of Service</a>
+    <a class="font-body-sm text-body-sm text-outline dark:text-outline-variant hover:text-primary transition-colors" href="contact.html" data-i18n="contact_us">Contact Us</a>
   </div>
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/main.js"></script>
+</footer>
 
-  <!-- Legal Assistant Chatbot Widget -->
-  <div id="chatbot-widget" style="position: fixed; bottom: 24px; right: 24px; z-index: 1000; font-family: var(--font-family);">
-      <!-- Chat Toggle Button -->
-      <button id="chatbot-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary-color); border: none; color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;" onclick="toggleChat()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      </button>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-inverse-surface border-t border-outline-variant dark:border-outline shadow-lg rounded-t-xl md:hidden">
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+    <span class="material-symbols-outlined fill-icon">home</span>
+    <span class="font-label-bold text-label-bold">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-lg" href="history.html">
+    <span class="material-symbols-outlined">history</span>
+    <span class="font-label-bold text-label-bold">History</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-lg" href="report.html">
+    <span class="material-symbols-outlined">report</span>
+    <span class="font-label-bold text-label-bold">Report</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors rounded-lg" href="profile.html">
+    <span class="material-symbols-outlined">person</span>
+    <span class="font-label-bold text-label-bold">Profile</span>
+  </a>
+</nav>
 
-      <!-- Chat Window (Hidden by default) -->
-      <div id="chatbot-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); overflow: hidden; flex-direction: column; border: 1px solid #f1f5f9;">
-          <!-- Header -->
-          <div style="background: var(--primary-color); color: white; padding: 16px; display: flex; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                  <strong style="font-size: 1rem;">Kavach Assistant</strong>
-              </div>
-              <button style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center;" onclick="toggleChat()">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
+<!-- Legal Assistant Chatbot Widget (From Original App) -->
+<div id="chatbot-widget" style="position: fixed; bottom: 24px; right: 24px; z-index: 1000; font-family: var(--font-family);">
+  <div id="chatbot-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); overflow: hidden; flex-direction: column; border: 1px solid #f1f5f9;">
+      <!-- Header -->
+      <div style="background: var(--primary-color); color: white; padding: 16px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <strong style="font-size: 1rem;">Kavach Assistant</strong>
           </div>
-          
-          <!-- Messages -->
-          <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8fafc; font-size: 0.9rem;">
-              <div style="background: white; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; color: #334155;">
-                  Namaste! I am the Kavach Legal Assistant. Ask me a question about Legal Metrology or Food Safety rules.
-              </div>
-              <!-- Quick replies -->
-              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
-                  <button class="chat-quick-reply" onclick="sendQuickReply('Can a shopkeeper charge above MRP?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">Over MRP?</button>
-                  <button class="chat-quick-reply" onclick="sendQuickReply('No expiry date on packet')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">No Expiry Date?</button>
-                  <button class="chat-quick-reply" onclick="sendQuickReply('How to file a complaint?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">File Complaint</button>
-              </div>
+          <button style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center;" onclick="toggleChat()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+      </div>
+      
+      <!-- Messages -->
+      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8fafc; font-size: 0.9rem;">
+          <div style="background: white; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; color: #334155;">
+              Namaste! I am the Kavach Legal Assistant. Ask me a question about Legal Metrology or Food Safety rules.
           </div>
-          
-          <!-- Input -->
-          <div style="padding: 12px; background: white; border-top: 1px solid #f1f5f9; display: flex; gap: 8px;">
-              <input type="text" id="chat-input" placeholder="Type your question..." style="flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 16px; font-size: 0.9rem; outline: none;">
-              <button onclick="sendChatMessage()" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-              </button>
+          <!-- Quick replies -->
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
+              <button class="chat-quick-reply" onclick="sendQuickReply('Can a shopkeeper charge above MRP?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">Over MRP?</button>
+              <button class="chat-quick-reply" onclick="sendQuickReply('No expiry date on packet')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">No Expiry Date?</button>
+              <button class="chat-quick-reply" onclick="sendQuickReply('How to file a complaint?')" style="background: white; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; cursor: pointer;">File Complaint</button>
           </div>
       </div>
+      
+      <!-- Input -->
+      <div style="padding: 12px; background: white; border-top: 1px solid #f1f5f9; display: flex; gap: 8px;">
+          <input type="text" id="chat-input" placeholder="Type your question..." style="flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 16px; font-size: 0.9rem; outline: none;">
+          <button onclick="sendChatMessage()" style="background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+      </div>
   </div>
+</div>
 
-  <script>
-      function toggleChat() {
-          const windowEl = document.getElementById('chatbot-window');
-          if (windowEl.style.display === 'none') {
-              windowEl.style.display = 'flex';
-          } else {
-              windowEl.style.display = 'none';
-          }
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/main.js"></script>
+<script defer src="js/api.js"></script>
+
+<script>
+  function toggleChat() {
+      const windowEl = document.getElementById('chatbot-window');
+      if (windowEl.style.display === 'none') {
+          windowEl.style.display = 'flex';
+      } else {
+          windowEl.style.display = 'none';
       }
+  }
 
-      function sendQuickReply(text) {
-          document.getElementById('chat-input').value = text;
-          sendChatMessage();
+  function sendQuickReply(text) {
+      document.getElementById('chat-input').value = text;
+      sendChatMessage();
+  }
+
+  function appendMessage(text, isUser) {
+      const chatMessages = document.getElementById('chat-messages');
+      const msgDiv = document.createElement('div');
+      
+      if (isUser) {
+          msgDiv.style = "background: var(--primary-color); color: white; padding: 12px; border-radius: 12px; border-bottom-right-radius: 2px; align-self: flex-end; max-width: 85%; font-size: 0.9rem;";
+      } else {
+          msgDiv.style = "background: white; color: #334155; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; font-size: 0.9rem;";
       }
+      
+      msgDiv.innerHTML = text; // Allow bolding/HTML in bot responses
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
 
-      function appendMessage(text, isUser) {
-          const chatMessages = document.getElementById('chat-messages');
-          const msgDiv = document.createElement('div');
-          
-          if (isUser) {
-              msgDiv.style = "background: var(--primary-color); color: white; padding: 12px; border-radius: 12px; border-bottom-right-radius: 2px; align-self: flex-end; max-width: 85%; font-size: 0.9rem;";
-          } else {
-              msgDiv.style = "background: white; color: #334155; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; font-size: 0.9rem;";
-          }
-          
-          msgDiv.innerHTML = text; // Allow bolding/HTML in bot responses
-          chatMessages.appendChild(msgDiv);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
+  async function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      // Append User Message
+      appendMessage(text, true);
+      input.value = '';
+      
+      // Show typing indicator
+      const chatMessages = document.getElementById('chat-messages');
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'typing-indicator';
+      typingDiv.style = "background: white; color: #334155; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; font-size: 0.9rem; font-style: italic;";
+      typingDiv.innerHTML = "Typing...";
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      try {
+          const response = await API.sendChatMessage(text);
+          chatMessages.removeChild(typingDiv);
+          appendMessage(response.response, false);
+      } catch (error) {
+          chatMessages.removeChild(typingDiv);
+          appendMessage("Sorry, I am having trouble connecting to the server.", false);
+          console.error("Chat error:", error);
       }
+  }
 
-      async function sendChatMessage() {
-          const input = document.getElementById('chat-input');
-          const text = input.value.trim();
-          if (!text) return;
-          
-          // Append User Message
-          appendMessage(text, true);
-          input.value = '';
-          
-          // Show typing indicator
-          const chatMessages = document.getElementById('chat-messages');
-          const typingDiv = document.createElement('div');
-          typingDiv.id = 'typing-indicator';
-          typingDiv.style = "background: white; color: #334155; padding: 12px; border-radius: 12px; border-bottom-left-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); align-self: flex-start; max-width: 85%; font-size: 0.9rem; font-style: italic;";
-          typingDiv.innerHTML = "Typing...";
-          chatMessages.appendChild(typingDiv);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
+  // Enter key to send
+  document.getElementById('chat-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') sendChatMessage();
+  });
+</script>
 
-          try {
-              const response = await API.sendChatMessage(text);
-              chatMessages.removeChild(typingDiv);
-              appendMessage(response.response, false);
-          } catch (error) {
-              chatMessages.removeChild(typingDiv);
-              appendMessage("Sorry, I am having trouble connecting to the server.", false);
-              console.error("Chat error:", error);
-          }
-      }
-
-      // Enter key to send
-      document.getElementById('chat-input').addEventListener('keypress', function (e) {
-          if (e.key === 'Enter') sendChatMessage();
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('SW registration failed: ', err);
       });
-  </script>
-  
-  <!-- Add API definitions for Chatbot -->
-  <script defer src="js/api.js"></script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => {
-          console.log('SW registration failed: ', err);
-        });
-      });
-    }
-  </script>
+    });
+  }
+</script>
 </body>
 </html>

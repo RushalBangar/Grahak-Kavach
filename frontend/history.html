@@ -1,13 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Shop History - Grahak Kavach</title>
+  
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Tailwind CSS & Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "fontFamily": {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body { -webkit-tap-highlight-color: transparent; }
+    .nav-item.active {
+      color: var(--primary);
+    }
+    .nav-item.active .nav-icon {
+      font-variation-settings: 'FILL' 1;
+      color: var(--primary);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4HZYJ6RHJ"></script>
@@ -15,57 +85,65 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container">
+<body class="bg-surface text-on-surface font-body-md min-h-[100dvh] flex flex-col antialiased">
+  
+  <!-- Header (TopAppBar) -->
+  <header class="bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-40 w-full px-4 py-3 flex justify-between items-center transition-all duration-300">
+    <div class="flex items-center gap-2">
+      <h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight" data-i18n="shop_history">Shop History Lookup</h1>
+    </div>
+    <div class="relative">
+      <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-xs pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none shadow-sm">
+        <option value="en">EN</option>
+        <option value="mr">MR</option>
+        <option value="hi">HI</option>
+      </select>
+      <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 w-full max-w-md mx-auto px-4 pt-6 pb-24 flex flex-col gap-6">
     
-    <div class="header glass-header" style="justify-content: space-between;">
-      <h3 data-i18n="shop_history" style="margin: 0; font-size: 1.1rem; width: auto; text-align: left;">Shop History Lookup</h3>
-      <div style="width: auto;">
-        <select class="lang-switcher">
-          <option value="en">EN</option>
-          <option value="mr">MR</option>
-          <option value="hi">HI</option>
-        </select>
-      </div>
+    <!-- Search Bar -->
+    <div class="relative w-full">
+      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[22px]">search</span>
+      <input type="text" id="shop-search" class="w-full bg-surface-container-lowest border-2 border-outline-variant/50 focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-full py-3.5 pl-12 pr-4 text-[15px] font-body-md text-text-ink placeholder:text-outline transition-all shadow-sm" placeholder="Search by shop name or PIN code...">
     </div>
 
-    <div class="content animate-slide-up" style="padding-bottom: 80px;">
-      
-      <div class="form-group">
-        <div style="position: relative;">
-          <input type="text" id="shop-search" class="form-control glass-input" placeholder="Search by shop name or PIN code..." style="padding-left: 40px; border-radius: var(--radius-full);">
-          <svg style="position: absolute; left: 14px; top: 12px; color: var(--text-muted);" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <div>
+        <h4 class="font-headline-sm text-[16px] text-text-ink font-bold mb-4">Search Results</h4>
+        
+        <div id="results-container" class="flex flex-col gap-4">
+            <div class="text-center text-outline font-body-md py-10" id="loading-msg">Loading recent complaints...</div>
         </div>
-      </div>
-
-      <h4 class="mt-2 mb-4" style="font-size: 0.95rem;">Search Results</h4>
-
-      <div id="results-container">
-          <div class="text-center text-muted" id="loading-msg" style="padding: 2rem;">Loading recent complaints...</div>
-      </div>
     </div>
+    
+  </main>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav glass-nav">
-      <a href="scan.html" class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
-        <span data-i18n="scan_nav">Scan</span>
-      </a>
-      <a href="history.html" class="nav-item active">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        <span data-i18n="history_nav">History</span>
-      </a>
-      <a href="complaint.html" class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-        <span data-i18n="complaints_nav">Complaints</span>
-      </a>
-    </div>
+  <!-- Bottom Navigation (Shared Component) -->
+  <nav class="fixed bottom-0 w-full bg-surface-container-lowest/90 backdrop-blur-md border-t border-outline-variant/30 pb-safe pt-2 px-6 flex justify-between items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <a href="scan.html" class="nav-item flex flex-col items-center gap-1 p-2 text-on-surface-variant hover:text-primary transition-colors min-w-[64px]">
+      <span class="material-symbols-outlined nav-icon text-2xl" style="font-variation-settings: 'FILL' 0;">qr_code_scanner</span>
+      <span class="font-label-bold text-[10px] tracking-wide" data-i18n="scan_nav">Scan</span>
+    </a>
+    
+    <a href="history.html" class="nav-item active flex flex-col items-center gap-1 p-2 text-primary transition-colors min-w-[64px]">
+      <div class="relative">
+        <span class="material-symbols-outlined nav-icon text-2xl" style="font-variation-settings: 'FILL' 1;">history</span>
+      </div>
+      <span class="font-label-bold text-[10px] tracking-wide" data-i18n="history_nav">History</span>
+    </a>
+    
+    <a href="complaint.html" class="nav-item flex flex-col items-center gap-1 p-2 text-on-surface-variant hover:text-primary transition-colors min-w-[64px]">
+      <span class="material-symbols-outlined nav-icon text-2xl" style="font-variation-settings: 'FILL' 0;">assignment</span>
+      <span class="font-label-bold text-[10px] tracking-wide" data-i18n="complaints_nav">Complaints</span>
+    </a>
+  </nav>
 
-  </div>
   <script defer src="js/translations.js"></script>
   <script defer src="js/i18n.js"></script>
   <script defer src="js/api.js"></script>
@@ -84,7 +162,7 @@
               renderComplaints(complaints);
           } catch (e) {
               console.error(e);
-              container.innerHTML = `<div class="text-center text-muted" style="color:var(--danger)!important;">Failed to load complaints. ${e.message}</div>`;
+              container.innerHTML = `<div class="text-center font-body-md py-10 text-error">Failed to load complaints. ${e.message}</div>`;
           }
       }
 
@@ -93,7 +171,7 @@
           container.innerHTML = '';
           
           if(complaintsList.length === 0) {
-              container.innerHTML = '<p class="text-center text-muted">No recent complaints found.</p>';
+              container.innerHTML = '<p class="text-center text-outline font-body-md py-10">No recent complaints found.</p>';
               return;
           }
 
@@ -105,23 +183,38 @@
               const isResolved = c.status === 'Resolved';
               const shopName = c.shop ? c.shop.name : c.shop_name;
               
+              const badgeClass = isResolved 
+                    ? "bg-[#D1FAE5] text-[#047857] border-[#A7F3D0]" 
+                    : "bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]";
+                    
+              const verifyColor = c.is_verified ? "text-safe-green" : "text-outline";
+              
               container.innerHTML += `
-              <div class="glass-card mb-4" style="padding: 16px;">
-                <div class="flex-between mb-2">
-                  <h4 style="margin: 0; font-size: 1.05rem;">ID: ${c.tracking_id}</h4>
-                  <span class="badge badge-${isResolved ? 'success' : 'warning'}">${c.status}</span>
+              <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-3">
+                  <h4 class="font-headline-sm text-[15px] text-text-ink font-bold m-0 tracking-tight">ID: #${c.tracking_id}</h4>
+                  <span class="px-2.5 py-1 rounded-full border text-[11px] font-bold leading-none ${badgeClass}">${c.status}</span>
                 </div>
-                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 4px;">Shop: <strong>${shopName}</strong></p>
-                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px;">Violation: ${c.violation_type} (${c.routed_to})</p>
                 
-                <div style="display: flex; gap: 16px; font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-                  <div>
-                    <div style="font-weight: 600; color: var(--text-main);">${dateStr}</div>
-                    <div class="text-muted">Date Filed</div>
+                <div class="flex flex-col gap-1 mb-4">
+                  <p class="font-body-md text-[14px] text-on-surface-variant flex items-start gap-2">
+                    <span class="material-symbols-outlined text-[18px] text-outline shrink-0 mt-0.5">storefront</span>
+                    <span><strong>${shopName}</strong></span>
+                  </p>
+                  <p class="font-body-md text-[14px] text-on-surface-variant flex items-start gap-2">
+                    <span class="material-symbols-outlined text-[18px] text-outline shrink-0 mt-0.5">warning</span>
+                    <span>${c.violation_type} <span class="text-[12px] opacity-75">(${c.routed_to})</span></span>
+                  </p>
+                </div>
+                
+                <div class="flex gap-6 border-t border-outline-variant/30 pt-3">
+                  <div class="flex flex-col">
+                    <span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider mb-0.5">Date Filed</span>
+                    <span class="font-body-md text-[14px] text-text-ink font-semibold">${dateStr}</span>
                   </div>
-                  <div>
-                    <div style="font-weight: 600; color: ${c.is_verified ? 'var(--success)' : 'var(--text-muted)'};">${c.is_verified ? 'Yes' : 'No'}</div>
-                    <div class="text-muted">Verified</div>
+                  <div class="flex flex-col">
+                    <span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider mb-0.5">Verified</span>
+                    <span class="font-body-md text-[14px] font-bold ${verifyColor}">${c.is_verified ? 'Yes' : 'No'}</span>
                   </div>
                 </div>
               </div>

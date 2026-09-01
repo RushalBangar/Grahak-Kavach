@@ -1,18 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Grahak Kavach - Officer Login</title>
+
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <title>Officer Portal - Grahak Kavach</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+          spacing: {
+            "base-unit": "8px", "margin-desktop": "32px", "stack-sm": "8px", "gutter": "16px",
+            "stack-md": "16px", "section-gap": "64px", "stack-lg": "32px", "margin-mobile": "16px"
+          },
+          fontFamily: {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    /* Desktop override for Officer Portal */
-    body { background-color: #f1f5f9; background-image: none; }
-    .officer-container { max-width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .login-box { width: 100%; max-width: 400px; padding: 40px; border-radius: var(--radius-lg); background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+    .card-shadow { box-shadow: 0 10px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03); }
+    /* Subtle authority background pattern */
+    .auth-bg { background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wMiI+PHBhdGggZD0iTTM2IDM0djIwaDJ2LTIwaC0yeiIvPjwvZz48L2c+PC9zdmc+'); }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -21,92 +78,165 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="lang-container" style="position: absolute; top: 16px; right: 16px;">
-    <select class="lang-switcher">
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md">
+
+<!-- Header -->
+<header class="bg-surface-container-high w-full px-margin-mobile md:px-margin-desktop py-3.5 flex flex-row items-center justify-between shadow-sm border-b border-outline-variant/30">
+  <div class="flex items-center gap-2.5">
+    <span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+    <h1 class="font-headline-md text-[18px] md:text-[22px] font-extrabold text-primary tracking-tight">Grahak Kavach Officer Portal</h1>
+  </div>
+  <div class="relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-[13px] pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
       <option value="en">EN</option>
       <option value="mr">MR</option>
       <option value="hi">HI</option>
     </select>
+    <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
   </div>
-  <div class="officer-container">
-    <div class="login-box animate-slide-up">
-      
-      <div class="flex-center mb-8">
-        <img src="assets/logo.svg" alt="Logo" style="width: 60px; height: 60px; margin-bottom: 16px;">
-        <h2 data-i18n="officer_portal" style="margin: 0; color: #1e293b;">Officer Portal</h2>
-        <p class="text-muted">Secure Access System</p>
-      </div>
+</header>
 
-      <div id="step-1-form">
-        <div class="form-group mb-8">
-          <label class="form-label" data-i18n="email_address">Email Address</label>
-          <div style="display: flex; align-items: center; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--radius-md); padding: 0 12px;">
-            <input type="email" id="email-input" style="border: none; background: transparent; padding: 12px 0; width: 100%; outline: none;" placeholder="officer@example.com" required>
-          </div>
+<!-- Main Content -->
+<main class="flex-1 flex items-center justify-center p-margin-mobile md:p-margin-desktop auth-bg">
+  <div class="w-full max-w-md bg-surface-container-lowest rounded-2xl card-shadow border border-outline-variant/30 p-6 md:p-8 flex flex-col gap-6 relative z-10">
+
+    <!-- Login Header -->
+    <div class="text-center flex flex-col items-center gap-2">
+      <div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center shadow-sm border border-outline-variant/20">
+        <span class="material-symbols-outlined text-primary text-[30px]" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+      </div>
+      <h2 class="font-headline-lg text-headline-lg-mobile text-on-surface mt-1" data-i18n="officer_portal">Officer Portal</h2>
+      <p class="text-[14px] text-on-surface-variant">Secure Access System</p>
+    </div>
+
+    <!-- Step 1: Email -->
+    <div id="step-1-form" class="flex flex-col gap-4">
+      <div>
+        <label class="block font-label-bold text-[13px] text-on-surface mb-1.5" for="email-input" data-i18n="email_address">Official Email Address</label>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
+          <input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant bg-surface focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all text-[15px] text-on-surface" id="email-input" placeholder="officer@nic.in" type="email" required/>
         </div>
-
-        <button id="send-otp-btn" class="btn btn-primary" style="background-color: #1e293b; width: 100%;">
-          Send OTP
-        </button>
       </div>
+      <button id="send-otp-btn" class="w-full bg-safe-green hover:opacity-90 text-on-primary font-button-text text-[15px] py-3.5 rounded-xl shadow-md transition-all active:scale-[0.98]">
+        Send OTP
+      </button>
+    </div>
 
-      <div id="step-2-form" style="display: none;">
-        <div class="form-group mb-8">
-          <label class="form-label">Enter 6-digit OTP</label>
-          <input type="text" id="otp-input" class="form-control" placeholder="123456" required>
-        </div>
-
-        <button id="verify-otp-btn" class="btn btn-primary" style="background-color: #1e293b; width: 100%;">
-          Verify & Login
-        </button>
+    <!-- Step 2: OTP -->
+    <div id="step-2-form" style="display: none;" class="flex flex-col gap-4">
+      <div>
+        <label class="block font-label-bold text-[13px] text-on-surface mb-1.5" for="otp-input">Enter 6-digit OTP</label>
+        <input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface focus:border-trust-blue focus:ring-1 focus:ring-trust-blue/30 outline-none transition-all text-[15px] text-on-surface tracking-[0.3em] text-center" id="otp-input" maxlength="6" placeholder="------" type="text" required/>
       </div>
+      <button id="verify-otp-btn" class="w-full bg-safe-green hover:opacity-90 text-on-primary font-button-text text-[15px] py-3.5 rounded-xl shadow-md transition-all active:scale-[0.98]">
+        Verify &amp; Login
+      </button>
+    </div>
 
+    <!-- Security Note -->
+    <div class="bg-surface-container rounded-xl p-3.5 flex items-start gap-2.5 border border-outline-variant/40">
+      <span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">lock</span>
+      <p class="text-[12px] text-on-surface-variant leading-relaxed">
+        <strong class="text-tertiary">Security Note:</strong> Unauthorized access is strictly prohibited. All login attempts and actions are monitored and logged.
+      </p>
+    </div>
 
-      <div class="mt-8 text-center" style="font-size: 0.75rem; color: #94a3b8;">
-        Unauthorized access is prohibited. All actions are logged.
-        <br><br>
-        <a href="index.html" style="color: #64748b; text-decoration: underline;">Return to Consumer App</a>
-      </div>
+    <!-- Return Link -->
+    <div class="text-center pt-3 border-t border-outline-variant/30">
+      <a class="font-button-text text-[14px] text-trust-blue hover:underline inline-flex items-center gap-1 transition-colors no-underline" href="index.html">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Return to Consumer App
+      </a>
     </div>
   </div>
-  
+</main>
 
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/api.js"></script>
-  <script>
-      // The API file handles the native OTP backend logic.
-      document.getElementById('send-otp-btn').addEventListener('click', async () => {
-          const email = document.getElementById('email-input').value.trim();
-          if(!email.includes('@')) {
-              alert("Please enter a valid email address");
-              return;
-          }
-          await API.sendOTP(email);
-      });
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30 w-full py-5 px-margin-mobile md:px-margin-desktop">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+    <div class="flex flex-col items-center md:items-start">
+      <span class="font-label-bold text-[12px] uppercase tracking-wider text-primary">© 2026 Grahak Kavach</span>
+      <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tight mt-0.5">Ministry of Consumer Affairs | Government of India</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+      <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 no-underline" href="privacy.html">
+        <span class="material-symbols-outlined text-[14px]">policy</span> Privacy Policy
+      </a>
+      <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 no-underline" href="#">
+        <span class="material-symbols-outlined text-[14px]">verified_user</span> Security Protocol
+      </a>
+      <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 no-underline" href="#">
+        <span class="material-symbols-outlined text-[14px]">history_edu</span> Audit Logs
+      </a>
+      <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 no-underline" href="contact.html">
+        <span class="material-symbols-outlined text-[14px]">contact_support</span> Support
+      </a>
+    </div>
+  </div>
+  <div class="text-center border-t border-outline-variant/20 pt-3 mt-4 max-w-7xl mx-auto">
+    <p class="text-[10px] text-outline uppercase tracking-widest">Secure Officer Terminal Access • Authorized Personnel Only</p>
+  </div>
+</footer>
 
-      document.getElementById('verify-otp-btn').addEventListener('click', async () => {
-          const otp = document.getElementById('otp-input').value.trim();
-          if(otp.length !== 6) {
-              alert("Enter a 6-digit OTP");
-              return;
-          }
-          await API.verifyOTP(otp);
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/api.js"></script>
+<script>
+    // The API file handles the native OTP backend logic.
+    document.getElementById('send-otp-btn').addEventListener('click', async () => {
+        const email = document.getElementById('email-input').value.trim();
+        if(!email.includes('@')) {
+            if(typeof showToast === 'function') { showToast("Please enter a valid email address", "warning"); } else { alert("Please enter a valid email address"); }
+            return;
+        }
+        const btn = document.getElementById('send-otp-btn');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        try {
+            await API.sendOTP(email);
+            // Show OTP step
+            document.getElementById('step-1-form').style.display = 'none';
+            document.getElementById('step-2-form').style.display = 'flex';
+            if(typeof showToast === 'function') showToast('OTP sent to ' + email, 'success');
+        } catch(e) {
+            console.error(e);
+            if(typeof showToast === 'function') { showToast(e.message || 'Failed to send OTP', 'error'); } else { alert(e.message || 'Failed'); }
+            btn.textContent = 'Send OTP';
+            btn.disabled = false;
+        }
+    });
+
+    document.getElementById('verify-otp-btn').addEventListener('click', async () => {
+        const otp = document.getElementById('otp-input').value.trim();
+        if(otp.length !== 6) {
+            if(typeof showToast === 'function') { showToast("Enter a 6-digit OTP", "warning"); } else { alert("Enter a 6-digit OTP"); }
+            return;
+        }
+        const btn = document.getElementById('verify-otp-btn');
+        btn.textContent = 'Verifying...';
+        btn.disabled = true;
+        try {
+            await API.verifyOTP(otp);
+        } catch(e) {
+            console.error(e);
+            if(typeof showToast === 'function') { showToast(e.message || 'Verification failed', 'error'); } else { alert(e.message || 'Failed'); }
+            btn.textContent = 'Verify & Login';
+            btn.disabled = false;
+        }
+    });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('SW registration failed: ', err);
       });
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => {
-          console.log('SW registration failed: ', err);
-        });
-      });
-    }
-  </script>
+    });
+  }
+</script>
 </body>
 </html>

@@ -7,8 +7,6 @@ const ASSETS_TO_CACHE = [
   '/complaint.html',
   '/officer-login.html',
   '/officer-dashboard.html',
-  '/css/style.css',
-  '/css/glassmorphism.css',
   '/js/main.js',
   '/js/api.js',
   '/assets/logo.svg'

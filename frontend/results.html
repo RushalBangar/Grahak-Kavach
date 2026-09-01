@@ -1,13 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Scan Results - Grahak Kavach</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Analysis Results - Grahak Kavach</title>
+  
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+          spacing: {
+            "base-unit": "8px",
+            "margin-desktop": "32px",
+            "stack-sm": "8px",
+            "gutter": "16px",
+            "stack-md": "16px",
+            "section-gap": "64px",
+            "stack-lg": "32px",
+            "margin-mobile": "16px"
+          },
+          fontFamily: {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+    .card-shadow { box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02); }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4HZYJ6RHJ"></script>
@@ -15,165 +86,213 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container">
-    
-    <div class="header glass-header">
-      <a href="index.html" style="color: var(--text-main);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      </a>
-      <h3 data-i18n="analysis_results" style="margin: 0; font-size: 1.1rem;">Analysis Results</h3>
-      <div style="width: auto;">
-        <select class="lang-switcher">
-          <option value="en">EN</option>
-          <option value="mr">MR</option>
-          <option value="hi">HI</option>
-        </select>
-      </div>
-    </div>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pb-24 md:pb-0">
 
-    <div class="content animate-slide-up" style="padding-bottom: 80px;">
-      
-      <!-- Product Thumbnail Header -->
-      <div class="flex-row mb-4" style="background: white; padding: 12px; border-radius: var(--radius-md); box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
-        <div style="width: 60px; height: 60px; background: #e2e8f0; border-radius: 8px; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-        </div>
-        <div style="flex: 1;">
-          <h4 style="margin: 0;">Packaged Snack Product</h4>
-          <p class="text-muted" style="font-size: 0.8rem; margin: 0;">Scanned on Aug 31, 2026</p>
-        </div>
-      </div>
-
-      <!-- Legal Metrology Section -->
-      <div class="glass-card mb-4" style="border-left: 4px solid var(--warning);">
-        <div class="flex-between mb-2">
-          <h4 style="display: flex; align-items: center; gap: 6px; margin: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <span data-i18n="legal_metrology">Legal Metrology</span>
-          </h4>
-          <span id="lm-badge" class="badge badge-warning" data-i18n="issue_found">1 Issue Found</span>
-        </div>
-        
-        <div id="lm-container" style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 12px;">
-            <div id="lm-details" style="font-size: 0.9rem; color: var(--text-main);">
-                Awaiting scan...
-            </div>
-        </div>
-      </div>
-
-      <!-- Food Safety Section -->
-      <div class="glass-card mb-4" style="border-left: 4px solid var(--danger);">
-        <div class="flex-between mb-2">
-          <h4 style="display: flex; align-items: center; gap: 6px; margin: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-            <span data-i18n="food_safety">Food Safety</span>
-          </h4>
-          <span id="fs-badge" class="badge badge-danger">Score: -</span>
-        </div>
-        
-        <ul id="harmful-list" style="padding-left: 20px; font-size: 0.9rem; color: var(--text-main); margin-top: 12px; line-height: 1.8;">
-          <li>Awaiting scan...</li>
-        </ul>
-      </div>
-
-      <!-- OCR Text Section for Debugging -->
-      <div class="glass-card mb-4" style="border-left: 4px solid var(--primary-color);">
-        <h4 style="margin-top: 0; margin-bottom: 8px;">Extracted Text (OCR)</h4>
-        <div id="ocr-text-display" style="font-size: 0.8rem; color: var(--text-muted); max-height: 150px; overflow-y: auto; white-space: pre-wrap; background: rgba(0,0,0,0.02); padding: 8px; border-radius: 4px;">
-          Awaiting scan...
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="flex-row mt-4" style="gap: 12px;">
-        <a href="complaint.html" class="btn btn-secondary" style="flex: 1; border-color: var(--warning); color: var(--warning);" data-i18n="file_complaint">
-          File a Complaint
-        </a>
-        <button class="btn btn-primary" style="flex: 1;" onclick="showToast('Saved to history!', 'success')" data-i18n="save_result">
-          Save Result
-        </button>
-      </div>
-
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav glass-nav">
-      <a href="scan.html" class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
-        <span data-i18n="scan_nav">Scan</span>
-      </a>
-      <a href="history.html" class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        <span data-i18n="history_nav">History</span>
-      </a>
-      <a href="complaint.html" class="nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-        <span data-i18n="complaints_nav">Complaints</span>
-      </a>
-    </div>
-
+<!-- Header -->
+<header class="bg-background w-full px-margin-mobile py-3 flex flex-row items-center justify-between sticky top-0 z-40 border-b border-outline-variant/40">
+  <div class="flex items-center gap-2">
+    <a href="scan.html" class="text-on-surface w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 flex items-center justify-center">
+      <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+    </a>
+    <h1 class="font-headline-sm text-[20px] text-on-background font-bold" data-i18n="analysis_results">Analysis Results</h1>
   </div>
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/api.js"></script>
-  <script defer src="js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const resultString = sessionStorage.getItem('scanResult');
-      if (resultString) {
+  <div class="relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-[13px] pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<main class="flex-1 w-full max-w-3xl mx-auto px-margin-mobile py-5 flex flex-col gap-5">
+  
+  <!-- Product Summary -->
+  <section class="bg-surface-container-lowest rounded-2xl p-4 card-shadow border border-outline-variant/60 flex gap-4 items-center">
+    <div class="w-14 h-14 rounded-xl bg-surface-container-high flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-outline text-[28px]">image</span>
+    </div>
+    <div>
+      <h2 class="font-headline-sm text-[17px] text-on-surface font-bold leading-tight">Scanned Product</h2>
+      <p class="font-body-sm text-[13px] text-outline mt-0.5" id="scan-date">Scanned today</p>
+    </div>
+  </section>
+
+  <!-- Results Grid -->
+  <section class="flex flex-col gap-4">
+    
+    <!-- Legal Metrology Card -->
+    <div id="lm-card" class="bg-surface-container-lowest rounded-2xl p-4 card-shadow border-l-[5px] border-l-outline-variant border border-outline-variant/60 relative overflow-hidden transition-all duration-300">
+      <div class="flex justify-between items-center mb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface text-[20px]">shield</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface font-bold" data-i18n="legal_metrology">Legal Metrology</h3>
+        </div>
+        <span id="lm-badge" class="bg-surface-container-high text-on-surface-variant font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap">Analyzing...</span>
+      </div>
+      <div class="mt-1 pl-7">
+        <p id="lm-details" class="text-on-surface-variant text-[14px] font-medium flex items-center gap-1.5">
+          <span id="lm-icon" class="material-symbols-outlined text-[16px]">sync</span>
+          <span id="lm-details-text">Awaiting scan...</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Food Safety Card -->
+    <div id="fs-card" class="bg-surface-container-lowest rounded-2xl p-4 card-shadow border-l-[5px] border-l-outline-variant border border-outline-variant/60 relative overflow-hidden transition-all duration-300">
+      <div class="flex justify-between items-center mb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface text-[20px]">restaurant</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface font-bold" data-i18n="food_safety">Food Safety</h3>
+        </div>
+        <span id="fs-badge" class="bg-surface-container-high text-on-surface-variant font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap">Score: -</span>
+      </div>
+      <div id="harmful-list" class="mt-1 pl-7">
+        <p class="text-on-surface-variant text-[14px] font-medium flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">sync</span> Awaiting scan...</p>
+      </div>
+    </div>
+
+    <!-- OCR Text Section -->
+    <div class="bg-surface-container-lowest rounded-2xl p-4 card-shadow border border-outline-variant/60">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="material-symbols-outlined text-on-surface text-[20px]">document_scanner</span>
+        <h3 class="font-headline-sm text-[16px] text-on-surface font-bold">Extracted Text (OCR)</h3>
+      </div>
+      <div id="ocr-text-display" class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-3 font-mono text-[13px] text-on-surface-variant max-h-40 overflow-y-auto whitespace-pre-wrap leading-relaxed">Awaiting scan data...</div>
+    </div>
+  </section>
+
+  <!-- Actions -->
+  <section class="flex flex-col gap-3 mt-2 pb-6">
+    <a href="complaint.html" class="bg-violation-red text-white font-button-text text-[15px] py-3.5 px-6 rounded-xl shadow-md hover:opacity-90 active:scale-[0.98] transition-all text-center flex justify-center items-center gap-2 no-underline" data-i18n="file_complaint">
+      <span class="material-symbols-outlined text-[20px]">report</span> File a Complaint
+    </a>
+    <button onclick="if(typeof showToast === 'function') { showToast('Saved to history!', 'success'); } else { alert('Saved!'); }" class="border-2 border-primary text-primary font-button-text text-[15px] py-3.5 px-6 rounded-xl hover:bg-primary/5 active:scale-[0.98] transition-all text-center flex justify-center items-center gap-2 bg-surface-container-lowest" data-i18n="save_result">
+      <span class="material-symbols-outlined text-[20px]">bookmark_add</span> Save Result
+    </button>
+  </section>
+</main>
+
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant/50 shadow-[0_-2px_10px_rgba(0,0,0,0.04)]">
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="index.html">
+    <span class="material-symbols-outlined text-[22px]">home</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-1.5 w-16 no-underline" href="scan.html">
+    <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Scan</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="history.html">
+    <span class="material-symbols-outlined text-[22px]">history</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Reports</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="#">
+    <span class="material-symbols-outlined text-[22px]">contact_support</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Support</span>
+  </a>
+</nav>
+
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/api.js"></script>
+<script defer src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set dynamic date
+    const dateEl = document.getElementById('scan-date');
+    if (dateEl) dateEl.textContent = 'Scanned on ' + new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+
+    // Load data from session or local storage
+    const resultString = sessionStorage.getItem('scanResult') || localStorage.getItem('latest_scan_result');
+    if (resultString) {
+      try {
         const result = JSON.parse(resultString);
         
-        // Update Legal Metrology
+        // ==== Legal Metrology Card Logic ====
+        const lmCard = document.getElementById('lm-card');
         const lmBadge = document.getElementById('lm-badge');
-        const lmContainer = document.getElementById('lm-container');
+        const lmDetailsText = document.getElementById('lm-details-text');
+        const lmDetails = document.getElementById('lm-details');
+        const lmIcon = document.getElementById('lm-icon');
+
         if(lmBadge && result.legal_metrology) {
-            lmBadge.className = result.legal_metrology.is_compliant ? "badge badge-success" : "badge badge-warning";
-            lmBadge.textContent = result.legal_metrology.is_compliant ? "Compliant" : "Issue Found";
-            // Update details (a real app would map the details string to the icons)
-            document.getElementById('lm-details').textContent = result.legal_metrology.details;
+            if (result.legal_metrology.is_compliant) {
+                lmBadge.className = "bg-safe-green/10 text-safe-green font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap";
+                lmBadge.textContent = "Compliant";
+                lmCard.style.borderLeftColor = "#00875A";
+                
+                lmDetails.className = "text-safe-green text-[14px] font-medium flex items-center gap-1.5";
+                lmIcon.textContent = "verified";
+                lmIcon.style.fontVariationSettings = "'FILL' 1";
+            } else {
+                lmBadge.className = "bg-warning-amber/10 text-warning-amber font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap";
+                lmBadge.textContent = "Issue Found";
+                lmCard.style.borderLeftColor = "#FFAB00";
+                
+                lmDetails.className = "text-violation-red text-[14px] font-bold flex items-center gap-1.5";
+                lmIcon.textContent = "warning";
+                lmIcon.style.fontVariationSettings = "'FILL' 1";
+            }
+            lmDetailsText.textContent = result.legal_metrology.details || "No details provided.";
         }
 
-        // Update Food Safety
+        // ==== Food Safety Card Logic ====
+        const fsCard = document.getElementById('fs-card');
         const fsBadge = document.getElementById('fs-badge');
+        const harmList = document.getElementById('harmful-list');
+
         if(fsBadge && result.food_safety) {
-            const score = result.food_safety.health_score;
-            fsBadge.className = score === 'A' ? 'badge badge-success' : (score === 'B' ? 'badge badge-warning' : 'badge badge-danger');
-            fsBadge.textContent = `Score: ${score}`;
+            const score = result.food_safety.health_score || 'N/A';
             
-            const harmList = document.getElementById('harmful-list');
+            if (score === 'A' || score === 'B') {
+                fsBadge.className = "bg-safe-green/10 text-safe-green font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap";
+                fsCard.style.borderLeftColor = "#00875A";
+            } else if (score === 'C' || score === 'D') {
+                fsBadge.className = "bg-warning-amber/10 text-warning-amber font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap";
+                fsCard.style.borderLeftColor = "#FFAB00";
+            } else {
+                fsBadge.className = "bg-violation-red/10 text-violation-red font-label-bold text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap";
+                fsCard.style.borderLeftColor = "#DE350B";
+            }
+            fsBadge.textContent = 'Grade: ' + score;
+            
             if(harmList && result.food_safety.harmful_ingredients) {
-                harmList.innerHTML = '';
                 if(result.food_safety.harmful_ingredients.length === 0) {
-                    harmList.innerHTML = '<li><span style="color: var(--success); font-weight: 500;">No harmful ingredients detected.</span></li>';
+                    harmList.innerHTML = '<p class="text-safe-green text-[14px] font-medium flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: \'FILL\' 1;">verified</span> No harmful ingredients detected.</p>';
                 } else {
+                    let html = '';
                     result.food_safety.harmful_ingredients.forEach(ing => {
-                        harmList.innerHTML += `<li><span style="color: var(--danger); font-weight: 500;">Contains ${ing}</span></li>`;
+                        html += '<p class="text-violation-red text-[14px] font-bold flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: \'FILL\' 1;">warning</span> Contains ' + ing + '</p>';
                     });
+                    harmList.innerHTML = html;
                 }
             }
         }
         
-        // Show OCR Text
+        // ==== OCR Text display ====
         const ocrTextDisplay = document.getElementById('ocr-text-display');
         if (ocrTextDisplay && result.extracted_text) {
             ocrTextDisplay.textContent = result.extracted_text;
         }
+      } catch (err) {
+        console.error("Error parsing scan results:", err);
       }
-    });
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => {
-          console.log('SW registration failed: ', err);
-        });
-      });
     }
-  </script>
+  });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('SW registration failed: ', err);
+      });
+    });
+  }
+</script>
 </body>
 </html>

@@ -1,84 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scan Product - Grahak Kavach</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Grahak Kavach - Scan Product</title>
+  
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+  
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- Tailwind CSS & Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "fontFamily": {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    .viewfinder {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      background: #000;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* ===== Pulsing Capture Button Ring ===== */
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.6; }
+      70% { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.35); opacity: 0; }
     }
-    .viewfinder-frame {
-      width: 80%;
-      height: 60%;
-      border: 2px dashed rgba(255,255,255,0.7);
-      border-radius: 12px;
-      position: relative;
-    }
-    .viewfinder-frame::before {
+    .capture-btn::before {
       content: '';
       position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      border: 2px solid transparent;
-      border-radius: 12px;
-      background: linear-gradient(var(--primary-color), var(--primary-color)) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      animation: scan 2s linear infinite;
-      opacity: 0.5;
+      inset: -6px;
+      border-radius: 9999px;
+      border: 3px solid #00875A;
+      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    @keyframes scan {
-      0% { clip-path: inset(0 0 95% 0); }
-      50% { clip-path: inset(45% 0 45% 0); }
-      100% { clip-path: inset(95% 0 0 0); }
+
+    /* ===== Corner Bracket Glow ===== */
+    .corner-glow {
+      filter: drop-shadow(0 0 6px rgba(0, 135, 90, 0.5));
     }
-    .scan-overlay {
+
+    /* ===== Tab Slider ===== */
+    .tab-slider {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
-      z-index: 100;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
+      height: 100%;
+      border-radius: 9999px;
+      background: #006b47;
+      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== Shutter Flash ===== */
+    @keyframes shutter {
+      0% { opacity: 0.85; }
+      100% { opacity: 0; }
+    }
+    .shutter-flash {
+      animation: shutter 0.3s ease-out forwards;
+    }
+
+    /* ===== Polished Scan Line ===== */
+    @keyframes scanline {
+      0% { top: 0%; }
+      50% { top: calc(100% - 4px); }
+      100% { top: 0%; }
+    }
+    .scan-line-glow {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #00875A, #71dba6, #00875A, transparent);
+      box-shadow: 0 0 12px 4px rgba(0, 135, 90, 0.4), 0 0 24px 8px rgba(0, 135, 90, 0.15);
+      animation: scanline 2.5s ease-in-out infinite;
+      filter: blur(0.5px);
+    }
+
+    /* ===== Processing overlay ===== */
+    .scan-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); z-index: 200; display: none;
+      flex-direction: column; align-items: center; justify-content: center; color: white;
     }
     .loader-line {
-      width: 150px;
-      height: 4px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 4px;
-      margin-bottom: 16px;
-      overflow: hidden;
-      position: relative;
+      width: 180px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 4px;
+      margin-bottom: 20px; overflow: hidden; position: relative;
     }
     .loader-line::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -50px;
-      width: 50px;
-      height: 100%;
-      background: var(--primary-color);
-      box-shadow: 0 0 10px var(--primary-color);
+      content: ''; position: absolute; top: 0; left: -60px; width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, #00875A, transparent);
+      box-shadow: 0 0 10px #00875A;
       animation: loading 1.5s infinite ease-in-out;
     }
     @keyframes loading {
-      0% { left: -50px; }
-      100% { left: 150px; }
+      0% { left: -60px; } 100% { left: 180px; }
+    }
+
+    /* ===== Scan mode chip ===== */
+    .mode-chip.active {
+      background: #00875A;
+      color: white;
+      border-color: #00875A;
+      box-shadow: 0 2px 8px rgba(0, 135, 90, 0.3);
     }
   </style>
 
@@ -88,176 +154,404 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container">
+<body class="bg-background text-on-surface h-screen flex flex-col font-body-md overflow-hidden relative">
+
+<!-- TopAppBar — Light Theme -->
+<header class="w-full top-0 sticky bg-background z-50 flex items-center justify-between px-4 py-4 h-16 shadow-sm border-b border-outline-variant/50">
+  <a href="index.html" class="text-on-surface p-2 rounded-full hover:bg-surface-variant transition-colors active:scale-95 duration-100 flex items-center justify-center">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+  <h1 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="scan_label_title">Scan Product</h1>
+  <div class="lang-container relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-label-bold pl-4 pr-9 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[18px] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<main class="flex-grow relative flex flex-col items-center justify-start overflow-hidden w-full bg-background">
+  
+  <!-- Tab Switcher with animated pill slider -->
+  <div class="z-30 mt-4 bg-surface-container-low p-1 rounded-full flex items-center border border-outline-variant shadow-sm mx-auto relative">
+    <div class="tab-slider z-0" id="tab-slider"></div>
+    <button id="tab-ocr" onclick="switchScanMode('ocr')" class="relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-primary transition-all">Text Label OCR</button>
+    <button id="tab-barcode" onclick="switchScanMode('barcode')" class="relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface transition-all">Barcode Scan</button>
+  </div>
+
+  <!-- ====== OCR SECTION ====== -->
+  <div id="section-ocr" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center pt-20">
     
-    <div class="header glass-header">
-      <a href="index.html" style="color: var(--text-main);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      </a>
-      <h3 data-i18n="scan_label_title" style="margin: 0; font-size: 1.1rem;">Scan Label</h3>
-      <div style="width: auto;">
-        <select class="lang-switcher">
-          <option value="en">EN</option>
-          <option value="mr">MR</option>
-          <option value="hi">HI</option>
-        </select>
+    <!-- Camera Viewfinder Container (rounded card with camera inside) -->
+    <div class="relative w-[90%] max-w-sm aspect-square rounded-2xl overflow-hidden bg-surface-container border-2 border-outline-variant shadow-lg">
+      <!-- Real Camera Feed -->
+      <video id="camera-feed" autoplay playsinline class="absolute inset-0 w-full h-full object-cover z-0"></video>
+      
+      <!-- Subtle vignette inside the viewfinder -->
+      <div class="absolute inset-0 z-[1] pointer-events-none rounded-2xl" style="box-shadow: inset 0 0 40px rgba(0,0,0,0.15);"></div>
+
+      <!-- Viewfinder Corner Brackets -->
+      <div class="absolute inset-4 z-[2] pointer-events-none">
+        <div class="corner-glow absolute top-0 left-0 w-8 h-8 border-t-[3px] border-l-[3px] border-safe-green rounded-tl-lg"></div>
+        <div class="corner-glow absolute top-0 right-0 w-8 h-8 border-t-[3px] border-r-[3px] border-safe-green rounded-tr-lg"></div>
+        <div class="corner-glow absolute bottom-0 left-0 w-8 h-8 border-b-[3px] border-l-[3px] border-safe-green rounded-bl-lg"></div>
+        <div class="corner-glow absolute bottom-0 right-0 w-8 h-8 border-b-[3px] border-r-[3px] border-safe-green rounded-br-lg"></div>
+        <!-- Polished Scan Line -->
+        <div class="scan-line-glow"></div>
       </div>
+
+      <!-- Instruction Pill (glassmorphism inside viewfinder) -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-white/80 backdrop-blur-xl px-4 py-2 rounded-full shadow-sm border border-white/40">
+        <p id="scan-instruction" class="font-body-sm text-on-surface text-center flex items-center gap-1.5 whitespace-nowrap" data-i18n="fit_label">
+          <span class="material-symbols-outlined text-[16px] text-safe-green">center_focus_strong</span>
+          <span>Fit the label inside this frame</span>
+        </p>
+      </div>
+
+      <!-- Shutter Flash Element -->
+      <div id="shutter-flash" class="absolute inset-0 bg-white z-[90] opacity-0 pointer-events-none rounded-2xl"></div>
+
+      <!-- Torch Toggle (inside viewfinder top-right) -->
+      <button id="toggle-flash" onclick="toggleFlash()" class="absolute top-3 right-3 z-10 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/90 transition-colors border border-white/50 active:scale-95 shadow-sm">
+        <span class="material-symbols-outlined text-on-surface text-[20px]" id="flash-icon">flash_off</span>
+      </button>
     </div>
 
-    <div class="content animate-slide-up">
-      <!-- Tabs for OCR vs Barcode -->
-      <div style="display: flex; gap: 16px; margin: 0 16px 16px 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-        <button id="tab-ocr" class="btn" style="flex: 1; background: none; border: none; border-bottom: 2px solid var(--primary-color); border-radius: 0; color: var(--primary-color); font-weight: bold; padding: 12px 0;" onclick="switchScanMode('ocr')">Text Label OCR</button>
-        <button id="tab-barcode" class="btn" style="flex: 1; background: none; border: none; color: var(--text-muted); font-weight: bold; padding: 12px 0;" onclick="switchScanMode('barcode')">Barcode Scan</button>
+    <!-- Hidden canvas -->
+    <canvas id="camera-canvas" style="display: none;"></canvas>
+
+    <!-- Scan Mode Chips -->
+    <div class="z-10 mt-4 flex items-center gap-2 px-4">
+      <button onclick="setScanFocus(this, 'ingredients')" class="mode-chip active px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Ingredients</button>
+      <button onclick="setScanFocus(this, 'mrp')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">MRP</button>
+      <button onclick="setScanFocus(this, 'expiry')" class="mode-chip px-4 py-2 rounded-full text-[12px] font-bold border border-outline-variant transition-all duration-200 bg-surface-container-lowest text-on-surface-variant">Expiry Date</button>
+    </div>
+
+    <!-- Privacy Badge -->
+    <div class="z-10 mt-2 flex items-center gap-1.5 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/50">
+      <span class="material-symbols-outlined text-[14px] text-safe-green" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <span class="text-[11px] text-outline font-label-bold">Data stays on your device until you tap Capture</span>
+    </div>
+
+    <!-- Bottom Action Controls -->
+    <div class="absolute bottom-24 w-full flex justify-around items-center px-8 z-10">
+      <!-- Gallery Upload -->
+      <label class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors border border-outline-variant active:scale-95 shadow-sm cursor-pointer">
+        <span class="material-symbols-outlined text-on-surface">photo_library</span>
+        <input type="file" id="file-upload" accept="image/*" class="hidden">
+      </label>
+      <!-- Primary Scan Button with Pulse Ring -->
+      <button id="start-scan" onclick="triggerCapture()" class="capture-btn relative w-20 h-20 bg-safe-green rounded-full flex items-center justify-center p-1 hover:scale-105 transition-transform active:scale-90 shadow-[0_4px_14px_rgba(0,135,90,0.35)]">
+        <div class="w-full h-full border-4 border-white/40 rounded-full pointer-events-none"></div>
+      </button>
+      <!-- Torch Toggle (outside viewfinder duplicate for easy access) -->
+      <button onclick="toggleFlash()" class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors border border-outline-variant active:scale-95 shadow-sm" id="flash-btn-bottom">
+        <span class="material-symbols-outlined text-on-surface" id="flash-icon-bottom">flash_off</span>
+      </button>
+    </div>
+
+    <!-- Camera Permission Denied UI -->
+    <div id="camera-permission-ui" class="absolute inset-0 z-20 bg-background flex flex-col items-center justify-center px-8 hidden">
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-2xl p-8 flex flex-col items-center max-w-sm w-full shadow-lg">
+        <div class="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center mb-4">
+          <span class="material-symbols-outlined text-outline text-[40px]">videocam_off</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface text-center mb-2">Camera Access Needed</h3>
+        <p class="font-body-sm text-outline text-center mb-6">To scan product labels, we need access to your camera. Please enable it in your browser or device settings.</p>
+        <button onclick="retryCamera()" class="w-full bg-safe-green text-on-primary font-button-text text-button-text py-3.5 rounded-xl hover:bg-safe-green/90 active:scale-95 transition-all flex items-center justify-center gap-2 mb-3 shadow-sm">
+          <span class="material-symbols-outlined text-[20px]">refresh</span>
+          Try Again
+        </button>
+        <label class="w-full bg-surface-container-low text-on-surface font-button-text text-button-text py-3.5 rounded-xl hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer border border-outline-variant">
+          <span class="material-symbols-outlined text-[20px]">photo_library</span>
+          Upload from Gallery Instead
+          <input type="file" id="file-upload-fallback" accept="image/*" class="hidden">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== BARCODE SECTION ====== -->
+  <div id="section-barcode" class="absolute inset-0 w-full h-full bg-background z-10 hidden pt-28 px-4 overflow-y-auto pb-28">
+    <div class="max-w-md mx-auto flex flex-col gap-4">
+      
+      <!-- Barcode Camera Scanner Card -->
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-variant shadow-sm flex flex-col items-center">
+        <div class="w-14 h-14 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-safe-green text-[28px]" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-center mb-1 text-on-surface">Scan Barcode with Camera</h3>
+        <p class="font-body-sm text-outline text-center mb-4">Point your camera at the product barcode for instant lookup.</p>
+        <button onclick="startBarcodeCamera()" class="w-full bg-safe-green text-on-primary font-button-text text-button-text py-3.5 rounded-xl shadow-sm hover:bg-safe-green/90 active:scale-95 transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          Open Camera Scanner
+        </button>
       </div>
 
-      <!-- OCR Section -->
-      <div id="section-ocr">
-        <div class="viewfinder mb-4 shadow" style="position: relative;">
-          <!-- Flashlight Button -->
-          <div class="camera-controls">
-            <button id="toggle-flash" style="border: none; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
-            </button>
-          </div>
+      <!-- Divider -->
+      <div class="flex items-center gap-3 px-2">
+        <div class="flex-1 h-px bg-outline-variant"></div>
+        <span class="font-label-bold text-label-bold text-outline uppercase tracking-widest text-[11px]">or enter manually</span>
+        <div class="flex-1 h-px bg-outline-variant"></div>
+      </div>
 
-          <!-- Real Camera Feed -->
-          <video id="camera-feed" autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"></video>
-          
-          <!-- UI overlay for scanning -->
-          <div class="viewfinder-frame" style="z-index: 2;"></div>
-          <p data-i18n="fit_label" style="position: absolute; bottom: 24px; color: white; text-align: center; width: 100%; font-size: 0.85rem; opacity: 0.8; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Fit the label inside this frame</p>
-          
-          <!-- Hidden canvas to grab image -->
-          <canvas id="camera-canvas" style="display: none;"></canvas>
+      <!-- Manual Barcode Entry Card -->
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-variant shadow-sm flex flex-col items-center">
+        <div class="w-14 h-14 rounded-full bg-secondary-fixed/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-secondary text-[28px]">barcode</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm text-center mb-1 text-on-surface">Verify Product Authenticity</h3>
+        <p class="font-body-sm text-outline text-center mb-5">Enter the EAN/UPC barcode number to check against the global database.</p>
+        
+        <input type="number" id="barcode-input" class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-4 text-center font-headline-sm text-on-surface mb-5 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline/50" placeholder="e.g. 5449000000996">
+        
+        <div class="form-group mb-5 flex justify-center w-full">
+          <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
         </div>
         
-        <p data-i18n="make_sure_visible" class="text-center text-muted mb-4" style="font-size: 0.85rem;">Make sure MRP, ingredients, and dates are visible.</p>
-
-        <div class="flex-row" style="gap: 16px; padding: 0 16px;">
-          <button id="start-scan" class="btn btn-primary" style="flex: 2; padding: 18px;" data-i18n="capture">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg> Capture
-          </button>
-          
-          <label class="btn btn-secondary" style="flex: 1; padding: 18px; cursor: pointer;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-            <input type="file" id="file-upload" accept="image/*" style="display: none;">
-          </label>
-        </div>
+        <button class="w-full bg-primary text-on-primary font-button-text text-button-text py-4 rounded-xl shadow-sm hover:bg-primary/90 active:scale-95 transition-all flex items-center justify-center gap-2" onclick="verifyBarcode()">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+          Check Barcode
+        </button>
       </div>
-
-      <!-- Barcode Section -->
-      <div id="section-barcode" style="display: none; padding: 0 16px;">
-        <div style="background: white; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); margin-bottom: 24px;">
-            <div style="text-align: center; margin-bottom: 24px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14"></path><path d="M8 5v14"></path><path d="M12 5v14"></path><path d="M17 5v14"></path><path d="M21 5v14"></path></svg>
-            </div>
-            <h3 style="margin-top: 0; text-align: center;">Verify Product Authenticity</h3>
-            <p class="text-muted text-center">Enter the EAN/UPC barcode number to check against the Open Food Facts database.</p>
-            
-            <input type="number" id="barcode-input" class="form-control glass-input mb-4" placeholder="e.g. 5449000000996 (Coke)" style="font-size: 1.2rem; text-align: center; letter-spacing: 2px;">
-            
-            <div class="form-group mb-4" style="display: flex; justify-content: center;">
-              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-            </div>
-            
-            <button class="btn btn-primary" style="width: 100%; padding: 16px;" onclick="verifyBarcode()">
-                Check Barcode
-            </button>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Processing Overlay (Screen 3) -->
-    <div id="processing-overlay" class="scan-overlay">
-      <div class="loader-line"></div>
-      <h3 data-i18n="reading_label" style="color: white;">Reading label...</h3>
-      <p data-i18n="checking_compliance" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Checking compliance rules</p>
-    </div>
-
   </div>
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/api.js"></script>
-  <script defer src="js/main.js"></script>
-  <script>
-    function switchScanMode(mode) {
-        if (mode === 'ocr') {
-            document.getElementById('section-ocr').style.display = 'block';
-            document.getElementById('section-barcode').style.display = 'none';
-            document.getElementById('tab-ocr').style.borderBottom = '2px solid var(--primary-color)';
-            document.getElementById('tab-ocr').style.color = 'var(--primary-color)';
-            document.getElementById('tab-barcode').style.borderBottom = 'none';
-            document.getElementById('tab-barcode').style.color = 'var(--text-muted)';
-        } else {
-            document.getElementById('section-ocr').style.display = 'none';
-            document.getElementById('section-barcode').style.display = 'block';
-            document.getElementById('tab-barcode').style.borderBottom = '2px solid var(--primary-color)';
-            document.getElementById('tab-barcode').style.color = 'var(--primary-color)';
-            document.getElementById('tab-ocr').style.borderBottom = 'none';
-            document.getElementById('tab-ocr').style.color = 'var(--text-muted)';
-        }
+</main>
+
+<!-- BottomNavBar — Light Theme -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_16px_rgba(0,0,0,0.05)] border-t border-outline-variant pb-safe rounded-t-xl">
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-xl w-16" href="index.html">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">home</span>
+    <span class="font-label-bold text-[10px]">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 w-16" href="scan.html">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+    <span class="font-label-bold text-[10px]">Scan</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-xl w-16" href="history.html">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">history</span>
+    <span class="font-label-bold text-[10px]">Reports</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-xl w-16" href="#">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">contact_support</span>
+    <span class="font-label-bold text-[10px]">Support</span>
+  </a>
+</nav>
+
+<!-- Processing Overlay -->
+<div id="processing-overlay" class="scan-overlay">
+  <div class="loader-line"></div>
+  <h3 data-i18n="reading_label" class="text-white font-headline-sm text-headline-sm mb-2">Reading label...</h3>
+  <p data-i18n="checking_compliance" class="text-white/60 font-body-sm text-body-sm">Checking compliance rules</p>
+</div>
+
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/api.js"></script>
+<script defer src="js/main.js"></script>
+<script>
+  // ===== State =====
+  let currentScanFocus = 'ingredients';
+  let flashOn = false;
+  let cameraStream = null;
+
+  // ===== Tab Switching with Animated Slider =====
+  function positionSlider(tabId) {
+    const slider = document.getElementById('tab-slider');
+    const tab = document.getElementById(tabId);
+    if (!slider || !tab) return;
+    const parent = tab.parentElement;
+    const parentRect = parent.getBoundingClientRect();
+    const tabRect = tab.getBoundingClientRect();
+    slider.style.left = (tabRect.left - parentRect.left) + 'px';
+    slider.style.width = tabRect.width + 'px';
+  }
+
+  function switchScanMode(mode) {
+    const tabOcr = document.getElementById('tab-ocr');
+    const tabBarcode = document.getElementById('tab-barcode');
+    const sectionOcr = document.getElementById('section-ocr');
+    const sectionBarcode = document.getElementById('section-barcode');
+
+    if (mode === 'ocr') {
+      sectionOcr.classList.remove('hidden');
+      sectionBarcode.classList.add('hidden');
+      tabOcr.className = 'relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-primary transition-all';
+      tabBarcode.className = 'relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface transition-all';
+      positionSlider('tab-ocr');
+    } else {
+      sectionOcr.classList.add('hidden');
+      sectionBarcode.classList.remove('hidden');
+      tabBarcode.className = 'relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-primary transition-all';
+      tabOcr.className = 'relative z-10 px-5 py-2 rounded-full font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface transition-all';
+      positionSlider('tab-barcode');
     }
+  }
 
-    async function verifyBarcode() {
-        const barcode = document.getElementById('barcode-input').value.trim();
-        if (!barcode) {
-            if(typeof showToast === 'function') { showToast('Please enter a barcode.', 'warning'); } else { alert('Please enter a barcode.'); }
-            return;
-        }
+  // Init slider position
+  window.addEventListener('load', () => {
+    setTimeout(() => positionSlider('tab-ocr'), 100);
+  });
+  window.addEventListener('resize', () => {
+    positionSlider(document.getElementById('section-barcode').classList.contains('hidden') ? 'tab-ocr' : 'tab-barcode');
+  });
 
-        try {
-            const captchaToken = grecaptcha.getResponse();
-            if (!captchaToken) {
-                if(typeof showToast === 'function') { showToast('Please complete the CAPTCHA verification.', 'error'); } else { alert('Please complete the CAPTCHA verification.'); }
-                return;
-            }
+  // ===== Shutter Flash on Capture =====
+  function triggerCapture() {
+    const flash = document.getElementById('shutter-flash');
+    flash.classList.remove('shutter-flash');
+    void flash.offsetWidth;
+    flash.classList.add('shutter-flash');
+    
+    if (navigator.vibrate) navigator.vibrate(50);
 
-            document.getElementById('processing-overlay').style.display = 'flex';
-            document.querySelector('#processing-overlay h3').textContent = 'Querying Global DB...';
-            document.querySelector('#processing-overlay p').textContent = 'Validating FSSAI / Authenticity';
-            
-            const data = await API.scanBarcode(barcode, captchaToken);
-            
-            if (data.found) {
-                // Store results for the results page
-                const scanRes = {
-                    extracted_text: "BARCODE MATCH: " + barcode,
-                    food_safety: {
-                        health_score: data.nutriscore_grade,
-                        harmful_ingredients: data.nova_group > 3 ? ["Ultra-Processed (Nova 4)"] : []
-                    },
-                    legal_metrology: {
-                        is_compliant: true,
-                        details: `Product: ${data.product_name} by ${data.brand}`
-                    }
-                };
-                localStorage.setItem('latest_scan_result', JSON.stringify(scanRes));
-                window.location.href = 'results.html';
-            } else {
-                if(typeof showToast === 'function') { showToast('Product not found in global database. Potential counterfeit!', 'error'); } else { alert('Product not found in database. Potential counterfeit!'); }
-            }
-        } catch (e) {
-            console.error(e);
-            if(typeof showToast === 'function') { showToast('Failed to check barcode.', 'error'); } else { alert('Failed to check barcode.'); }
-        } finally {
-            document.getElementById('processing-overlay').style.display = 'none';
-        }
+    if (typeof handleCapture === 'function') {
+      handleCapture();
+    } else {
+      document.getElementById('start-scan').dispatchEvent(new CustomEvent('scan-capture'));
     }
+  }
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => {
-          console.log('SW registration failed: ', err);
-        });
+  // ===== Scan Mode Chips =====
+  function setScanFocus(btn, mode) {
+    currentScanFocus = mode;
+    document.querySelectorAll('.mode-chip').forEach(chip => chip.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const labelMap = {
+      'ingredients': 'Point camera at the Ingredients label',
+      'mrp': 'Point camera at the MRP / Price tag',
+      'expiry': 'Point camera at the Expiry / Best Before date'
+    };
+    const instrSpan = document.querySelector('#scan-instruction span:last-child');
+    if (instrSpan) {
+      instrSpan.textContent = labelMap[mode] || 'Fit the label inside this frame';
+    }
+  }
+
+  // ===== Camera Permission Handling =====
+  async function initCamera() {
+    const permUI = document.getElementById('camera-permission-ui');
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } } 
       });
+      cameraStream = stream;
+      document.getElementById('camera-feed').srcObject = stream;
+      permUI.classList.add('hidden');
+    } catch (err) {
+      console.warn('Camera access denied:', err);
+      permUI.classList.remove('hidden');
     }
-  </script>
+  }
+
+  function retryCamera() {
+    initCamera();
+  }
+
+  // ===== Torch / Flashlight Toggle =====
+  function toggleFlash() {
+    if (!cameraStream) return;
+    const track = cameraStream.getVideoTracks()[0];
+    if (!track) return;
+    const capabilities = track.getCapabilities();
+    if (!capabilities.torch) {
+      if(typeof showToast === 'function') { showToast('Torch not supported on this device', 'warning'); } else { alert('Torch not supported on this device.'); }
+      return;
+    }
+    
+    flashOn = !flashOn;
+    track.applyConstraints({ advanced: [{ torch: flashOn }] });
+    
+    // Update both torch icons
+    const iconTop = document.getElementById('flash-icon');
+    const iconBottom = document.getElementById('flash-icon-bottom');
+    const btnTop = document.getElementById('toggle-flash');
+    const btnBottom = document.getElementById('flash-btn-bottom');
+    
+    if (iconTop) iconTop.textContent = flashOn ? 'flash_on' : 'flash_off';
+    if (iconBottom) iconBottom.textContent = flashOn ? 'flash_on' : 'flash_off';
+    
+    if (flashOn) {
+      if (btnTop) { btnTop.classList.add('bg-warning-amber/30'); btnTop.classList.remove('bg-white/70'); }
+      if (btnBottom) { btnBottom.classList.add('bg-warning-amber/20'); }
+    } else {
+      if (btnTop) { btnTop.classList.remove('bg-warning-amber/30'); btnTop.classList.add('bg-white/70'); }
+      if (btnBottom) { btnBottom.classList.remove('bg-warning-amber/20'); }
+    }
+  }
+
+  // ===== Barcode Camera (shortcut) =====
+  function startBarcodeCamera() {
+    switchScanMode('ocr');
+    if(typeof showToast === 'function') {
+      showToast('Point camera at barcode and tap capture', 'info');
+    }
+  }
+
+  // ===== Barcode Verification =====
+  async function verifyBarcode() {
+    const barcode = document.getElementById('barcode-input').value.trim();
+    if (!barcode) {
+      if(typeof showToast === 'function') { showToast('Please enter a barcode.', 'warning'); } else { alert('Please enter a barcode.'); }
+      return;
+    }
+
+    try {
+      const captchaToken = grecaptcha.getResponse();
+      if (!captchaToken) {
+        if(typeof showToast === 'function') { showToast('Please complete the CAPTCHA verification.', 'error'); } else { alert('Please complete the CAPTCHA verification.'); }
+        return;
+      }
+
+      document.getElementById('processing-overlay').style.display = 'flex';
+      document.querySelector('#processing-overlay h3').textContent = 'Querying Global DB...';
+      document.querySelector('#processing-overlay p').textContent = 'Validating FSSAI / Authenticity';
+      
+      const data = await API.scanBarcode(barcode, captchaToken);
+      
+      if (data.found) {
+        const scanRes = {
+          extracted_text: "BARCODE MATCH: " + barcode,
+          food_safety: {
+            health_score: data.nutriscore_grade,
+            harmful_ingredients: data.nova_group > 3 ? ["Ultra-Processed (Nova 4)"] : []
+          },
+          legal_metrology: {
+            is_compliant: true,
+            details: `Product: ${data.product_name} by ${data.brand}`
+          }
+        };
+        localStorage.setItem('latest_scan_result', JSON.stringify(scanRes));
+        window.location.href = 'results.html';
+      } else {
+        if(typeof showToast === 'function') { showToast('Product not found in global database. Potential counterfeit!', 'error'); } else { alert('Product not found in database. Potential counterfeit!'); }
+      }
+    } catch (e) {
+      console.error(e);
+      if(typeof showToast === 'function') { showToast('Failed to check barcode.', 'error'); } else { alert('Failed to check barcode.'); }
+    } finally {
+      document.getElementById('processing-overlay').style.display = 'none';
+    }
+  }
+
+  // ===== Init =====
+  document.addEventListener('DOMContentLoaded', () => {
+    initCamera();
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('SW registration failed: ', err);
+      });
+    });
+  }
+</script>
 </body>
 </html>

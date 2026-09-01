@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
   <title>Privacy Policy - Grahak Kavach</title>
+
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "text-ink": "#172B4D", "background": "#f5fbf4", "on-surface-variant": "#3e4942",
+            "on-tertiary-fixed": "#410005", "tertiary": "#9b403e", "secondary-fixed": "#dae2ff",
+            "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-muted": "#F4F5F7",
+            "tertiary-container": "#ba5855", "on-tertiary": "#ffffff", "surface-container-high": "#e4eae3",
+            "on-background": "#171d19", "inverse-primary": "#71dba6", "on-primary": "#ffffff",
+            "outline-variant": "#bdcac0", "surface-container-low": "#f0f5ef", "secondary-container": "#356ee7",
+            "on-tertiary-container": "#ffffff", "surface-container-highest": "#dee4de", "outline": "#6e7a71",
+            "secondary": "#0453cd", "surface-bright": "#f5fbf4", "tertiary-fixed-dim": "#ffb3af",
+            "surface-dim": "#d6dbd5", "secondary-fixed-dim": "#b2c5ff", "primary-fixed": "#8df7c1",
+            "primary-fixed-dim": "#71dba6", "surface-container": "#eaefe9", "on-tertiary-fixed-variant": "#7d2a2a",
+            "error": "#ba1a1a", "primary": "#006b47", "on-primary-fixed-variant": "#005235",
+            "on-primary-fixed": "#002113", "on-secondary-fixed": "#001848", "surface-tint": "#006c47",
+            "on-surface": "#171d19", "on-secondary": "#ffffff", "inverse-on-surface": "#edf2ec",
+            "primary-container": "#00875a", "safe-green": "#00875A", "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#0040a2", "inverse-surface": "#2c322e", "on-primary-container": "#ffffff",
+            "surface": "#f5fbf4", "surface-variant": "#dee4de", "violation-red": "#DE350B",
+            "on-error-container": "#93000a", "trust-blue": "#0052CC", "warning-amber": "#FFAB00",
+            "tertiary-fixed": "#ffdad7", "on-error": "#ffffff"
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+          spacing: {
+            "base-unit": "8px", "margin-desktop": "32px", "stack-sm": "8px", "gutter": "16px",
+            "stack-md": "16px", "section-gap": "64px", "stack-lg": "32px", "margin-mobile": "16px"
+          },
+          fontFamily: {
+            "label-bold": ["Plus Jakarta Sans"], "headline-md": ["Manrope"], "button-text": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Manrope"], "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Manrope"], "headline-sm": ["Manrope"], "body-lg": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "button-text": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+    .card-shadow { box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02); }
+    .text-gradient { background: linear-gradient(to right, #00875A, #0052CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4HZYJ6RHJ"></script>
@@ -15,56 +77,141 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J4HZYJ6RHJ');
   </script>
 </head>
-<body>
-  <div class="app-container">
-    
-    <div class="header glass-header">
-      <a href="index.html" style="color: var(--text-main);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      </a>
-      <h3 data-i18n="privacy_title" style="margin: 0; font-size: 1.1rem;">Privacy Policy</h3>
-      <div style="width: auto;">
-        <select class="lang-switcher">
-          <option value="en">EN</option>
-          <option value="mr">MR</option>
-          <option value="hi">HI</option>
-        </select>
-      </div>
-    </div>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pb-24 md:pb-0">
 
-    <div class="content animate-slide-up" style="padding: 24px;">
-      <h2 style="margin-bottom: 16px;">Data Privacy & Protection</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Effective Date: August 24, 2026</p>
-      
-      <div class="glass-card mb-4" style="padding: 20px;">
-        <h4 style="margin-bottom: 8px;">1. Data Collection</h4>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">We collect scan images and ingredient text locally on your device. This data is only transmitted to our servers if you explicitly choose to file a complaint.</p>
-      </div>
-
-      <div class="glass-card mb-4" style="padding: 20px;">
-        <h4 style="margin-bottom: 8px;">2. Identity Verification</h4>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Aadhaar numbers and other sensitive IDs are <strong>never stored</strong> in our database. We only record a verified/unverified status flag returned by the authentication gateway.</p>
-      </div>
-
-      <div class="glass-card mb-4" style="padding: 20px;">
-        <h4 style="margin-bottom: 8px;">3. DPDP Act Compliance</h4>
-        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">In accordance with the Digital Personal Data Protection (DPDP) Act, your data is used strictly for the stated purpose of regulatory compliance reporting. You have the right to request deletion of your complaint data at any time.</p>
-      </div>
-    </div>
+<!-- Header -->
+<header class="bg-background w-full px-margin-mobile py-3 flex flex-row items-center justify-between sticky top-0 z-40 border-b border-outline-variant/40">
+  <div class="flex items-center gap-2">
+    <a href="index.html" class="text-on-surface w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 flex items-center justify-center">
+      <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+    </a>
+    <h1 class="font-headline-sm text-[20px] text-on-background font-bold" data-i18n="privacy_title">Privacy Policy</h1>
   </div>
-  <script defer src="js/translations.js"></script>
-  <script defer src="js/i18n.js"></script>
-  <script defer src="js/main.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
-      });
-    }
-  </script>
+  <div class="relative">
+    <select class="lang-switcher bg-surface-container-low text-primary font-label-bold text-[13px] pl-3 pr-8 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors appearance-none cursor-pointer outline-none">
+      <option value="en">EN</option>
+      <option value="mr">MR</option>
+      <option value="hi">HI</option>
+    </select>
+    <span class="material-symbols-outlined text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-primary">expand_more</span>
+  </div>
+</header>
+
+<main class="flex-1 w-full max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-6 flex flex-col gap-6">
+
+  <!-- Hero -->
+  <section class="flex flex-col gap-2 text-center md:text-left">
+    <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-gradient">Data Privacy &amp; Protection</h2>
+    <p class="text-[13px] text-outline">Effective Date: September 01, 2026</p>
+    <p class="text-[15px] text-on-surface-variant mt-2 max-w-2xl leading-relaxed mx-auto md:mx-0">
+      Grahak Kavach is committed to ensuring your data is handled with the utmost security and in strict accordance with national regulations. We act as a secure shield between you and regulatory violations.
+    </p>
+  </section>
+
+  <!-- Bento Grid -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <!-- Card 1: Data Collection -->
+    <div class="bg-surface-container-lowest rounded-2xl p-5 card-shadow border border-outline-variant/60 flex flex-col gap-3 transition-all hover:shadow-md hover:-translate-y-0.5 duration-300">
+      <div class="flex items-center gap-3">
+        <div class="bg-safe-green/10 p-2.5 rounded-full shrink-0">
+          <span class="material-symbols-outlined text-safe-green text-[22px]" style="font-variation-settings: 'FILL' 1;">visibility</span>
+        </div>
+        <h3 class="font-headline-sm text-[16px] text-on-surface font-bold">1. Data Collection</h3>
+      </div>
+      <p class="text-[14px] text-on-surface-variant leading-relaxed">
+        We collect scan images and ingredient text locally on your device. This data is only transmitted to our servers if you explicitly choose to file a complaint.
+      </p>
+    </div>
+
+    <!-- Card 2: Identity Verification -->
+    <div class="bg-surface-container-lowest rounded-2xl p-5 card-shadow border border-outline-variant/60 flex flex-col gap-3 transition-all hover:shadow-md hover:-translate-y-0.5 duration-300 bg-gradient-to-br from-secondary-fixed/20 to-transparent">
+      <div class="flex items-center gap-3">
+        <div class="bg-trust-blue/10 p-2.5 rounded-full shrink-0">
+          <span class="material-symbols-outlined text-trust-blue text-[22px]" style="font-variation-settings: 'FILL' 1;">security</span>
+        </div>
+        <h3 class="font-headline-sm text-[16px] text-on-surface font-bold">2. Identity Verification</h3>
+      </div>
+      <p class="text-[14px] text-on-surface-variant leading-relaxed">
+        Aadhaar numbers and other sensitive IDs are <strong class="text-on-surface font-bold">never stored</strong> in our database. We only record a verified/unverified status flag returned by the authentication gateway.
+      </p>
+    </div>
+
+    <!-- Card 3: DPDP Act Compliance (Featured, full width) -->
+    <div class="md:col-span-2 bg-surface-container-lowest rounded-2xl p-5 md:p-6 card-shadow border-l-[5px] border-l-trust-blue border border-outline-variant/60 flex flex-col gap-3 transition-all hover:shadow-md hover:-translate-y-0.5 duration-300 bg-gradient-to-br from-primary-container/5 to-transparent">
+      <div class="flex items-center gap-3">
+        <div class="bg-trust-blue/10 p-2.5 rounded-full shrink-0">
+          <span class="material-symbols-outlined text-trust-blue text-[24px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+        </div>
+        <h3 class="font-headline-sm text-[17px] text-on-surface font-bold">3. DPDP Act Compliance</h3>
+      </div>
+      <p class="text-[15px] text-on-surface-variant leading-relaxed">
+        In accordance with the Digital Personal Data Protection (DPDP) Act, your data is used strictly for the stated purpose of regulatory compliance reporting. You have the right to request deletion of your complaint data at any time.
+      </p>
+    </div>
+
+    <!-- Visual Card: Your Data is Safe -->
+    <div class="md:col-span-2 bg-surface-container-low rounded-2xl p-6 card-shadow border border-outline-variant/40 flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIiIGZpbGw9IiMwMDhiNWEiLz48L3N2Zz4=')]"></div>
+      <div class="text-center relative z-10">
+        <span class="material-symbols-outlined text-[48px] text-safe-green/40 mb-2">shield</span>
+        <p class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-widest">Your Data is Safe</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acknowledge Button -->
+  <div class="flex justify-center mt-2">
+    <a href="index.html" class="bg-safe-green text-on-primary font-button-text text-[15px] px-10 py-3.5 rounded-xl shadow-md hover:opacity-90 active:scale-[0.98] transition-all no-underline">
+      Acknowledge
+    </a>
+  </div>
+</main>
+
+<!-- Footer (desktop) -->
+<footer class="hidden md:flex flex-col items-center gap-2 w-full py-8 px-margin-mobile bg-background border-t border-outline-variant/40 mt-auto">
+  <div class="flex gap-4 mb-1">
+    <a class="text-[13px] text-primary underline hover:opacity-80 transition-colors" href="privacy.html">Privacy Policy</a>
+    <span class="text-outline-variant">•</span>
+    <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors no-underline" href="terms.html">Terms of Service</a>
+    <span class="text-outline-variant">•</span>
+    <a class="text-[13px] text-on-surface-variant hover:text-primary transition-colors no-underline" href="contact.html">Contact Us</a>
+  </div>
+  <p class="text-[12px] text-center text-outline">© 2026 Grahak Kavach. All rights reserved.</p>
+</footer>
+
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant/50 shadow-[0_-2px_10px_rgba(0,0,0,0.04)]">
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="index.html">
+    <span class="material-symbols-outlined text-[22px]">home</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="scan.html">
+    <span class="material-symbols-outlined text-[22px]">document_scanner</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Scan</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="complaint.html">
+    <span class="material-symbols-outlined text-[22px]">report</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Report</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant p-1.5 hover:bg-surface-container-high transition-all rounded-xl w-16 no-underline" href="contact.html">
+    <span class="material-symbols-outlined text-[22px]">contact_support</span>
+    <span class="font-label-bold text-[10px] mt-0.5">Support</span>
+  </a>
+</nav>
+
+<script defer src="js/translations.js"></script>
+<script defer src="js/i18n.js"></script>
+<script defer src="js/main.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+    });
+  }
+</script>
 </body>
 </html>
